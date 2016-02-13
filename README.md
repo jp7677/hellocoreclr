@@ -2,7 +2,11 @@
 Just a playgrond..
 
 Use 
-''dnu restore''
-to restore packages and
-''dnx run''
+```bash
+dnu restore
+```
+to restore packages and use
+```bash
+dnx run
+```
 to run the app.

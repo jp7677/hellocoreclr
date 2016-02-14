@@ -1,6 +1,6 @@
 ﻿namespace HelloWorldApp
 {
-    public class HelloWorldResponse
+    public class GetHelloWorldResponse
     {
         public string Name { get; set; }
     }

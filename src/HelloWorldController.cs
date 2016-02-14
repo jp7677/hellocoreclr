@@ -17,14 +17,12 @@ namespace HelloWorldApp
         [Route("helloworld/{name}")]
         [HttpGet]
         // ReSharper disable once UnusedMember.Global
-        public IActionResult HelloWorld(string name)
+        public IActionResult GetHelloWorld(string name)
         {
             logger.LogInformation(string.Format("'HelloWorld' Request received with '{0}'.",name));
             
-            var response = new HelloWorldResponse
-            {
-                Name = string.Format("Hello {0}!", name)
-            };
+            var action = new GetHelloWorldAction();
+            var response = action.Execute(name);
             return Ok(response);
         }
     }

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Hello World</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <div class="modal-header">
+        <h1 class="modal-title">Hello World</h1>
+    </div>
+    <p />
+
+    <div class="container-fluid">
+        <div>
+            <div ui-view></div>
+        </div>
+    </div>
+
+    <!-- 3rd party libraries -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <!-- App libraries -->
+    <script src="app/app.config.js"></script>
+    <script src="app/demo/helloworld.controller.js"></script>
+
+</body>
+</html>

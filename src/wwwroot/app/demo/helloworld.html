@@ -1,0 +1,17 @@
+﻿<form class="form-horizontal" ng-submit="vm.executeHelloWorld();">
+    <div class=" form-group">
+
+        <div class="col-lg-2">
+            <input type="text" class="form-control input-lg" placeholder="Give me some text" ng-model="vm.inputText" required />
+        </div>
+
+        <button type="submit" class="col-lg-2 btn btn-primary btn-lg">
+            Say Hello! <span class="glyphicon glyphicon-play-circle"></span>
+        </button>
+
+        <div class="col-lg-3">
+            <input class="form-control input-lg" type="text" placeholder="Something will happen over here" ng-model="vm.labelText" disabled>
+        </div>
+
+    </div>
+</form>

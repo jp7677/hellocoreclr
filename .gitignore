@@ -1,1 +1,4 @@
-project.lock.json
+typings/**
+src/node_modules/**
+src/wwwroot/bower_components/**
+src/project.lock.json

@@ -12,6 +12,4 @@ to restore packages and use
 cd src
 dnx web
 ```
-to run the app. Now open
-[http://localhost:5000/index.html]
-in you favorite browser.
+to run the app. Now open <http://localhost:5000/index.html> in you favorite browser.

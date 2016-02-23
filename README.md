@@ -25,5 +25,6 @@ and publish like
 ```bash
 dnu publish HelloCoreClrApp/project.json
 ```
+(Though publishing isn't perfect yet...)
 
 Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.

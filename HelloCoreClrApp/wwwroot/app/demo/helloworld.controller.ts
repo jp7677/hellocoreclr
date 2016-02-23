@@ -29,13 +29,13 @@ module app{
             this.log.info('We got the following name: ' + name);
 
             this.http.get('/api/helloworld/' + name)
-                .success((data : any, status) => {
+                .success((data : GetHelloWorldResponse, status) => {
                     this.log.info('Received http code ' + status);
                     this.log.info('Received data was: ' + data.Name);
 
                     this.labelText = data.Name;
                 })
-                .error((data : any, status) => {
+                .error((data : GetHelloWorldResponse, status) => {
                     this.log.info('Received http code ' + status);
                     this.log.error('Oops... something went wrong');
                     this.labelText = '';

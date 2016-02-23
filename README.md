@@ -6,12 +6,15 @@ Use
 dnu restore
 npm install --prefix HelloCoreClrApp
 HelloCoreClrApp/node_modules/.bin/bower --config.cwd=HelloCoreClrApp install
+./HelloCoreClrApp/node_modules/.bin/tsc -p HelloCoreClrApp
 ```
-to restore packages. Use
+to restore packages and for compiling Typescript files. Use
 ```bash
 dnx -p HelloCoreClrApp.Test test
 ```
-to run unit tests and use
+to run c# unit tests.
+
+Use
 ```bash
 dnx -p HelloCoreClrApp web
 ```
@@ -28,3 +31,8 @@ dnu publish HelloCoreClrApp/project.json
 (Though publishing isn't perfect yet...)
 
 Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.
+
+Install Typescript bindings with
+```bash
+./HelloCoreClrApp/node_modules/.bin/tsd install angular
+```

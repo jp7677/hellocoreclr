@@ -1,7 +1,8 @@
 typings/**
 HelloCoreClrApp/node_modules/**
 HelloCoreClrApp/wwwroot/lib/**
-HelloCoreClrApp/wwwroot/app/**/*.min.js*
+HelloCoreClrApp/wwwroot/app/**/*.js
+HelloCoreClrApp/wwwroot/app/**/*.js.map
 HelloCoreClrApp/project.lock.json
 HelloCoreClrApp/bin/**
 HelloCoreClrApp.Test/project.lock.json

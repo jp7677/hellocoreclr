@@ -17,4 +17,13 @@ dnx -p src/ web
 ```
 to run the app. Now open <http://localhost:5000/index.html> in you favorite browser.
 
+Building goes like
+```bash
+dnu build src/project.json
+```
+and publish like
+```bash
+dnu publish src/project.json
+```
+
 Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.

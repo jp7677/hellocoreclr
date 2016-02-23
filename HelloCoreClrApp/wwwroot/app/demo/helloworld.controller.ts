@@ -6,8 +6,8 @@ module app{
     export class HelloWorldController{
         http : ng.IHttpService;
         log : ng.ILogService;
-        inputText : any;
-        labelText : any;
+        inputText : string;
+        labelText : string;
 
         static $inject = ['$http', '$log'];
                 

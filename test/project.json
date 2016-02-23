@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+ 
+  "dependencies": {
+    "src":"0.0.1",    
+    "xunit": "2.1.0",
+    "xunit.runner.dnx": "2.1.0-rc1-build204"
+  },
+
+  "commands": {
+    "test": "xunit.runner.dnx"
+   },
+
+  "frameworks": {
+    "dnxcore50": { }
+  }
+}

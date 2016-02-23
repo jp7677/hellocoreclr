@@ -7,10 +7,13 @@ dnu restore
 npm install --prefix src
 src/node_modules/.bin/bower --config.cwd=src install
 ```
-to restore packages and use
+to restore packages. Use
 ```bash
-cd src
-dnx web
+dnx -p test/ test
+```
+to run unit tests and use
+```bash
+dnx -p src/ web
 ```
 to run the app. Now open <http://localhost:5000/index.html> in you favorite browser.
 

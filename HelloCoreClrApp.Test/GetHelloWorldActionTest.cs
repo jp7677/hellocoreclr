@@ -4,7 +4,6 @@ namespace HelloWorldApp
 {
     public class GetHelloWorldActionTest
     {
-        
         [Fact]
         public void ExecuteTest()
         {

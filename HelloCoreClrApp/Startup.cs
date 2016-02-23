@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace HelloWorldApp
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
     public class Startup
     {
         public Startup(IHostingEnvironment env)

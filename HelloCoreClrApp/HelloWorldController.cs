@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 namespace HelloWorldApp
 {
     [Route("api")]
-    // ReSharper disable once UnusedMember.Global
     public class HelloWorldController : Controller
     {
         ILogger logger;
@@ -16,7 +15,6 @@ namespace HelloWorldApp
         
         [Route("helloworld/{name}")]
         [HttpGet]
-        // ReSharper disable once UnusedMember.Global
         public IActionResult GetHelloWorld(string name)
         {
             logger.LogInformation(string.Format("'HelloWorld' Request received with '{0}'.",name));

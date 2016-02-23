@@ -3,7 +3,7 @@
 module app{
     'use strict';
 
-    export class Config{
+    class Config{
         static $inject = ["$stateProvider","$urlRouterProvider"];
         
         constructor(stateProvider: ng.ui.IStateProvider, urlRouterProvider: ng.ui.IUrlRouterProvider) 

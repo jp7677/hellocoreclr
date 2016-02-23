@@ -3,7 +3,7 @@
 module app{
     'use strict';
 
-    export class HelloWorldController{
+    class HelloWorldController{
         http : ng.IHttpService;
         log : ng.ILogService;
         inputText : string;
@@ -18,7 +18,7 @@ module app{
             this.labelText = '';
         }
 
-        public executeHelloWorld(){
+        private executeHelloWorld(){
             var name = this.inputText;
             if (name == undefined || name.length == 0) {
                 this.log.warn('No name received. abort.. ');

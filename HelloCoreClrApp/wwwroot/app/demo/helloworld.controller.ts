@@ -1,38 +1,48 @@
 /// <reference path="../../../../typings/angularjs/angular.d.ts" />
 
 module app{
-    var app = angular.module('app');
-    
-    function helloWorldController($http, $log) {
-        var vm = this;
-        vm.inputText = undefined;
-        vm.labelText = '';
+    'use strict';
 
-        vm.executeHelloWorld = function() {
-            var name = vm.inputText;
+    export class HelloWorldController{
+        http : ng.IHttpService;
+        log : ng.ILogService;
+        inputText : any;
+        labelText : any;
+
+        static $inject = ['$http', '$log'];
+                
+        constructor ($http : ng.IHttpService, $log : ng.ILogService) {
+            this.http = $http;
+            this.log = $log;
+            this.inputText = undefined;
+            this.labelText = '';
+        }
+
+        public executeHelloWorld(){
+            var name = this.inputText;
             if (name == undefined || name.length == 0) {
-                $log.warn('No name received. abort.. ');
-                vm.labelText = '';
+                this.log.warn('No name received. abort.. ');
+                this.labelText = '';
                 return;
             }
 
-            $log.info('We got the following name: ' + name);
+            this.log.info('We got the following name: ' + name);
 
-            $http.get('/api/helloworld/' + name)
-                .success(function(data, status) {
-                    $log.info('Received http code ' + status);
-                    $log.info('Received data was: ' + data.Name);
+            this.http.get('/api/helloworld/' + name)
+                .success((data : any, status) => {
+                    this.log.info('Received http code ' + status);
+                    this.log.info('Received data was: ' + data.Name);
 
-                    vm.labelText = data.Name;
+                    this.labelText = data.Name;
                 })
-                .error(function(data, status) {
-                    $log.info('Received http code ' + status);
-                    $log.error('Oops... something went wrong');
-                    vm.labelText = '';
+                .error((data : any, status) => {
+                    this.log.info('Received http code ' + status);
+                    this.log.error('Oops... something went wrong');
+                    this.labelText = '';
                 });
         };
     }
     
-    helloWorldController.$inject = ['$http', '$log'];
-    app.controller('HelloWorldController', helloWorldController);
+    var app = angular.module('app');
+    app.controller('HelloWorldController', HelloWorldController);
 }

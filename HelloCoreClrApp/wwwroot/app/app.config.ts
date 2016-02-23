@@ -1,21 +1,25 @@
 /// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
 
 module app{
-    var app = angular.module('app', ['ui.router', 'ui.bootstrap']);
-    
-    function config(stateProvider: ng.ui.IStateProvider, urlRouterProvider: ng.ui.IUrlRouterProvider) 
-    {
-        urlRouterProvider.otherwise('/helloworld');
+    'use strict';
 
-        stateProvider
-            .state('helloworld', {
-                url: '/helloworld',
-                templateUrl: 'app/demo/helloworld.html',
-                controller: 'HelloWorldController',
-                controllerAs: 'vm'
-            });
+    export class Config{
+        static $inject = ["$stateProvider","$urlRouterProvider"];
+        
+        constructor(stateProvider: ng.ui.IStateProvider, urlRouterProvider: ng.ui.IUrlRouterProvider) 
+        {
+            urlRouterProvider.otherwise('/helloworld');
+
+            stateProvider
+                .state('helloworld', {
+                    url: '/helloworld',
+                    templateUrl: 'app/demo/helloworld.html',
+                    controller: 'HelloWorldController',
+                    controllerAs: 'vm'
+                });
+        }
     }
     
-    config.$inject = ["$stateProvider","$urlRouterProvider"];
-    app.config(config);
+    var app = angular.module('app', ['ui.router', 'ui.bootstrap']);
+    app.config(Config);
 }

@@ -28,7 +28,7 @@
   "exclude": [
     "wwwroot",
     "node_modules",
-    "bower_components"
+    "lib"
   ],
 
   "publishExclude": [
@@ -37,6 +37,6 @@
   ],
 
   "scripts": {
-    "prepublish": [ "npm install", "./node_modules/.bin/bower install", "./node_modules/.bin/gulp clean", "./node_modules/.bin/gulp min" ]
+    "prepublish": [ "npm install", "./node_modules/.bin/bower install", "./node_modules/.bin/tsc -p .", "./node_modules/.bin/gulp clean", "./node_modules/.bin/gulp min" ]
   }
 }

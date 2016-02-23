@@ -3,6 +3,8 @@
         .module('app', ['ui.router', 'ui.bootstrap'])
         .config(config);
 
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+
     function config($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/helloworld');
 

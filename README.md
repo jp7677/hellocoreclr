@@ -32,7 +32,9 @@ dnu publish HelloCoreClrApp/project.json
 
 Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.
 
-Install Typescript bindings with
+
+Note: For having better intellisense in Visual Studio Code you can install Typescript bindings like
 ```bash
 HelloCoreClrApp/node_modules/.bin/tsd install angular
+HelloCoreClrApp/node_modules/.bin/tsd install angular-ui-router
 ```

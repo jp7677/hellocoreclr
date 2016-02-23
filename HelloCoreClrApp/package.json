@@ -1,17 +1,17 @@
 {
   "name": "aspnet",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Just a playground",
   "repository": {
       "url": "https://github.com/jp7677/hellocoreclr/"
   },
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "devDependencies": {
-    "gulp": "3.9.1",
-    "gulp-concat": "2.6.0",
-    "gulp-cssmin": "0.1.7",
-    "gulp-uglify": "1.5.3",
-    "rimraf": "2.5.2",
-    "bower":"1.7.7"
+    "gulp": "3.9.*",
+    "gulp-concat": "2.6.*",
+    "gulp-cssmin": "0.1.*",
+    "gulp-uglify": "1.5.*",
+    "rimraf": "2.5.*",
+    "bower":"1.7.*"
   }
 }

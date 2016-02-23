@@ -15,7 +15,7 @@ to run unit tests and use
 ```bash
 dnx -p HelloCoreClrApp web
 ```
-to run the app. Now open <http://localhost:5000/index.html> in you favorite browser.
+to run the app. Now open <http://localhost:5000/> in you favorite browser.
 
 Building goes like
 ```bash

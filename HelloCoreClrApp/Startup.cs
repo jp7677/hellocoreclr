@@ -8,7 +8,6 @@ namespace HelloWorldApp
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Startup
     {
-                
         public Startup(IHostingEnvironment env)
         {
         }
@@ -26,6 +25,8 @@ namespace HelloWorldApp
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
             
+            // Serve the default file, if present.
+            app.UseDefaultFiles();
             // Add static files to the request pipeline.
             app.UseStaticFiles();
             
@@ -35,6 +36,5 @@ namespace HelloWorldApp
         
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
-        
     }
 }

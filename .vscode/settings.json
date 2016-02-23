@@ -11,6 +11,7 @@
         "HelloCoreClrApp/project.lock.json": true,
         "HelloCoreClrApp.Test/bin/**": true,
         "HelloCoreClrApp.Test/project.lock.json": true,
-        "typings/**": true
+        "typings/**": true,
+        ".vscode/**": true
 	}
 }

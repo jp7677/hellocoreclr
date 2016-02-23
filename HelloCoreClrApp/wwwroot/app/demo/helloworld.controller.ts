@@ -1,10 +1,8 @@
-﻿(function() {
-    angular
-        .module('app')
-        .controller('HelloWorldController', helloWorldController);
+/// <reference path="../../../../typings/angularjs/angular.d.ts" />
 
-    helloWorldController.$inject = ['$http', '$log'];
-
+module app{
+    var app = angular.module('app');
+    
     function helloWorldController($http, $log) {
         var vm = this;
         vm.inputText = undefined;
@@ -34,4 +32,7 @@
                 });
         };
     }
-})();
+    
+    helloWorldController.$inject = ['$http', '$log'];
+    app.controller('HelloWorldController', helloWorldController);
+}

@@ -6,7 +6,7 @@ Use
 dnu restore
 npm install --prefix HelloCoreClrApp
 HelloCoreClrApp/node_modules/.bin/bower --config.cwd=HelloCoreClrApp install
-./HelloCoreClrApp/node_modules/.bin/tsc -p HelloCoreClrApp
+HelloCoreClrApp/node_modules/.bin/tsc -p HelloCoreClrApp
 ```
 to restore packages and for compiling Typescript files. Use
 ```bash
@@ -34,5 +34,5 @@ Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.
 
 Install Typescript bindings with
 ```bash
-./HelloCoreClrApp/node_modules/.bin/tsd install angular
+HelloCoreClrApp/node_modules/.bin/tsd install angular
 ```

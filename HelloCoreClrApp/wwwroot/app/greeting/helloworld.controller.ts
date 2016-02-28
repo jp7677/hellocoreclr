@@ -1,9 +1,8 @@
 /// <reference path="../../../../typings/angularjs/angular.d.ts" />
+'use strict';
 
-module app{
-    'use strict';
-
-    class HelloWorldController{
+module greeting {
+    export class HelloWorldController{
         http : ng.IHttpService;
         log : ng.ILogService;
         inputText : string;
@@ -44,5 +43,5 @@ module app{
     }
     
     var app = angular.module('app');
-    app.controller('HelloWorldController', HelloWorldController);
+    app.controller('HelloWorldController', greeting.HelloWorldController);
 }

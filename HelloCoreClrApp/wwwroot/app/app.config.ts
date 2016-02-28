@@ -1,9 +1,8 @@
 /// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
+'use strict';
 
 module app{
-    'use strict';
-
-    class Config{
+    export class Config{
         static $inject = ["$stateProvider","$urlRouterProvider"];
         
         constructor(stateProvider: ng.ui.IStateProvider, urlRouterProvider: ng.ui.IUrlRouterProvider) 
@@ -13,7 +12,7 @@ module app{
             stateProvider
                 .state('helloworld', {
                     url: '/helloworld',
-                    templateUrl: 'app/demo/helloworld.html',
+                    templateUrl: 'app/greeting/helloworld.html',
                     controller: 'HelloWorldController',
                     controllerAs: 'vm'
                 });

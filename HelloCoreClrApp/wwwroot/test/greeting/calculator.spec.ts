@@ -3,8 +3,8 @@
 'use strict';
 
 describe("Calculator Test ", () => {
-    it('Should calculate', () => {
+    it('calculates 5 + 9', () => {
         var calc = new greeting.Calculator();
-        chai.expect(calc.sum(5,9)).to.equals(14);
+        chai.expect(calc.sum(5,9), "to return 14").to.equals(14);
     });
 });

@@ -3,6 +3,8 @@ HelloCoreClrApp/node_modules/**
 HelloCoreClrApp/wwwroot/lib/**
 HelloCoreClrApp/wwwroot/app/**/*.js
 HelloCoreClrApp/wwwroot/app/**/*.js.map
+HelloCoreClrApp/wwwroot/test/**/*.js
+HelloCoreClrApp/wwwroot/test/**/*.js.map
 HelloCoreClrApp/project.lock.json
 HelloCoreClrApp/bin/**
 HelloCoreClrApp.Test/project.lock.json

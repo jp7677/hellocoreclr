@@ -22,6 +22,7 @@ namespace HelloWorldApp
             // Add framework services.
             services.AddMvc();
             
+            // Add SimpleInjector Controller Activator
             services.AddInstance<IControllerActivator>(new SimpleInjectorControllerActivator(container));
         }
         
@@ -37,7 +38,6 @@ namespace HelloWorldApp
             container.Register<IResourceProvider, ResourceProvider>(Lifestyle.Scoped);
             container.Register<IActionFactory, ActionFactory>(Lifestyle.Scoped);
             container.Register<IGetHelloWorldAction, GetHelloWorldAction>(Lifestyle.Scoped);
-            
             container.RegisterAspNetControllers(app);
             
             container.Verify();

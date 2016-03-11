@@ -9,6 +9,7 @@ HelloCoreClrApp/node_modules/.bin/tsd install angular
 HelloCoreClrApp/node_modules/.bin/tsd install angular-ui-router
 HelloCoreClrApp/node_modules/.bin/tsd install jquery
 HelloCoreClrApp/node_modules/.bin/tsd install mocha
+HelloCoreClrApp/node_modules/.bin/tsd install assertion-error
 HelloCoreClrApp/node_modules/.bin/tsd install chai
 HelloCoreClrApp/node_modules/.bin/bower --config.cwd=HelloCoreClrApp install
 HelloCoreClrApp/node_modules/.bin/tsc -p HelloCoreClrApp

@@ -4,14 +4,15 @@
 		"**/.git": true,
 		"**/.DS_Store": true,
 
-        	"HelloCoreClrApp/wwwroot/**/*.js": { "when": "$(basename).ts"},
-        	"HelloCoreClrApp/wwwroot/**/*.js.map": true,
-        	"HelloCoreClrApp/node_modules/**": true,
-        	"HelloCoreClrApp/bin/**": true,
-        	"HelloCoreClrApp/project.lock.json": true,
-        	"HelloCoreClrApp.Test/bin/**": true,
-        	"HelloCoreClrApp.Test/project.lock.json": true,
-         	".vscode/**": true,
-	 	"typings/**": true
+                "HelloCoreClrApp/wwwroot/**/*.js": { "when": "$(basename).ts"},
+                "HelloCoreClrApp/wwwroot/**/*.js.map": true,
+                "HelloCoreClrApp/node_modules/**": true,
+                "HelloCoreClrApp/bin/**": true,
+                "HelloCoreClrApp/project.lock.json": true,
+                "HelloCoreClrApp.Test/bin/**": true,
+                "HelloCoreClrApp.Test/project.lock.json": true,
+                ".vscode/**": true,
+                "typings/**": true,
+                "node_modules/**": true
 	}
 }

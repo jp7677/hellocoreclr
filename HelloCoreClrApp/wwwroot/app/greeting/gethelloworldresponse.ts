@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-module greeting {
+namespace greeting {
     export class GetHelloWorldResponse {
-        public Name : string;
+        public Name: string;
     }
 }

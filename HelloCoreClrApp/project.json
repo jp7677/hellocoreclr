@@ -14,7 +14,9 @@
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Debug" : "1.0.0-rc1-final"
+    "Microsoft.Extensions.Logging.Debug" : "1.0.0-rc1-final",
+    "SimpleInjector": "3.1.2",
+    "SimpleInjector.Integration.AspNet": "3.1.2-beta4"
   },
 
   "commands": {

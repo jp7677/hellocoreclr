@@ -7,10 +7,12 @@ namespace HelloWorldApp
     public class HelloWorldController : Controller
     {
         ILogger logger;
+        IActionFactory actionFactory;
         
-        public HelloWorldController(ILoggerFactory loggerFactory)
+        public HelloWorldController(ILoggerFactory loggerFactory, IActionFactory actionFactory)
         {
             logger = loggerFactory.CreateLogger(typeof(HelloWorldController).Name);
+            this.actionFactory = actionFactory;
         }
         
         [Route("helloworld/{name}")]
@@ -19,7 +21,7 @@ namespace HelloWorldApp
         {
             logger.LogInformation(string.Format("'HelloWorld' Request received with '{0}'.",name));
             
-            var action = new GetHelloWorldAction();
+            var action = actionFactory.CreateGetHelloWorldAction();
             var response = action.Execute(name);
             return Ok(response);
         }

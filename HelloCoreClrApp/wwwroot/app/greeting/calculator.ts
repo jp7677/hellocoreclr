@@ -1,10 +1,9 @@
-'use strict';
+"use strict";
 
-module greeting {
+namespace greeting {
     export class Calculator {
-        sum(a: number, b: number){
+        sum(a: number, b: number) {
             return a + b;
         }
     }
 }
-

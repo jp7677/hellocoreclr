@@ -5,10 +5,15 @@ Use
 ```bash
 dnu restore
 npm install --prefix HelloCoreClrApp
+HelloCoreClrApp/node_modules/.bin/tsd install angular
+HelloCoreClrApp/node_modules/.bin/tsd install angular-ui-router
+HelloCoreClrApp/node_modules/.bin/tsd install jquery
+HelloCoreClrApp/node_modules/.bin/tsd install mocha
+HelloCoreClrApp/node_modules/.bin/tsd install chai
 HelloCoreClrApp/node_modules/.bin/bower --config.cwd=HelloCoreClrApp install
 HelloCoreClrApp/node_modules/.bin/tsc -p HelloCoreClrApp
 ```
-to restore packages and for compiling Typescript files. Use
+to restore packages, bindings and for compiling Typescript files. Use
 ```bash
 dnx -p HelloCoreClrApp.Test test
 ```
@@ -32,9 +37,3 @@ dnu publish HelloCoreClrApp/project.json
 
 Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.
 
-
-Note: for having better intellisense in Visual Studio Code you can install Typescript bindings like:
-```bash
-HelloCoreClrApp/node_modules/.bin/tsd install angular
-HelloCoreClrApp/node_modules/.bin/tsd install angular-ui-router
-```

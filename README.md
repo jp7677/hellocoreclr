@@ -17,8 +17,9 @@ HelloCoreClrApp/node_modules/.bin/tsc -p HelloCoreClrApp
 to restore packages, bindings and for compiling Typescript files. Use
 ```bash
 dnx -p HelloCoreClrApp.Test test
+HelloCoreClrApp/node_modules/.bin/karma start HelloCoreClrApp/karma.conf.js
 ```
-to run c# unit tests.
+to run c# and typscript/javascript unit tests.
 
 Use
 ```bash

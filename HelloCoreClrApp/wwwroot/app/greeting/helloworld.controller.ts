@@ -10,7 +10,7 @@ namespace greeting {
 
         static $inject = ["$http", "$log"];
 
-        constructor ($http: ng.IHttpService, $log: ng.ILogService) {
+        constructor($http: ng.IHttpService, $log: ng.ILogService) {
             this.http = $http;
             this.log = $log;
             this.inputText = undefined;

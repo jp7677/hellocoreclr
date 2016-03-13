@@ -5,7 +5,7 @@ Use
 ```bash
 dnu restore
 npm install --prefix HelloCoreClrApp
-HelloCoreClrApp/node_modules/.bin/tsd install  angular angular-ui-router mocha chai
+HelloCoreClrApp/node_modules/.bin/tsd install angular angular-ui-router mocha chai
 HelloCoreClrApp/node_modules/.bin/bower --config.cwd=HelloCoreClrApp install
 HelloCoreClrApp/node_modules/.bin/tsc -p HelloCoreClrApp
 ```

@@ -1,4 +1,6 @@
-module.exports = function(wallaby) {
+module.exports = function (wallaby) {
+  'use strict'
+
   return {
     files: [
       {pattern: 'node_modules/chai/chai.js', instrument: false},

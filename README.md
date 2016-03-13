@@ -34,3 +34,10 @@ dnu publish HelloCoreClrApp/project.json
 
 Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.
 
+For a nice programming experience I'm using Visual Studio Code with the following extensions:
+C#, tslint, standardjs, HTMLHint, Wallabyjs for Visual Studio Code
+Use the follwing command to setup required node packages for these extensions.  
+```bash
+npm install tslint standard htmlhint
+```
+Note that Wallabyjs is a commercial extension.

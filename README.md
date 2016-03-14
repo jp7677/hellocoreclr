@@ -24,7 +24,7 @@ to run the app. Now open <http://localhost:5000/> in you favorite browser.
 
 Building goes like
 ```bash
-dnu build HelloCoreClrApp.Ui/project.json
+dnu build HelloCoreClrApp/project.json HelloCoreClrApp.Test/project.json HelloCoreClrApp.Ui/project.json
 ```
 and publish like
 ```bash

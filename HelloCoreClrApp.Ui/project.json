@@ -1,0 +1,25 @@
+{
+  "webroot": "wwwroot",
+  "version": "0.0.1",
+ 
+  "dependencies": {
+    "HelloCoreClrApp":"0.0.1"
+  },
+
+  "commands": {
+    "web": "Microsoft.AspNet.Server.Kestrel  --app HelloCoreClrApp"
+   },
+
+  "frameworks": {
+    "dnxcore50": { }
+  },
+
+  "exclude": [
+    "wwwroot",
+    "node_modules"
+  ],
+
+  "scripts": {
+    "prepublish": [ "npm install", "./node_modules/.bin/bower install", "./node_modules/.bin/tsc -p .", "./node_modules/.bin/gulp clean", "./node_modules/.bin/gulp min" ]
+  }
+}

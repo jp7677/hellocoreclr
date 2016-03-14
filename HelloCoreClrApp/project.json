@@ -1,5 +1,4 @@
 {
-  "webroot": "wwwroot",
   "version": "0.0.1",
  
   "dependencies": {
@@ -19,26 +18,7 @@
     "SimpleInjector.Integration.AspNet": "3.1.2-beta4"
   },
 
-  "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel"
-   },
-
   "frameworks": {
     "dnxcore50": { }
-  },
-
-  "exclude": [
-    "wwwroot",
-    "node_modules",
-    "lib"
-  ],
-
-  "publishExclude": [
-    "**.user",
-    "**.vspscc"
-  ],
-
-  "scripts": {
-    "prepublish": [ "npm install", "./node_modules/.bin/bower install", "./node_modules/.bin/tsc -p .", "./node_modules/.bin/gulp clean", "./node_modules/.bin/gulp min" ]
   }
 }

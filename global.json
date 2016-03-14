@@ -1,11 +1,12 @@
 {
-    "projects": [
-        "HelloCoreClrApp",
-        "HelloCoreClrApp.Test"
-    ],
-    "sdk": {
-        "version": "1.0.0-rc1-update1",
-        "runtime": "coreclr",
-        "architecture": "x64"
-    }
+  "projects": [
+    "HelloCoreClrApp",
+    "HelloCoreClrApp.Test",
+    "HelloCoreClrApp.Ui"
+  ],
+  "sdk": {
+    "version": "1.0.0-rc1-update1",
+    "runtime": "coreclr",
+    "architecture": "x64"
+  }
 }

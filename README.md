@@ -4,31 +4,31 @@ Just a playgrond..
 Use 
 ```bash
 dnu restore
-npm install --prefix HelloCoreClrApp
-HelloCoreClrApp/node_modules/.bin/tsd install angular angular-ui-router mocha chai
-HelloCoreClrApp/node_modules/.bin/bower --config.cwd=HelloCoreClrApp install
-HelloCoreClrApp/node_modules/.bin/tsc -p HelloCoreClrApp
+npm install --prefix HelloCoreClrApp.Ui
+HelloCoreClrApp.Ui/node_modules/.bin/tsd install angular angular-ui-router mocha chai
+HelloCoreClrApp.Ui/node_modules/.bin/bower --config.cwd=HelloCoreClrApp.Ui install
+HelloCoreClrApp.Ui/node_modules/.bin/tsc -p HelloCoreClrApp.Ui
 ```
 to restore packages, bindings and for compiling Typescript files. Use
 ```bash
 dnx -p HelloCoreClrApp.Test test
-HelloCoreClrApp/node_modules/.bin/karma start HelloCoreClrApp/karma.conf.js
+HelloCoreClrApp.Ui/node_modules/.bin/karma start HelloCoreClrApp.Ui/karma.conf.js
 ```
 to run c# and typscript/javascript unit tests.
 
 Use
 ```bash
-dnx -p HelloCoreClrApp web
+dnx -p HelloCoreClrApp.Ui web
 ```
 to run the app. Now open <http://localhost:5000/> in you favorite browser.
 
 Building goes like
 ```bash
-dnu build HelloCoreClrApp/project.json
+dnu build HelloCoreClrApp.Ui/project.json
 ```
 and publish like
 ```bash
-dnu publish HelloCoreClrApp/project.json
+dnu publish HelloCoreClrApp.Ui/project.json
 ```
 (Though publishing isn't perfect yet...)
 

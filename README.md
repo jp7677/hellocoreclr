@@ -12,14 +12,14 @@ HelloCoreClrApp.Ui/node_modules/.bin/bower --config.cwd=HelloCoreClrApp.Ui insta
 HelloCoreClrApp.Ui/node_modules/.bin/tsc -p HelloCoreClrApp.Ui
 ```
 
-to restore packages, bindings and for compiling Typescript files. Use
+to restore packages, bindings and for compiling TypeScript files. Use
 
 ```bash
 dnx -p HelloCoreClrApp.Test test
 HelloCoreClrApp.Ui/node_modules/.bin/karma start HelloCoreClrApp.Ui/karma.conf.js
 ```
 
-to run C# and typescript/JavaScript unit tests.
+to run C# and TypeScript/JavaScript unit tests.
 
 Use
 

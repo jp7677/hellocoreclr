@@ -1,6 +1,6 @@
 # hellocoreclr
 
-Just a playgrond..
+Just a playground..
 
 Use
 
@@ -19,7 +19,7 @@ dnx -p HelloCoreClrApp.Test test
 HelloCoreClrApp.Ui/node_modules/.bin/karma start HelloCoreClrApp.Ui/karma.conf.js
 ```
 
-to run c# and typscript/javascript unit tests.
+to run C# and typescript/JavaScript unit tests.
 
 Use
 
@@ -46,8 +46,8 @@ dnu publish HelloCoreClrApp.Ui/project.json
 Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.
 
 For a nice programming experience I'm using Visual Studio Code with the following extensions:
-C#, tslint, standardjs, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint
-Use the follwing command to setup required node packages for these extensions.
+C#, tslint, standardjs, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint, Spelling and Grammar Checker
+Use the following command to set up required node packages for these extensions.
 
 ```bash
 npm install tslint standard htmlhint

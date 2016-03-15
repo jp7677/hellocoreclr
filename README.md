@@ -1,6 +1,6 @@
 # hellocoreclr
 
-Just a playground..
+Just a playground...
 
 Use
 

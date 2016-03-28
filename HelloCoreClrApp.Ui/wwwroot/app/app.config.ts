@@ -5,10 +5,10 @@ namespace app {
     export class Config {
         static $inject = ["$stateProvider", "$urlRouterProvider"];
 
-        constructor(stateProvider: ng.ui.IStateProvider, urlRouterProvider: ng.ui.IUrlRouterProvider) {
-            urlRouterProvider.otherwise("/helloworld");
+        constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
+            $urlRouterProvider.otherwise("/helloworld");
 
-            stateProvider
+            $stateProvider
                 .state("helloworld", {
                     url: "/helloworld",
                     templateUrl: "app/greeting/helloworld.html",

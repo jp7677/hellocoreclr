@@ -2,7 +2,7 @@ module.exports = function (config) {
   'use strict'
 
   config.set({
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'chai', 'sinon'],
     files: [
       {pattern: 'wwwroot/lib/angular/angular.js', instrument: false},
       {pattern: 'node_modules/angular-mocks/angular-mocks.js', instrument: false},

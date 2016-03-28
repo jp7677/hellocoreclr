@@ -36,7 +36,7 @@ namespace greeting {
                 })
                 .error((data: GetHelloWorldResponse, status) => {
                     this.log.info("Received http code " + status);
-                    this.log.error("Oops... something went wrong");
+                    this.log.warn("Oops... something went wrong");
                     this.labelText = "";
                 });
         };

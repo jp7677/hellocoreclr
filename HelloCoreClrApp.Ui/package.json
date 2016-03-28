@@ -17,10 +17,12 @@
     "tsd": "0.6.*",
     "mocha": "2.4.*",
     "chai": "3.5.*",
+    "sinon": "1.17.*",
     "angular-mocks": "1.5.*",
     "karma": "0.13.*",
     "karma-mocha": "0.2.*",
     "karma-chai": "0.1.*",
+    "karma-sinon": "1.0.*",
     "karma-phantomjs-launcher": "1.0.*"
   }
 }

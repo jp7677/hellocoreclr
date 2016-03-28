@@ -7,7 +7,7 @@ Use
 ```bash
 dnu restore
 npm install --prefix HelloCoreClrApp.Ui
-HelloCoreClrApp.Ui/node_modules/.bin/tsd install angular angular-ui-router mocha chai angular-mocks
+HelloCoreClrApp.Ui/node_modules/.bin/tsd install angular angular-ui-router mocha chai sinon angular-mocks
 HelloCoreClrApp.Ui/node_modules/.bin/bower --config.cwd=HelloCoreClrApp.Ui install
 HelloCoreClrApp.Ui/node_modules/.bin/tsc -p HelloCoreClrApp.Ui
 ```

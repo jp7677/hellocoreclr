@@ -25,7 +25,6 @@ describe("HelloWorldController Test ", () => {
     it("initializes correctly", () => {
         let sut: greeting.HelloWorldController;
         sut = new greeting.HelloWorldController(http, log);
-        sut.inputText = "";
         sut.executeHelloWorld();
     });
 

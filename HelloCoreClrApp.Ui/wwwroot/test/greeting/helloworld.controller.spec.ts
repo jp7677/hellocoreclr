@@ -12,7 +12,7 @@ describe("HelloWorldController Test ", () => {
 
     beforeEach(() => {
         inject( function($http, $httpBackend: ng.IHttpBackendService, $log: ng.ILogService){
-            let res = new greeting.GetHelloWorldResponse();
+            let res = new app.greeting.GetHelloWorldResponse();
             res.Name = "Hello World!";
             $httpBackend.whenGET("/api/helloworld/Hello").respond(200, res);
             $httpBackend.whenGET("/api/helloworld/Error").respond(500);
@@ -25,7 +25,7 @@ describe("HelloWorldController Test ", () => {
 
     it("does nothing when there is no input", () => {
         let logSpy = sinon.spy(log, "warn");
-        let sut = new greeting.HelloWorldController(http, log);
+        let sut = new app.greeting.HelloWorldController(http, log);
 
         sut.executeHelloWorld();
 
@@ -35,7 +35,7 @@ describe("HelloWorldController Test ", () => {
 
     it("can handle a valid response", () => {
         let logSpy = sinon.spy(log, "info");
-        let sut = new greeting.HelloWorldController(http, log);
+        let sut = new app.greeting.HelloWorldController(http, log);
         sut.inputText = "Hello";
 
         sut.executeHelloWorld();
@@ -47,7 +47,7 @@ describe("HelloWorldController Test ", () => {
 
     it("can handle an error response", () => {
         let logSpy = sinon.spy(log, "warn");
-        let sut = new greeting.HelloWorldController(http, log);
+        let sut = new app.greeting.HelloWorldController(http, log);
         sut.inputText = "Error";
 
         sut.executeHelloWorld();

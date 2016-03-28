@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings/angularjs/angular.d.ts" />
 "use strict";
 
-namespace greeting {
+namespace app.greeting {
     export class HelloWorldController {
         private http: ng.IHttpService;
         private log: ng.ILogService;

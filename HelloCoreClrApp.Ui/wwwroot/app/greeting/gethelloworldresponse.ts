@@ -1,6 +1,6 @@
 "use strict";
 
-namespace greeting {
+namespace app.greeting {
     export class GetHelloWorldResponse {
         public Name: string;
     }

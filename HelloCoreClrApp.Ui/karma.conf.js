@@ -5,6 +5,7 @@ module.exports = function (config) {
     frameworks: ['mocha', 'chai'],
     files: [
       {pattern: 'wwwroot/lib/angular/angular.js', instrument: false},
+      {pattern: 'node_modules/angular-mocks/angular-mocks.js', instrument: false},
       'wwwroot/app/**/*.js',
       'wwwroot/test/**/*.spec.js'
     ],

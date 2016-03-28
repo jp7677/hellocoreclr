@@ -3,8 +3,8 @@
 
 namespace greeting {
     export class HelloWorldController {
-        http: ng.IHttpService;
-        log: ng.ILogService;
+        private http: ng.IHttpService;
+        private log: ng.ILogService;
         inputText: string;
         labelText: string;
 
@@ -17,7 +17,7 @@ namespace greeting {
             this.labelText = "";
         }
 
-        private executeHelloWorld() {
+        executeHelloWorld() {
             let name = this.inputText;
             if (name === undefined || name.length === 0) {
                 this.log.warn("No name received. abort.. ");

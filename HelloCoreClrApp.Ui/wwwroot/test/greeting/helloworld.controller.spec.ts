@@ -11,7 +11,7 @@ describe("HelloWorldController Test ", () => {
     let $log;
 
     beforeEach(() => {
-        inject( function(_$http_, _$httpBackend_: ng.IHttpBackendService, _$log_: ng.ILogService){
+        inject( function(_$http_: ng.IHttpService, _$httpBackend_: ng.IHttpBackendService, _$log_: ng.ILogService){
             $http = _$http_;
             $httpBackend = _$httpBackend_;
             $log = _$log_;

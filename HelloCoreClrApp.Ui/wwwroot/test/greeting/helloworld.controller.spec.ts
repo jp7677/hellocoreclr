@@ -6,12 +6,12 @@
 "use strict";
 
 describe("HelloWorldController Test ", () => {
-    let $http;
-    let $httpBackend;
-    let $log;
+    let $http: ng.IHttpService;
+    let $httpBackend: ng.IHttpBackendService;
+    let $log: ng.ILogService;
 
     beforeEach(() => {
-        inject( function(_$http_: ng.IHttpService, _$httpBackend_: ng.IHttpBackendService, _$log_: ng.ILogService){
+        inject((_$http_: ng.IHttpService, _$httpBackend_: ng.IHttpBackendService, _$log_: ng.ILogService) => {
             $http = _$http_;
             $httpBackend = _$httpBackend_;
             $log = _$log_;

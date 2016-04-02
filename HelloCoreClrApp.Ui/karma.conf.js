@@ -7,6 +7,7 @@ module.exports = function (config) {
       {pattern: 'wwwroot/lib/angular/angular.js', instrument: false},
       {pattern: 'node_modules/angular-mocks/angular-mocks.js', instrument: false},
       'wwwroot/app/**/*.js',
+      'wwwroot/test/stubs.js',
       'wwwroot/test/**/*.spec.js'
     ],
 

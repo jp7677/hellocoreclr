@@ -6,25 +6,18 @@
 
 describe("Config Test ", () => {
     it("initializes correctly", () => {
-        let stateProvider = new StateProviderStub();
-        let urlRouterProvider = new UrlRouterProvider();
+        let stateProvider = new stubs.StateProvider();
+        let urlRouterProvider = new stubs.UrlRouterProvider();
 
         let sut = new app.Config(stateProvider, urlRouterProvider);
         chai.expect(urlRouterProvider.otherwise.calledOnce).to.equals(true);
+        chai.expect(urlRouterProvider.otherwise.calledWithExactly("/helloworld")).to.equals(true);
         chai.expect(stateProvider.state.called).to.equals(true);
+        chai.expect(stateProvider.state.calledWithExactly("helloworld", {
+                    url: "/helloworld",
+                    templateUrl: "app/greeting/helloworld.html",
+                    controller: "HelloWorldController",
+                    controllerAs: "vm"
+                })).to.equals(true);
     });
-
-    class StateProviderStub implements ng.ui.IStateProvider {
-        state = sinon.stub();
-        decorator = sinon.stub();
-        $get = sinon.stub();
-    }
-
-    class UrlRouterProvider implements ng.ui.IUrlRouterProvider {
-        when = sinon.stub();
-        otherwise = sinon.stub();
-        rule = sinon.stub();
-        deferIntercept = sinon.stub();
-        $get = sinon.stub();
-    }
 });

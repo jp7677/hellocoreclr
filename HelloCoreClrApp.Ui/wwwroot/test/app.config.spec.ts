@@ -1,7 +1,4 @@
-/// <reference path="../../../typings/mocha/mocha.d.ts" />
-/// <reference path="../../../typings/chai/chai.d.ts" />
-/// <reference path="../../../typings/sinon/sinon.d.ts" />
-/// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 "use strict";
 
 describe("Config Test ", () => {

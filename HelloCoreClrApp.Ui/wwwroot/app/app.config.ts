@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 "use strict";
 
 namespace app {

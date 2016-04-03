@@ -3,7 +3,7 @@ namespace app.greeting {
 "use strict";
 
     export class HelloWorldController {
-        private static $inject = ["$http", "$log"];
+        public static $inject = ["$http", "$log"];
         public inputText: string;
         public labelText: string;
 
@@ -38,5 +38,5 @@ namespace app.greeting {
     }
 
     let app = angular.module("app");
-    app.controller("HelloWorldController", [greeting.HelloWorldController]);
+    app.controller("HelloWorldController", greeting.HelloWorldController);
 }

@@ -4,7 +4,7 @@ namespace app {
 "use strict";
 
     export class Config {
-        private static $inject = ["$stateProvider", "$urlRouterProvider"];
+        public static $inject = ["$stateProvider", "$urlRouterProvider"];
 
         constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
             $urlRouterProvider.otherwise("/helloworld");

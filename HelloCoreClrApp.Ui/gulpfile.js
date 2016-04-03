@@ -1,6 +1,7 @@
 ﻿'use strict'
 
 var gulp = require('gulp')
+var tslint = require('gulp-tslint')
 var rimraf = require('rimraf')
 var concat = require('gulp-concat')
 var cssmin = require('gulp-cssmin')
@@ -10,12 +11,19 @@ var paths = {
   webroot: './wwwroot/'
 }
 
+paths.ts = [ paths.webroot + 'app/**/*.ts', paths.webroot + 'test/**/*.ts' ]
 paths.js = paths.webroot + 'app/**/*.js'
 paths.minJs = paths.webroot + 'app/**/*.min.js'
 paths.css = paths.webroot + 'css/**/*.css'
 paths.minCss = paths.webroot + 'css/**/*.min.css'
 paths.concatJsDest = paths.webroot + 'app/site.min.js'
 paths.concatCssDest = paths.webroot + 'css/site.min.css'
+
+gulp.task('tslint', function (cb) {
+  gulp.src(paths.ts)
+    .pipe(tslint())
+    .pipe(tslint.report('verbose'))
+})
 
 gulp.task('clean:js', function (cb) {
   rimraf(paths.concatJsDest, cb)

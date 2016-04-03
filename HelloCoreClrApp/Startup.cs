@@ -3,6 +3,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Mvc.Controllers;
+using Newtonsoft.Json.Serialization;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNet;
 
@@ -20,7 +21,9 @@ namespace HelloWorldApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(options => 
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
             
             // Add SimpleInjector Controller Activator
             services.AddInstance<IControllerActivator>(new SimpleInjectorControllerActivator(container));

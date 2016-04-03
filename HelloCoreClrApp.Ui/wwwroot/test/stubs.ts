@@ -1,18 +1,19 @@
 /// <reference path="../../../typings/browser.d.ts" />
-"use strict";
 
 namespace stubs {
+"use strict";
+
     export class StateProvider implements ng.ui.IStateProvider {
-        state = sinon.stub();
-        decorator = sinon.stub();
-        $get = sinon.stub();
+        public state = sinon.stub();
+        public decorator = sinon.stub();
+        public $get = sinon.stub();
     }
 
     export class UrlRouterProvider implements ng.ui.IUrlRouterProvider {
-        when = sinon.stub();
-        otherwise = sinon.stub();
-        rule = sinon.stub();
-        deferIntercept = sinon.stub();
-        $get = sinon.stub();
+        public when = sinon.stub();
+        public otherwise = sinon.stub();
+        public rule = sinon.stub();
+        public deferIntercept = sinon.stub();
+        public $get = sinon.stub();
     }
 }

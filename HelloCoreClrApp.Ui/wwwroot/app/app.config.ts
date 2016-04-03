@@ -1,9 +1,10 @@
 /// <reference path="../../../typings/browser.d.ts" />
-"use strict";
 
 namespace app {
+"use strict";
+
     export class Config {
-        static $inject = ["$stateProvider", "$urlRouterProvider"];
+        private static $inject = ["$stateProvider", "$urlRouterProvider"];
 
         constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
             $urlRouterProvider.otherwise("/helloworld");

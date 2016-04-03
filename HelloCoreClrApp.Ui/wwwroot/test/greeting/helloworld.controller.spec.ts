@@ -13,7 +13,7 @@ describe("HelloWorldController Test ", () => {
             $log = _$log_;
 
             let res = new app.greeting.GetHelloWorldResponse();
-            res.Name = "Hello World!";
+            res.name = "Hello World!";
             $httpBackend.whenGET("/api/helloworld/Hello").respond(200, res);
             $httpBackend.whenGET("/api/helloworld/Error").respond(500);
         });

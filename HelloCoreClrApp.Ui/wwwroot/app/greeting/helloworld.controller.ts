@@ -1,19 +1,18 @@
 /// <reference path="../../../../typings/browser.d.ts" />
+namespace app.greeting {
 "use strict";
 
-namespace app.greeting {
     export class HelloWorldController {
-        inputText: string;
-        labelText: string;
-
-        static $inject = ["$http", "$log"];
+        private static $inject = ["$http", "$log"];
+        public inputText: string;
+        public labelText: string;
 
         constructor(private $http: ng.IHttpService, private $log: ng.ILogService) {
             this.inputText = undefined;
             this.labelText = "";
         }
 
-        executeHelloWorld() {
+        public executeHelloWorld(): void  {
             let name = this.inputText;
             if (name === undefined || name.length === 0) {
                 this.$log.warn("No name received. abort.. ");
@@ -24,13 +23,13 @@ namespace app.greeting {
             this.$log.info("We got the following name: " + name);
 
             this.$http.get("/api/helloworld/" + name)
-                .success((data: GetHelloWorldResponse, status) => {
+                .success((data: GetHelloWorldResponse, status: number) => {
                     this.$log.info("Received http code " + status);
-                    this.$log.info("Received data was: " + data.Name);
+                    this.$log.info("Received data was: " + data.name);
 
-                    this.labelText = data.Name;
+                    this.labelText = data.name;
                 })
-                .error((data: GetHelloWorldResponse, status) => {
+                .error((data: GetHelloWorldResponse, status: number) => {
                     this.$log.info("Received http code " + status);
                     this.$log.warn("Oops... something went wrong");
                     this.labelText = "";
@@ -39,5 +38,5 @@ namespace app.greeting {
     }
 
     let app = angular.module("app");
-    app.controller("HelloWorldController", greeting.HelloWorldController);
+    app.controller("HelloWorldController", [greeting.HelloWorldController]);
 }

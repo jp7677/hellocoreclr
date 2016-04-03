@@ -7,7 +7,7 @@ Use
 ```bash
 dnu restore
 npm install --prefix HelloCoreClrApp.Ui
-HelloCoreClrApp.Ui/node_modules/.bin/tsd install --config HelloCoreClrApp.Ui/tsd.json
+HelloCoreClrApp.Ui/node_modules/.bin/typings install
 HelloCoreClrApp.Ui/node_modules/.bin/bower install --config.cwd=HelloCoreClrApp.Ui
 HelloCoreClrApp.Ui/node_modules/.bin/tsc -p HelloCoreClrApp.Ui
 ```

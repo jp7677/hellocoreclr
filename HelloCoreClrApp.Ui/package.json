@@ -11,6 +11,7 @@
     "gulp-rimraf": "0.2.*",
     "gulp-tslint": "4.3.*",
     "gulp-typescript": "2.12.*",
+    "gulp-sourcemaps": "1.6.*",
     "gulp-concat": "2.6.*",
     "gulp-cssmin": "0.1.*",
     "gulp-uglify": "1.5.*",

@@ -44,7 +44,7 @@ gulp.task('tslint', function (cb) {
     .pipe(tslint.report('verbose'))
 })
 
-gulp.task('tscompile', ['tslint'], function (cb) {
+gulp.task('tscompile', ['tslint', 'clean:js'], function (cb) {
   var tsResult = tsProject.src()
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject))
@@ -54,7 +54,7 @@ gulp.task('tscompile', ['tslint'], function (cb) {
     .pipe(gulp.dest(paths.webroot))
 })
 
-gulp.task('min:js', ['clean:js', 'tscompile'], function () {
+gulp.task('min:js', ['tscompile'], function () {
   gulp.src([paths.js, '!' + paths.minJs], { base: '.' })
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(concat(paths.concatJsDest))

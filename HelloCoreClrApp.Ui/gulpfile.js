@@ -51,7 +51,7 @@ gulp.task('tscompile', ['tslint', 'clean:js'], function (cb) {
 
   return tsResult.js
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.webroot))
+    .pipe(gulp.dest('.'))
 })
 
 gulp.task('min:js', ['tscompile'], function () {

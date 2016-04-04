@@ -1,4 +1,8 @@
-/// <reference path="../../../typings/browser.d.ts" />
+/// <reference path="../../typings/browser/ambient/mocha/index.d.ts" />
+/// <reference path="../../typings/browser/ambient/chai/index.d.ts" />
+/// <reference path="../../typings/browser/ambient/sinon/index.d.ts" />
+/// <reference path="../../typings/browser/ambient/angular/index.d.ts" />
+/// <reference path="../../typings/browser/ambient/angular-ui-router/index.d.ts" />
 
 namespace stubs {
 "use strict";

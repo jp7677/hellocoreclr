@@ -9,6 +9,7 @@
     "HelloCoreClrApp.Ui/wwwroot/app/site.min.js": true,
     "HelloCoreClrApp.Ui/wwwroot/app/site.min.js.map": true,
     "HelloCoreClrApp.Ui/node_modules/**": true,
+    "HelloCoreClrApp.Ui/typings/**": true,
     "HelloCoreClrApp.Ui/bin/**": true,
     "HelloCoreClrApp.Ui/project.lock.json": true,
     "HelloCoreClrApp/bin/**": true,
@@ -16,7 +17,6 @@
     "HelloCoreClrApp.Test/bin/**": true,
     "HelloCoreClrApp.Test/project.lock.json": true,
     ".vscode/**": true,
-    "typings/**": true,
     "node_modules/**": true
   }
 }

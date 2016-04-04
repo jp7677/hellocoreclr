@@ -1,6 +1,6 @@
-typings/**
 node_modules/**
 HelloCoreClrApp.Ui/node_modules/**
+HelloCoreClrApp.Ui/typings/**
 HelloCoreClrApp.Ui/wwwroot/lib/**
 HelloCoreClrApp.Ui/wwwroot/app/**/*.js
 HelloCoreClrApp.Ui/wwwroot/app/**/*.js.map

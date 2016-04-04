@@ -56,9 +56,13 @@ gulp.task('tscompile', ['tslint'], function (cb) {
 
 gulp.task('min:js', ['clean:js', 'tscompile'], function () {
   gulp.src([paths.js, '!' + paths.minJs], { base: '.' })
-    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(concat(paths.concatJsDest))
-    .pipe(uglify())
+    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    // Note that compress: true and mangle: true gives you uglier code,
+    // but makes debugging in the browser debugger more difficult.
+    .pipe(uglify({compress: false, mangle: false}))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('.'))
 })

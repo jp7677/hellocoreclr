@@ -61,7 +61,7 @@ gulp.task('min:js', ['tscompile'], function () {
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(concat(paths.concatJsDest))
     .pipe(sourcemaps.write())
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init())
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
     .pipe(uglify({compress: false, mangle: false}))
@@ -69,12 +69,12 @@ gulp.task('min:js', ['tscompile'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min:vendorjs', function () {
+gulp.task('min:vendorjs', ['clean:js'], function () {
   gulp.src(bowerfiles('**/*.js'), { base: '.' })
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init())
     .pipe(concat(paths.concatVendorJsDest))
     .pipe(sourcemaps.write())
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.init())
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
     .pipe(uglify({compress: false, mangle: false}))

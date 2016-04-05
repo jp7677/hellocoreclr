@@ -5,6 +5,7 @@ var rimraf = require('gulp-rimraf')
 var tslint = require('gulp-tslint')
 var ts = require('gulp-typescript')
 var sourcemaps = require('gulp-sourcemaps')
+var bowerfiles = require('main-bower-files')
 var concat = require('gulp-concat')
 var cssmin = require('gulp-cssmin')
 var uglify = require('gulp-uglify')
@@ -22,6 +23,7 @@ paths.minJs = paths.webroot + 'app/**/*.min.js'
 paths.css = paths.webroot + 'css/**/*.css'
 paths.minCss = paths.webroot + 'css/**/*.min.css'
 paths.concatJsDest = paths.webroot + 'app/site.min.js'
+paths.concatVendorJsDest = paths.webroot + 'app/vendor.min.js'
 paths.concatCssDest = paths.webroot + 'css/site.min.css'
 
 var tsProject = ts.createProject('tsconfig.json')
@@ -67,6 +69,19 @@ gulp.task('min:js', ['tscompile'], function () {
     .pipe(gulp.dest('.'))
 })
 
+gulp.task('min:vendorjs', function () {
+  gulp.src(bowerfiles('**/*.js'), { base: '.' })
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(concat(paths.concatVendorJsDest))
+    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    // Note that compress: true and mangle: true gives you uglier code,
+    // but makes debugging in the browser debugger more difficult.
+    .pipe(uglify({compress: false, mangle: false}))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('.'))
+})
+
 gulp.task('min:css', ['clean:css'], function () {
   gulp.src([paths.css, '!' + paths.minCss])
     .pipe(concat(paths.concatCssDest))
@@ -74,7 +89,7 @@ gulp.task('min:css', ['clean:css'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min', ['min:js', 'min:css'])
+gulp.task('min', ['min:js', 'min:vendorjs', 'min:css'])
 
 gulp.task('build', ['min'])
 

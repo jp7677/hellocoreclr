@@ -24,6 +24,7 @@ paths.minJs = paths.webroot + 'app/**/*.min.js'
 paths.css = paths.webroot + 'css/**/*.css'
 paths.minCss = paths.webroot + 'css/**/*.min.css'
 paths.concatJsDest = paths.webroot + 'site.min.js'
+paths.concatJsMapDest = paths.webroot + 'site.min.js.map'
 paths.concatVendorJsDest = paths.webroot + 'vendor.min.js'
 paths.concatVendorJsMapDest = paths.webroot + 'vendor.min.js.map'
 paths.concatCssDest = paths.webroot + 'site.min.css'
@@ -37,6 +38,8 @@ gulp.task('clean:js', function (cb) {
     paths.jsMap,
     paths.specJs,
     paths.specJsMap,
+    paths.concatJsDest,
+    paths.concatJsMapDest,
     paths.concatVendorJsDest,
     paths.concatVendorJsMapDest
   ], { read: false })

@@ -9,6 +9,7 @@ var bowerfiles = require('main-bower-files')
 var concat = require('gulp-concat')
 var cssmin = require('gulp-cssmin')
 var uglify = require('gulp-uglify')
+var util = require('gulp-util')
 
 var paths = {
   webroot: './wwwroot/'
@@ -22,15 +23,24 @@ paths.specJsMap = paths.webroot + 'test/**/*.js.map'
 paths.minJs = paths.webroot + 'app/**/*.min.js'
 paths.css = paths.webroot + 'css/**/*.css'
 paths.minCss = paths.webroot + 'css/**/*.min.css'
-paths.concatJsDest = paths.webroot + 'app/site.min.js'
-paths.concatVendorJsDest = paths.webroot + 'app/vendor.min.js'
-paths.concatCssDest = paths.webroot + 'css/site.min.css'
+paths.concatJsDest = paths.webroot + 'site.min.js'
+paths.concatVendorJsDest = paths.webroot + 'vendor.min.js'
+paths.concatVendorJsMapDest = paths.webroot + 'vendor.min.js.map'
+paths.concatCssDest = paths.webroot + 'site.min.css'
 
 var tsProject = ts.createProject('tsconfig.json')
 
 gulp.task('clean:js', function (cb) {
-  return gulp.src([paths.js, paths.minJs, paths.jsMap, paths.specJs, paths.specJsMap], { read: false })
-    .pipe(rimraf())
+  return gulp.src([
+    paths.js,
+    paths.minJs,
+    paths.jsMap,
+    paths.specJs,
+    paths.specJsMap,
+    paths.concatVendorJsDest,
+    paths.concatVendorJsMapDest
+  ], { read: false })
+  .pipe(rimraf())
 })
 
 gulp.task('clean:css', function (cb) {
@@ -52,8 +62,14 @@ gulp.task('tscompile', ['tslint', 'clean:js'], function (cb) {
     .pipe(ts(tsProject))
 
   return tsResult.js
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('.'))
+    .pipe(sourcemaps.write('.', {
+      mapSources: function (sourcePath) {
+        var truncatedSourcePath = sourcePath.substr(sourcePath.lastIndexOf('/') + 1)
+        util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
+        return truncatedSourcePath
+      }
+    }))
+    .pipe(gulp.dest(paths.webroot))
 })
 
 gulp.task('min:js', ['tscompile'], function () {
@@ -65,7 +81,13 @@ gulp.task('min:js', ['tscompile'], function () {
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
     .pipe(uglify({compress: false, mangle: false}))
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write('.', {
+      mapSources: function (sourcePath) {
+        var truncatedSourcePath = sourcePath.substr(paths.webroot.length - 2)
+        util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
+        return truncatedSourcePath
+      }
+    }))
     .pipe(gulp.dest('.'))
 })
 
@@ -78,7 +100,13 @@ gulp.task('min:vendorjs', ['clean:js'], function () {
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
     .pipe(uglify({compress: false, mangle: false}))
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write('.', {
+      mapSources: function (sourcePath) {
+        var truncatedSourcePath = sourcePath.substr(paths.webroot.length - 2)
+        util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
+        return truncatedSourcePath
+      }
+    }))
     .pipe(gulp.dest('.'))
 })
 

@@ -6,8 +6,8 @@
 
     "HelloCoreClrApp.Ui/wwwroot/**/*.js": { "when": "$(basename).ts"},
     "HelloCoreClrApp.Ui/wwwroot/**/*.js.map": true,
-    "HelloCoreClrApp.Ui/wwwroot/app/site.min.js": true,
-    "HelloCoreClrApp.Ui/wwwroot/app/site.min.js.map": true,
+    "HelloCoreClrApp.Ui/wwwroot/site.min.js": true,
+    "HelloCoreClrApp.Ui/wwwroot/vendor.min.js": true,
     "HelloCoreClrApp.Ui/node_modules/**": true,
     "HelloCoreClrApp.Ui/typings/**": true,
     "HelloCoreClrApp.Ui/bin/**": true,

@@ -16,6 +16,7 @@
     "gulp-concat": "2.6.*",
     "gulp-cssmin": "0.1.*",
     "gulp-uglify": "1.5.*",
+    "gulp-util": "3.0.*",
     "rimraf": "2.5.*",
     "bower": "1.7.*",
     "typescript": "1.8.*",

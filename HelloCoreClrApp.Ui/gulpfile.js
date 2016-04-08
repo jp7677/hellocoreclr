@@ -129,8 +129,16 @@ gulp.task('min:vendorcss', ['clean:css'], function () {
     bootstrap: {
       main: ['./dist/css/bootstrap.css']
     }}}), { base: '.' })
+    .pipe(sourcemaps.init())
     .pipe(concat(paths.concatVendorCssDest))
     .pipe(cssmin())
+    .pipe(sourcemaps.write('.', {
+      mapSources: function (sourcePath) {
+        var truncatedSourcePath = sourcePath.substr(paths.webroot.length - 2)
+        util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
+        return truncatedSourcePath
+      }
+    }))
     .pipe(gulp.dest('.'))
 })
 

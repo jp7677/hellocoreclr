@@ -6,9 +6,9 @@ module.exports = function (config) {
     files: [
       {pattern: 'bower_components/angular/angular.js', instrument: false},
       {pattern: 'node_modules/angular-mocks/angular-mocks.js', instrument: false},
-      'wwwroot/app/**/*.js',
-      'wwwroot/test/stubs.js',
-      'wwwroot/test/**/*.spec.js'
+      'src/app/**/*.js',
+      'test/stubs.js',
+      'test/**/*.spec.js'
     ],
 
     singleRun: true,

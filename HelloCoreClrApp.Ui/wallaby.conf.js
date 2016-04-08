@@ -7,11 +7,11 @@ module.exports = function (wallaby) {
       {pattern: 'node_modules/sinon/pkg/sinon.js', instrument: false},
       {pattern: 'bower_components/angular/angular.js', instrument: false},
       {pattern: 'node_modules/angular-mocks/angular-mocks.js', instrument: false},
-      'wwwroot/app/**/*.ts',
-      'wwwroot/test/stubs.ts'
+      'src/app/**/*.ts',
+      'test/stubs.ts'
     ],
     tests: [
-      'wwwroot/test/**/*.spec.ts'
+      'test/**/*.spec.ts'
     ],
     testFramework: 'mocha'
   }

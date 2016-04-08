@@ -13,58 +13,43 @@ var flatten = require('gulp-flatten')
 var util = require('gulp-util')
 
 var paths = {
-  webroot: './wwwroot/'
+  wwwroot: './wwwroot/',
+  src: './src/',
+  test: './test/'
 }
 
-paths.ts = paths.webroot + '**/*.ts'
-paths.js = paths.webroot + 'app/**/*.js'
-paths.jsMap = paths.webroot + 'app/**/*.js.map'
-paths.specJs = paths.webroot + 'test/**/*.js'
-paths.specJsMap = paths.webroot + 'test/**/*.js.map'
-paths.minJs = paths.webroot + 'app/**/*.min.js'
-paths.css = paths.webroot + 'css/**/*.css'
-paths.minCss = paths.webroot + 'css/**/*.min.css'
-paths.concatJsDest = paths.webroot + 'site.min.js'
-paths.concatJsMapDest = paths.webroot + 'site.min.js.map'
-paths.concatVendorJsDest = paths.webroot + 'vendor.min.js'
-paths.concatVendorJsMapDest = paths.webroot + 'vendor.min.js.map'
-paths.concatCssDest = paths.webroot + 'site.min.css'
-paths.concatVendorCssDest = paths.webroot + 'vendor.min.css'
-paths.concatVendorCssMapDest = paths.webroot + 'vendor.min.css.map'
+paths.srcTs = paths.src + '**/*.ts'
+paths.testTs = paths.test + '**/*.ts'
+paths.srcCss = paths.src + '**/*.css'
+paths.srcJs = paths.src + '**/*.js'
+paths.testJs = paths.test + '**/*.js'
+paths.srcJsMap = paths.src + '**/*.js.map'
+paths.testJsMap = paths.test + '**/*.js.map'
+
+paths.concatJsDest = paths.wwwroot + 'site.min.js'
+paths.concatVendorJsDest = paths.wwwroot + 'vendor.min.js'
+paths.concatCssDest = paths.wwwroot + 'site.min.css'
+paths.concatVendorCssDest = paths.wwwroot + 'vendor.min.css'
 
 var tsProject = ts.createProject('tsconfig.json')
 
-gulp.task('clean:js', function (cb) {
+gulp.task('clean', function (cb) {
   return gulp.src([
-    paths.js,
-    paths.minJs,
-    paths.jsMap,
-    paths.specJs,
-    paths.specJsMap,
-    paths.concatJsDest,
-    paths.concatJsMapDest,
-    paths.concatVendorJsDest,
-    paths.concatVendorJsMapDest], { read: false })
+    paths.srcJs,
+    paths.srcJsMap,
+    paths.testJs,
+    paths.testJsMap,
+    paths.wwwroot], { read: false })
     .pipe(rimraf())
 })
-
-gulp.task('clean:css', function (cb) {
-  return gulp.src([
-    paths.concatCssDest,
-    paths.concatVendorCssDest,
-    paths.concatVendorCssMapDest], { read: false })
-    .pipe(rimraf())
-})
-
-gulp.task('clean', ['clean:js', 'clean:css'])
 
 gulp.task('tslint', function (cb) {
-  return gulp.src(paths.ts)
+  return gulp.src([paths.srcTs, paths.testTs])
     .pipe(tslint())
     .pipe(tslint.report('verbose'))
 })
 
-gulp.task('tscompile', ['tslint', 'clean:js'], function (cb) {
+gulp.task('tscompile', ['tslint'], function (cb) {
   var tsResult = tsProject.src()
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject))
@@ -77,11 +62,11 @@ gulp.task('tscompile', ['tslint', 'clean:js'], function (cb) {
         return truncatedSourcePath
       }
     }))
-    .pipe(gulp.dest(paths.webroot))
+    .pipe(gulp.dest('.'))
 })
 
 gulp.task('min:js', ['tscompile'], function () {
-  gulp.src([paths.js, '!' + paths.minJs], { base: '.' })
+  gulp.src([paths.srcJs], { base: '.' })
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(concat(paths.concatJsDest))
     .pipe(sourcemaps.write())
@@ -89,17 +74,11 @@ gulp.task('min:js', ['tscompile'], function () {
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
     .pipe(uglify({compress: false, mangle: false}))
-    .pipe(sourcemaps.write('.', {
-      mapSources: function (sourcePath) {
-        var truncatedSourcePath = sourcePath.substr(paths.webroot.length - 2)
-        util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
-        return truncatedSourcePath
-      }
-    }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min:vendorjs', ['clean:js'], function () {
+gulp.task('min:vendorjs', ['clean'], function () {
   gulp.src(bowerfiles('**/*.js'), { base: '.' })
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatVendorJsDest))
@@ -112,14 +91,16 @@ gulp.task('min:vendorjs', ['clean:js'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min:css', ['clean:css'], function () {
-  gulp.src([paths.css, '!' + paths.minCss])
+gulp.task('min:css', ['clean'], function () {
+  gulp.src(paths.srcCss)
+    .pipe(sourcemaps.init())
     .pipe(concat(paths.concatCssDest))
     .pipe(cssmin())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min:vendorcss', ['clean:css'], function () {
+gulp.task('min:vendorcss', ['clean'], function () {
   gulp.src(bowerfiles('**/*.css',
     {overrides: {bootstrap: {main: ['./dist/css/bootstrap.css', './dist/fonts/*.*']}}}), { base: '.' })
     .pipe(sourcemaps.init())
@@ -129,15 +110,20 @@ gulp.task('min:vendorcss', ['clean:css'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('vendorassets', function () {
+gulp.task('assets', ['clean'], function () {
+  gulp.src([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap])
+    .pipe(gulp.dest(paths.wwwroot))
+})
+
+gulp.task('vendorassets', ['clean'], function () {
   gulp.src(bowerfiles(['**/*.eot', '**/*.svg', '**/*.ttf', '**/*.woff', '**/*.woff2'],
     {overrides: {bootstrap: {main: ['./dist/css/bootstrap.css', './dist/fonts/*.*']}}}), { base: '.' })
     .pipe(flatten({includeParents: -1}))
-    .pipe(gulp.dest(paths.webroot))
+    .pipe(gulp.dest(paths.wwwroot))
 })
 
 gulp.task('min', ['min:js', 'min:vendorjs', 'min:css', 'min:vendorcss'])
 
-gulp.task('build', ['min', 'vendorassets'])
+gulp.task('build', ['min', 'assets', 'vendorassets'])
 
 gulp.task('default', ['build'])

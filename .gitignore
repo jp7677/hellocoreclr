@@ -2,11 +2,11 @@ node_modules/**
 HelloCoreClrApp.Ui/node_modules/**
 HelloCoreClrApp.Ui/bower_components/**
 HelloCoreClrApp.Ui/typings/**
-HelloCoreClrApp.Ui/wwwroot/**/*.js
-HelloCoreClrApp.Ui/wwwroot/**/*.js.map
-HelloCoreClrApp.Ui/wwwroot/*.css
-HelloCoreClrApp.Ui/wwwroot/**/*.css.map
-HelloCoreClrApp.Ui/wwwroot/fonts/**
+HelloCoreClrApp.Ui/wwwroot/**
+HelloCoreClrApp.Ui/src/**/*.js
+HelloCoreClrApp.Ui/src/**/*.js.map
+HelloCoreClrApp.Ui/test/**/*.js
+HelloCoreClrApp.Ui/test/**/*.js.map
 HelloCoreClrApp.Ui/project.lock.json
 HelloCoreClrApp.Ui/bin/**
 HelloCoreClrApp/project.lock.json

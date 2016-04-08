@@ -10,6 +10,7 @@
     "HelloCoreClrApp.Ui/wwwroot/vendor.min.js": true,
     "HelloCoreClrApp.Ui/wwwroot/vendor.min.css": true,
     "HelloCoreClrApp.Ui/wwwroot/**/*.css.map": true,
+    "HelloCoreClrApp.Ui/wwwroot/fonts/**": true,
     "HelloCoreClrApp.Ui/node_modules/**": true,
     "HelloCoreClrApp.Ui/typings/**": true,
     "HelloCoreClrApp.Ui/bin/**": true,

@@ -9,6 +9,7 @@ var bowerfiles = require('main-bower-files')
 var concat = require('gulp-concat')
 var cssmin = require('gulp-cssmin')
 var uglify = require('gulp-uglify')
+var flatten = require('gulp-flatten')
 var util = require('gulp-util')
 
 var paths = {
@@ -125,10 +126,8 @@ gulp.task('min:css', ['clean:css'], function () {
 })
 
 gulp.task('min:vendorcss', ['clean:css'], function () {
-  gulp.src(bowerfiles('**/*.css', {overrides: {
-    bootstrap: {
-      main: ['./dist/css/bootstrap.css']
-    }}}), { base: '.' })
+  gulp.src(bowerfiles('**/*.css',
+    {overrides: {bootstrap: {main: ['./dist/css/bootstrap.css', './dist/fonts/*.*']}}}), { base: '.' })
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatVendorCssDest))
     .pipe(cssmin())
@@ -142,8 +141,15 @@ gulp.task('min:vendorcss', ['clean:css'], function () {
     .pipe(gulp.dest('.'))
 })
 
+gulp.task('vendorassets', function () {
+  gulp.src(bowerfiles(['**/*.eot', '**/*.svg', '**/*.ttf', '**/*.woff', '**/*.woff2'],
+    {overrides: {bootstrap: {main: ['./dist/css/bootstrap.css', './dist/fonts/*.*']}}}), { base: '.' })
+    .pipe(flatten({includeParents: -1}))
+    .pipe(gulp.dest(paths.webroot))
+})
+
 gulp.task('min', ['min:js', 'min:vendorjs', 'min:css', 'min:vendorcss'])
 
-gulp.task('build', ['min'])
+gulp.task('build', ['min', 'vendorassets'])
 
 gulp.task('default', ['build'])

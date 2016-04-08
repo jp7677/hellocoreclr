@@ -32,7 +32,7 @@ paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
 paths.concatVendorCssDest = paths.wwwroot + 'css/vendor.min.css'
 
 var tsProject = ts.createProject('tsconfig.json')
-var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/fonts/*.*']
+var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
 
 gulp.task('clean', function (cb) {
   return gulp.src([

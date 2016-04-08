@@ -99,7 +99,7 @@ gulp.task('min:css', ['clean'], function () {
     .pipe(cssmin())
     .pipe(sourcemaps.write('.', {
       mapSources: function (sourcePath) {
-        var extendedSourcePath = 'src/' + sourcePath
+        var extendedSourcePath = paths.src.substr(2) + sourcePath
         util.log('SourcePath within source map extended to:', util.colors.cyan(extendedSourcePath))
         return extendedSourcePath
       }

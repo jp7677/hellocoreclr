@@ -32,6 +32,7 @@ paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
 paths.concatVendorCssDest = paths.wwwroot + 'css/vendor.min.css'
 
 var tsProject = ts.createProject('tsconfig.json')
+var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/fonts/*.*']
 
 gulp.task('clean', function (cb) {
   return gulp.src([
@@ -96,13 +97,19 @@ gulp.task('min:css', ['clean'], function () {
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatCssDest))
     .pipe(cssmin())
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write('.', {
+      mapSources: function (sourcePath) {
+        var extendedSourcePath = 'src/' + sourcePath
+        util.log('SourcePath within source map extended to:', util.colors.cyan(extendedSourcePath))
+        return extendedSourcePath
+      }
+    }))
     .pipe(gulp.dest('.'))
 })
 
 gulp.task('min:vendorcss', ['clean'], function () {
   gulp.src(bowerfiles('**/*.css',
-    {overrides: {bootstrap: {main: ['./dist/css/bootstrap.css', './dist/fonts/*.*']}}}), { base: '.' })
+    {overrides: {bootstrap: {main: bootstrapFiles}}}), { base: '.' })
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatVendorCssDest))
     .pipe(cssmin())
@@ -117,7 +124,7 @@ gulp.task('assets', ['clean'], function () {
 
 gulp.task('vendorassets', ['clean'], function () {
   gulp.src(bowerfiles(['**/*.eot', '**/*.svg', '**/*.ttf', '**/*.woff', '**/*.woff2'],
-    {overrides: {bootstrap: {main: ['./dist/css/bootstrap.css', './dist/fonts/*.*']}}}), { base: '.' })
+    {overrides: {bootstrap: {main: bootstrapFiles}}}), { base: '.' })
     .pipe(flatten({includeParents: -1}))
     .pipe(gulp.dest(paths.wwwroot))
 })

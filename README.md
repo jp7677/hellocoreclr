@@ -12,7 +12,7 @@ HelloCoreClrApp.Ui/node_modules/.bin/typings install --cwd HelloCoreClrApp.Ui
 HelloCoreClrApp.Ui/node_modules/.bin/gulp --cwd HelloCoreClrApp.Ui
 ```
 
-to restore packages, bindings and for compiling TypeScript files. Use
+to restore packages, bindings and for assembling the web application. Use
 
 ```bash
 dnx -p HelloCoreClrApp.Test test

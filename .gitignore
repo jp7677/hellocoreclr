@@ -4,6 +4,8 @@ HelloCoreClrApp.Ui/typings/**
 HelloCoreClrApp.Ui/wwwroot/lib/**
 HelloCoreClrApp.Ui/wwwroot/**/*.js
 HelloCoreClrApp.Ui/wwwroot/**/*.js.map
+HelloCoreClrApp.Ui/wwwroot/*.css
+HelloCoreClrApp.Ui/wwwroot/**/*.css.map
 HelloCoreClrApp.Ui/project.lock.json
 HelloCoreClrApp.Ui/bin/**
 HelloCoreClrApp/project.lock.json

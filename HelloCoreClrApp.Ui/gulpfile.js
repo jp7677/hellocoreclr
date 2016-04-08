@@ -28,6 +28,8 @@ paths.concatJsMapDest = paths.webroot + 'site.min.js.map'
 paths.concatVendorJsDest = paths.webroot + 'vendor.min.js'
 paths.concatVendorJsMapDest = paths.webroot + 'vendor.min.js.map'
 paths.concatCssDest = paths.webroot + 'site.min.css'
+paths.concatVendorCssDest = paths.webroot + 'vendor.min.css'
+paths.concatVendorCssMapDest = paths.webroot + 'vendor.min.css.map'
 
 var tsProject = ts.createProject('tsconfig.json')
 
@@ -41,13 +43,15 @@ gulp.task('clean:js', function (cb) {
     paths.concatJsDest,
     paths.concatJsMapDest,
     paths.concatVendorJsDest,
-    paths.concatVendorJsMapDest
-  ], { read: false })
-  .pipe(rimraf())
+    paths.concatVendorJsMapDest], { read: false })
+    .pipe(rimraf())
 })
 
 gulp.task('clean:css', function (cb) {
-  return gulp.src(paths.concatCssDest, { read: false })
+  return gulp.src([
+    paths.concatCssDest,
+    paths.concatVendorCssDest,
+    paths.concatVendorCssMapDest], { read: false })
     .pipe(rimraf())
 })
 
@@ -120,7 +124,17 @@ gulp.task('min:css', ['clean:css'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min', ['min:js', 'min:vendorjs', 'min:css'])
+gulp.task('min:vendorcss', ['clean:css'], function () {
+  gulp.src(bowerfiles('**/*.css', {overrides: {
+    bootstrap: {
+      main: ['./dist/css/bootstrap.css']
+    }}}), { base: '.' })
+    .pipe(concat(paths.concatVendorCssDest))
+    .pipe(cssmin())
+    .pipe(gulp.dest('.'))
+})
+
+gulp.task('min', ['min:js', 'min:vendorjs', 'min:css', 'min:vendorcss'])
 
 gulp.task('build', ['min'])
 

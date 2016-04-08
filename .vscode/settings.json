@@ -12,6 +12,7 @@
     "HelloCoreClrApp.Ui/wwwroot/**/*.css.map": true,
     "HelloCoreClrApp.Ui/wwwroot/fonts/**": true,
     "HelloCoreClrApp.Ui/node_modules/**": true,
+    "HelloCoreClrApp.Ui/bower_components/**": true,
     "HelloCoreClrApp.Ui/typings/**": true,
     "HelloCoreClrApp.Ui/bin/**": true,
     "HelloCoreClrApp.Ui/project.lock.json": true,

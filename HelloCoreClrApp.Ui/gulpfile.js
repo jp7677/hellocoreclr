@@ -108,13 +108,7 @@ gulp.task('min:vendorjs', ['clean:js'], function () {
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
     .pipe(uglify({compress: false, mangle: false}))
-    .pipe(sourcemaps.write('.', {
-      mapSources: function (sourcePath) {
-        var truncatedSourcePath = sourcePath.substr(paths.webroot.length - 2)
-        util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
-        return truncatedSourcePath
-      }
-    }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('.'))
 })
 
@@ -131,13 +125,7 @@ gulp.task('min:vendorcss', ['clean:css'], function () {
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatVendorCssDest))
     .pipe(cssmin())
-    .pipe(sourcemaps.write('.', {
-      mapSources: function (sourcePath) {
-        var truncatedSourcePath = sourcePath.substr(paths.webroot.length - 2)
-        util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
-        return truncatedSourcePath
-      }
-    }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('.'))
 })
 

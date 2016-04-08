@@ -26,10 +26,10 @@ paths.testJs = paths.test + '**/*.js'
 paths.srcJsMap = paths.src + '**/*.js.map'
 paths.testJsMap = paths.test + '**/*.js.map'
 
-paths.concatJsDest = paths.wwwroot + 'site.min.js'
-paths.concatVendorJsDest = paths.wwwroot + 'vendor.min.js'
-paths.concatCssDest = paths.wwwroot + 'site.min.css'
-paths.concatVendorCssDest = paths.wwwroot + 'vendor.min.css'
+paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
+paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
+paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
+paths.concatVendorCssDest = paths.wwwroot + 'css/vendor.min.css'
 
 var tsProject = ts.createProject('tsconfig.json')
 

@@ -30,17 +30,32 @@ paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
 paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
 paths.concatVendorCssDest = paths.wwwroot + 'css/vendor.min.css'
+paths.vendorAssetsDest = paths.wwwroot + 'fonts'
 
 var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
 
-gulp.task('clean', function (cb) {
+gulp.task('clean:app', function (cb) {
   return gulp.src([
     paths.srcJs,
     paths.srcJsMap,
     paths.testJs,
     paths.testJsMap,
-    paths.wwwroot], { read: false })
+    paths.concatJsDest,
+    paths.concatCssDest], { read: false })
+    .pipe(rimraf())
+})
+
+gulp.task('clean:vendor', function (cb) {
+  return gulp.src([
+    paths.concatVendorJsDest + '*',
+    paths.concatVendorCssDest + '*',
+    paths.vendorAssetsDest], { read: false })
+    .pipe(rimraf())
+})
+
+gulp.task('clean:all', function (cb) {
+  return gulp.src(paths.wwwroot, { read: false })
     .pipe(rimraf())
 })
 
@@ -50,7 +65,7 @@ gulp.task('tslint', function (cb) {
     .pipe(tslint.report('verbose'))
 })
 
-gulp.task('tscompile', ['tslint'], function (cb) {
+gulp.task('tscompile', ['tslint', 'clean:app'], function (cb) {
   var tsResult = tsProject.src()
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject))
@@ -79,20 +94,7 @@ gulp.task('min:js', ['tscompile'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min:vendorjs', ['clean'], function () {
-  gulp.src(bowerfiles('**/*.js'), { base: '.' })
-    .pipe(sourcemaps.init())
-    .pipe(concat(paths.concatVendorJsDest))
-    .pipe(sourcemaps.write())
-    .pipe(sourcemaps.init())
-    // Note that compress: true and mangle: true gives you uglier code,
-    // but makes debugging in the browser debugger more difficult.
-    .pipe(uglify({compress: false, mangle: false}))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('.'))
-})
-
-gulp.task('min:css', ['clean'], function () {
+gulp.task('min:css', ['clean:app'], function () {
   gulp.src(paths.srcCss)
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatCssDest))
@@ -107,7 +109,25 @@ gulp.task('min:css', ['clean'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min:vendorcss', ['clean'], function () {
+gulp.task('assets', ['clean:app'], function () {
+  gulp.src([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap, '!' + paths.srcCss])
+    .pipe(gulp.dest(paths.wwwroot))
+})
+
+gulp.task('min:vendorjs', ['clean:vendor'], function () {
+  gulp.src(bowerfiles('**/*.js'), { base: '.' })
+    .pipe(sourcemaps.init())
+    .pipe(concat(paths.concatVendorJsDest))
+    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.init())
+    // Note that compress: true and mangle: true gives you uglier code,
+    // but makes debugging in the browser debugger more difficult.
+    .pipe(uglify({compress: false, mangle: false}))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('.'))
+})
+
+gulp.task('min:vendorcss', ['clean:vendor'], function () {
   gulp.src(bowerfiles('**/*.css',
     {overrides: {bootstrap: {main: bootstrapFiles}}}), { base: '.' })
     .pipe(sourcemaps.init())
@@ -117,20 +137,17 @@ gulp.task('min:vendorcss', ['clean'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('assets', ['clean'], function () {
-  gulp.src([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap])
-    .pipe(gulp.dest(paths.wwwroot))
-})
-
-gulp.task('vendorassets', ['clean'], function () {
+gulp.task('vendorassets', ['clean:vendor'], function () {
   gulp.src(bowerfiles(['**/*.eot', '**/*.svg', '**/*.ttf', '**/*.woff', '**/*.woff2'],
     {overrides: {bootstrap: {main: bootstrapFiles}}}), { base: '.' })
     .pipe(flatten({includeParents: -1}))
     .pipe(gulp.dest(paths.wwwroot))
 })
 
-gulp.task('min', ['min:js', 'min:vendorjs', 'min:css', 'min:vendorcss'])
+gulp.task('build:app', ['min:js', 'min:css', 'assets'])
 
-gulp.task('build', ['min', 'assets', 'vendorassets'])
+gulp.task('build:vendor', ['min:vendorjs', 'min:vendorcss', 'vendorassets'])
+
+gulp.task('build', ['build:app', 'build:vendor'])
 
 gulp.task('default', ['build'])

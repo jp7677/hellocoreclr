@@ -19,6 +19,6 @@
   ],
 
   "scripts": {
-    "prepublish": [ "npm install", "./node_modules/.bin/bower install", "./node_modules/.bin/gulp" ]
+    "prepublish": [ "npm install", "./node_modules/.bin/bower install", "./node_modules/.bin/gulp clean:all", "./node_modules/.bin/gulp" ]
   }
 }

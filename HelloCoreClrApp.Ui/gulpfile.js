@@ -34,6 +34,7 @@ paths.vendorAssetsDest = paths.wwwroot + 'fonts'
 
 var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
+var fontawesomeFiles = ['./css/font-awesome.css', './fonts/*.*']
 
 gulp.task('clean:app', function (cb) {
   return gulp.src([
@@ -129,7 +130,10 @@ gulp.task('min:vendorjs', ['clean:vendor'], function () {
 
 gulp.task('min:vendorcss', ['clean:vendor'], function () {
   gulp.src(bowerfiles('**/*.css',
-    {overrides: {bootstrap: {main: bootstrapFiles}}}), { base: '.' })
+    {overrides: {
+      'bootstrap': {main: bootstrapFiles},
+      'font-awesome': {main: fontawesomeFiles}
+    }}), { base: '.' })
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatVendorCssDest))
     .pipe(cssmin())
@@ -139,7 +143,10 @@ gulp.task('min:vendorcss', ['clean:vendor'], function () {
 
 gulp.task('vendorassets', ['clean:vendor'], function () {
   gulp.src(bowerfiles(['**/*.eot', '**/*.svg', '**/*.ttf', '**/*.woff', '**/*.woff2'],
-    {overrides: {bootstrap: {main: bootstrapFiles}}}), { base: '.' })
+    {overrides: {
+      'bootstrap': {main: bootstrapFiles},
+      'font-awesome': {main: fontawesomeFiles}
+    }}), { base: '.' })
     .pipe(flatten({includeParents: -1}))
     .pipe(gulp.dest(paths.wwwroot))
 })

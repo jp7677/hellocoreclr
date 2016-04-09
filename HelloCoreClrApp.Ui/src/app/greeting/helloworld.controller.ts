@@ -1,4 +1,5 @@
 /// <reference path="../../../typings/browser/ambient/angular/index.d.ts" />
+/// <reference path="../../../typings/browser/ambient/toastr/index.d.ts" />
 namespace app.greeting {
 "use strict";
 
@@ -27,11 +28,14 @@ namespace app.greeting {
                     this.$log.info("Received http code " + status);
                     this.$log.info("Received data was: " + data.name);
 
+                    toastr.info("Received http code " + status);
                     this.labelText = data.name;
                 })
                 .error((data: GetHelloWorldResponse, status: number) => {
                     this.$log.info("Received http code " + status);
                     this.$log.warn("Oops... something went wrong");
+
+                    toastr.warning("Received http code " + status);
                     this.labelText = "";
                 });
         };

@@ -34,6 +34,7 @@ describe("HelloWorldController Test ", () => {
     });
 
     it("can handle a valid response", () => {
+        let toastrSpy = sinon.spy(toastr, "info");
         let logSpy = sinon.spy($log, "info");
         let sut = new app.greeting.HelloWorldController($http, $log);
         sut.inputText = "Hello";
@@ -42,10 +43,12 @@ describe("HelloWorldController Test ", () => {
 
         $httpBackend.flush();
         chai.expect(sut.labelText, "Hello World!").to.equals("Hello World!");
+        chai.expect(toastrSpy.called).to.equals(true);
         chai.expect(logSpy.called).to.equals(true);
     });
 
     it("can handle an error response", () => {
+        let toastrSpy = sinon.spy(toastr, "warning");
         let logSpy = sinon.spy($log, "warn");
         let sut = new app.greeting.HelloWorldController($http, $log);
         sut.inputText = "Error";
@@ -54,6 +57,7 @@ describe("HelloWorldController Test ", () => {
 
         $httpBackend.flush();
         chai.expect(sut.labelText).to.equals("");
+        chai.expect(toastrSpy.called).to.equals(true);
         chai.expect(logSpy.calledOnce).to.equals(true);
     });
 });

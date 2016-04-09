@@ -1,4 +1,5 @@
 node_modules/**
+dist/**
 HelloCoreClrApp.Ui/node_modules/**
 HelloCoreClrApp.Ui/bower_components/**
 HelloCoreClrApp.Ui/typings/**

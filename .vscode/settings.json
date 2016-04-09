@@ -19,6 +19,7 @@
     "HelloCoreClrApp.Test/bin/**": true,
     "HelloCoreClrApp.Test/project.lock.json": true,
     ".vscode/**": true,
-    "node_modules/**": true
+    "node_modules/**": true,
+    "dist/**": true
   }
 }

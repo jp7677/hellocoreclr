@@ -38,10 +38,8 @@ dnu build HelloCoreClrApp/project.json HelloCoreClrApp.Test/project.json HelloCo
 and publish like
 
 ```bash
-dnu publish HelloCoreClrApp.Ui/project.json
+dnu publish HelloCoreClrApp.Ui/project.json --no-source --out dist
 ```
-
-(Though publishing isn't perfect yet...)
 
 Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.
 

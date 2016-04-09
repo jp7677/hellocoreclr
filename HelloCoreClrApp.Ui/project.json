@@ -15,10 +15,27 @@
 
   "exclude": [
     "wwwroot",
-    "node_modules"
+    "node_modules",
+    "bower_components",
+    "typings",
+    "src",
+    "test",
+    "bower.json",
+    "gulpfile.js",
+    "karma.conf.js",
+    "package.json",
+    "tsconfig.json",
+    "tslint.json",
+    "typings.json",
+    "wallaby.conf.js"
   ],
 
   "scripts": {
-    "prepublish": [ "npm install", "./node_modules/.bin/bower install", "./node_modules/.bin/gulp clean:all", "./node_modules/.bin/gulp" ]
+    "prepublish": [
+        "npm install",
+        "./node_modules/.bin/bower install", 
+        "./node_modules/.bin/typings install", 
+        "./node_modules/.bin/gulp clean:all", 
+        "./node_modules/.bin/gulp" ]
   }
 }

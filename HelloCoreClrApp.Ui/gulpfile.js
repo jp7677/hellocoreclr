@@ -11,6 +11,8 @@ var cssmin = require('gulp-cssmin')
 var uglify = require('gulp-uglify')
 var flatten = require('gulp-flatten')
 var util = require('gulp-util')
+var watch = require('gulp-watch')
+var batch = require('gulp-batch')
 
 var paths = {
   wwwroot: './wwwroot/',
@@ -25,25 +27,35 @@ paths.srcJs = paths.src + '**/*.js'
 paths.testJs = paths.test + '**/*.js'
 paths.srcJsMap = paths.src + '**/*.js.map'
 paths.testJsMap = paths.test + '**/*.js.map'
+paths.assets = paths.wwwroot + '**/*.{html,ico}'
 
 paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
 paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
 paths.concatVendorCssDest = paths.wwwroot + 'css/vendor.min.css'
-paths.vendorAssetsDest = paths.wwwroot + 'fonts'
+paths.vendorAssets = paths.wwwroot + '**/*.{eot,svg,ttf,woff,woff2}'
 
 var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
 var fontawesomeFiles = ['./css/font-awesome.css', './fonts/*.*']
 
-gulp.task('clean:app', function (cb) {
+gulp.task('clean:js', function (cb) {
   return gulp.src([
     paths.srcJs,
     paths.srcJsMap,
     paths.testJs,
     paths.testJsMap,
-    paths.concatJsDest,
-    paths.concatCssDest], { read: false })
+    paths.concatJsDest + '*'], { read: false })
+    .pipe(rimraf())
+})
+
+gulp.task('clean:css', function (cb) {
+  return gulp.src(paths.concatCssDest + '*', { read: false })
+    .pipe(rimraf())
+})
+
+gulp.task('clean:assets', function (cb) {
+  return gulp.src(paths.assets, { read: false })
     .pipe(rimraf())
 })
 
@@ -51,7 +63,7 @@ gulp.task('clean:vendor', function (cb) {
   return gulp.src([
     paths.concatVendorJsDest + '*',
     paths.concatVendorCssDest + '*',
-    paths.vendorAssetsDest], { read: false })
+    paths.vendorAssets], { read: false })
     .pipe(rimraf())
 })
 
@@ -66,7 +78,7 @@ gulp.task('tslint', function (cb) {
     .pipe(tslint.report('verbose'))
 })
 
-gulp.task('tscompile', ['tslint', 'clean:app'], function (cb) {
+gulp.task('tscompile', ['tslint', 'clean:js'], function (cb) {
   var tsResult = tsProject.src()
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject))
@@ -95,7 +107,7 @@ gulp.task('min:js', ['tscompile'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min:css', ['clean:app'], function () {
+gulp.task('min:css', ['clean:css'], function () {
   gulp.src(paths.srcCss)
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatCssDest))
@@ -110,7 +122,7 @@ gulp.task('min:css', ['clean:app'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('assets', ['clean:app'], function () {
+gulp.task('assets', ['clean:assets'], function () {
   gulp.src([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap, '!' + paths.srcCss])
     .pipe(gulp.dest(paths.wwwroot))
 })
@@ -158,3 +170,25 @@ gulp.task('build:vendor', ['min:vendorjs', 'min:vendorcss', 'vendorassets'])
 gulp.task('build', ['build:app', 'build:vendor'])
 
 gulp.task('default', ['build'])
+
+// Watch tasks
+
+gulp.task('watch:js', function () {
+  watch(paths.srcTs, batch(function (events, done) {
+    gulp.start('min:js', done)
+  }))
+})
+
+gulp.task('watch:css', function () {
+  watch(paths.srcCss, batch(function (events, done) {
+    gulp.start('min:css', done)
+  }))
+})
+
+gulp.task('watch:assets', function () {
+  watch([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap, '!' + paths.srcCss], batch(function (events, done) {
+    gulp.start('assets', done)
+  }))
+})
+
+gulp.task('watch', ['watch:js', 'watch:css', 'watch:assets'])

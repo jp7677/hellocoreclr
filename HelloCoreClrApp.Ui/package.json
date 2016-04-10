@@ -18,6 +18,8 @@
     "gulp-uglify": "1.5.*",
     "gulp-flatten": "0.2.*",
     "gulp-util": "3.0.*",
+    "gulp-watch": "4.3.*",
+    "gulp-batch": "1.0.*",
     "bower": "1.7.*",
     "typings": "0.7.*",
     "tslint": "3.6.*",

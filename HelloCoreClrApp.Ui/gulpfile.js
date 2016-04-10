@@ -167,7 +167,10 @@ gulp.task('build:app', ['min:js', 'min:css', 'assets'])
 
 gulp.task('build:vendor', ['min:vendorjs', 'min:vendorcss', 'vendorassets'])
 
-gulp.task('build', ['build:app', 'build:vendor'])
+gulp.task('build', ['clean:all'], function (cb) {
+  gulp.start('build:app', cb)
+  gulp.start('build:vendor', cb)
+})
 
 gulp.task('default', ['build'])
 

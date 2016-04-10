@@ -27,19 +27,19 @@ paths.srcJs = paths.src + '**/*.js'
 paths.testJs = paths.test + '**/*.js'
 paths.srcJsMap = paths.src + '**/*.js.map'
 paths.testJsMap = paths.test + '**/*.js.map'
-paths.assets = paths.wwwroot + '**/*.{html,ico}'
+paths.assets = paths.wwwroot + '**/*.{html,ico}' // Far from perfect :(
 
 paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
 paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
 paths.concatVendorCssDest = paths.wwwroot + 'css/vendor.min.css'
-paths.vendorAssets = paths.wwwroot + '**/*.{eot,svg,ttf,woff,woff2}'
+paths.vendorAssets = paths.wwwroot + '**/*.{eot,svg,ttf,woff,woff2}' // Far from perfect :(
 
 var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
 var fontawesomeFiles = ['./css/font-awesome.css', './fonts/*.*']
 
-gulp.task('clean:js', function (cb) {
+gulp.task('clean:js', function () {
   return gulp.src([
     paths.srcJs,
     paths.srcJsMap,
@@ -49,17 +49,17 @@ gulp.task('clean:js', function (cb) {
     .pipe(rimraf())
 })
 
-gulp.task('clean:css', function (cb) {
+gulp.task('clean:css', function () {
   return gulp.src(paths.concatCssDest + '*', { read: false })
     .pipe(rimraf())
 })
 
-gulp.task('clean:assets', function (cb) {
+gulp.task('clean:assets', function () {
   return gulp.src(paths.assets, { read: false })
     .pipe(rimraf())
 })
 
-gulp.task('clean:vendor', function (cb) {
+gulp.task('clean:vendor', function () {
   return gulp.src([
     paths.concatVendorJsDest + '*',
     paths.concatVendorCssDest + '*',
@@ -67,18 +67,18 @@ gulp.task('clean:vendor', function (cb) {
     .pipe(rimraf())
 })
 
-gulp.task('clean:all', function (cb) {
+gulp.task('clean:all', function () {
   return gulp.src(paths.wwwroot, { read: false })
     .pipe(rimraf())
 })
 
-gulp.task('tslint', function (cb) {
+gulp.task('tslint', function () {
   return gulp.src([paths.srcTs, paths.testTs])
     .pipe(tslint())
     .pipe(tslint.report('verbose'))
 })
 
-gulp.task('tscompile', ['tslint', 'clean:js'], function (cb) {
+gulp.task('tscompile', ['tslint', 'clean:js'], function () {
   var tsResult = tsProject.src()
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject))

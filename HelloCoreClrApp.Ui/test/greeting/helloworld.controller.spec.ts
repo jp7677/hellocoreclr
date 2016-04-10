@@ -34,7 +34,7 @@ describe("HelloWorldController Test ", () => {
     });
 
     it("can handle a valid response", () => {
-        let toastrSpy = sinon.spy(toastr, "info");
+        let toastrSpy = sinon.spy(toastr, "success");
         let logSpy = sinon.spy($log, "info");
         let sut = new app.greeting.HelloWorldController($http, $log);
         sut.inputText = "Hello";

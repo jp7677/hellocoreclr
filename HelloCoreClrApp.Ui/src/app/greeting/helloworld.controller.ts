@@ -22,20 +22,21 @@ namespace app.greeting {
             }
 
             this.$log.info("We got the following name: " + name);
+            toastr.info("...");
 
             this.$http.get("/api/helloworld/" + name)
                 .success((data: GetHelloWorldResponse, status: number) => {
                     this.$log.info("Received http code " + status);
                     this.$log.info("Received data was: " + data.name);
 
-                    toastr.info("Received http code " + status);
+                    toastr.success("HTTP/" + status);
                     this.labelText = data.name;
                 })
                 .error((data: GetHelloWorldResponse, status: number) => {
                     this.$log.info("Received http code " + status);
                     this.$log.warn("Oops... something went wrong");
 
-                    toastr.warning("Received http code " + status);
+                    toastr.warning("HTTP/" + status);
                     this.labelText = "";
                 });
         };

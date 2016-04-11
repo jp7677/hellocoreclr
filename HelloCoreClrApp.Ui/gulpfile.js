@@ -33,7 +33,8 @@ paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
 paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
 paths.concatVendorCssDest = paths.wwwroot + 'css/vendor.min.css'
-paths.vendorAssets = paths.wwwroot + '**/*.{eot,svg,ttf,woff,woff2}' // Far from perfect :(
+var vendorExtensions = '**/*.{eot,svg,ttf,woff,woff2}'
+paths.vendorAssets = paths.wwwroot + vendorExtensions // Far from perfect :(
 
 var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
@@ -154,7 +155,7 @@ gulp.task('min:vendorcss', ['clean:vendor'], function () {
 })
 
 gulp.task('vendorassets', ['clean:vendor'], function () {
-  gulp.src(bowerfiles(['**/*.eot', '**/*.svg', '**/*.ttf', '**/*.woff', '**/*.woff2'],
+  gulp.src(bowerfiles(vendorExtensions,
     {overrides: {
       'bootstrap': {main: bootstrapFiles},
       'font-awesome': {main: fontawesomeFiles}

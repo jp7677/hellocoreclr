@@ -41,15 +41,21 @@ and publish like
 dnu publish HelloCoreClrApp.Ui/project.json --no-source --out dist
 ```
 
+Please read <http://docs.asp.net/en/latest/publishing/linuxproduction.html> for the steps that should follow.
+
 Obviously you should have CoreClr RC1 and Nodejs/npm already up and running.
 
 For a nice programming experience I'm using Visual Studio Code with the following extensions:
 > C#, tslint, standardjs, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint, Spelling and Grammar Checker
 
-Use the following command to set up required node packages for these extensions.
+Note that Wallabyjs is a commercial extension. Use the following command to set up required node packages for these extensions.
 
 ```bash
 npm install tslint standard htmlhint
 ```
 
-Note that Wallabyjs is a commercial extension.
+Use the following command for assembling the web application on save.
+
+```bash
+HelloCoreClrApp.Ui/node_modules/.bin/gulp watch --cwd HelloCoreClrApp.Ui
+```

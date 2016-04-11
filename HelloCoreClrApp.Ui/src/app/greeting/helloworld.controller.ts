@@ -36,7 +36,7 @@ namespace app.greeting {
                     this.$log.info("Received http code " + status);
                     this.$log.warn("Oops... something went wrong");
 
-                    toastr.warning("HTTP/" + status);
+                    toastr.warning("Oops... HTTP/" + status);
                     this.labelText = "";
                 });
         };

@@ -39,6 +39,7 @@ paths.vendorAssets = paths.wwwroot + vendorExtensions // Far from perfect :(
 var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
 var fontawesomeFiles = ['./css/font-awesome.css', './fonts/*.*']
+var browserSync = require('browser-sync').create()
 
 gulp.task('clean:js', function () {
   return gulp.src([
@@ -196,3 +197,15 @@ gulp.task('watch:assets', function () {
 })
 
 gulp.task('watch', ['watch:js', 'watch:css', 'watch:assets'])
+
+gulp.task('watch:browsersync', function () {
+  browserSync.init({
+    server: {baseDir: paths.wwwroot}
+  })
+
+  watch(paths.wwwroot.substr(2) + '**/*', batch(function (events, done) {
+    browserSync.reload()
+    done()
+  }))
+  gulp.start('watch')
+})

@@ -20,6 +20,7 @@
     "gulp-util": "3.0.*",
     "gulp-watch": "4.3.*",
     "gulp-batch": "1.0.*",
+    "browser-sync": "2.11.*",
     "bower": "1.7.*",
     "typings": "0.7.*",
     "tslint": "3.6.*",

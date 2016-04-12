@@ -203,9 +203,20 @@ gulp.task('watch:browsersync', function () {
     server: {baseDir: paths.wwwroot}
   })
 
-  watch(paths.wwwroot.substr(2) + '**/*', batch(function (events, done) {
+  watch(paths.concatJsDest.substr(2) + '*', function (event) {
+    return gulp.src(event.path)
+      .pipe(browserSync.stream())
+  })
+
+  watch(paths.concatCssDest.substr(2) + '*', function (event) {
+    return gulp.src(event.path)
+      .pipe(browserSync.stream())
+  })
+
+  watch(paths.assets.substr(2), batch(function (events, done) {
     browserSync.reload()
     done()
   }))
+
   gulp.start('watch')
 })

@@ -13,6 +13,8 @@ var flatten = require('gulp-flatten')
 var util = require('gulp-util')
 var watch = require('gulp-watch')
 var batch = require('gulp-batch')
+var browserSync = require('browser-sync').create()
+var proxy = require('proxy-middleware')
 
 var paths = {
   wwwroot: './wwwroot/',
@@ -39,7 +41,9 @@ paths.vendorAssets = paths.wwwroot + vendorExtensions // Far from perfect :(
 var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
 var fontawesomeFiles = ['./css/font-awesome.css', './fonts/*.*']
-var browserSync = require('browser-sync').create()
+
+var proxyOptions = 'http://localhost:5000/'
+proxyOptions.route = '/api'
 
 gulp.task('clean:js', function () {
   return gulp.src([
@@ -198,10 +202,16 @@ gulp.task('watch:assets', function () {
 
 gulp.task('watch', ['watch:js', 'watch:css', 'watch:assets'])
 
+// Browsersync tasks
+
 gulp.task('watch:browsersync', function () {
   util.log(util.colors.cyan(' -- Only changes on application files will be synced using browser-sync --'))
+
   browserSync.init({
-    server: {baseDir: paths.wwwroot}
+    server: {
+      baseDir: paths.wwwroot,
+      middleware: [proxy(proxyOptions)]
+    }
   })
 
   var sync = function (vinyl) {

@@ -203,14 +203,18 @@ gulp.task('watch:browsersync', function () {
     server: {baseDir: paths.wwwroot}
   })
 
-  watch(paths.concatJsDest.substr(2) + '*', function (event) {
-    return gulp.src(event.path)
-      .pipe(browserSync.stream())
+  watch(paths.concatJsDest.substr(2) + '*', function (vinyl) {
+    if (vinyl.event === 'add' || vinyl.event === 'change') {
+      return gulp.src(vinyl.path)
+        .pipe(browserSync.stream())
+    }
   })
 
-  watch(paths.concatCssDest.substr(2) + '*', function (event) {
-    return gulp.src(event.path)
-      .pipe(browserSync.stream())
+  watch(paths.concatCssDest.substr(2) + '*', function (vinyl) {
+    if (vinyl.event === 'add' || vinyl.event === 'change') {
+      return gulp.src(vinyl.path)
+        .pipe(browserSync.stream())
+    }
   })
 
   watch(paths.assets.substr(2), batch(function (events, done) {

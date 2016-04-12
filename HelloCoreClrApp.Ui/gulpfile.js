@@ -199,24 +199,20 @@ gulp.task('watch:assets', function () {
 gulp.task('watch', ['watch:js', 'watch:css', 'watch:assets'])
 
 gulp.task('watch:browsersync', function () {
+  util.log(util.colors.cyan(' -- Only changes on application files will be synced using browser-sync --'))
   browserSync.init({
     server: {baseDir: paths.wwwroot}
   })
 
-  watch(paths.concatJsDest.substr(2) + '*', function (vinyl) {
+  var sync = function (vinyl) {
     if (vinyl.event === 'add' || vinyl.event === 'change') {
       return gulp.src(vinyl.path)
         .pipe(browserSync.stream())
     }
-  })
+  }
 
-  watch(paths.concatCssDest.substr(2) + '*', function (vinyl) {
-    if (vinyl.event === 'add' || vinyl.event === 'change') {
-      return gulp.src(vinyl.path)
-        .pipe(browserSync.stream())
-    }
-  })
-
+  watch(paths.concatJsDest.substr(2) + '*', sync)
+  watch(paths.concatCssDest.substr(2) + '*', sync)
   watch(paths.assets.substr(2), batch(function (events, done) {
     browserSync.reload()
     done()

@@ -22,7 +22,7 @@ namespace app.greeting {
             }
 
             this.$log.info("We got the following name: " + name);
-            toastr.info("...");
+            toastr.info("Working...");
 
             this.$http.get("/api/helloworld/" + name)
                 .success((data: GetHelloWorldResponse, status: number) => {

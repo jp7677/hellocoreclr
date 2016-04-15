@@ -10,6 +10,7 @@ var concat = require('gulp-concat')
 var cssmin = require('gulp-cssmin')
 var uglify = require('gulp-uglify')
 var flatten = require('gulp-flatten')
+var htmlhint = require('gulp-htmlhint')
 var util = require('gulp-util')
 var watch = require('gulp-watch')
 var batch = require('gulp-batch')
@@ -26,6 +27,7 @@ paths.srcTs = paths.src + '**/*.ts'
 paths.testTs = paths.test + '**/*.ts'
 paths.srcCss = paths.src + '**/*.css'
 paths.srcJs = paths.src + '**/*.js'
+paths.srcHtml = paths.src + '**/*.html'
 paths.testJs = paths.test + '**/*.js'
 paths.srcJsMap = paths.src + '**/*.js.map'
 paths.testJsMap = paths.test + '**/*.js.map'
@@ -78,13 +80,13 @@ gulp.task('clean:all', function () {
     .pipe(rimraf())
 })
 
-gulp.task('tslint', function () {
+gulp.task('lint:ts', function () {
   return gulp.src([paths.srcTs, paths.testTs])
     .pipe(tslint())
     .pipe(tslint.report('verbose'))
 })
 
-gulp.task('tscompile', ['tslint', 'clean:js'], function () {
+gulp.task('tscompile', ['lint:ts', 'clean:js'], function () {
   var tsResult = tsProject.src()
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject))
@@ -128,7 +130,14 @@ gulp.task('min:css', ['clean:css'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('assets', ['clean:assets'], function () {
+gulp.task('lint:html', function () {
+  gulp.src(paths.srcHtml)
+    .pipe(htmlhint())
+    .pipe(htmlhint.reporter())
+    .pipe(htmlhint.failReporter({ suppress: true }))
+})
+
+gulp.task('assets', ['lint:html', 'clean:assets'], function () {
   gulp.src([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap, '!' + paths.srcCss])
     .pipe(gulp.dest(paths.wwwroot))
 })

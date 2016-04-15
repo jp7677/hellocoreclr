@@ -81,9 +81,9 @@ gulp.task('clean:all', function () {
 })
 
 gulp.task('lint:ts', function () {
-  return gulp.src([paths.srcTs, paths.testTs])
+  gulp.src([paths.srcTs, paths.testTs])
     .pipe(tslint())
-    .pipe(tslint.report('verbose'))
+    .pipe(tslint.report('verbose', {emitError: false}))
 })
 
 gulp.task('tscompile', ['lint:ts', 'clean:js'], function () {

@@ -134,7 +134,6 @@ gulp.task('lint:html', function () {
   gulp.src(paths.srcHtml)
     .pipe(htmlhint())
     .pipe(htmlhint.reporter())
-    .pipe(htmlhint.failReporter({ suppress: true }))
 })
 
 gulp.task('assets', ['lint:html', 'clean:assets'], function () {

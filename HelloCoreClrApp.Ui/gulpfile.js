@@ -122,7 +122,17 @@ gulp.task('lint:css', function () {
     .pipe(stylelint({
       failAfterError: false,
       reporters: [
-        {formatter: 'string', console: true}
+        {formatter: function (results) {
+          results.forEach(function (element) {
+            var file = element.source.substr(element.source.lastIndexOf('/') + 1)
+            element.warnings.forEach(function (warning) {
+              var message = '[' + util.colors.cyan('gulp-stylelint') + '] ' +
+                util.colors.red(warning.severity) + ' ' + file +
+                '[' + warning.line + ', ' + warning.column + ']: ' + warning.text
+              util.log(message)
+            })
+          })
+        }}
       ]
     }))
 })

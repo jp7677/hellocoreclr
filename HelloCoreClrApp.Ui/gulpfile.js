@@ -7,6 +7,7 @@ var ts = require('gulp-typescript')
 var sourcemaps = require('gulp-sourcemaps')
 var bowerfiles = require('main-bower-files')
 var concat = require('gulp-concat')
+var stylelint = require('gulp-stylelint')
 var cssmin = require('gulp-cssmin')
 var uglify = require('gulp-uglify')
 var flatten = require('gulp-flatten')
@@ -16,6 +17,7 @@ var watch = require('gulp-watch')
 var batch = require('gulp-batch')
 var browserSync = require('browser-sync').create()
 var proxy = require('proxy-middleware')
+var url = require('url')
 
 var paths = {
   wwwroot: './wwwroot/',
@@ -44,7 +46,7 @@ var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
 var fontawesomeFiles = ['./css/font-awesome.css', './fonts/*.*']
 
-var proxyOptions = 'http://localhost:5000/'
+var proxyOptions = url.parse('http://localhost:5000/')
 proxyOptions.route = '/api'
 
 gulp.task('clean:js', function () {
@@ -115,7 +117,17 @@ gulp.task('min:js', ['tscompile'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min:css', ['clean:css'], function () {
+gulp.task('lint:css', function () {
+  gulp.src(paths.srcCss)
+    .pipe(stylelint({
+      failAfterError: false,
+      reporters: [
+        {formatter: 'string', console: true}
+      ]
+    }))
+})
+
+gulp.task('min:css', ['lint:css', 'clean:css'], function () {
   gulp.src(paths.srcCss)
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatCssDest))

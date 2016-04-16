@@ -46,7 +46,7 @@ var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
 var fontawesomeFiles = ['./css/font-awesome.css', './fonts/*.*']
 
-var proxyOptions = url.parse('http://localhost:5000/')
+var proxyOptions = url.parse('http://localhost:5000/api')
 proxyOptions.route = '/api'
 
 gulp.task('clean:js', function () {

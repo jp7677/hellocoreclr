@@ -18,6 +18,7 @@ var batch = require('gulp-batch')
 var browserSync = require('browser-sync').create()
 var proxy = require('proxy-middleware')
 var url = require('url')
+var path = require('path')
 
 var paths = {
   wwwroot: './wwwroot/',
@@ -124,7 +125,7 @@ gulp.task('lint:css', function () {
       reporters: [
         {formatter: function (results) {
           results.forEach(function (element) {
-            var file = element.source.substr(element.source.lastIndexOf('/') + 1)
+            var file = path.relative(path.join(process.cwd(), paths.src), element.source)
             element.warnings.forEach(function (warning) {
               var message = '[' + util.colors.cyan('gulp-stylelint') + '] ' +
                 util.colors.red(warning.severity) + ' ' + file +

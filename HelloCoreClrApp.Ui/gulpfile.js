@@ -156,7 +156,15 @@ gulp.task('min:css', ['lint:css', 'clean:css'], function () {
 gulp.task('lint:html', function () {
   gulp.src(paths.srcHtml)
     .pipe(htmlhint())
-    .pipe(htmlhint.reporter())
+    .pipe(htmlhint.reporter(function (results) {
+      results.htmlhint.messages.forEach(function (warning) {
+        var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
+        var message = '[' + util.colors.cyan('gulp-htmlhint') + '] ' +
+                util.colors.red(warning.error.type) + ' ' + file +
+                '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
+        util.log(message)
+      })
+    }))
 })
 
 gulp.task('assets', ['lint:html', 'clean:assets'], function () {

@@ -78,7 +78,7 @@ gulp.task('clean:vendor', function () {
     .pipe(rimraf())
 })
 
-gulp.task('clean:all', function () {
+gulp.task('clean:dest', function () {
   return gulp.src(paths.wwwroot, { read: false })
     .pipe(rimraf())
 })
@@ -212,7 +212,7 @@ gulp.task('build:app', ['min:js', 'min:css', 'assets'])
 
 gulp.task('build:vendor', ['min:vendorjs', 'min:vendorcss', 'vendorassets'])
 
-gulp.task('build', ['clean:all'], function (cb) {
+gulp.task('build', ['clean:dest'], function (cb) {
   gulp.start('build:app', cb)
   gulp.start('build:vendor', cb)
 })

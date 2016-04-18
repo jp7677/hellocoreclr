@@ -84,7 +84,7 @@ gulp.task('clean:all', function () {
 })
 
 gulp.task('lint:ts', function () {
-  gulp.src([paths.srcTs, paths.testTs])
+  return gulp.src([paths.srcTs, paths.testTs])
     .pipe(tslint())
     .pipe(tslint.report('verbose', {emitError: false}))
 })
@@ -106,7 +106,7 @@ gulp.task('tscompile', ['lint:ts', 'clean:js'], function () {
 })
 
 gulp.task('min:js', ['tscompile'], function () {
-  gulp.src([paths.srcJs], { base: '.' })
+  return gulp.src([paths.srcJs], { base: '.' })
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(concat(paths.concatJsDest))
     .pipe(sourcemaps.write())
@@ -119,7 +119,7 @@ gulp.task('min:js', ['tscompile'], function () {
 })
 
 gulp.task('lint:css', function () {
-  gulp.src(paths.srcCss)
+  return gulp.src(paths.srcCss)
     .pipe(stylelint({
       failAfterError: false,
       reporters: [
@@ -139,7 +139,7 @@ gulp.task('lint:css', function () {
 })
 
 gulp.task('min:css', ['lint:css', 'clean:css'], function () {
-  gulp.src(paths.srcCss)
+  return gulp.src(paths.srcCss)
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatCssDest))
     .pipe(cssmin())
@@ -154,7 +154,7 @@ gulp.task('min:css', ['lint:css', 'clean:css'], function () {
 })
 
 gulp.task('lint:html', function () {
-  gulp.src(paths.srcHtml)
+  return gulp.src(paths.srcHtml)
     .pipe(htmlhint())
     .pipe(htmlhint.reporter(function (results) {
       results.htmlhint.messages.forEach(function (warning) {
@@ -168,12 +168,12 @@ gulp.task('lint:html', function () {
 })
 
 gulp.task('assets', ['lint:html', 'clean:assets'], function () {
-  gulp.src([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap, '!' + paths.srcCss])
+  return gulp.src([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap, '!' + paths.srcCss])
     .pipe(gulp.dest(paths.wwwroot))
 })
 
 gulp.task('min:vendorjs', ['clean:vendor'], function () {
-  gulp.src(bowerfiles('**/*.js'), { base: '.' })
+  return gulp.src(bowerfiles('**/*.js'), { base: '.' })
     .pipe(sourcemaps.init())
     .pipe(concat(paths.concatVendorJsDest))
     .pipe(sourcemaps.write())
@@ -186,7 +186,7 @@ gulp.task('min:vendorjs', ['clean:vendor'], function () {
 })
 
 gulp.task('min:vendorcss', ['clean:vendor'], function () {
-  gulp.src(bowerfiles('**/*.css',
+  return gulp.src(bowerfiles('**/*.css',
     {overrides: {
       'bootstrap': {main: bootstrapFiles},
       'font-awesome': {main: fontawesomeFiles}
@@ -199,7 +199,7 @@ gulp.task('min:vendorcss', ['clean:vendor'], function () {
 })
 
 gulp.task('vendorassets', ['clean:vendor'], function () {
-  gulp.src(bowerfiles(vendorExtensions,
+  return gulp.src(bowerfiles(vendorExtensions,
     {overrides: {
       'bootstrap': {main: bootstrapFiles},
       'font-awesome': {main: fontawesomeFiles}

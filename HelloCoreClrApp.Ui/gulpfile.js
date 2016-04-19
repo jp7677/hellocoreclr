@@ -1,7 +1,6 @@
 ﻿'use strict'
 
 var gulp = require('gulp')
-var rimraf = require('gulp-rimraf')
 var tslint = require('gulp-tslint')
 var ts = require('gulp-typescript')
 var sourcemaps = require('gulp-sourcemaps')
@@ -19,6 +18,7 @@ var browserSync = require('browser-sync').create()
 var proxy = require('proxy-middleware')
 var url = require('url')
 var path = require('path')
+var del = require('del')
 
 var paths = {
   wwwroot: './wwwroot/',
@@ -51,36 +51,31 @@ var proxyOptions = url.parse('http://localhost:5000/api')
 proxyOptions.route = '/api'
 
 gulp.task('clean:js', function () {
-  return gulp.src([
+  return del([
     paths.srcJs,
     paths.srcJsMap,
     paths.testJs,
     paths.testJsMap,
-    paths.concatJsDest + '*'], { read: false })
-    .pipe(rimraf())
+    paths.concatJsDest + '*'])
 })
 
 gulp.task('clean:css', function () {
-  return gulp.src(paths.concatCssDest + '*', { read: false })
-    .pipe(rimraf())
+  return del(paths.concatCssDest + '*')
 })
 
 gulp.task('clean:assets', function () {
-  return gulp.src(paths.assets, { read: false })
-    .pipe(rimraf())
+  return del(paths.assets)
 })
 
 gulp.task('clean:vendor', function () {
-  return gulp.src([
+  return del([
     paths.concatVendorJsDest + '*',
     paths.concatVendorCssDest + '*',
-    paths.vendorAssets], { read: false })
-    .pipe(rimraf())
+    paths.vendorAssets])
 })
 
 gulp.task('clean:dest', function () {
-  return gulp.src(paths.wwwroot, { read: false })
-    .pipe(rimraf())
+  return del(paths.wwwroot)
 })
 
 gulp.task('lint:ts', function () {

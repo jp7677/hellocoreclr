@@ -8,7 +8,6 @@
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "devDependencies": {
     "gulp": "3.9.*",
-    "gulp-rimraf": "0.2.*",
     "gulp-tslint": "4.3.*",
     "gulp-typescript": "2.12.*",
     "gulp-sourcemaps": "git+https://github.com/floridoo/gulp-sourcemaps.git#a626896c7660114680ecf998394bda87004c08e1",
@@ -22,6 +21,7 @@
     "gulp-util": "3.0.*",
     "gulp-watch": "4.3.*",
     "gulp-batch": "1.0.*",
+    "del": "2.2.*",
     "browser-sync": "2.11.*",
     "proxy-middleware": "0.15.*",
     "bower": "1.7.*",

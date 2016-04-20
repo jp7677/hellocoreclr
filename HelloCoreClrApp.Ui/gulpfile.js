@@ -1,6 +1,7 @@
 ﻿'use strict'
 
 var gulp = require('gulp')
+var run = require('run-sequence')
 var tslint = require('gulp-tslint')
 var ts = require('gulp-typescript')
 var sourcemaps = require('gulp-sourcemaps')
@@ -12,13 +13,13 @@ var uglify = require('gulp-uglify')
 var flatten = require('gulp-flatten')
 var htmlhint = require('gulp-htmlhint')
 var util = require('gulp-util')
+var del = require('del')
 var watch = require('gulp-watch')
 var batch = require('gulp-batch')
 var browserSync = require('browser-sync').create()
 var proxy = require('proxy-middleware')
 var url = require('url')
 var path = require('path')
-var del = require('del')
 
 var paths = {
   wwwroot: './wwwroot/',
@@ -203,13 +204,16 @@ gulp.task('vendorassets', ['clean:vendor'], function () {
     .pipe(gulp.dest(paths.wwwroot))
 })
 
-gulp.task('build:app', ['min:js', 'min:css', 'assets'])
+gulp.task('build:app', function (done) {
+  run(['min:js', 'min:css', 'assets'], done)
+})
 
-gulp.task('build:vendor', ['min:vendorjs', 'min:vendorcss', 'vendorassets'])
+gulp.task('build:vendor', function (done) {
+  run(['min:vendorjs', 'min:vendorcss', 'vendorassets'], done)
+})
 
-gulp.task('build', ['clean:dest'], function () {
-  gulp.start('build:app')
-  gulp.start('build:vendor')
+gulp.task('build', function (done) {
+  run('clean:dest', ['build:app', 'build:vendor'], done)
 })
 
 gulp.task('default', ['build'])

@@ -2,6 +2,7 @@
 
 var gulp = require('gulp')
 var run = require('run-sequence')
+var iif = require('gulp-if')
 var tslint = require('gulp-tslint')
 var ts = require('gulp-typescript')
 var sourcemaps = require('gulp-sourcemaps')
@@ -14,11 +15,6 @@ var flatten = require('gulp-flatten')
 var htmlhint = require('gulp-htmlhint')
 var util = require('gulp-util')
 var del = require('del')
-var watch = require('gulp-watch')
-var batch = require('gulp-batch')
-var browserSync = require('browser-sync').create()
-var proxy = require('proxy-middleware')
-var url = require('url')
 var path = require('path')
 
 var paths = {
@@ -47,9 +43,7 @@ paths.vendorAssets = paths.wwwroot + vendorExtensions // Far from perfect :(
 var tsProject = ts.createProject('tsconfig.json')
 var bootstrapFiles = ['./dist/css/bootstrap.css', './dist/css/bootstrap-theme.css', './dist/fonts/*.*']
 var fontawesomeFiles = ['./css/font-awesome.css', './fonts/*.*']
-
-var proxyOptions = url.parse('http://localhost:5000/api')
-proxyOptions.route = '/api'
+var production = false
 
 gulp.task('clean:js', function () {
   return del([
@@ -79,7 +73,13 @@ gulp.task('clean:dest', function () {
   return del(paths.wwwroot)
 })
 
-gulp.task('lint:ts', function () {
+gulp.task('lint:ts', function (done) {
+  if (production) {
+    util.log('Skipping \'' + util.colors.cyan('gulp-tslint') + '\'')
+    done()
+    return
+  }
+  
   return gulp.src([paths.srcTs, paths.testTs])
     .pipe(tslint())
     .pipe(tslint.report('verbose', {emitError: false}))
@@ -87,34 +87,40 @@ gulp.task('lint:ts', function () {
 
 gulp.task('tscompile', ['lint:ts', 'clean:js'], function () {
   var tsResult = tsProject.src()
-    .pipe(sourcemaps.init())
+    .pipe(iif(!production, sourcemaps.init()))
     .pipe(ts(tsProject))
 
   return tsResult.js
-    .pipe(sourcemaps.write('.', {
+    .pipe(iif(!production, sourcemaps.write('.', {
       mapSources: function (sourcePath) {
         var truncatedSourcePath = sourcePath.substr(sourcePath.lastIndexOf('/') + 1)
         util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
         return truncatedSourcePath
       }
-    }))
+    })))
     .pipe(gulp.dest('.'))
 })
 
 gulp.task('min:js', ['tscompile'], function () {
   return gulp.src([paths.srcJs], { base: '.' })
-    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(iif(!production, sourcemaps.init({loadMaps: true})))
     .pipe(concat(paths.concatJsDest))
-    .pipe(sourcemaps.write())
-    .pipe(sourcemaps.init())
+    .pipe(iif(!production, sourcemaps.write()))
+    .pipe(iif(!production, sourcemaps.init()))
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
-    .pipe(uglify({compress: false, mangle: false}))
-    .pipe(sourcemaps.write('.'))
+    .pipe(uglify({compress: production, mangle: production}))
+    .pipe(iif(!production, sourcemaps.write('.')))
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('lint:css', function () {
+gulp.task('lint:css', function (done) {
+  if (production) {
+    util.log('Skipping \'' + util.colors.cyan('gulp-stylelint') + '\'')
+    done()
+    return
+  }
+  
   return gulp.src(paths.srcCss)
     .pipe(stylelint({
       failAfterError: false,
@@ -136,20 +142,26 @@ gulp.task('lint:css', function () {
 
 gulp.task('min:css', ['lint:css', 'clean:css'], function () {
   return gulp.src(paths.srcCss)
-    .pipe(sourcemaps.init())
+    .pipe(iif(!production, sourcemaps.init()))
     .pipe(concat(paths.concatCssDest))
     .pipe(cssmin())
-    .pipe(sourcemaps.write('.', {
+    .pipe(iif(!production, sourcemaps.write('.', {
       mapSources: function (sourcePath) {
         var extendedSourcePath = paths.src.substr(2) + sourcePath
         util.log('SourcePath within source map extended to:', util.colors.cyan(extendedSourcePath))
         return extendedSourcePath
       }
-    }))
+    })))
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('lint:html', function () {
+gulp.task('lint:html', function (done) {
+  if (production) {
+    util.log('Skipping \'' + util.colors.cyan('gulp-htmlhint') + '\'')
+    done()
+    return
+  }
+  
   return gulp.src(paths.srcHtml)
     .pipe(htmlhint())
     .pipe(htmlhint.reporter(function (results) {
@@ -170,14 +182,14 @@ gulp.task('assets', ['lint:html', 'clean:assets'], function () {
 
 gulp.task('min:vendorjs', ['clean:vendor'], function () {
   return gulp.src(bowerfiles('**/*.js'), { base: '.' })
-    .pipe(sourcemaps.init())
+    .pipe(iif(!production,sourcemaps.init()))
     .pipe(concat(paths.concatVendorJsDest))
-    .pipe(sourcemaps.write())
-    .pipe(sourcemaps.init())
+    .pipe(iif(!production, sourcemaps.write()))
+    .pipe(iif(!production, sourcemaps.init()))
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
-    .pipe(uglify({compress: false, mangle: false}))
-    .pipe(sourcemaps.write('.'))
+    .pipe(uglify({compress: production, mangle: production}))
+    .pipe(iif(!production, sourcemaps.write('.')))
     .pipe(gulp.dest('.'))
 })
 
@@ -187,10 +199,10 @@ gulp.task('min:vendorcss', ['clean:vendor'], function () {
       'bootstrap': {main: bootstrapFiles},
       'font-awesome': {main: fontawesomeFiles}
     }}), { base: '.' })
-    .pipe(sourcemaps.init())
+    .pipe(iif(!production, sourcemaps.init()))
     .pipe(concat(paths.concatVendorCssDest))
     .pipe(cssmin())
-    .pipe(sourcemaps.write('.'))
+    .pipe(iif(!production, sourcemaps.write('.')))
     .pipe(gulp.dest('.'))
 })
 
@@ -216,23 +228,37 @@ gulp.task('build', function (done) {
   run('clean:dest', ['build:app', 'build:vendor'], done)
 })
 
+gulp.task('production', function (done) {
+  production = true
+  run('build', done)
+})
+
 gulp.task('default', ['build'])
 
 // Watch tasks
 
 gulp.task('watch:js', function () {
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+  
   watch(paths.srcTs, batch(function (events, done) {
     gulp.start('min:js', done)
   }))
 })
 
 gulp.task('watch:css', function () {
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+  
   watch(paths.srcCss, batch(function (events, done) {
     gulp.start('min:css', done)
   }))
 })
 
 gulp.task('watch:assets', function () {
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+  
   watch([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap, '!' + paths.srcCss], batch(function (events, done) {
     gulp.start('assets', done)
   }))
@@ -243,7 +269,16 @@ gulp.task('watch', ['watch:js', 'watch:css', 'watch:assets'])
 // Browsersync tasks
 
 gulp.task('watch:browsersync', function () {
+  var browserSync = require('browser-sync').create()
+  var proxy = require('proxy-middleware')
+  var url = require('url')
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+ 
   util.log(util.colors.cyan(' -- Only changes on application files will be synced using browser-sync --'))
+  
+  var proxyOptions = url.parse('http://localhost:5000/api')
+  proxyOptions.route = '/api'  
 
   browserSync.init({
     server: {

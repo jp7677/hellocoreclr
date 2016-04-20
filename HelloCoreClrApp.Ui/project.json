@@ -34,6 +34,6 @@
     "prepublish": [
         "./node_modules/.bin/bower install", 
         "./node_modules/.bin/typings install", 
-        "./node_modules/.bin/gulp" ]
+        "./node_modules/.bin/gulp production" ]
   }
 }

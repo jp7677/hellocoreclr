@@ -13,6 +13,7 @@ module.exports = function (config) {
       'test/**/*.spec.js'
     ],
 
+    autoWatchBatchDelay: 10000,
     singleRun: true,
     browsers: ['PhantomJS']
   })

@@ -67,7 +67,7 @@ For a nice programming experience I'm using Visual Studio Code with the followin
 > C#, tslint, standardjs, stylelint, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint, Spelling and Grammar Checker
 
 Note that Wallabyjs is a commercial extension. Furthermore hinting style sheets doesn't work yet out of the box, see <https://github.com/shinnn/vscode-stylelint/issues/8>.
-Use the following command to set up required node packages for these extensions.
+Use the following command to set up required node packages for these extensions if you haven't installed them globally.
 
 ```bash
 npm install tslint standard stylelint htmlhint

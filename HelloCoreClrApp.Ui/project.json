@@ -2,11 +2,13 @@
   "version": "0.0.1",
  
   "dependencies": {
-    "HelloCoreClrApp":"0.0.1"
+    "HelloCoreClrApp":"0.0.1",
+    "Microsoft.Dnx.Watcher": "1.0.0-rc1-final"
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel"
+    "web": "Microsoft.AspNet.Server.Kestrel",
+    "watch-web": "Microsoft.Dnx.Watcher web"
    },
 
   "frameworks": {

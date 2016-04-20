@@ -86,7 +86,7 @@ to restore packages, bindings and for assembling the web application. Finally ru
 
 ```bash
 cd HelloCoreClrApp.Test; dnx watch-test
-HelloCoreClrApp.Ui/node_modules/.bin/karma start HelloCoreClrApp.Ui/watch-karma.conf.js
+HelloCoreClrApp.Ui/node_modules/.bin/karma start --no-single-run HelloCoreClrApp.Ui/karma.conf.js
 cd HelloCoreClrApp.Ui; dnx watch-web
 HelloCoreClrApp.Ui/node_modules/.bin/gulp watch:browsersync --cwd HelloCoreClrApp.Ui
 ```

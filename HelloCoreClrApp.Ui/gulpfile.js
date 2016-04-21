@@ -9,6 +9,7 @@ var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
 var cssmin = require('gulp-cssmin')
 var htmlmin = require('gulp-htmlmin');
+var image = require('gulp-image-optimization')
 var bowerfiles = require('main-bower-files')
 var flatten = require('gulp-flatten')
 var util = require('gulp-util')
@@ -29,13 +30,13 @@ paths.testJs = paths.test + '**/*.js'
 paths.testJsMap = paths.test + '**/*.js.map'
 paths.srcCss = paths.src + '**/*.css'
 paths.srcHtml = paths.src + '**/*.html'
-paths.srcImage = paths.src + '**/*.{png,jpg}'
+paths.srcImage = paths.src + '**/*.{png,jpg,gif,svg}'
 paths.srcAssets = paths.src + '**/*.{ico}'
 
 paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
 paths.htmlDest = paths.wwwroot + '**/*.html'
-paths.imageDest = paths.wwwroot + '**/*.{png,jpg}'
+paths.imageDest = paths.wwwroot + '**/*.{png,jpg,gif,svg}'
 paths.assetsDest = paths.wwwroot + '**/*.{ico}'
 
 paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
@@ -202,6 +203,11 @@ gulp.task('min:html', ['lint:html', 'clean:html'], function () {
 
 gulp.task('min:image', ['clean:image'], function () {
   return gulp.src(paths.srcImage)
+    .pipe(image({
+        optimizationLevel: 3,
+        progressive: true,
+        interlaced: true
+    }))
     .pipe(gulp.dest(paths.wwwroot))
 })
 

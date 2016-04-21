@@ -96,5 +96,4 @@ Your favorite should fire up and should open <http://localhost:3000/>. Happy cod
 ## To-do
 
 - CoreClr: Update to RC2 once it's ready.
-- Gulp: Implement image optimization <https://www.npmjs.com/package/gulp-image-optimization>.
 - Gulp: Throw hinting errors when running in non-watch mode.

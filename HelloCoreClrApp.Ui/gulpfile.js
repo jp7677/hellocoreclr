@@ -3,14 +3,11 @@
 var gulp = require('gulp')
 var run = require('run-sequence')
 var iif = require('gulp-if')
-var tslint = require('gulp-tslint')
 var ts = require('gulp-typescript')
 var sourcemaps = require('gulp-sourcemaps')
 var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
-var stylelint = require('gulp-stylelint')
 var cssmin = require('gulp-cssmin')
-var htmlhint = require('gulp-htmlhint')
 var htmlmin = require('gulp-htmlmin');
 var bowerfiles = require('main-bower-files')
 var flatten = require('gulp-flatten')
@@ -88,6 +85,7 @@ gulp.task('lint:ts', function (done) {
     return
   }
   
+  var tslint = require('gulp-tslint')
   return gulp.src([paths.srcTs, paths.testTs])
     .pipe(tslint())
     .pipe(tslint.report('verbose', {emitError: false}))
@@ -128,7 +126,8 @@ gulp.task('lint:css', function (done) {
     done()
     return
   }
-  
+
+  var stylelint = require('gulp-stylelint')
   return gulp.src(paths.srcCss)
     .pipe(stylelint({
       failAfterError: false,
@@ -169,7 +168,8 @@ gulp.task('lint:html', function (done) {
     done()
     return
   }
-  
+
+  var htmlhint = require('gulp-htmlhint')  
   return gulp.src(paths.srcHtml)
     .pipe(htmlhint())
     .pipe(htmlhint.reporter(function (results) {

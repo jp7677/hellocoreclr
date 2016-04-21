@@ -29,11 +29,13 @@ paths.testJs = paths.test + '**/*.js'
 paths.testJsMap = paths.test + '**/*.js.map'
 paths.srcCss = paths.src + '**/*.css'
 paths.srcHtml = paths.src + '**/*.html'
+paths.srcImage = paths.src + '**/*.{png,jpg}'
 paths.srcAssets = paths.src + '**/*.{ico}'
 
 paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
 paths.htmlDest = paths.wwwroot + '**/*.html'
+paths.imageDest = paths.wwwroot + '**/*.{png,jpg}'
 paths.assetsDest = paths.wwwroot + '**/*.{ico}'
 
 paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
@@ -61,6 +63,10 @@ gulp.task('clean:css', function () {
 
 gulp.task('clean:html', function () {
   return del(paths.htmlDest)
+})
+
+gulp.task('clean:image', function () {
+  return del(paths.imageDest)
 })
 
 gulp.task('clean:assets', function () {
@@ -194,6 +200,11 @@ gulp.task('min:html', ['lint:html', 'clean:html'], function () {
     .pipe(gulp.dest(paths.wwwroot))
 })
 
+gulp.task('min:image', ['clean:image'], function () {
+  return gulp.src(paths.srcImage)
+    .pipe(gulp.dest(paths.wwwroot))
+})
+
 gulp.task('assets', ['clean:assets'], function () {
   return gulp.src(paths.srcAssets)
     .pipe(gulp.dest(paths.wwwroot))
@@ -236,7 +247,7 @@ gulp.task('vendorassets', ['clean:vendor'], function () {
 })
 
 gulp.task('build:app', function (done) {
-  run(['min:js', 'min:css', 'min:html', 'assets'], done)
+  run(['min:js', 'min:css', 'min:html', 'min:image', 'assets'], done)
 })
 
 gulp.task('build:vendor', function (done) {
@@ -283,6 +294,15 @@ gulp.task('watch:html', function () {
   }))
 })
 
+gulp.task('watch:image', function () {
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+  
+  watch(paths.srcImage, batch(function (events, done) {
+    gulp.start('min:image', done)
+  }))
+})
+
 gulp.task('watch:assets', function () {
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
@@ -292,7 +312,7 @@ gulp.task('watch:assets', function () {
   }))
 })
 
-gulp.task('watch', ['watch:js', 'watch:css', 'watch:html', 'watch:assets'])
+gulp.task('watch', ['watch:js', 'watch:css', 'watch:html', 'watch:image', 'watch:assets'])
 
 // Browsersync tasks
 
@@ -324,7 +344,8 @@ gulp.task('watch:browsersync', function () {
 
   watch(paths.concatJsDest.substr(2) + '*', sync)
   watch(paths.concatCssDest.substr(2) + '*', sync)
-  watch([paths.htmlDest.substr(2), paths.assetsDest.substr(2)], batch(function (events, done) {
+  watch([paths.htmlDest.substr(2), paths.imageDest.substr(2), paths.assetsDest.substr(2)], 
+    batch(function (events, done) {
     browserSync.reload()
     done()
   }))

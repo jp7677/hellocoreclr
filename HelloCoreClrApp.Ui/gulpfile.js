@@ -6,13 +6,14 @@ var iif = require('gulp-if')
 var tslint = require('gulp-tslint')
 var ts = require('gulp-typescript')
 var sourcemaps = require('gulp-sourcemaps')
-var bowerfiles = require('main-bower-files')
 var concat = require('gulp-concat')
+var uglify = require('gulp-uglify')
 var stylelint = require('gulp-stylelint')
 var cssmin = require('gulp-cssmin')
-var uglify = require('gulp-uglify')
-var flatten = require('gulp-flatten')
 var htmlhint = require('gulp-htmlhint')
+var htmlmin = require('gulp-htmlmin');
+var bowerfiles = require('main-bower-files')
+var flatten = require('gulp-flatten')
 var util = require('gulp-util')
 var del = require('del')
 var path = require('path')
@@ -25,17 +26,20 @@ var paths = {
 
 paths.srcTs = paths.src + '**/*.ts'
 paths.testTs = paths.test + '**/*.ts'
-paths.srcCss = paths.src + '**/*.css'
 paths.srcJs = paths.src + '**/*.js'
-paths.srcHtml = paths.src + '**/*.html'
-paths.testJs = paths.test + '**/*.js'
 paths.srcJsMap = paths.src + '**/*.js.map'
+paths.testJs = paths.test + '**/*.js'
 paths.testJsMap = paths.test + '**/*.js.map'
-paths.assets = paths.wwwroot + '**/*.{html,ico}' // Far from perfect :(
+paths.srcCss = paths.src + '**/*.css'
+paths.srcHtml = paths.src + '**/*.html'
+paths.srcAssets = paths.src + '**/*.{ico}'
 
 paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
-paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
+paths.htmlDest = paths.wwwroot + '**/*.html'
+paths.assetsDest = paths.wwwroot + '**/*.{ico}'
+
+paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
 paths.concatVendorCssDest = paths.wwwroot + 'css/vendor.min.css'
 var vendorExtensions = '**/*.{eot,svg,ttf,woff,woff2}'
 paths.vendorAssets = paths.wwwroot + vendorExtensions // Far from perfect :(
@@ -58,8 +62,12 @@ gulp.task('clean:css', function () {
   return del(paths.concatCssDest + '*')
 })
 
+gulp.task('clean:html', function () {
+  return del(paths.htmlDest)
+})
+
 gulp.task('clean:assets', function () {
-  return del(paths.assets)
+  return del(paths.assetsDest)
 })
 
 gulp.task('clean:vendor', function () {
@@ -175,8 +183,19 @@ gulp.task('lint:html', function (done) {
     }))
 })
 
-gulp.task('assets', ['lint:html', 'clean:assets'], function () {
-  return gulp.src([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap, '!' + paths.srcCss])
+gulp.task('min:html', ['lint:html', 'clean:html'], function () {
+  return gulp.src(paths.srcHtml)
+    .pipe(htmlmin({
+      collapseWhitespace: production, 
+      removeComments: production,
+      sortAttributes: production,
+      sortClassName: production
+    }))
+    .pipe(gulp.dest(paths.wwwroot))
+})
+
+gulp.task('assets', ['clean:assets'], function () {
+  return gulp.src(paths.srcAssets)
     .pipe(gulp.dest(paths.wwwroot))
 })
 
@@ -217,7 +236,7 @@ gulp.task('vendorassets', ['clean:vendor'], function () {
 })
 
 gulp.task('build:app', function (done) {
-  run(['min:js', 'min:css', 'assets'], done)
+  run(['min:js', 'min:css', 'min:html', 'assets'], done)
 })
 
 gulp.task('build:vendor', function (done) {
@@ -255,16 +274,25 @@ gulp.task('watch:css', function () {
   }))
 })
 
+gulp.task('watch:html', function () {
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+  
+  watch(paths.srcHtml, batch(function (events, done) {
+    gulp.start('min:html', done)
+  }))
+})
+
 gulp.task('watch:assets', function () {
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
   
-  watch([paths.src + '**/*', '!' + paths.srcTs, '!' + paths.srcJs, '!' + paths.srcJsMap, '!' + paths.srcCss], batch(function (events, done) {
+  watch(paths.srcAssets, batch(function (events, done) {
     gulp.start('assets', done)
   }))
 })
 
-gulp.task('watch', ['watch:js', 'watch:css', 'watch:assets'])
+gulp.task('watch', ['watch:js', 'watch:css', 'watch:html', 'watch:assets'])
 
 // Browsersync tasks
 
@@ -296,7 +324,7 @@ gulp.task('watch:browsersync', function () {
 
   watch(paths.concatJsDest.substr(2) + '*', sync)
   watch(paths.concatCssDest.substr(2) + '*', sync)
-  watch(paths.assets.substr(2), batch(function (events, done) {
+  watch([paths.htmlDest.substr(2), paths.assetsDest.substr(2)], batch(function (events, done) {
     browserSync.reload()
     done()
   }))

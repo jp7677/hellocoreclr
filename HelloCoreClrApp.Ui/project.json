@@ -26,6 +26,7 @@
     "gulpfile.js",
     "karma.conf.js",
     "package.json",
+    "stylelint.config.js",
     "tsconfig.json",
     "tslint.json",
     "typings.json",

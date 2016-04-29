@@ -133,23 +133,25 @@ gulp.task('lint:css', function (done) {
     done()
     return
   }
+  
+  var consoleFormatter = function (results) {
+    results.forEach(function (element) {
+      var file = path.relative(path.join(process.cwd(), paths.src), element.source)
+      element.warnings.forEach(function (warning) {
+        var message = '[' + util.colors.cyan('gulp-stylelint') + '] ' +
+          util.colors.red(warning.severity) + ' ' + file +
+          '[' + warning.line + ', ' + warning.column + ']: ' + warning.text
+        util.log(message)
+      })
+    })
+  }
 
   var stylelint = require('gulp-stylelint')
   return gulp.src(paths.srcCss)
     .pipe(stylelint({
       failAfterError: false,
       reporters: [
-        {formatter: function (results) {
-          results.forEach(function (element) {
-            var file = path.relative(path.join(process.cwd(), paths.src), element.source)
-            element.warnings.forEach(function (warning) {
-              var message = '[' + util.colors.cyan('gulp-stylelint') + '] ' +
-                util.colors.red(warning.severity) + ' ' + file +
-                '[' + warning.line + ', ' + warning.column + ']: ' + warning.text
-              util.log(message)
-            })
-          })
-        }}
+        {formatter: consoleFormatter}
       ]
     }))
 })
@@ -175,19 +177,21 @@ gulp.task('lint:html', function (done) {
     done()
     return
   }
+  
+  var consoleReporter = function (results) {
+    results.htmlhint.messages.forEach(function (warning) {
+      var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
+      var message = '[' + util.colors.cyan('gulp-htmlhint') + '] ' +
+              util.colors.red(warning.error.type) + ' ' + file +
+              '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
+      util.log(message)
+    })
+  }
 
   var htmlhint = require('gulp-htmlhint')  
   return gulp.src(paths.srcHtml)
     .pipe(htmlhint())
-    .pipe(htmlhint.reporter(function (results) {
-      results.htmlhint.messages.forEach(function (warning) {
-        var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
-        var message = '[' + util.colors.cyan('gulp-htmlhint') + '] ' +
-                util.colors.red(warning.error.type) + ' ' + file +
-                '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
-        util.log(message)
-      })
-    }))
+    .pipe(htmlhint.reporter(consoleReporter))
 })
 
 gulp.task('min:html', ['lint:html', 'clean:html'], function () {

@@ -8,7 +8,7 @@ var sourcemaps = require('gulp-sourcemaps')
 var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
 var cssmin = require('gulp-cssmin')
-var htmlmin = require('gulp-htmlmin');
+var htmlmin = require('gulp-htmlmin')
 var image = require('gulp-image-optimization')
 var bowerfiles = require('main-bower-files')
 var flatten = require('gulp-flatten')
@@ -91,7 +91,7 @@ gulp.task('lint:ts', function (done) {
     done()
     return
   }
-  
+
   var tslint = require('gulp-tslint')
   return gulp.src([paths.srcTs, paths.testTs])
     .pipe(tslint())
@@ -133,7 +133,7 @@ gulp.task('lint:css', function (done) {
     done()
     return
   }
-  
+
   var consoleFormatter = function (results) {
     results.forEach(function (element) {
       var file = path.relative(path.join(process.cwd(), paths.src), element.source)
@@ -177,7 +177,7 @@ gulp.task('lint:html', function (done) {
     done()
     return
   }
-  
+
   var consoleReporter = function (results) {
     results.htmlhint.messages.forEach(function (warning) {
       var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
@@ -188,7 +188,7 @@ gulp.task('lint:html', function (done) {
     })
   }
 
-  var htmlhint = require('gulp-htmlhint')  
+  var htmlhint = require('gulp-htmlhint')
   return gulp.src(paths.srcHtml)
     .pipe(htmlhint())
     .pipe(htmlhint.reporter(consoleReporter))
@@ -197,7 +197,7 @@ gulp.task('lint:html', function (done) {
 gulp.task('min:html', ['lint:html', 'clean:html'], function () {
   return gulp.src(paths.srcHtml)
     .pipe(htmlmin({
-      collapseWhitespace: production, 
+      collapseWhitespace: production,
       removeComments: production,
       sortAttributes: production,
       sortClassName: production
@@ -208,9 +208,9 @@ gulp.task('min:html', ['lint:html', 'clean:html'], function () {
 gulp.task('min:image', ['clean:image'], function () {
   return gulp.src(paths.srcImage)
     .pipe(image({
-        optimizationLevel: 3,
-        progressive: true,
-        interlaced: true
+      optimizationLevel: 3,
+      progressive: true,
+      interlaced: true
     }))
     .pipe(gulp.dest(paths.wwwroot))
 })
@@ -222,7 +222,7 @@ gulp.task('assets', ['clean:assets'], function () {
 
 gulp.task('min:vendorjs', ['clean:vendor'], function () {
   return gulp.src(bowerfiles('**/*.js'), { base: '.' })
-    .pipe(iif(!production,sourcemaps.init()))
+    .pipe(iif(!production, sourcemaps.init()))
     .pipe(concat(paths.concatVendorJsDest))
     .pipe(iif(!production, sourcemaps.write()))
     .pipe(iif(!production, sourcemaps.init()))
@@ -280,7 +280,7 @@ gulp.task('default', ['build'])
 gulp.task('watch:js', function () {
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
-  
+
   watch(paths.srcTs, batch(function (events, done) {
     gulp.start('min:js', done)
   }))
@@ -289,7 +289,7 @@ gulp.task('watch:js', function () {
 gulp.task('watch:css', function () {
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
-  
+
   watch(paths.srcCss, batch(function (events, done) {
     gulp.start('min:css', done)
   }))
@@ -298,7 +298,7 @@ gulp.task('watch:css', function () {
 gulp.task('watch:html', function () {
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
-  
+
   watch(paths.srcHtml, batch(function (events, done) {
     gulp.start('min:html', done)
   }))
@@ -307,7 +307,7 @@ gulp.task('watch:html', function () {
 gulp.task('watch:image', function () {
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
-  
+
   watch(paths.srcImage, batch(function (events, done) {
     gulp.start('min:image', done)
   }))
@@ -316,7 +316,7 @@ gulp.task('watch:image', function () {
 gulp.task('watch:assets', function () {
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
-  
+
   watch(paths.srcAssets, batch(function (events, done) {
     gulp.start('assets', done)
   }))
@@ -332,11 +332,11 @@ gulp.task('watch:browsersync', function () {
   var url = require('url')
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
- 
+
   util.log(util.colors.cyan(' -- Only changes on application files will be synced using browser-sync --'))
-  
+
   var proxyOptions = url.parse('http://localhost:5000/api')
-  proxyOptions.route = '/api'  
+  proxyOptions.route = '/api'
 
   browserSync.init({
     server: {
@@ -354,11 +354,12 @@ gulp.task('watch:browsersync', function () {
 
   watch(paths.concatJsDest.substr(2) + '*', sync)
   watch(paths.concatCssDest.substr(2) + '*', sync)
-  watch([paths.htmlDest.substr(2), paths.imageDest.substr(2), paths.assetsDest.substr(2)], 
+  watch([paths.htmlDest.substr(2), paths.imageDest.substr(2), paths.assetsDest.substr(2)],
     batch(function (events, done) {
-    browserSync.reload()
-    done()
-  }))
+      browserSync.reload()
+      done()
+    }
+  ))
 
   gulp.start('watch')
 })

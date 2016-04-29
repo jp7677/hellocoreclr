@@ -9,7 +9,7 @@
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "dependencies": {
     "bower": "1.7.x",
-    "typings": "0.7.x",
+    "typings": "0.8.x",
     "gulp": "3.9.x",
     "run-sequence": "1.1.*",
     "gulp-if": "2.0.x",
@@ -20,14 +20,14 @@
     "gulp-cssmin": "0.1.x",
     "gulp-htmlmin": "1.3.x",
     "gulp-image-optimization": "0.1.x",
-    "main-bower-files": "2.11.x",
+    "main-bower-files": "2.13.x",
     "gulp-flatten": "0.2.x",
     "gulp-util": "3.0.x",
     "del": "2.2.x"
   },
   "devDependencies": {
-    "gulp-tslint": "4.3.x",
-    "gulp-stylelint": "1.1.x",
+    "gulp-tslint": "5.0.x",
+    "gulp-stylelint": "2.0.x",
     "gulp-htmlhint": "0.3.x",
     "mocha": "2.4.x",
     "chai": "3.5.x",

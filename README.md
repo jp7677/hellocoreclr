@@ -66,7 +66,7 @@ to run the web server. Now open <http://localhost:5000/> in you favorite browser
 For a nice programming experience I'm using Visual Studio Code with the following extensions:
 > C#, tslint, standardjs, stylelint, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint, Spelling and Grammar Checker
 
-Note that Wallabyjs is a commercial extension. Furthermore hinting style sheets doesn't work yet out of the box, see <https://github.com/shinnn/vscode-stylelint/issues/8>.
+Note that Wallabyjs is a commercial extension.
 Use the following command to set up required node packages for these extensions if you haven't installed them globally.
 
 ```bash

@@ -31,7 +31,7 @@ paths.testJsMap = paths.test + '**/*.js.map'
 paths.srcCss = paths.src + '**/*.css'
 paths.srcHtml = paths.src + '**/*.html'
 paths.srcImage = paths.src + '**/*.{png,jpg,gif,svg}'
-paths.srcAssets = paths.src + '**/*.{ico}'
+paths.srcAssets = paths.src + '**/*.ico'
 
 paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'

@@ -8,6 +8,7 @@ var sourcemaps = require('gulp-sourcemaps')
 var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
 var cssmin = require('gulp-cssmin')
+var htmlreplace = require('gulp-html-replace')
 var htmlmin = require('gulp-htmlmin')
 var image = require('gulp-image-optimization')
 var bowerfiles = require('main-bower-files')
@@ -196,6 +197,12 @@ gulp.task('lint:html', function (done) {
 
 gulp.task('min:html', ['lint:html', 'clean:html'], function () {
   return gulp.src(paths.srcHtml)
+    .pipe(htmlreplace({
+      'vendorcss': 'css/vendor.min.css',
+      'appcss': 'css/site.min.css',
+      'vendorjs': 'js/vendor.min.js',
+      'appjs': 'js/site.min.js'
+    }))
     .pipe(htmlmin({
       collapseWhitespace: production,
       removeComments: production,

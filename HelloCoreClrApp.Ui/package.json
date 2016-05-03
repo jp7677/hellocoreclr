@@ -18,6 +18,7 @@
     "gulp-concat": "2.6.x",
     "gulp-uglify": "1.5.x",
     "gulp-cssmin": "0.1.x",
+    "gulp-html-replace": "1.5.x",
     "gulp-htmlmin": "1.3.x",
     "gulp-image-optimization": "0.1.x",
     "main-bower-files": "2.13.x",

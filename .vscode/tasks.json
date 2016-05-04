@@ -6,14 +6,25 @@
 // ${fileExtname}: the current opened file's extension
 // ${cwd}: the current working directory of the spawned process
 
+// A task runner that calls the Typescript compiler (tsc) and
+// compiles based on a tsconfig.json file that is present in
+// the root of the folder open in VSCode
 {
 	"version": "0.1.0",
-	"command": "${workspaceRoot}/HelloCoreClrApp.Ui/node_modules/.bin/gulp",
-	"isShellCommand": true,
-	"showOutput": "always",
-	"args": ["--cwd", "${workspaceRoot}/HelloCoreClrApp.Ui", "--no-color"],
 
-	// use the standard ms problem matcher to find compile problems
+	// The command is tsc.
+	"command": "${workspaceRoot}/HelloCoreClrApp.Ui/node_modules/.bin/tsc",
+
+	// The command is a shell script
+	"isShellCommand": true,
+
+	// Show the output window only if unrecognized errors occur.
+	"showOutput": "always",
+
+	// Tell the tsc compiler to use the tsconfig.json from the open folder.
+	"args": ["-p", "${workspaceRoot}/HelloCoreClrApp.Ui"],
+
+	// use the standard tsc problem matcher to find compile problems
 	// in the output.
-	"problemMatcher": "$msCompile"
+	"problemMatcher": "$tsc"
 }

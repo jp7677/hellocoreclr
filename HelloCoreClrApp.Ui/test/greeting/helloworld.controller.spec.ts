@@ -9,6 +9,7 @@ describe("HelloWorldController Test ", () => {
     let $http: ng.IHttpService;
     let $httpBackend: ng.IHttpBackendService;
     let $log: ng.ILogService;
+    let apiBaseUrl = "/api/";
 
     beforeEach(() => {
         inject((_$http_: ng.IHttpService, _$httpBackend_: ng.IHttpBackendService, _$log_: ng.ILogService) => {
@@ -18,14 +19,14 @@ describe("HelloWorldController Test ", () => {
 
             let res = new app.greeting.GetHelloWorldResponse();
             res.name = "Hello World!";
-            $httpBackend.whenGET("/api/helloworld/Hello").respond(200, res);
-            $httpBackend.whenGET("/api/helloworld/Error").respond(500);
+            $httpBackend.whenGET(apiBaseUrl + "helloworld/Hello").respond(200, res);
+            $httpBackend.whenGET(apiBaseUrl + "helloworld/Error").respond(500);
         });
     });
 
     it("does nothing when there is no input", () => {
         let logSpy = sinon.spy($log, "warn");
-        let sut = new app.greeting.HelloWorldController($http, $log);
+        let sut = new app.greeting.HelloWorldController(apiBaseUrl, $http, $log);
 
         sut.executeHelloWorld();
 
@@ -36,7 +37,7 @@ describe("HelloWorldController Test ", () => {
     it("can handle a valid response", () => {
         let toastrSpy = sinon.spy(toastr, "success");
         let logSpy = sinon.spy($log, "info");
-        let sut = new app.greeting.HelloWorldController($http, $log);
+        let sut = new app.greeting.HelloWorldController(apiBaseUrl, $http, $log);
         sut.inputText = "Hello";
 
         sut.executeHelloWorld();
@@ -50,7 +51,7 @@ describe("HelloWorldController Test ", () => {
     it("can handle an error response", () => {
         let toastrSpy = sinon.spy(toastr, "warning");
         let logSpy = sinon.spy($log, "warn");
-        let sut = new app.greeting.HelloWorldController($http, $log);
+        let sut = new app.greeting.HelloWorldController(apiBaseUrl, $http, $log);
         sut.inputText = "Error";
 
         sut.executeHelloWorld();

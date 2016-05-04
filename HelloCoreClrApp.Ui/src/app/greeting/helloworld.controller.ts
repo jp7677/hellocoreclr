@@ -4,11 +4,11 @@ namespace app.greeting {
 "use strict";
 
     export class HelloWorldController {
-        public static $inject = ["$http", "$log"];
+        public static $inject = ["apiBaseUrl", "$http", "$log"];
         public inputText: string;
         public labelText: string;
 
-        constructor(private $http: ng.IHttpService, private $log: ng.ILogService) {
+        constructor(private apiBaseUrl: string, private $http: ng.IHttpService, private $log: ng.ILogService) {
             this.inputText = undefined;
             this.labelText = "";
 
@@ -26,7 +26,7 @@ namespace app.greeting {
             this.$log.info("We got the following name: " + name);
             toastr.info("Working...");
 
-            this.$http.get("/api/helloworld/" + name)
+            this.$http.get(this.apiBaseUrl + "helloworld/" + name)
                 .success((data: GetHelloWorldResponse, status: number) => {
                     this.$log.info("Received http code " + status);
                     this.$log.info("Received data was: " + data.name);

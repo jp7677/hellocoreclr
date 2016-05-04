@@ -4,6 +4,7 @@ var gulp = require('gulp')
 var run = require('run-sequence')
 var iif = require('gulp-if')
 var ts = require('gulp-typescript')
+var config = require('gulp-ng-config')
 var sourcemaps = require('gulp-sourcemaps')
 var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
@@ -23,6 +24,8 @@ var paths = {
   test: './test/'
 }
 
+paths.devConstants = paths.src + 'app/appsettings.dev.js'
+paths.srcConstants = './appsettings.json'
 paths.srcTs = paths.src + '**/*.ts'
 paths.testTs = paths.test + '**/*.ts'
 paths.srcJs = paths.src + '**/*.js'
@@ -34,11 +37,12 @@ paths.srcHtml = paths.src + '**/*.html'
 paths.srcImage = paths.src + '**/*.{png,jpg,gif,svg}'
 paths.srcAssets = paths.src + '**/*.ico'
 
+paths.constantsDest = paths.src + 'app/'
 paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
 paths.htmlDest = paths.wwwroot + '**/*.html'
 paths.imageDest = paths.wwwroot + '**/*.{png,jpg,gif,svg}'
-paths.assetsDest = paths.wwwroot + '**/*.{ico}'
+paths.assetsDest = paths.wwwroot + '**/*.ico'
 
 paths.concatVendorJsDest = paths.wwwroot + 'js/vendor.min.js'
 paths.concatVendorCssDest = paths.wwwroot + 'css/vendor.min.css'
@@ -115,8 +119,17 @@ gulp.task('tscompile', ['lint:ts', 'clean:js'], function () {
     .pipe(gulp.dest('.'))
 })
 
-gulp.task('min:js', ['tscompile'], function () {
-  return gulp.src([paths.srcJs], { base: '.' })
+gulp.task('config', function () {
+  return gulp.src(paths.srcConstants)
+    .pipe(config('app', {
+      createModule: false,
+      wrap: true
+    }))
+    .pipe(gulp.dest(paths.constantsDest))
+})
+
+gulp.task('min:js', ['tscompile', 'config'], function () {
+  return gulp.src([paths.srcJs, '!' + paths.devConstants], { base: '.' })
     .pipe(iif(!production, sourcemaps.init({loadMaps: true})))
     .pipe(concat(paths.concatJsDest))
     .pipe(iif(!production, sourcemaps.write()))

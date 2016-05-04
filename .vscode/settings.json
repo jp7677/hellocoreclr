@@ -6,6 +6,7 @@
 
     "HelloCoreClrApp.Ui/src/**/*.js": { "when": "$(basename).ts"},
     "HelloCoreClrApp.Ui/src/**/*.js.map": true,
+    "HelloCoreClrApp.Ui/src/app/appsettings.js": true,
     "HelloCoreClrApp.Ui/test/**/*.js": { "when": "$(basename).ts"},
     "HelloCoreClrApp.Ui/test/**/*.js.map": true,
     "HelloCoreClrApp.Ui/wwwroot/**": true,

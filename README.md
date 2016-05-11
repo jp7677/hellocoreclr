@@ -91,7 +91,7 @@ cd HelloCoreClrApp.Ui; dnx watch-web
 HelloCoreClrApp.Ui/node_modules/.bin/gulp watch:browsersync --cwd HelloCoreClrApp.Ui
 ```
 
-Your favorite should fire up and should open <http://localhost:3000/>. Happy coding!
+Your favorite browser should fire up and should open <http://localhost:3000/>. Happy coding!
 
 ## To-do
 

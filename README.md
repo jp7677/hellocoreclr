@@ -19,7 +19,7 @@ HelloCoreClrApp.Ui/node_modules/.bin/gulp production --cwd HelloCoreClrApp.Ui
 to restore packages, bindings and for assembling the web application in production mode. Use
 
 ```bash
-dnx -p HelloCoreClrApp.Ui web
+dnx -p HelloCoreClrApp.Ui web-production
 ```
 
 to start the web server. Now open <http://localhost:5000/> in you favorite browser for a short test.
@@ -56,7 +56,7 @@ to run C# and TypeScript/JavaScript unit tests.
 Use
 
 ```bash
-dnx -p HelloCoreClrApp.Ui web
+dnx -p HelloCoreClrApp.Ui web-production
 ```
 
 to run the web server. Now open <http://localhost:5000/> in you favorite browser. Enjoy source maps in your browser when testing manually.

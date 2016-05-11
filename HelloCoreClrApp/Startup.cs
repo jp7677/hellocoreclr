@@ -3,6 +3,8 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Mvc.Controllers;
+using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Cors;
 using Newtonsoft.Json.Serialization;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNet;
@@ -20,10 +22,17 @@ namespace HelloWorldApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+                options.AddPolicy("AllowFileOrigin", builder => 
+                    builder.WithOrigins("file://")));
+            
             // Add framework services.
             services.AddMvc()
                 .AddJsonOptions(options => 
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+            
+            services.Configure<MvcOptions>(options =>
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowFileOrigin")));
             
             // Add SimpleInjector Controller Activator
             services.AddInstance<IControllerActivator>(new SimpleInjectorControllerActivator(container));
@@ -56,6 +65,9 @@ namespace HelloWorldApp
             
             // Add MVC to the request pipeline.
             app.UseMvc();
+
+            if (env.IsDevelopment())
+                app.UseCors("AllowFileOrigin");
         }
         
         // Entry point for the application.

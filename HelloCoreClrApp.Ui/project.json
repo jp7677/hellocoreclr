@@ -7,7 +7,8 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel",
+    "web-production": "Microsoft.AspNet.Server.Kestrel",
+    "web": "Microsoft.AspNet.Server.Kestrel  --Hosting:Environment Development",
     "watch-web": "Microsoft.Dnx.Watcher web"
    },
 

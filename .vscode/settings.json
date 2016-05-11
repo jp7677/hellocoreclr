@@ -23,7 +23,6 @@
     "node_modules/**": true,
     "dist/**": true
   },
-  "stylelint.enable": true,
   "stylelint.config": {
     "extends": "./HelloCoreClrApp.Ui/stylelint.config.js" 
   }

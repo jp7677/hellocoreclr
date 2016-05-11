@@ -4,7 +4,7 @@
 		{
 			"name": "Launch index.html with sourcemaps",
 			"type": "chrome",
-			"runtimeArgs": ["--disable-web-security", "--user-data-dir"],
+			"runtimeArgs": ["--allow-file-access-from-files"],
 			"request": "launch",
 			"file": "${workspaceRoot}/HelloCoreClrApp.Ui/src/index.html",
 			"sourceMaps": true,

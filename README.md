@@ -63,6 +63,7 @@ to restore packages, bindings and for assembling the web application. Finally ru
 ```bash
 dotnet --project HelloCoreClrApp
 HelloCoreClrApp.Ui/node_modules/.bin/karma start --no-single-run HelloCoreClrApp.Ui/karma.conf.js
+cd HelloCoreClrApp.Test;dotnet watch --command test --
 HelloCoreClrApp.Ui/node_modules/.bin/gulp watch:browsersync --cwd HelloCoreClrApp.Ui
 ```
 
@@ -72,6 +73,6 @@ Your favorite browser should fire up and should open <http://localhost:3000/>. H
 
 - .NET Core: Restore Cors handling in development mode.
 - .NET Core: Restore DI using SimpleInjector once SimpleInjector is ready for RC2.
-- .NET Core: Restore (dnx like) watch mode.
+- .NET Core: Restore dotnet watch mode for the web app.
 - .NET Core: Play with publish.
 - Gulp: Throw hinting errors when running in non-watch mode.

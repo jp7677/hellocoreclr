@@ -28,5 +28,12 @@
     "ubuntu.14.04-x64": { }
   },
   
-  "testRunner": "xunit"
+  "testRunner": "xunit",
+  
+  "tools": {
+    "Microsoft.DotNet.Watcher.Tools": {
+      "version": "1.0.0-preview1-final",
+      "imports": "portable-net45"
+    }
+  }
 }

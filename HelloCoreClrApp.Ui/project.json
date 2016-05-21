@@ -1,20 +1,8 @@
 {
   "version": "0.0.1",
- 
-  "dependencies": {
-    "HelloCoreClrApp":"0.0.1",
-    "Microsoft.Dnx.Watcher": "1.0.0-rc1-final"
-  },
-
-  "commands": {
-    "production": "Microsoft.AspNet.Server.Kestrel",
-    "staging": "Microsoft.AspNet.Server.Kestrel  --Hosting:Environment Staging",
-    "web": "Microsoft.AspNet.Server.Kestrel  --Hosting:Environment Development",
-    "watch-web": "Microsoft.Dnx.Watcher web"
-   },
 
   "frameworks": {
-    "dnxcore50": { }
+    "netcoreapp1.0": { }
   },
 
   "exclude": [

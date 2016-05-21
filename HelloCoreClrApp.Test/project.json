@@ -2,18 +2,31 @@
   "version": "0.0.1",
  
   "dependencies": {
-    "HelloCoreClrApp":"0.0.1",
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0-rc2-3002702",
+      "type": "platform"
+    },
+    "HelloCoreClrApp": {
+      "version": "0.0.1",
+      "target": "project"
+    },
     "xunit": "2.1.0",
-    "xunit.runner.dnx": "2.1.0-rc1-build204",
-    "Microsoft.Dnx.Watcher": "1.0.0-rc1-final"
-  },
-
-  "commands": {
-    "test": "xunit.runner.dnx",
-    "watch-test": "Microsoft.Dnx.Watcher test"
+    "dotnet-test-xunit": "1.0.0-rc2-*",
+    "Microsoft.AspNetCore.TestHost": "1.0.0-rc2-final"
    },
 
   "frameworks": {
-    "dnxcore50": { }
-  }
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet",
+        "portable-net45"
+      ]
+    }
+  },
+  
+  "runtimes": {
+    "ubuntu.14.04-x64": { }
+  },
+  
+  "testRunner": "xunit"
 }

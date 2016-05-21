@@ -9,8 +9,9 @@ HelloCoreClrApp.Ui/src/**/*.js.map
 HelloCoreClrApp.Ui/test/**/*.js
 HelloCoreClrApp.Ui/test/**/*.js.map
 HelloCoreClrApp.Ui/project.lock.json
-HelloCoreClrApp.Ui/bin/**
 HelloCoreClrApp/project.lock.json
 HelloCoreClrApp/bin/**
+HelloCoreClrApp/obj/**
 HelloCoreClrApp.Test/project.lock.json
 HelloCoreClrApp.Test/bin/**
+HelloCoreClrApp.Test/obj/**

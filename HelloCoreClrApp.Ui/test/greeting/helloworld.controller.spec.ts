@@ -1,8 +1,8 @@
-/// <reference path="../../typings/browser/ambient/mocha/index.d.ts" />
-/// <reference path="../../typings/browser/ambient/chai/index.d.ts" />
-/// <reference path="../../typings/browser/ambient/sinon/index.d.ts" />
-/// <reference path="../../typings/browser/ambient/angular/index.d.ts" />
-/// <reference path="../../typings/browser/ambient/angular-mocks/index.d.ts" />
+/// <reference path="../../typings/globals/mocha/index.d.ts" />
+/// <reference path="../../typings/globals/chai/index.d.ts" />
+/// <reference path="../../typings/globals/sinon/index.d.ts" />
+/// <reference path="../../typings/globals/angular/index.d.ts" />
+/// <reference path="../../typings/globals/angular-mocks/index.d.ts" />
 "use strict";
 
 describe("HelloWorldController Test ", () => {

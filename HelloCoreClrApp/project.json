@@ -36,6 +36,10 @@
   "tools": {
     "Microsoft.AspNetCore.Server.Kestrel": {
       "version": "1.0.0-rc2-final"
+    },
+    "Microsoft.DotNet.Watcher.Tools": {
+      "version": "1.0.0-preview1-final",
+      "imports": "portable-net451"
     }
   }
 }

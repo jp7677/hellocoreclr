@@ -41,9 +41,20 @@ namespace HelloWorldApp
         // Entry point for the application.
         public static void Main(string[] args)
         {
+            var currentDir = Directory.GetCurrentDirectory();
+            var webRoot = currentDir + Path.DirectorySeparatorChar + 
+                            "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
+                            "wwwroot";
+
+            if (!Directory.Exists(webRoot))
+                webRoot = currentDir + Path.DirectorySeparatorChar + 
+                            ".." + Path.DirectorySeparatorChar +
+                            "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
+                            "wwwroot";
+            
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory() + "/HelloCoreClrApp.Ui")
+                .UseWebRoot(webRoot)
                 .UseStartup<Startup>()
                 .Build();
 

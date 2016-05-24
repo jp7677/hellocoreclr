@@ -6,7 +6,22 @@ Obviously you should have Net Core RC2 and Nodejs/npm 4.x already up and running
 
 ## Production build and publish
 
-Don't know yet...
+Use
+
+```bash
+dotnet restore
+```
+
+to restore packages.
+
+Building, assembling and publishing goes like
+
+```bash
+dotnet publish --configuration Release --output dist/approot  HelloCoreClrApp
+dotnet publish --output dist  HelloCoreClrApp.Ui/
+```
+
+Find the result within the ```dist/``` folder. Please read <http://docs.asp.net/en/latest/publishing/linuxproduction.html> how to go ahead with installation and front-end servers.
 
 ## Testing setup
 
@@ -73,5 +88,4 @@ Your favorite browser should fire up and should open <http://localhost:3000/>. H
 
 - .NET Core: Restore Cors handling in development mode.
 - .NET Core: Restore DI using SimpleInjector once SimpleInjector is ready for RC2.
-- .NET Core: Play with publish.
 - Gulp: Throw hinting errors when running in non-watch mode.

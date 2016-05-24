@@ -42,7 +42,13 @@ namespace HelloWorldApp
         public static void Main(string[] args)
         {
             var currentDir = Directory.GetCurrentDirectory();
+            
             var webRoot = currentDir + Path.DirectorySeparatorChar + 
+                            ".." + Path.DirectorySeparatorChar + 
+                            "wwwroot";
+                            
+            if (!Directory.Exists(webRoot))
+                webRoot = currentDir + Path.DirectorySeparatorChar + 
                             "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
                             "wwwroot";
 

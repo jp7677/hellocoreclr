@@ -87,5 +87,4 @@ Your favorite browser should fire up and should open <http://localhost:3000/>. H
 ## To-do
 
 - .NET Core: Restore Cors handling in development mode.
-- .NET Core: Restore DI using SimpleInjector once SimpleInjector is ready for RC2.
 - Gulp: Throw hinting errors when running in non-watch mode.

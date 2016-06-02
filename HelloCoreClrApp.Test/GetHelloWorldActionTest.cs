@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Xunit;
 
 namespace HelloWorldApp
@@ -9,7 +10,7 @@ namespace HelloWorldApp
         {
             var sut = new GetHelloWorldAction();
             var result = sut.Execute("World");
-            Assert.Equal("Hello World!", result.Name);
+            result.Name.Should().Be("Hello World!");
         }
         
         [Fact]
@@ -17,7 +18,7 @@ namespace HelloWorldApp
         {
             var sut = new GetHelloWorldAction();
             var result = sut.Execute(null);
-            Assert.Equal("Are you sure?", result.Name);
+            result.Name.Should().Be("Are you sure?");
         }
         
         [Fact]
@@ -25,7 +26,7 @@ namespace HelloWorldApp
         {
             var sut = new GetHelloWorldAction();
             var result = sut.Execute("");
-            Assert.Equal("Are you sure?", result.Name);
+            result.Name.Should().Be("Are you sure?");
         }
     }
 }

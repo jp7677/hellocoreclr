@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Xunit;
 
 namespace HelloWorldApp
@@ -10,7 +11,7 @@ namespace HelloWorldApp
         {
             var sut = new ActionFactory(new ResourceProviderMock());
             var action = sut.CreateGetHelloWorldAction();
-            Assert.NotNull(action);
+            action.Should().NotBeNull();
         }
         
         class ResourceProviderMock : IResourceProvider

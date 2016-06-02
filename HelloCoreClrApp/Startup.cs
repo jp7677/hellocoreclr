@@ -65,7 +65,26 @@ namespace HelloWorldApp
         public static void Main(string[] args)
         {
             SetupNLog();
-            
+
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseWebRoot(FindWebRoot())
+                .UseStartup<Startup>()
+                .Build();
+
+           host.Run();
+        }
+        
+        private static void SetupNLog()
+        {
+            var location = System.Reflection.Assembly.GetEntryAssembly().Location;
+            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
+            location = location + Path.DirectorySeparatorChar + "nlog.config";
+            LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(location, true);   
+        }
+        
+        private static string FindWebRoot()
+        {
             var currentDir = Directory.GetCurrentDirectory();
             
             var webRoot = currentDir + Path.DirectorySeparatorChar + 
@@ -81,23 +100,9 @@ namespace HelloWorldApp
                 webRoot = currentDir + Path.DirectorySeparatorChar + 
                             ".." + Path.DirectorySeparatorChar +
                             "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
-                            "wwwroot";
-            
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseWebRoot(webRoot)
-                .UseStartup<Startup>()
-                .Build();
+                            "wwwroot";  
 
-           host.Run();
-        }
-        
-        private static void SetupNLog()
-        {
-            var location = System.Reflection.Assembly.GetEntryAssembly().Location;
-            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
-            location = location + Path.DirectorySeparatorChar + "nlog.config";
-            LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(location, true);   
+            return webRoot;          
         }
     }
 }

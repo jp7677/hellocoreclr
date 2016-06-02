@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace HelloWorldApp
 {
@@ -7,12 +7,11 @@ namespace HelloWorldApp
     [Route("api")]
     public class HelloWorldController
     {
-        ILogger logger;
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         IActionFactory actionFactory;
         
-        public HelloWorldController(ILoggerFactory loggerFactory, IActionFactory actionFactory)
+        public HelloWorldController(IActionFactory actionFactory)
         {
-            logger = loggerFactory.CreateLogger(typeof(HelloWorldController).Name);
             this.actionFactory = actionFactory;
         }
         
@@ -20,7 +19,7 @@ namespace HelloWorldApp
         [HttpGet]
         public IActionResult GetHelloWorld(string name)
         {
-            logger.LogInformation(string.Format("'HelloWorld' Request received with '{0}'.",name));
+            logger.Info(string.Format("'HelloWorld' Request received with '{0}'.",name));
             
             var action = actionFactory.CreateGetHelloWorldAction();
             var response = action.Execute(name);

@@ -7,11 +7,15 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Newtonsoft.Json.Serialization;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNet;
+using NLog;
+using NLog.Extensions.Logging;
 
 namespace HelloWorldApp
 {
     public class Startup
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+        
         public Startup(IHostingEnvironment env)
         {
         }
@@ -45,8 +49,8 @@ namespace HelloWorldApp
             
             container.Verify();
             
-            // Configure logging
-            loggerFactory.AddConsole(LogLevel.Debug);
+            //add NLog to ASP.NET Core
+            loggerFactory.AddNLog();
             
             // Serve the default file, if present.
             app.UseDefaultFiles();
@@ -60,6 +64,8 @@ namespace HelloWorldApp
         // Entry point for the application.
         public static void Main(string[] args)
         {
+            SetupNLog();
+            
             var currentDir = Directory.GetCurrentDirectory();
             
             var webRoot = currentDir + Path.DirectorySeparatorChar + 
@@ -84,6 +90,14 @@ namespace HelloWorldApp
                 .Build();
 
            host.Run();
+        }
+        
+        private static void SetupNLog()
+        {
+            var location = System.Reflection.Assembly.GetEntryAssembly().Location;
+            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
+            location = location + Path.DirectorySeparatorChar + "nlog.config";
+            LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(location, true);   
         }
     }
 }

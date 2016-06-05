@@ -47,6 +47,7 @@ to run C# and TypeScript/JavaScript unit tests.
 Use
 
 ```bash
+export ASPNETCORE_ENVIRONMENT=Staging
 dotnet --project HelloCoreClrApp
 ```
 
@@ -76,6 +77,7 @@ HelloCoreClrApp.Ui/node_modules/.bin/typings install --cwd HelloCoreClrApp.Ui
 to restore packages, bindings and for assembling the web application. Finally run the following commands in separate terminals for building and testing on file save.
 
 ```bash
+export ASPNETCORE_ENVIRONMENT=Development
 cd HelloCoreClrApp;dotnet watch
 HelloCoreClrApp.Ui/node_modules/.bin/karma start --no-single-run HelloCoreClrApp.Ui/karma.conf.js
 cd HelloCoreClrApp.Test;dotnet watch --command test --
@@ -86,5 +88,4 @@ Your favorite browser should fire up and should open <http://localhost:3000/>. H
 
 ## To-do
 
-- .NET Core: Restore Cors handling in development mode.
 - Gulp: Throw hinting errors when running in non-watch mode.

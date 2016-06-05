@@ -25,6 +25,10 @@ namespace HelloWorldApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+                options.AddPolicy("AllowFileOrigin", builder => 
+                    builder.WithOrigins("file://")));
+            
             // Add framework services.
             services.AddMvcCore()
                 .AddJsonFormatters(options => 
@@ -51,6 +55,9 @@ namespace HelloWorldApp
             
             //add NLog to ASP.NET Core
             loggerFactory.AddNLog();
+            
+            if (env.IsDevelopment())
+                app.UseCors("AllowFileOrigin");
             
             // Serve the default file, if present.
             app.UseDefaultFiles();

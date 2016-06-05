@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -66,50 +65,6 @@ namespace HelloWorldApp
             
             // Add MVC to the request pipeline.
             app.UseMvc();
-        }
-        
-        // Entry point for the application.
-        public static void Main(string[] args)
-        {
-            SetupNLog();
-
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseWebRoot(FindWebRoot())
-                .UseStartup<Startup>()
-                .Build();
-
-           host.Run();
-        }
-        
-        private static void SetupNLog()
-        {
-            var location = System.Reflection.Assembly.GetEntryAssembly().Location;
-            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
-            location = location + Path.DirectorySeparatorChar + "nlog.config";
-            LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(location, true);   
-        }
-        
-        private static string FindWebRoot()
-        {
-            var currentDir = Directory.GetCurrentDirectory();
-            
-            var webRoot = currentDir + Path.DirectorySeparatorChar + 
-                            ".." + Path.DirectorySeparatorChar + 
-                            "wwwroot";
-                            
-            if (!Directory.Exists(webRoot))
-                webRoot = currentDir + Path.DirectorySeparatorChar + 
-                            "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
-                            "wwwroot";
-
-            if (!Directory.Exists(webRoot))
-                webRoot = currentDir + Path.DirectorySeparatorChar + 
-                            ".." + Path.DirectorySeparatorChar +
-                            "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
-                            "wwwroot";  
-
-            return webRoot;          
         }
     }
 }

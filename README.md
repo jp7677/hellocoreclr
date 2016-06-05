@@ -17,8 +17,8 @@ to restore packages.
 Building, assembling and publishing goes like
 
 ```bash
-dotnet publish --configuration Release --output dist/approot  HelloCoreClrApp
-dotnet publish --output dist  HelloCoreClrApp.Ui/
+dotnet publish --configuration Release --output dist/approot HelloCoreClrApp
+dotnet publish --output dist HelloCoreClrApp.Ui/
 ```
 
 Find the result within the ```dist/``` folder. Please read <http://docs.asp.net/en/latest/publishing/linuxproduction.html> how to go ahead with installation and front-end servers.

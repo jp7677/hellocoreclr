@@ -1,43 +1,26 @@
 {
-  "version": "0.0.1",
- 
-  "dependencies": {
-    "HelloCoreClrApp":"0.0.1",
-    "Microsoft.Dnx.Watcher": "1.0.0-rc1-final"
+  "publishOptions": {
+    "include": "wwwroot"
   },
 
-  "commands": {
-    "production": "Microsoft.AspNet.Server.Kestrel",
-    "staging": "Microsoft.AspNet.Server.Kestrel  --Hosting:Environment Staging",
-    "web": "Microsoft.AspNet.Server.Kestrel  --Hosting:Environment Development",
-    "watch-web": "Microsoft.Dnx.Watcher web"
-   },
+  "dependencies": {
+      "Microsoft.NETCore.App": {  
+        "version": "1.0.0-rc2-3002702",
+        "type": "platform"
+      }
+  },
 
   "frameworks": {
-    "dnxcore50": { }
+    "netcoreapp1.0": { }
   },
-
-  "exclude": [
-    "wwwroot",
-    "node_modules",
-    "bower_components",
-    "typings",
-    "src",
-    "test",
-    "appsettings.json",
-    "bower.json",
-    "gulpfile.js",
-    "karma.conf.js",
-    "package.json",
-    "stylelint.config.js",
-    "tsconfig.json",
-    "tslint.json",
-    "typings.json",
-    "wallaby.conf.js"
-  ],
+  
+  "runtimes": {
+    "ubuntu.14.04-x64": { }
+  },
 
   "scripts": {
     "prepublish": [
+        "npm install --production", 
         "./node_modules/.bin/bower install", 
         "./node_modules/.bin/typings install", 
         "./node_modules/.bin/gulp production" ]

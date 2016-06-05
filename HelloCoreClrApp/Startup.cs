@@ -1,18 +1,21 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+﻿using System.IO;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNet.Mvc.Controllers;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Cors;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Newtonsoft.Json.Serialization;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNet;
+using NLog;
+using NLog.Extensions.Logging;
 
 namespace HelloWorldApp
 {
     public class Startup
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+        
         public Startup(IHostingEnvironment env)
         {
         }
@@ -27,15 +30,12 @@ namespace HelloWorldApp
                     builder.WithOrigins("file://")));
             
             // Add framework services.
-            services.AddMvc()
-                .AddJsonOptions(options => 
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
-            
-            services.Configure<MvcOptions>(options =>
-                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowFileOrigin")));
-            
+            services.AddMvcCore()
+                .AddJsonFormatters(options => 
+                    options.ContractResolver = new CamelCasePropertyNamesContractResolver());
+
             // Add SimpleInjector Controller Activator
-            services.AddInstance<IControllerActivator>(new SimpleInjectorControllerActivator(container));
+            services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,13 +50,14 @@ namespace HelloWorldApp
             container.Register<IResourceProvider, ResourceProvider>(Lifestyle.Scoped);
             container.Register<IActionFactory, ActionFactory>(Lifestyle.Scoped);
             container.Register<IGetHelloWorldAction, GetHelloWorldAction>(Lifestyle.Scoped);
-            container.RegisterAspNetControllers(app);
             
             container.Verify();
             
-            // Configure logging
-            loggerFactory.AddConsole();
-            loggerFactory.AddDebug();
+            //add NLog to ASP.NET Core
+            loggerFactory.AddNLog();
+            
+            if (env.IsDevelopment())
+                app.UseCors("AllowFileOrigin");
             
             // Serve the default file, if present.
             app.UseDefaultFiles();
@@ -65,12 +66,50 @@ namespace HelloWorldApp
             
             // Add MVC to the request pipeline.
             app.UseMvc();
-
-            if (env.IsDevelopment())
-                app.UseCors("AllowFileOrigin");
         }
         
         // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+        public static void Main(string[] args)
+        {
+            SetupNLog();
+
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseWebRoot(FindWebRoot())
+                .UseStartup<Startup>()
+                .Build();
+
+           host.Run();
+        }
+        
+        private static void SetupNLog()
+        {
+            var location = System.Reflection.Assembly.GetEntryAssembly().Location;
+            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
+            location = location + Path.DirectorySeparatorChar + "nlog.config";
+            LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(location, true);   
+        }
+        
+        private static string FindWebRoot()
+        {
+            var currentDir = Directory.GetCurrentDirectory();
+            
+            var webRoot = currentDir + Path.DirectorySeparatorChar + 
+                            ".." + Path.DirectorySeparatorChar + 
+                            "wwwroot";
+                            
+            if (!Directory.Exists(webRoot))
+                webRoot = currentDir + Path.DirectorySeparatorChar + 
+                            "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
+                            "wwwroot";
+
+            if (!Directory.Exists(webRoot))
+                webRoot = currentDir + Path.DirectorySeparatorChar + 
+                            ".." + Path.DirectorySeparatorChar +
+                            "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
+                            "wwwroot";  
+
+            return webRoot;          
+        }
     }
 }

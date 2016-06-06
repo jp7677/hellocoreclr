@@ -1,12 +1,16 @@
 {
   "version": "0.0.1",
+  
+  "buildOptions": {
+    "outputName": "HelloCoreClrApp.Test"
+  },
  
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0-rc2-3002702",
       "type": "platform"
     },
-    "HelloCoreClrApp": {
+    "src": {
       "version": "0.0.1",
       "target": "project"
     },

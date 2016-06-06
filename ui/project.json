@@ -2,6 +2,10 @@
   "publishOptions": {
     "include": "wwwroot"
   },
+  
+  "buildOptions": {
+    "outputName": "HelloCoreClrApp.Ui"
+  },
 
   "dependencies": {
       "Microsoft.NETCore.App": {  

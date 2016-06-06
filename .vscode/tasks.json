@@ -13,7 +13,7 @@
 	"version": "0.1.0",
 
 	// The command is tsc.
-	"command": "${workspaceRoot}/HelloCoreClrApp.Ui/node_modules/.bin/tsc",
+	"command": "${workspaceRoot}/ui/node_modules/.bin/tsc",
 
 	// The command is a shell script
 	"isShellCommand": true,
@@ -22,7 +22,7 @@
 	"showOutput": "always",
 
 	// Tell the tsc compiler to use the tsconfig.json from the open folder.
-	"args": ["-p", "${workspaceRoot}/HelloCoreClrApp.Ui"],
+	"args": ["-p", "${workspaceRoot}/ui"],
 
 	// use the standard tsc problem matcher to find compile problems
 	// in the output.

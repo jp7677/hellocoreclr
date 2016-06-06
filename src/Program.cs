@@ -38,15 +38,19 @@ namespace HelloWorldApp
                             
             if (!Directory.Exists(webRoot))
                 webRoot = currentDir + Path.DirectorySeparatorChar + 
-                            "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
+                            "ui" + Path.DirectorySeparatorChar + 
                             "wwwroot";
 
             if (!Directory.Exists(webRoot))
                 webRoot = currentDir + Path.DirectorySeparatorChar + 
                             ".." + Path.DirectorySeparatorChar +
-                            "HelloCoreClrApp.Ui" + Path.DirectorySeparatorChar + 
+                            "ui" + Path.DirectorySeparatorChar + 
                             "wwwroot";  
 
+            if (!Directory.Exists(webRoot))
+                webRoot = currentDir + Path.DirectorySeparatorChar + 
+                            "wwwroot";
+            
             return webRoot;          
         }
     }

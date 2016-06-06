@@ -6,9 +6,9 @@
 			"type": "chrome",
 			"runtimeArgs": ["--allow-file-access-from-files"],
 			"request": "launch",
-			"file": "${workspaceRoot}/HelloCoreClrApp.Ui/src/index.html",
+			"file": "${workspaceRoot}/ui/src/index.html",
 			"sourceMaps": true,
-			"webRoot": "${workspaceRoot}/HelloCoreClrApp.Ui/src"
+			"webRoot": "${workspaceRoot}/ui/src"
 		}
 	]
 }

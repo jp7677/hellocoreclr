@@ -1,7 +1,7 @@
 {
   "projects": [
-    "HelloCoreClrApp",
-    "HelloCoreClrApp.Test",
-    "HelloCoreClrApp.Ui"
+    "src",
+    "test",
+    "ui"
   ]
 }

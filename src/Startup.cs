@@ -14,16 +14,18 @@ namespace HelloWorldApp
     public class Startup
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private readonly Container container = new Container();
         
         public Startup(IHostingEnvironment env)
         {
+            logger.Info("Starting up.");
         }
-        
-        private readonly Container container = new Container();
-        
+                
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            logger.Info("Configuring services.");
+            
             services.AddCors(options =>
                 options.AddPolicy("AllowFileOrigin", builder => 
                     builder.WithOrigins("file://")));
@@ -41,6 +43,8 @@ namespace HelloWorldApp
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            logger.Info("Configuring.");
+            
             // Setup SimpleInjector
             container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();
             app.UseSimpleInjectorAspNetRequestScoping(container);

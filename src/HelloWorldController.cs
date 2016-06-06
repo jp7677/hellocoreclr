@@ -19,7 +19,7 @@ namespace HelloWorldApp
         [HttpGet]
         public IActionResult GetHelloWorld(string name)
         {
-            logger.Info(string.Format("'HelloWorld' Request received with '{0}'.",name));
+            logger.Info("'HelloWorld' Request received with '{0}'.", name);
             
             var action = actionFactory.CreateGetHelloWorldAction();
             var response = action.Execute(name);

@@ -1,5 +1,5 @@
-/// <reference path="../../../typings/globals/angular/index.d.ts" />
-/// <reference path="../../../typings/globals/toastr/index.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
+
 namespace app.greeting {
 "use strict";
 

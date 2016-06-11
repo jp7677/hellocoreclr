@@ -1,5 +1,4 @@
-/// <reference path="../../typings/globals/angular/index.d.ts" />
-/// <reference path="../../typings/globals/angular-ui-router/index.d.ts" />
+/// <reference path="../../typings/index.d.ts" />
 
 namespace app {
 "use strict";

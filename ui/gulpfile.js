@@ -197,21 +197,21 @@ gulp.task('min:css', ['lint:css', 'clean:css'], function () {
     .pipe(gulp.dest('.'))
 })
 
+var consoleReporter = function (results) {
+  results.htmlhint.messages.forEach(function (warning) {
+    var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
+    var message = '[' + util.colors.cyan('gulp-htmlhint') + '] ' +
+            util.colors.red(warning.error.type) + ' ' + file +
+            '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
+    util.log(message)
+  })
+}
+
 gulp.task('lint:html', function (done) {
   if (production) {
     util.log('Skipping \'' + util.colors.cyan('gulp-htmlhint') + '\'')
     done()
     return
-  }
-
-  var consoleReporter = function (results) {
-    results.htmlhint.messages.forEach(function (warning) {
-      var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
-      var message = '[' + util.colors.cyan('gulp-htmlhint') + '] ' +
-              util.colors.red(warning.error.type) + ' ' + file +
-              '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
-      util.log(message)
-    })
   }
 
   var htmlhint = require('gulp-htmlhint')
@@ -236,16 +236,6 @@ gulp.task('lint:indexhtml', function (done) {
     util.log('Skipping \'' + util.colors.cyan('gulp-htmlhint') + '\'')
     done()
     return
-  }
-
-  var consoleReporter = function (results) {
-    results.htmlhint.messages.forEach(function (warning) {
-      var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
-      var message = '[' + util.colors.cyan('gulp-htmlhint') + '] ' +
-              util.colors.red(warning.error.type) + ' ' + file +
-              '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
-      util.log(message)
-    })
   }
 
   var htmlhint = require('gulp-htmlhint')

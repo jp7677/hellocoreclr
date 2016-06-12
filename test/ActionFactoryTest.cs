@@ -9,12 +9,11 @@ namespace HelloWorldApp
         [Fact]
         public void CreateGetHelloWorldActionTest()
         {
-            var getHelloWorldAction = new Mock<IGetHelloWorldAction>();
-            var resourceProvider = new Mock<IResourceProvider>();
+            var getHelloWorldAction = Mock.Of<IGetHelloWorldAction>();
+            var resourceProvider = Mock.Of<IResourceProvider>(r => 
+                r.CreateResource<IGetHelloWorldAction>() == getHelloWorldAction);
             
-            resourceProvider.Setup(m => m.CreateResource<IGetHelloWorldAction>()).Returns(getHelloWorldAction.Object);
-
-            var sut = new ActionFactory(resourceProvider.Object);
+            var sut = new ActionFactory(resourceProvider);
             var action = sut.CreateGetHelloWorldAction();
             action.Should().NotBeNull();
         }

@@ -10,10 +10,12 @@ var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
 var cssmin = require('gulp-cssmin')
 var htmlreplace = require('gulp-html-replace')
+var filenames = require('gulp-filenames')
 var htmlmin = require('gulp-htmlmin')
 var image = require('gulp-image-optimization')
 var bowerfiles = require('main-bower-files')
 var flatten = require('gulp-flatten')
+var hash = require('gulp-hash-filename')
 var util = require('gulp-util')
 var del = require('del')
 var path = require('path')
@@ -33,14 +35,16 @@ paths.srcJsMap = paths.src + '**/*.js.map'
 paths.testJs = paths.test + '**/*.js'
 paths.testJsMap = paths.test + '**/*.js.map'
 paths.srcCss = paths.src + '**/*.css'
-paths.srcHtml = paths.src + '**/*.html'
+paths.srcIndexhtml = paths.src + 'index.html'
+paths.srcHtml = [paths.src + '**/*.html', '!' + paths.srcIndexhtml] // TODO: exclude index.html
 paths.srcImage = paths.src + '**/*.{png,jpg,gif,svg}'
 paths.srcAssets = paths.src + '**/*.ico'
 
 paths.constantsDest = paths.src + 'app/'
 paths.concatJsDest = paths.wwwroot + 'js/site.min.js'
 paths.concatCssDest = paths.wwwroot + 'css/site.min.css'
-paths.htmlDest = paths.wwwroot + '**/*.html'
+paths.indexhtmlDest = paths.wwwroot + 'index.html'
+paths.htmlDest = [paths.wwwroot + '**/*.html', '!' + paths.indexhtmlDest] // TODO: exclude index.html
 paths.imageDest = paths.wwwroot + '**/*.{png,jpg,gif,svg}'
 paths.assetsDest = paths.wwwroot + '**/*.ico'
 
@@ -69,6 +73,10 @@ gulp.task('clean:css', function () {
 
 gulp.task('clean:html', function () {
   return del(paths.htmlDest)
+})
+
+gulp.task('clean:indexhtml', function () {
+  return del(paths.indexhtmlDest)
 })
 
 gulp.task('clean:image', function () {
@@ -137,6 +145,8 @@ gulp.task('min:js', ['tscompile', 'config'], function () {
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
     .pipe(uglify({compress: production, mangle: production}))
+    .pipe(iif(production, hash({'format': '4-{hash}{ext}'})))
+    .pipe(filenames('minjs'))
     .pipe(iif(!production, sourcemaps.write('.')))
     .pipe(gulp.dest('.'))
 })
@@ -175,6 +185,8 @@ gulp.task('min:css', ['lint:css', 'clean:css'], function () {
     .pipe(iif(!production, sourcemaps.init()))
     .pipe(concat(paths.concatCssDest))
     .pipe(cssmin())
+    .pipe(iif(production, hash({'format': '2-{hash}{ext}'})))
+    .pipe(filenames('mincss'))
     .pipe(iif(!production, sourcemaps.write('.', {
       mapSources: function (sourcePath) {
         var extendedSourcePath = paths.src.substr(2) + sourcePath
@@ -210,11 +222,50 @@ gulp.task('lint:html', function (done) {
 
 gulp.task('min:html', ['lint:html', 'clean:html'], function () {
   return gulp.src(paths.srcHtml)
+    .pipe(htmlmin({
+      collapseWhitespace: production,
+      removeComments: production,
+      sortAttributes: production,
+      sortClassName: production
+    }))
+    .pipe(gulp.dest(paths.wwwroot))
+})
+
+gulp.task('lint:indexhtml', function (done) {
+  if (production) {
+    util.log('Skipping \'' + util.colors.cyan('gulp-htmlhint') + '\'')
+    done()
+    return
+  }
+
+  var consoleReporter = function (results) {
+    results.htmlhint.messages.forEach(function (warning) {
+      var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
+      var message = '[' + util.colors.cyan('gulp-htmlhint') + '] ' +
+              util.colors.red(warning.error.type) + ' ' + file +
+              '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
+      util.log(message)
+    })
+  }
+
+  var htmlhint = require('gulp-htmlhint')
+  return gulp.src(paths.srcIndexhtml)
+    .pipe(htmlhint())
+    .pipe(htmlhint.reporter(consoleReporter))
+})
+
+gulp.task('min:indexhtml', ['lint:indexhtml', 'clean:indexhtml', 'min:js', 'min:css', 'min:vendorjs', 'min:vendorcss'], function () {
+  var vendorcss = filenames.get('minvendorcss')[0].substr(filenames.get('minvendorcss')[0].indexOf('/') + 1)
+  var appcss = filenames.get('mincss')[0].substr(filenames.get('mincss')[0].indexOf('/') + 1)
+  var vendorjs = filenames.get('minvendorjs')[0].substr(filenames.get('minvendorjs')[0].indexOf('/') + 1)
+  var appjs = filenames.get('minjs')[0].substr(filenames.get('minjs')[0].indexOf('/') + 1)
+
+  return gulp.src(paths.srcIndexhtml)
     .pipe(htmlreplace({
-      'vendorcss': 'css/vendor.min.css',
-      'appcss': 'css/site.min.css',
-      'vendorjs': 'js/vendor.min.js',
-      'appjs': 'js/site.min.js'
+      'vendorcss': vendorcss,
+      'appcss': appcss,
+      'vendorjs': vendorjs,
+      'appjs': appjs
     }))
     .pipe(htmlmin({
       collapseWhitespace: production,
@@ -249,6 +300,8 @@ gulp.task('min:vendorjs', ['clean:vendor'], function () {
     // Note that compress: true and mangle: true gives you uglier code,
     // but makes debugging in the browser debugger more difficult.
     .pipe(uglify({compress: production, mangle: production}))
+    .pipe(iif(production, hash({'format': '3-{hash}{ext}'})))
+    .pipe(filenames('minvendorjs'))
     .pipe(iif(!production, sourcemaps.write('.')))
     .pipe(gulp.dest('.'))
 })
@@ -262,6 +315,8 @@ gulp.task('min:vendorcss', ['clean:vendor'], function () {
     .pipe(iif(!production, sourcemaps.init()))
     .pipe(concat(paths.concatVendorCssDest))
     .pipe(cssmin())
+    .pipe(iif(production, hash({'format': '1-{hash}{ext}'})))
+    .pipe(filenames('minvendorcss'))
     .pipe(iif(!production, sourcemaps.write('.')))
     .pipe(gulp.dest('.'))
 })
@@ -277,7 +332,7 @@ gulp.task('vendorassets', ['clean:vendor'], function () {
 })
 
 gulp.task('build:app', function (done) {
-  run(['min:js', 'min:css', 'min:html', 'min:image', 'assets'], done)
+  run(['min:js', 'min:css', 'min:html', 'min:indexhtml', 'min:image', 'assets'], done)
 })
 
 gulp.task('build:vendor', function (done) {
@@ -353,7 +408,7 @@ gulp.task('watch:browsersync', function () {
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
 
-  util.log(util.colors.cyan(' -- Only changes on application files will be synced using browser-sync --'))
+  util.log(util.colors.cyan(' -- Only changes on application other than the index.html files will be synced using browser-sync --'))
 
   var proxyOptions = url.parse('http://localhost:5000/api')
   proxyOptions.route = '/api'
@@ -374,7 +429,7 @@ gulp.task('watch:browsersync', function () {
 
   watch(paths.concatJsDest.substr(2) + '*', sync)
   watch(paths.concatCssDest.substr(2) + '*', sync)
-  watch([paths.htmlDest.substr(2), paths.imageDest.substr(2), paths.assetsDest.substr(2)],
+  watch([paths.htmlDest[0].substr(2), paths.imageDest.substr(2), paths.assetsDest.substr(2)],
     batch(function (events, done) {
       browserSync.reload()
       done()

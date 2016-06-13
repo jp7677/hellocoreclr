@@ -72,6 +72,7 @@ dotnet restore
 npm install --prefix ui
 ui/node_modules/.bin/bower install --config.cwd=ui
 ui/node_modules/.bin/typings install --cwd ui
+ui/node_modules/.bin/gulp --cwd ui
 ```
 
 to restore packages and bindings. Finally run the following commands in separate terminals for building and testing on file save.

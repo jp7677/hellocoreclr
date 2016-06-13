@@ -12,12 +12,12 @@ describe("HelloWorldController Test ", () => {
             $http = _$http_;
             $httpBackend = _$httpBackend_;
             $log = _$log_;
-
-            let res = new app.greeting.GetHelloWorldResponse();
-            res.name = "Hello World!";
-            $httpBackend.whenGET(apiBaseUrl + "helloworld/Hello").respond(200, res);
-            $httpBackend.whenGET(apiBaseUrl + "helloworld/Error").respond(500);
         });
+    });
+
+    afterEach(() => {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
     });
 
     it("does nothing when there is no input", () => {
@@ -26,11 +26,15 @@ describe("HelloWorldController Test ", () => {
 
         sut.executeHelloWorld();
 
-        chai.expect(sut.labelText).to.equals("");
-        chai.expect(logSpy.calledOnce).to.equals(true);
+        chai.expect(sut.labelText).to.empty;
+        chai.expect(logSpy.calledOnce).to.true;
     });
 
     it("can handle a valid response", () => {
+        let res = new app.greeting.GetHelloWorldResponse();
+        res.name = "Hello World!";
+        $httpBackend.whenGET(apiBaseUrl + "helloworld/Hello").respond(200, res);
+
         let toastrSpy = sinon.spy(toastr, "success");
         let logSpy = sinon.spy($log, "info");
         let sut = new app.greeting.HelloWorldController(apiBaseUrl, $http, $log);
@@ -40,11 +44,13 @@ describe("HelloWorldController Test ", () => {
 
         $httpBackend.flush();
         chai.expect(sut.labelText, "Hello World!").to.equals("Hello World!");
-        chai.expect(toastrSpy.called).to.equals(true);
-        chai.expect(logSpy.called).to.equals(true);
+        chai.expect(toastrSpy.called).to.true;
+        chai.expect(logSpy.called).to.true;
     });
 
     it("can handle an error response", () => {
+        $httpBackend.whenGET(apiBaseUrl + "helloworld/Error").respond(500);
+
         let toastrSpy = sinon.spy(toastr, "warning");
         let logSpy = sinon.spy($log, "warn");
         let sut = new app.greeting.HelloWorldController(apiBaseUrl, $http, $log);
@@ -53,8 +59,8 @@ describe("HelloWorldController Test ", () => {
         sut.executeHelloWorld();
 
         $httpBackend.flush();
-        chai.expect(sut.labelText).to.equals("");
-        chai.expect(toastrSpy.called).to.equals(true);
-        chai.expect(logSpy.calledOnce).to.equals(true);
+        chai.expect(sut.labelText).to.empty;
+        chai.expect(toastrSpy.called).to.true;
+        chai.expect(logSpy.calledOnce).to.true;
     });
 });

@@ -18,7 +18,8 @@
     "dotnet-test-xunit": "1.0.0-rc2-build10025",
     "FluentAssertions": "4.6.3",
     "Moq": "4.6.25-alpha",
-    "Microsoft.AspNetCore.TestHost": "1.0.0-rc2-final"
+    "Microsoft.AspNetCore.TestHost": "1.0.0-rc2-final",
+    "Newtonsoft.Json": "8.0.4-beta1"
    },
 
   "frameworks": {

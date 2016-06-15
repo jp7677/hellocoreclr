@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using NLog;
 
 namespace HelloWorldApp
@@ -19,7 +20,7 @@ namespace HelloWorldApp
         
         [Route("helloworld/{name}")]
         [HttpGet]
-        public IActionResult GetHelloWorld(string name)
+        public async Task<IActionResult> GetHelloWorldAsync(string name)
         {
             logger.Info("'HelloWorld' Request received with '{0}'.", name);
             
@@ -29,7 +30,7 @@ namespace HelloWorldApp
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 db.Greetings.Add(new Greeting{  Name = response.Name });
-                db.Save();
+                await db.SaveAsync();
             }                
 
             return new OkObjectResult(response);

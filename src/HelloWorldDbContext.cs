@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace HelloWorldApp
@@ -6,9 +7,9 @@ namespace HelloWorldApp
     {
         public DbSet<Greeting> Greetings { get; set; }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            SaveChanges();
+            await SaveChangesAsync();
         }
 
         public void EnsureCreated()

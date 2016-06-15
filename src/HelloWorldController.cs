@@ -9,10 +9,12 @@ namespace HelloWorldApp
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IActionFactory actionFactory;
+        IHelloWorldDbContextFactory dbContextFactory;
         
-        public HelloWorldController(IActionFactory actionFactory)
+        public HelloWorldController(IActionFactory actionFactory, IHelloWorldDbContextFactory dbContextFactory)
         {
             this.actionFactory = actionFactory;
+            this.dbContextFactory = dbContextFactory;
         }
         
         [Route("helloworld/{name}")]
@@ -23,6 +25,13 @@ namespace HelloWorldApp
             
             var action = actionFactory.CreateGetHelloWorldAction();
             var response = action.Execute(name);
+
+            using(var db = dbContextFactory.CreateHelloWorldDbContext())
+            {
+                db.Greetings.Add(new Greeting{  Name = response.Name });
+                db.Save();
+            }                
+
             return new OkObjectResult(response);
         }
     }

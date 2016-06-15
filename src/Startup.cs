@@ -8,6 +8,7 @@ using SimpleInjector;
 using SimpleInjector.Integration.AspNet;
 using NLog;
 using NLog.Extensions.Logging;
+using System.Linq;
 
 namespace HelloWorldApp
 {
@@ -45,16 +46,9 @@ namespace HelloWorldApp
         {
             logger.Info("Configuring.");
             
-            // Setup SimpleInjector
-            container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();
-            app.UseSimpleInjectorAspNetRequestScoping(container);
+            SetupSimpleInjector(app);
             
-            container.CrossWire<ILoggerFactory>(app);
-            container.Register<IResourceProvider, ResourceProvider>(Lifestyle.Scoped);
-            container.Register<IActionFactory, ActionFactory>(Lifestyle.Scoped);
-            container.Register<IGetHelloWorldAction, GetHelloWorldAction>(Lifestyle.Scoped);
-            
-            container.Verify();
+            SetupDatabase();
             
             //add NLog to ASP.NET Core
             loggerFactory.AddNLog();
@@ -62,13 +56,39 @@ namespace HelloWorldApp
             if (env.IsDevelopment())
                 app.UseCors("AllowFileOrigin");
             
-            // Serve the default file, if present.
-            app.UseDefaultFiles();
             // Add static files to the request pipeline.
             app.UseStaticFiles();
+            // Serve the default file, if present.
+            app.UseDefaultFiles();
             
             // Add MVC to the request pipeline.
             app.UseMvc();
+        }
+
+        private void SetupSimpleInjector(IApplicationBuilder app)
+        {
+            container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();
+            app.UseSimpleInjectorAspNetRequestScoping(container);
+            
+            container.CrossWire<ILoggerFactory>(app);
+            container.RegisterSingleton<IResourceProvider, ResourceProvider>();
+            container.RegisterSingleton<IActionFactory, ActionFactory>();
+            container.Register<IGetHelloWorldAction, GetHelloWorldAction>(Lifestyle.Scoped);
+
+            container.RegisterSingleton<IHelloWorldDbContextFactory, HelloWorldDbContextFactory>();
+            container.Register<IHelloWorldDbContext, HelloWorldDbContext>(Lifestyle.Scoped);
+            
+            container.Verify();
+        }
+
+        private void SetupDatabase()
+        {
+            using(var db = new HelloWorldDbContext())
+            {
+                db.EnsureCreated();
+                var numberOfGreetings = db.Greetings.Count();
+                logger.Info("Currently we have {0} saved Greetings.", numberOfGreetings);
+            }
         }
     }
 }

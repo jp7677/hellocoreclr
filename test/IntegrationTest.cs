@@ -30,5 +30,15 @@ namespace HelloWorldApp
                 data.Name.Should().Be("Hello World!");
             }
         }
+
+        [Fact]
+        public async void InvalidRequestReturnsNotFoundTest()
+        {
+            using (var client = server.CreateClient())
+            {
+                var response = await client.GetAsync("/api/helloworld/");
+                response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+            }
+        }
     }
 }

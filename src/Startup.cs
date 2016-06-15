@@ -9,6 +9,7 @@ using SimpleInjector.Integration.AspNet;
 using NLog;
 using NLog.Extensions.Logging;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HelloWorldApp
 {
@@ -48,7 +49,7 @@ namespace HelloWorldApp
             
             SetupSimpleInjector(app);
             
-            SetupDatabase();
+            SetupDatabaseAsync().Wait();
             
             //add NLog to ASP.NET Core
             loggerFactory.AddNLog();
@@ -81,11 +82,11 @@ namespace HelloWorldApp
             container.Verify();
         }
 
-        private void SetupDatabase()
+        private async Task SetupDatabaseAsync()
         {
             using(var db = new HelloWorldDbContext())
             {
-                db.EnsureCreated();
+                await db.EnsureCreatedAsync();
                 var numberOfGreetings = db.Greetings.Count();
                 logger.Info("Currently we have {0} saved Greetings.", numberOfGreetings);
             }

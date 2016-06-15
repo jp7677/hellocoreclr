@@ -7,14 +7,14 @@ namespace HelloWorldApp
     {
         public DbSet<Greeting> Greetings { get; set; }
 
-        public async Task SaveAsync()
+        public async Task SaveChangesAsync()
         {
-            await SaveChangesAsync();
+            await base.SaveChangesAsync();
         }
 
-        public void EnsureCreated()
+        public async Task EnsureCreatedAsync()
         {
-            Database.EnsureCreated();
+            await Database.EnsureCreatedAsync();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

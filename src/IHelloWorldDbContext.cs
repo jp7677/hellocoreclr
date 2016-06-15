@@ -7,7 +7,7 @@ namespace HelloWorldApp
     public interface IHelloWorldDbContext : IDisposable
     {
         DbSet<Greeting> Greetings { get; }
-        Task SaveAsync();
-        void EnsureCreated();
+        Task SaveChangesAsync();
+        Task EnsureCreatedAsync();
     }
 }

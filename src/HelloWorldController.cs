@@ -30,7 +30,7 @@ namespace HelloWorldApp
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 db.Greetings.Add(new Greeting{  Name = response.Name });
-                await db.SaveAsync();
+                await db.SaveChangesAsync();
             }                
 
             return new OkObjectResult(response);

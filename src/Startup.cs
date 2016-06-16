@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,8 +9,6 @@ using SimpleInjector;
 using SimpleInjector.Integration.AspNet;
 using NLog;
 using NLog.Extensions.Logging;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HelloWorldApp
 {
@@ -77,19 +76,17 @@ namespace HelloWorldApp
             container.Register<IGetHelloWorldAction, GetHelloWorldAction>(Lifestyle.Scoped);
 
             container.RegisterSingleton<IHelloWorldDbContextFactory, HelloWorldDbContextFactory>();
-            container.Register<IHelloWorldDbContext, HelloWorldDbContext>(Lifestyle.Scoped);
+            container.Register<IHelloWorldDataService,HelloWorldDataService>();
             
             container.Verify();
         }
 
         private async Task SetupDatabaseAsync()
         {
-            using(var db = new HelloWorldDbContext())
-            {
-                await db.EnsureCreatedAsync();
-                var numberOfGreetings = db.Greetings.Count();
-                logger.Info("Currently we have {0} saved Greetings.", numberOfGreetings);
-            }
+            var dataService = container.GetInstance<IHelloWorldDataService>();
+
+            await dataService.EnsureCreatedAsync();
+            logger.Info("Currently we have {0} saved Greetings.", dataService.GetNumberOfGreetings());
         }
     }
 }

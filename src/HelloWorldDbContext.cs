@@ -5,6 +5,10 @@ namespace HelloWorldApp
 {
     public class HelloWorldDbContext : DbContext, IHelloWorldDbContext
     {
+        public HelloWorldDbContext(DbContextOptions<HelloWorldDbContext> options)
+            : base(options)
+        { }
+
         public DbSet<Greeting> Greetings { get; set; }
 
         public async Task SaveChangesAsync()
@@ -15,11 +19,6 @@ namespace HelloWorldApp
         public async Task EnsureCreatedAsync()
         {
             await Database.EnsureCreatedAsync();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Filename=./helloworld.db");
         }
     }
 }

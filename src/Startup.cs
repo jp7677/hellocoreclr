@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNet;
@@ -75,7 +76,12 @@ namespace HelloWorldApp
             container.RegisterSingleton<IActionFactory, ActionFactory>();
             container.Register<IGetHelloWorldAction, GetHelloWorldAction>(Lifestyle.Scoped);
 
-            container.RegisterSingleton<IHelloWorldDbContextFactory, HelloWorldDbContextFactory>();
+            container.RegisterSingleton<IHelloWorldDbContextFactory>(() =>
+            {
+                var builder = new DbContextOptionsBuilder<HelloWorldDbContext>()
+                   .UseSqlite("Filename=./helloworld.db");
+                return new HelloWorldDbContextFactory(builder.Options);
+            });
             container.Register<IHelloWorldDataService,HelloWorldDataService>();
             
             container.Verify();

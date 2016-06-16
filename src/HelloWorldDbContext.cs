@@ -5,6 +5,9 @@ namespace HelloWorldApp
 {
     public class HelloWorldDbContext : DbContext, IHelloWorldDbContext
     {
+        public HelloWorldDbContext()
+        { }
+        
         public HelloWorldDbContext(DbContextOptions<HelloWorldDbContext> options)
             : base(options)
         { }

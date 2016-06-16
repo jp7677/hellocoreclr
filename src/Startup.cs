@@ -78,13 +78,18 @@ namespace HelloWorldApp
 
             container.RegisterSingleton<IHelloWorldDbContextFactory>(() =>
             {
-                var builder = new DbContextOptionsBuilder<HelloWorldDbContext>()
-                   .UseSqlite("Filename=./helloworld.db");
+                var builder = CreateDatabaseOptions();
                 return new HelloWorldDbContextFactory(builder.Options);
             });
             container.Register<IHelloWorldDataService,HelloWorldDataService>();
             
             container.Verify();
+        }
+
+        public virtual DbContextOptionsBuilder<HelloWorldDbContext> CreateDatabaseOptions()
+        {
+            return new DbContextOptionsBuilder<HelloWorldDbContext>()
+                .UseSqlite("Filename=./helloworld.db");
         }
 
         private async Task SetupDatabaseAsync()

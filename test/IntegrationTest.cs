@@ -13,7 +13,7 @@ namespace HelloWorldApp
 
         public IntegrationTest()
         {
-            server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+            server = new TestServer(new WebHostBuilder().UseStartup<TestserverStartup>());
         }
 
         [Fact]

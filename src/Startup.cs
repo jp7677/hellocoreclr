@@ -56,10 +56,10 @@ namespace HelloWorldApp
             if (env.IsDevelopment())
                 app.UseCors("AllowFileOrigin");
             
-            // Add static files to the request pipeline.
-            app.UseStaticFiles();
             // Serve the default file, if present.
             app.UseDefaultFiles();
+            // Add static files to the request pipeline.
+            app.UseStaticFiles();
             
             // Add MVC to the request pipeline.
             app.UseMvc();

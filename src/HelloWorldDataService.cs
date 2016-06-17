@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,7 +33,11 @@ namespace HelloWorldApp
         {
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
-                db.Greetings.Add(new Greeting{  Name = greeting });
+                db.Greetings.Add(new Greeting
+                    {
+                        Name = greeting,
+                        TimestampUtc = DateTime.Now.ToUniversalTime()
+                    });
                 await db.SaveChangesAsync();
             }
         }

@@ -77,10 +77,7 @@ namespace HelloWorldApp
             container.Register<IGetHelloWorldAction, GetHelloWorldAction>(Lifestyle.Scoped);
 
             container.RegisterSingleton<IHelloWorldDbContextFactory>(() =>
-            {
-                var builder = CreateDatabaseOptions();
-                return new HelloWorldDbContextFactory(builder.Options);
-            });
+                new HelloWorldDbContextFactory(CreateDatabaseOptions().Options));
             container.Register<IHelloWorldDataService,HelloWorldDataService>();
             
             container.Verify();

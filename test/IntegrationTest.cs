@@ -1,9 +1,9 @@
 using System.Net;
-using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
+using FluentAssertions;
 
 namespace HelloWorldApp
 {

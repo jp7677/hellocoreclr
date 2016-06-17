@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
+using FluentAssertions;
 
 namespace HelloWorldApp
 {

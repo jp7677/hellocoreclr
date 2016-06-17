@@ -16,14 +16,14 @@ namespace HelloWorldApp
         public async Task<GetHelloWorldResponse> ExecuteAsync(string name)
         {
             logger.Info("Calculating result.");
-            string result = !string.IsNullOrEmpty(name) 
-                            ? string.Format("Hello {0}!", name)
-                            : "Are you sure?";
+            if (string.IsNullOrEmpty(name))
+                return new GetHelloWorldResponse{Name = "Are you sure?"};
+
+            string result = string.Format("Hello {0}!", name);
             
             logger.Info("Save greeting.");
             await dataService.SaveGreetingAsync(result);
 
-            logger.Info("Return result.");
             return new GetHelloWorldResponse{Name = result};
         }
     }

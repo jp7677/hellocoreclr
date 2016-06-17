@@ -1,6 +1,6 @@
-using FluentAssertions;
-using Moq;
 using Xunit;
+using Moq;
+using FluentAssertions;
 
 namespace HelloWorldApp
 {

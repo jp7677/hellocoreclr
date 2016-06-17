@@ -1,9 +1,9 @@
-using FluentAssertions;
+using System.Threading.Tasks;
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using Xunit;
 using Moq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
+using FluentAssertions;
 
 namespace HelloWorldApp
 {

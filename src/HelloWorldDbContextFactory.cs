@@ -11,9 +11,9 @@ namespace HelloWorldApp
             this.options = options;
         }
 
-        public IHelloWorldDbContext CreateHelloWorldDbContext()
+        public HelloWorldDbContext CreateHelloWorldDbContext()
         {
-            return (IHelloWorldDbContext) new HelloWorldDbContext(options);
+            return new HelloWorldDbContext(options);
         }
     }
 }

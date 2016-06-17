@@ -2,6 +2,6 @@ namespace HelloWorldApp
 {
     public interface IHelloWorldDbContextFactory
     {
-        IHelloWorldDbContext CreateHelloWorldDbContext();
+        HelloWorldDbContext CreateHelloWorldDbContext();
     }
 }

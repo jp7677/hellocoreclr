@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HelloWorldApp
 {
-    public class HelloWorldDbContext : DbContext, IHelloWorldDbContext
+    public class HelloWorldDbContext : DbContext
     {
         public HelloWorldDbContext()
         { }

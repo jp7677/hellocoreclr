@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Xunit;
 using FluentAssertions;
 
-namespace HelloWorldApp
+namespace HelloWorldApp.Test
 {
     public class HelloWorldDataServiceTest
     {

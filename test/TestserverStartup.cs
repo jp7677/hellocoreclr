@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
-namespace HelloWorldApp
+namespace HelloWorldApp.Test
 {
     public class TestserverStartup : Startup
     {

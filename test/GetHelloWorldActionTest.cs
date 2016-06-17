@@ -3,7 +3,7 @@ using Xunit;
 using Moq;
 using FluentAssertions;
 
-namespace HelloWorldApp
+namespace HelloWorldApp.Test
 {
     public class GetHelloWorldActionTest
     {

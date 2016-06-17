@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Xunit;
 using FluentAssertions;
 
-namespace HelloWorldApp
+namespace HelloWorldApp.Test
 {
     public class IntegrationTest
     {

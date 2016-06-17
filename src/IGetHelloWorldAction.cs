@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
+
 namespace HelloWorldApp
 {
     public interface IGetHelloWorldAction
     {
-        GetHelloWorldResponse Execute(string name);
+        Task<GetHelloWorldResponse> ExecuteAsync(string name);
     }
 }

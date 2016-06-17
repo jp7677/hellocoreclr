@@ -11,14 +11,14 @@ namespace HelloWorldApp
     {
         [Fact]
         public async Task GetHelloWorldTest(){ 
-            var getHelloWorldAction = Mock.Of<IGetHelloWorldAction>(a =>
-                a.Execute("You") == new GetHelloWorldResponse(){Name = "Hello You!"});
+            var getHelloWorldAction = new Mock<IGetHelloWorldAction>();
+            getHelloWorldAction.Setup(a =>
+                a.ExecuteAsync("You")).Returns(
+                    Task.FromResult<GetHelloWorldResponse>(new GetHelloWorldResponse{ Name = "Hello You!" }));
             var actionFactory = Mock.Of<IActionFactory>(f =>
-                f.CreateGetHelloWorldAction() == getHelloWorldAction);
-
-            var dataService = Mock.Of<IHelloWorldDataService>();
+                f.CreateGetHelloWorldAction() == getHelloWorldAction.Object);
             
-            var sut = new HelloWorldController(actionFactory, dataService);
+            var sut = new HelloWorldController(actionFactory);
             var response = await sut.GetHelloWorldAsync("You");
 
             response.Should().NotBeNull();

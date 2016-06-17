@@ -1,17 +1,30 @@
+using System.Threading.Tasks;
+using NLog;
+
 namespace HelloWorldApp
 {
     public class GetHelloWorldAction : IGetHelloWorldAction
     {
-        public GetHelloWorldResponse Execute(string name)
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+        IHelloWorldDataService dataService;
+
+        public GetHelloWorldAction(IHelloWorldDataService dataService)
         {
+            this.dataService = dataService;
+        }
+
+        public async Task<GetHelloWorldResponse> ExecuteAsync(string name)
+        {
+            logger.Info("Calculating result.");
             string result = !string.IsNullOrEmpty(name) 
                             ? string.Format("Hello {0}!", name)
                             : "Are you sure?";
             
-            return new GetHelloWorldResponse
-            {
-                Name = result 
-            };
+            logger.Info("Save greeting.");
+            await dataService.SaveGreetingAsync(result);
+
+            logger.Info("Return result.");
+            return new GetHelloWorldResponse{Name = result};
         }
     }
 }

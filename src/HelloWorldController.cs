@@ -10,12 +10,10 @@ namespace HelloWorldApp
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
         IActionFactory actionFactory;
-        IHelloWorldDataService dataService;
         
-        public HelloWorldController(IActionFactory actionFactory, IHelloWorldDataService dataService)
+        public HelloWorldController(IActionFactory actionFactory)
         {
             this.actionFactory = actionFactory;
-            this.dataService = dataService;
         }
         
         [Route("helloworld/{name}")]
@@ -25,9 +23,7 @@ namespace HelloWorldApp
             logger.Info("'HelloWorld' Request received with '{0}'.", name);
             
             var action = actionFactory.CreateGetHelloWorldAction();
-            var response = action.Execute(name);
-
-            await dataService.SaveGreetingAsync(response.Name);
+            var response = await action.ExecuteAsync(name);
 
             return new OkObjectResult(response);
         }

@@ -1,31 +1,42 @@
 using FluentAssertions;
 using Xunit;
+using Moq;
+using System.Threading.Tasks;
 
 namespace HelloWorldApp
 {
     public class GetHelloWorldActionTest
     {
         [Fact]
-        public void ExecuteTest()
+        public async Task ExecuteAsyncTest()
         {
-            var sut = new GetHelloWorldAction();
-            var result = sut.Execute("World");
+            var dataService = Mock.Of<IHelloWorldDataService>();
+            var sut = new GetHelloWorldAction(dataService);
+            
+            var result = await sut.ExecuteAsync("World");
+            
             result.Name.Should().Be("Hello World!");
         }
         
         [Fact]
-        public void ExecuteTestWithNull()
+        public async Task ExecuteAsyncWithNullTest()
         {
-            var sut = new GetHelloWorldAction();
-            var result = sut.Execute(null);
+            var dataService = Mock.Of<IHelloWorldDataService>();
+            var sut = new GetHelloWorldAction(dataService);
+            
+            var result = await sut.ExecuteAsync(null);
+            
             result.Name.Should().Be("Are you sure?");
         }
         
         [Fact]
-        public void ExecuteTestWithEmptyString()
+        public async Task ExecuteAsyncTestWithEmptyStringTest()
         {
-            var sut = new GetHelloWorldAction();
-            var result = sut.Execute("");
+            var dataService = Mock.Of<IHelloWorldDataService>();
+            var sut = new GetHelloWorldAction(dataService);
+            
+            var result = await sut.ExecuteAsync("");
+            
             result.Name.Should().Be("Are you sure?");
         }
     }

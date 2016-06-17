@@ -74,7 +74,7 @@ namespace HelloWorldApp
             container.CrossWire<ILoggerFactory>(app);
             container.RegisterSingleton<IResourceProvider, ResourceProvider>();
             container.RegisterSingleton<IActionFactory, ActionFactory>();
-            container.Register<IGetHelloWorldAction, GetHelloWorldAction>(Lifestyle.Scoped);
+            container.Register<IGetHelloWorldAction, GetHelloWorldAction>();
 
             container.RegisterSingleton<IHelloWorldDbContextFactory>(() =>
                 new HelloWorldDbContextFactory(CreateDatabaseOptions().Options));

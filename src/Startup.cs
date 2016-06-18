@@ -10,6 +10,8 @@ using SimpleInjector;
 using SimpleInjector.Integration.AspNet;
 using NLog;
 using NLog.Extensions.Logging;
+using Swashbuckle.SwaggerGen.Generator;
+using Swashbuckle.SwaggerGen.Application;
 
 namespace HelloWorldApp
 {
@@ -33,12 +35,28 @@ namespace HelloWorldApp
                     builder.WithOrigins("file://")));
             
             // Add framework services.
+            services.AddMvc();
             services.AddMvcCore()
                 .AddJsonFormatters(options => 
                     options.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options =>
+                SetupSwagger(options));
+
             // Add SimpleInjector Controller Activator
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
+        }
+
+        private void SetupSwagger(SwaggerGenOptions options)
+        {
+            options.SingleApiVersion(new Info
+                {
+                    Title = "Hello CoreCLR Service API",
+                    Description = "Just a playground...",
+                    TermsOfService = "None",
+                    Version = "v1"
+                });
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +66,6 @@ namespace HelloWorldApp
             logger.Info("Configuring.");
             
             SetupSimpleInjector(app);
-            
             SetupDatabaseAsync().Wait();
             
             //add NLog to ASP.NET Core
@@ -61,9 +78,12 @@ namespace HelloWorldApp
             app.UseDefaultFiles();
             // Add static files to the request pipeline.
             app.UseStaticFiles();
-            
+
             // Add MVC to the request pipeline.
             app.UseMvc();
+
+            app.UseSwaggerGen();
+            app.UseSwaggerUi();
         }
 
         private void SetupSimpleInjector(IApplicationBuilder app)

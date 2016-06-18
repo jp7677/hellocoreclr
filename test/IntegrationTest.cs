@@ -40,5 +40,25 @@ namespace HelloWorldApp.Test
                 response.StatusCode.Should().Be(HttpStatusCode.NotFound);
             }
         }
+
+        [Fact]
+        public async void SwaggerReturnsOk()
+        {
+            using (var client = server.CreateClient())
+            {
+                var response = await client.GetAsync("/swagger/v1/swagger.json");
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
+            }
+        }
+
+        [Fact]
+        public async void SwaggerUiReturnsOk()
+        {
+            using (var client = server.CreateClient())
+            {
+                var response = await client.GetAsync("/swagger/ui/index.html");
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
+            }
+        }
     }
 }

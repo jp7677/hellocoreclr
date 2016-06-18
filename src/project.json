@@ -31,7 +31,8 @@
     "SimpleInjector": "3.1.5",
     "SimpleInjector.Integration.AspNet": "3.1.5-rc2-07",
     "NLog": "4.4.0-beta9",
-    "NLog.Extensions.Logging": "1.0.0-rc2-final-2016-05-21"
+    "NLog.Extensions.Logging": "1.0.0-rc2-final-2016-05-21",
+    "Swashbuckle": "6.0.0-beta9"
   },
 
   "frameworks": {

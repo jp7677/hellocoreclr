@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using SimpleInjector;
-using SimpleInjector.Integration.AspNet;
+using SimpleInjector.Integration.AspNetCore;
+using SimpleInjector.Integration.AspNetCore.Mvc;
 using NLog;
 using NLog.Extensions.Logging;
-using Swashbuckle.SwaggerGen.Generator;
 using Swashbuckle.SwaggerGen.Application;
+using Swashbuckle.Swagger.Model;
 
 namespace HelloWorldApp
 {
@@ -82,16 +83,15 @@ namespace HelloWorldApp
             // Add MVC to the request pipeline.
             app.UseMvc();
 
-            app.UseSwaggerGen();
+            app.UseSwagger();
             app.UseSwaggerUi();
         }
 
         private void SetupSimpleInjector(IApplicationBuilder app)
         {
-            container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();
             app.UseSimpleInjectorAspNetRequestScoping(container);
+            container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();
             
-            container.CrossWire<ILoggerFactory>(app);
             container.RegisterSingleton<IResourceProvider, ResourceProvider>();
             container.RegisterSingleton<IActionFactory, ActionFactory>();
             container.Register<IGetHelloWorldAction, GetHelloWorldAction>();

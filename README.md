@@ -2,7 +2,7 @@
 
 Just a playground...
 
-Obviously you should have Net Core RC2 and Nodejs/npm 4.x already up and running for everything that follows.
+Obviously you should have Net Core 1.0 and Nodejs/npm 4.x already up and running for everything that follows.
 
 ## Production build and publish
 

@@ -5,26 +5,28 @@
 // ${fileDirname}: the current opened file's dirname
 // ${fileExtname}: the current opened file's extension
 // ${cwd}: the current working directory of the spawned process
-
-// A task runner that calls the Typescript compiler (tsc) and
-// compiles based on a tsconfig.json file that is present in
-// the root of the folder open in VSCode
 {
 	"version": "0.1.0",
-
-	// The command is tsc.
-	"command": "${workspaceRoot}/ui/node_modules/.bin/tsc",
-
-	// The command is a shell script
-	"isShellCommand": true,
-
-	// Show the output window only if unrecognized errors occur.
+	"command": "sh",
+	"args": ["-c"],
+    "isShellCommand": true,
 	"showOutput": "always",
-
-	// Tell the tsc compiler to use the tsconfig.json from the open folder.
-	"args": ["-p", "${workspaceRoot}/ui"],
-
-	// use the standard tsc problem matcher to find compile problems
-	// in the output.
-	"problemMatcher": "$tsc"
+	"suppressTaskName": true,
+	"tasks": [
+        {
+            "taskName": "Build All",
+            "args": ["dotnet build ${workspaceRoot}/src;${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "Compile Typescript/tsc",
+            "args": ["${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
+			"problemMatcher": "$tsc"
+        },
+        {
+            "taskName": "Build C#/dotnet",
+            "args": ["dotnet build ${workspaceRoot}/src"],
+			"problemMatcher": "$msCompile"
+        }
+    ]
 }

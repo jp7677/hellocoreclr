@@ -25,7 +25,7 @@ namespace HelloWorldApp
             var location = System.Reflection.Assembly.GetEntryAssembly().Location;
             location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
             location = location + Path.DirectorySeparatorChar + "nlog.config";
-            LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(location, true);   
+            LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(location, true);
         }
         
         private static string FindWebRoot()

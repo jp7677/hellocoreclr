@@ -2,7 +2,7 @@
   "version": "0.0.1",
   
   "buildOptions": {
-    "outputName": "HelloCoreClrApp.Test"
+    "outputName": "HelloCoreClrApp.Tests"
   },
  
   "dependencies": {
@@ -10,7 +10,7 @@
       "version": "1.0.0",
       "type": "platform"
     },
-    "src": {
+    "app": {
       "version": "0.0.1",
       "target": "project"
     },

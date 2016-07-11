@@ -44,6 +44,7 @@ namespace HelloWorldApp
             if (!Directory.Exists(webRoot))
                 webRoot = currentDir + Path.DirectorySeparatorChar + 
                             ".." + Path.DirectorySeparatorChar +
+                            ".." + Path.DirectorySeparatorChar +
                             "ui" + Path.DirectorySeparatorChar + 
                             "wwwroot";  
 

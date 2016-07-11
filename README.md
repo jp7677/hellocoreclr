@@ -17,7 +17,7 @@ to restore packages.
 Building, assembling and publishing goes like
 
 ```bash
-dotnet publish --configuration Release --output dist/approot src
+dotnet publish --configuration Release --output dist/approot src/app
 dotnet publish --output dist ui
 ```
 
@@ -38,7 +38,7 @@ ui/node_modules/.bin/gulp --cwd ui
 to restore packages, bindings and for assembling the web application. Use
 
 ```bash
-dotnet test test
+dotnet test test/app.tests
 ui/node_modules/.bin/karma start ui/karma.conf.js
 ```
 
@@ -48,7 +48,7 @@ Use
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Staging
-dotnet run --project src
+dotnet run --project src/app
 ```
 
 to run the web server. Now open <http://localhost:5000/> in you favorite browser. Enjoy source maps in your browser when testing manually.
@@ -79,9 +79,9 @@ to restore packages and bindings. Finally run the following commands in separate
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Development
-cd src;dotnet watch
+cd src/app;dotnet watch
 ui/node_modules/.bin/karma start --no-single-run ui/karma.conf.js
-cd test;dotnet watch --command test --
+cd test/app.tests;dotnet watch --command test --
 ui/node_modules/.bin/gulp watch:browsersync --cwd ui
 ```
 

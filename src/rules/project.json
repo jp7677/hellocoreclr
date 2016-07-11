@@ -1,0 +1,35 @@
+{
+  "version": "0.0.1",
+  "buildOptions": {
+    "outputName": "HelloCoreClrApp.Rules",
+    "compilerName": "fsc",
+    "debugType": "portable",
+    "compile": {
+      "includeFiles": [
+        "GetHelloworldRule.fs"
+      ]
+    }
+  },
+  "dependencies": {
+    "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160629"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "portable-net45"
+      ]
+    }
+  },
+
+  "tools": {
+    "dotnet-compile-fsc": {
+      "version": "1.0.0-preview2-020000",
+      "imports": [
+        "dnxcore50",
+        "portable-net45",
+        "netstandard1.3"
+      ]
+    }
+  }
+}

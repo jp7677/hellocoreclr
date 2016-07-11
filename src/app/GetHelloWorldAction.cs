@@ -16,15 +16,20 @@ namespace HelloWorldApp
         public async Task<GetHelloWorldResponse> ExecuteAsync(string name)
         {
             logger.Info("Calculating result.");
-            if (string.IsNullOrEmpty(name))
-                return new GetHelloWorldResponse{Name = "Are you sure?"};
 
-            string result = string.Format("Hello {0}!", name);
+            // VS Code doesn't know yet about referenced F# project, that why intellisense complains :(, though it builds just fine. 
+            var res = GetHelloWorldRule.Process(name);
             
-            logger.Info("Save greeting.");
-            await dataService.SaveGreetingAsync(result);
+            if (res.Item2)
+                await SaveGreetingAsync(res.Item1);
 
-            return new GetHelloWorldResponse{Name = result};
+            return new GetHelloWorldResponse{Name = res.Item1};
+        }
+
+        private async Task SaveGreetingAsync(string response)
+        {
+            logger.Info("Save greeting.");
+            await dataService.SaveGreetingAsync(response);
         }
     }
 }

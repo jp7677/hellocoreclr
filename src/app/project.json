@@ -13,6 +13,10 @@
       "version": "1.0.0",
       "type": "platform"
     },
+    "rules": {
+      "version": "0.0.1",
+      "target": "project"
+    },
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Mvc.Core": "1.0.0",

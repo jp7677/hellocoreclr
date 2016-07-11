@@ -12,9 +12,9 @@ ui/project.lock.json
 src/app/project.lock.json
 src/app/bin/**
 src/app/obj/**
-src/filter/project.lock.json
-src/filter/bin/**
-src/filter/obj/**
+src/rules/project.lock.json
+src/rules/bin/**
+src/rules/obj/**
 test/app.tests/project.lock.json
 test/app.tests/bin/**
 test/app.tests/obj/**

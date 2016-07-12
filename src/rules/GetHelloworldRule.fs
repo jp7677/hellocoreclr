@@ -1,7 +1,9 @@
 ﻿module HelloWorldApp.GetHelloWorldRule
 
+let NegativeResult = "Are you sure?", false
+
 let Process name = 
     match name with
-    | null -> "Are you sure?", false
-    | "" -> "Are you sure?", false
+    | null -> NegativeResult
+    | "" -> NegativeResult
     | _ -> sprintf "Hello %s!" name, true

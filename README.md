@@ -79,9 +79,9 @@ to restore packages and bindings. Finally run the following commands in separate
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Development
-cd src/app;dotnet watch
+cd src/app;dotnet watch run
 ui/node_modules/.bin/karma start --no-single-run ui/karma.conf.js
-cd test/app.tests;dotnet watch --command test --
+cd test/app.tests;dotnet watch test
 ui/node_modules/.bin/gulp watch:browsersync --cwd ui
 ```
 

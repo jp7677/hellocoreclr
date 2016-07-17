@@ -17,11 +17,11 @@ to restore packages.
 Building, assembling and publishing goes like
 
 ```bash
-dotnet publish --configuration Release --output dist/approot src/app
-dotnet publish --output dist ui
+dotnet publish --configuration Release --output artefacts/approot src/app
+dotnet publish --output artefacts ui
 ```
 
-Find the result within the ```dist/``` folder. Please read <http://docs.asp.net/en/latest/publishing/linuxproduction.html> how to go ahead with installation and front-end servers.
+Find the result within the ```artefacts/``` folder. Please read <http://docs.asp.net/en/latest/publishing/linuxproduction.html> how to go ahead with installation and front-end servers.
 
 ## Testing setup
 

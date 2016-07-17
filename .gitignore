@@ -1,5 +1,5 @@
 node_modules/**
-dist/**
+artefacts/**
 reports/**
 ui/node_modules/**
 ui/bower_components/**

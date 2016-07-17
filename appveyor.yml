@@ -15,3 +15,8 @@ build_script:
 test_script:
 - dotnet test test/app.tests
 - ui/node_modules/.bin/karma start ui/karma.conf.js
+cache:
+- '%USERPROFILE%\.nuget\packages'
+- 'ui\node_modules'
+- 'ui\bower_components'
+- 'ui\typings'

@@ -14,7 +14,7 @@ build_script:
 test_script:
 - dotnet test test/app.tests
 - ui/node_modules/.bin/karma start ui/karma.conf.js
-artefacts:
+artifacts:
 - path: src\app\bin\Debug\netcoreapp1.0/**\*
   name: approot
   type: zip

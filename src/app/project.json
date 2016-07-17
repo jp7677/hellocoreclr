@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.1.0",
   
   "buildOptions": {
     "outputName": "HelloCoreClrApp",
@@ -14,7 +14,7 @@
       "type": "platform"
     },
     "rules": {
-      "version": "0.0.1",
+      "version": "0.1.0",
       "target": "project"
     },
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",

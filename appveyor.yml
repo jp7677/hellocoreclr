@@ -1,0 +1,17 @@
+version: '0.1.{build}'
+configuration:
+- Debug
+platform: Any CPU
+environment:
+    # Don't report back to the mothership
+    DOTNET_CLI_TELEMETRY_OPTOUT: 1
+build_script:
+- appveyor-retry dotnet restore -v Minimal
+- dotnet build src/app/project.json
+- npm install --prefix ui
+- ui/node_modules/.bin/bower install --config.cwd=ui
+- ui/node_modules/.bin/typings install --cwd ui
+- ui/node_modules/.bin/gulp --cwd ui
+test_script:
+- dotnet test test/app.tests
+- ui/node_modules/.bin/karma start ui/karma.conf.js

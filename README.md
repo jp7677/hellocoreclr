@@ -29,13 +29,14 @@ Use
 
 ```bash
 dotnet restore
+dotnet build src/app/project.json
 npm install --prefix ui
 ui/node_modules/.bin/bower install --config.cwd=ui
 ui/node_modules/.bin/typings install --cwd ui
 ui/node_modules/.bin/gulp --cwd ui
 ```
 
-to restore packages, bindings and for assembling the web application. Use
+to restore packages, bindings, building and for assembling the web application. Use
 
 ```bash
 dotnet test test/app.tests

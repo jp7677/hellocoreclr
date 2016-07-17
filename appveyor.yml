@@ -18,18 +18,18 @@ test_script:
 - appveyor AddMessage "Typescript/javascript unit tests completed."
 after_test:
 - npm install codecov remap-istanbul
-- ./node_modules/.bin/remap-istanbul -i reports/coverage-js.json -o reports/coverage-ts.json -t json
-- ./node_modules/.bin/codecov -f reports/coverage-ts.json
+- node_modules/.bin/remap-istanbul -i reports/coverage-js.json -o reports/coverage-ts.json -t json
+- node_modules/.bin/codecov -f reports/coverage-ts.json
 artifacts:
-- path: src\app\bin\Debug\netcoreapp1.0
+- path: src/app/bin/Debug/netcoreapp1.0
   name: approot
   type: zip
-- path: ui\wwwroot
+- path: ui/wwwroot
   name: webroot
   type: zip
 cache:
-- '%USERPROFILE%\.nuget\packages'
-- 'ui\node_modules'
-- 'ui\bower_components'
-- 'ui\typings'
+- '%USERPROFILE%/.nuget/packages'
+- 'ui/node_modules'
+- 'ui/bower_components'
+- 'ui/typings'
 - 'node_modules'

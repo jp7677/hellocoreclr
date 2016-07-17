@@ -15,10 +15,10 @@ test_script:
 - dotnet test test/app.tests
 - ui/node_modules/.bin/karma start ui/karma.conf.js
 artifacts:
-- path: src\app\bin\Debug\netcoreapp1.0/**\*
+- path: src\app\bin\Debug\netcoreapp1.0
   name: approot
   type: zip
-- path: ui\wwwroot\**\*
+- path: ui\wwwroot
   name: webroot
   type: zip
 cache:

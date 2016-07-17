@@ -28,6 +28,7 @@
     "ui/project.lock.json": true,
     ".vscode/**": true,
     "node_modules/**": true,
+    "reports/**": true,
     "dist/**": true
   },
   "stylelint.config": {

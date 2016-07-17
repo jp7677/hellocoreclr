@@ -1,5 +1,6 @@
 node_modules/**
 dist/**
+reports/**
 ui/node_modules/**
 ui/bower_components/**
 ui/typings/**

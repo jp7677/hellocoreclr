@@ -17,8 +17,9 @@ test_script:
 - ui/node_modules/.bin/karma start ui/karma.conf.js
 - appveyor AddMessage "Typescript/javascript unit tests completed."
 after_test:
-- npm install codecov
-- ./node_modules/.bin/codecov -f reports/cobertura-coverage.xml
+- npm install codecov remap-istanbul
+- ./node_modules/.bin/remap-istanbul -i reports/coverage-js.json -o reports/coverage-ts.json -t json
+- ./node_modules/.bin/codecov -f reports/coverage-ts.json
 artifacts:
 - path: src\app\bin\Debug\netcoreapp1.0
   name: approot

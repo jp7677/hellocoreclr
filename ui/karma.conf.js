@@ -18,15 +18,16 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
 
     preprocessors: {
-      'src/app/**/*.js': ['coverage']
+      'src/app/**/*.js': ['coverage', 'sourcemap']
     },
     reporters: ['progress', 'coverage'],
     coverageReporter: {
       dir: '../reports',
       reporters: [
         {
-          type: 'cobertura',
-          subdir: '.'
+          type: 'json',
+          subdir: '.',
+          file: 'coverage-js.json'
         }
       ]
     }

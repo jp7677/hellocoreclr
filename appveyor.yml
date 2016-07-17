@@ -13,9 +13,9 @@ build_script:
 - ui/node_modules/.bin/gulp --cwd ui
 test_script:
 - dotnet test test/app.tests
-- Add-AppveyorMessage "Dotnet unit tests completed."
+- appveyor AddMessage "Dotnet unit tests completed."
 - ui/node_modules/.bin/karma start ui/karma.conf.js
-- Add-AppveyorMessage "Typescript/javascript unit tests completed."
+- appveyor AddMessage "Typescript/javascript unit tests completed."
 artifacts:
 - path: src\app\bin\Debug\netcoreapp1.0
   name: approot

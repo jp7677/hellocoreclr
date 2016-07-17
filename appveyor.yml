@@ -16,6 +16,9 @@ test_script:
 - appveyor AddMessage "Dotnet unit tests completed."
 - ui/node_modules/.bin/karma start ui/karma.conf.js
 - appveyor AddMessage "Typescript/javascript unit tests completed."
+after_test:
+- npm install codecov
+- ./node_modules/.bin/codecov --file reports/coverage-js.info
 artifacts:
 - path: src\app\bin\Debug\netcoreapp1.0
   name: approot
@@ -28,3 +31,4 @@ cache:
 - 'ui\node_modules'
 - 'ui\bower_components'
 - 'ui\typings'
+- 'node_modules'

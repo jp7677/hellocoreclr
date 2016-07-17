@@ -18,7 +18,7 @@ test_script:
 - appveyor AddMessage "Typescript/javascript unit tests completed."
 after_test:
 - npm install codecov
-- ./node_modules/.bin/codecov --file reports/coverage-js.info
+- ./node_modules/.bin/codecov
 artifacts:
 - path: src\app\bin\Debug\netcoreapp1.0
   name: approot

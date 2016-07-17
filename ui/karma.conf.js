@@ -20,7 +20,7 @@ module.exports = function (config) {
     preprocessors: {
       'src/app/**/*.js': ['coverage']
     },
-    reporters: ['coverage'],
+    reporters: ['progress', 'coverage'],
     coverageReporter: {
       dir: '../reports',
       reporters: [

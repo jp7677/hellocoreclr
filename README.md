@@ -2,9 +2,15 @@
 
 Just a playground...
 
+## Status
+
+[![Debug build and unit tests status](https://ci.appveyor.com/api/projects/status/jpbt7swu8jaiuxa6/branch/master?svg=true)](https://ci.appveyor.com/project/jp7677/hellocoreclr/branch/master)
+
+## Instructions
+
 Obviously you should have Net Core 1.0 and Nodejs/npm 4.x already up and running for everything that follows.
 
-## Production build and publish
+### Production build and publish
 
 Use
 
@@ -23,7 +29,7 @@ dotnet publish --output artefacts ui
 
 Find the result within the ```artefacts/``` folder. Please read <http://docs.asp.net/en/latest/publishing/linuxproduction.html> how to go ahead with installation and front-end servers.
 
-## Testing setup
+### Testing setup
 
 Use
 
@@ -54,7 +60,7 @@ dotnet run --project src/app
 
 to run the web server. Now open <http://localhost:5000/> in you favorite browser. Enjoy source maps in your browser when testing manually.
 
-## Development setup
+### Development setup
 
 For a nice programming experience I'm using Visual Studio Code with the following extensions:
 > C#, tslint, standardjs, stylelint, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint, Spelling and Grammar Checker

@@ -29,7 +29,7 @@
     ".vscode/**": true,
     "node_modules/**": true,
     "reports/**": true,
-    "dist/**": true
+    "artifacts/**": true
   },
   "stylelint.config": {
     "extends": "./ui/stylelint.config.js" 

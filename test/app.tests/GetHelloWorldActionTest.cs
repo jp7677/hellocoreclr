@@ -15,7 +15,7 @@ namespace HelloWorldApp.Test
             
             var result = await sut.ExecuteAsync("World");
             
-            result.Name.Should().Be("Hello World");
+            result.Name.Should().Be("Hello World!");
             dataService.Verify(s => s.SaveGreetingAsync(It.IsAny<string>()), Times.Once());
         }
         

@@ -40,7 +40,7 @@ namespace app.greeting {
                     this.$log.warn("Oops... something went wrong.");
 
                     toastr.clear();
-                    toastr.warning("Oops... HTTP/" + status);
+                    //toastr.warning("Oops... HTTP/" + status);
                     this.labelText = "";
                 });
         };

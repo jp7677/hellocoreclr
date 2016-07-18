@@ -37,7 +37,7 @@ namespace HelloWorldApp
             loadContext.Unloading += ctx => 
             {
                 var logger = LogManager.GetCurrentClassLogger();
-                logger.Info("Shutting down.");
+                logger.Info("Shutting down...");
             };
         }
         

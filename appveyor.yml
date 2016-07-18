@@ -33,12 +33,6 @@ artifacts:
 - path: ui\wwwroot
   name: webroot-debug
   type: zip
-- path: reports
-  name: reports
-  type: zip
-- path: test\app.tests\bin\Debug\netcoreapp1.0
-  name: debug
-  type: zip
 
 cache:
 - '%USERPROFILE%\.nuget\packages'

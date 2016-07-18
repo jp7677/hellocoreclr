@@ -3,11 +3,7 @@
   "buildOptions": {
     "outputName": "HelloCoreClrApp.Rules",
     "compilerName": "fsc",
-    "compile": {
-      "includeFiles": [
-        "GetHelloworldRule.fs"
-      ]
-    }
+    "compile": "**/*.fs"
   },
   "dependencies": {
     "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160629"

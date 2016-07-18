@@ -28,6 +28,10 @@ Building, assembling and publishing goes like
 
 ```bash
 dotnet publish --configuration Release --output artifacts/approot src/app
+npm install --production --prefix ui
+node_modules/.bin/bower install --config.cwd=ui
+node_modules/.bin/typings install --cwd ui
+node_modules/.bin/gulp production --cwd ui
 dotnet publish --output artifacts ui
 ```
 

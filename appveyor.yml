@@ -13,10 +13,8 @@ build_script:
 
 test_script:
 - dotnet test test\app.tests
-- appveyor AddMessage "Dotnet unit tests completed."
 - npm install karma-coverage karma-sourcemap-loader karma-appveyor-reporter --prefix ui
 - ui\node_modules\.bin\karma start ui\karma-appveyor.conf.js
-- appveyor AddMessage "Typescript/javascript unit tests completed."
 
 after_test:
 - nuget install OpenCover -Version 4.6.519 -o .\packages

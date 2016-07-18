@@ -19,6 +19,8 @@ test_script:
 after_test:
 - nuget install OpenCover -Version 4.6.519 -o .\packages
 - nuget install xunit.runner.console -Version 2.2.0-beta2-build3300 -o .\packages
+- ls packages\OpenCover.4.6.519\
+- ls packages\xunit.runner.console.2.2.0-beta2-build3300
 - packages\OpenCover.4.6.519\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.2.0-beta2-build3300\xunit.console.clr4.exe "-targetargs:""test\app.tests\bin\Debug\netcoreapp1.0\HelloCoreClrApp.Tests.dll"" /noshadow /appveyor" -filter:"+[HelloCoreClrApp*]*" -output:reports\coverage-dotnet.xml
 
 - npm install codecov remap-istanbul

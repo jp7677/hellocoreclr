@@ -19,7 +19,7 @@ test_script:
 - appveyor AddMessage "Typescript/javascript unit tests completed."
 after_test:
 - nuget install OpenCover -Version 4.6.519 -o .\packages
-- packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:test -register:user -oldstyle -filter:"+[HelloCoreClrApp*]*" -output:reports\coverage-dotnet.xml
+- packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test/app.tests" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]*" -output:reports\coverage-dotnet.xml
 
 - npm install codecov remap-istanbul
 - node_modules\.bin\remap-istanbul -i reports\coverage-js.json -o reports\coverage-ts.json -t json

@@ -3,9 +3,9 @@
   "version": false,
   "dependencies": {},
   "globalDependencies": {
-    "angular": "registry:dt/angular#1.5.0+20160627105203",
+    "angular": "registry:dt/angular#1.5.0+20160709055139",
     "angular-mocks": "registry:dt/angular-mocks#1.5.0+20160608104721",
-    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160521151413",
+    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160707113237",
     "chai": "registry:dt/chai#3.4.0+20160601211834",
     "jquery": "registry:dt/jquery#1.10.0+20160704162008",
     "mocha": "registry:dt/mocha#2.2.5+20160619032855",

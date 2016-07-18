@@ -1,4 +1,6 @@
 using System.IO;
+using System.Reflection;
+using System.Runtime.Loader;
 using Microsoft.AspNetCore.Hosting;
 using NLog;
 
@@ -9,7 +11,8 @@ namespace HelloWorldApp
         // Entry point for the application.
         public static void Main(string[] args)
         {
-            SetupNLog();
+            ConfigureNLog();
+            ConfigureShutdownHandler();
 
             var host = new WebHostBuilder()
                 .UseKestrel()
@@ -20,12 +23,22 @@ namespace HelloWorldApp
            host.Run();
         }
         
-        private static void SetupNLog()
+        private static void ConfigureNLog()
         {
             var location = System.Reflection.Assembly.GetEntryAssembly().Location;
             location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
             location = location + Path.DirectorySeparatorChar + "nlog.config";
             LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(location, true);
+        }
+
+        private static void ConfigureShutdownHandler()
+        {
+            var loadContext = AssemblyLoadContext.GetLoadContext(Assembly.GetEntryAssembly());
+            loadContext.Unloading += ctx => 
+            {
+                var logger = LogManager.GetCurrentClassLogger();
+                logger.Info("Shutting down.");
+            };
         }
         
         private static string FindWebRoot()

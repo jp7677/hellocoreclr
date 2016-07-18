@@ -17,6 +17,10 @@ test_script:
 - ui\node_modules\.bin\karma start ui\karma.conf.js
 - appveyor AddMessage "Typescript/javascript unit tests completed."
 after_test:
+- nuget install OpenCover /Version=4.6.519 -o .\packages
+- nuget install xunit.runner.console /Version=2.2.0-beta2-build3300 -o .\packages
+- .\packages\OpenCover.Console.exe -register:user -target:.\packages\xunit.console.clr4.exe "-targetargs:""test\app.tests\bin\Debug\netcoreapp1.0\HelloCoreClrApp.Tests.dll"" /noshadow /appveyor" -filter:"+[HelloCoreClrApp*]*" -output:reports\coverage-dotnet.xml
+
 - npm install codecov remap-istanbul
 - node_modules\.bin\remap-istanbul -i reports\coverage-js.json -o reports\coverage-ts.json -t json
 - node_modules\.bin\codecov --disable=gvoc -f reports\coverage-ts.json

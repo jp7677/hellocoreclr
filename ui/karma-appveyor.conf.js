@@ -15,6 +15,21 @@ module.exports = function (config) {
 
     autoWatchBatchDelay: 10000,
     singleRun: true,
-    browsers: ['PhantomJS']
+    browsers: ['PhantomJS'],
+
+    preprocessors: {
+      'src/app/**/*.js': ['coverage', 'sourcemap']
+    },
+    reporters: ['progress', 'coverage', 'appveyor'],
+    coverageReporter: {
+      dir: '../reports',
+      reporters: [
+        {
+          type: 'json',
+          subdir: '.',
+          file: 'coverage-js.json'
+        }
+      ]
+    }
   })
 }

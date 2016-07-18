@@ -19,18 +19,21 @@ test_script:
 - appveyor AddMessage "Typescript/javascript unit tests completed."
 after_test:
 - nuget install OpenCover -Version 4.6.519 -o .\packages
-- packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test/app.tests" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]*" -output:reports\coverage-dotnet.xml
+- packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test/app.tests" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test]*" -output:reports\coverage-dotnet.xml
+- node_modules\.bin\codecov --disable=gcov -f reports\coverage-dotnet.xml
 
 - npm install codecov remap-istanbul
 - node_modules\.bin\remap-istanbul -i reports\coverage-js.json -o reports\coverage-ts.json -t json
-
-- node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json -f reports\coverage-dotnet.xml
+- node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 artifacts:
 - path: src\app\bin\Debug\netcoreapp1.0
-  name: approot
+  name: approot-debug
   type: zip
 - path: ui\wwwroot
-  name: webroot
+  name: webroot-debug
+  type: zip
+- path: reports
+  name: reports
   type: zip
 cache:
 - '%USERPROFILE%\.nuget\packages'

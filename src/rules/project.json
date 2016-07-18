@@ -3,7 +3,6 @@
   "buildOptions": {
     "outputName": "HelloCoreClrApp.Rules",
     "compilerName": "fsc",
-    "debugType": "full",
     "compile": {
       "includeFiles": [
         "GetHelloworldRule.fs"

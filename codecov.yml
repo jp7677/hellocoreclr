@@ -1,17 +1,2 @@
-coverage:
-  branch: master
-  precision: 2
-  round: down
-  range: "70...100"
-
-  status:
-    project:
-
-    patch:
-
-    changes: true
-
-
 comment:
   layout: "header, diff, changes"
-  behavior: default

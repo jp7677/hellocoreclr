@@ -1,9 +1,8 @@
 version: '0.1.{build}'
-configuration:
-- Debug
-platform: Any CPU
+
 environment:
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
 build_script:
 - dotnet restore
 - dotnet build src\app\project.json
@@ -11,12 +10,14 @@ build_script:
 - ui\node_modules\.bin\bower install --config.cwd=ui
 - ui\node_modules\.bin\typings install --cwd ui
 - ui\node_modules\.bin\gulp --cwd ui
+
 test_script:
 - dotnet test test\app.tests
 - appveyor AddMessage "Dotnet unit tests completed."
 - npm install karma-coverage karma-sourcemap-loader karma-appveyor-reporter --prefix ui
 - ui\node_modules\.bin\karma start ui\karma-appveyor.conf.js
 - appveyor AddMessage "Typescript/javascript unit tests completed."
+
 after_test:
 - nuget install OpenCover -Version 4.6.519 -o .\packages
 - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\app.tests" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Tests*]*" -hideskipped:Filter -mergeoutput -output:reports\coverage-dotnet.xml
@@ -24,6 +25,7 @@ after_test:
 - npm install codecov remap-istanbul
 - node_modules\.bin\remap-istanbul -i reports\coverage-js.json -o reports\coverage-ts.json -t json
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
+
 artifacts:
 - path: src\app\bin\Debug\netcoreapp1.0
   name: approot-debug
@@ -37,6 +39,7 @@ artifacts:
 - path: test\app.tests\bin\Debug\netcoreapp1.0
   name: debug
   type: zip
+
 cache:
 - '%USERPROFILE%\.nuget\packages'
 - 'ui\node_modules'

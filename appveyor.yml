@@ -26,14 +26,6 @@ after_test:
 - node_modules\.bin\remap-istanbul -i reports\coverage-js.json -o reports\coverage-ts.json -t json
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 
-artifacts:
-- path: src\app\bin\Debug\netcoreapp1.0
-  name: approot-debug
-  type: zip
-- path: ui\wwwroot
-  name: webroot-debug
-  type: zip
-
 cache:
 - '%USERPROFILE%\.nuget\packages'
 - 'ui\node_modules'

@@ -23,7 +23,8 @@ after_test:
 
 - npm install codecov remap-istanbul
 - node_modules\.bin\remap-istanbul -i reports\coverage-js.json -o reports\coverage-ts.json -t json
-- node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
+
+- node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json -f reports\coverage-dotnet.xml
 artifacts:
 - path: src\app\bin\Debug\netcoreapp1.0
   name: approot

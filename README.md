@@ -4,7 +4,8 @@ Just a playground...
 
 ## Status
 
-| --- | --- |
+| . | . |
+| ---: | :--- |
 | Debug build and unit tests status (Windows): | [![Debug build and unit tests status](https://ci.appveyor.com/api/projects/status/jpbt7swu8jaiuxa6/branch/master?svg=true)](https://ci.appveyor.com/project/jp7677/hellocoreclr/branch/master) |
 | Unit tests coverage status (typescript only for now): | [![Coverage status](https://codecov.io/gh/jp7677/hellocoreclr/branch/master/graph/badge.svg)](https://codecov.io/gh/jp7677/hellocoreclr) |
 | Release build status (Linux): | [![Release build Status](https://travis-ci.org/jp7677/hellocoreclr.svg?branch=master)](https://travis-ci.org/jp7677/hellocoreclr) |

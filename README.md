@@ -2,7 +2,7 @@
 
 Just a playground...
 
-## Status
+## Continuous integration status
 
 |  | Status |
 | ---: | :---: |

@@ -11,7 +11,7 @@ addons:
     - libicu52
 language: node_js
 node_js:
-  - "4.4.x"
+  - "node"
 
 before_install:
   - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'

@@ -20,7 +20,7 @@ test_script:
 after_test:
 - nuget install OpenCover -Version 4.6.519 -o .\packages
 - cd test/app.tests
-- ..\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Tests*]*" -output:..\..\reports\coverage-dotnet.xml
+- ..\..\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Tests*]*" -mergeoutput -output:..\..\reports\coverage-dotnet.xml
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-dotnet.xml
 - ls C:\projects\hellocoreclr\test\app.tests\bin\Debug\netcoreapp1.0\
 

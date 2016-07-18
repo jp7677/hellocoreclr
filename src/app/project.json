@@ -4,7 +4,6 @@
   "buildOptions": {
     "outputName": "HelloCoreClrApp",
     "emitEntryPoint": true,
-    "debugType": "portable",
     "copyToOutput": "nlog.config"
   },
  

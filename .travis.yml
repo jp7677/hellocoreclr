@@ -32,3 +32,11 @@ script:
 - ui/node_modules/.bin/typings install --cwd ui
 - ui/node_modules/.bin/gulp production --cwd ui
 - dotnet publish --output artifacts ui
+
+cache:
+  directories:
+    - $HOME/.nuget/packages
+    - node_modules
+    - ui\node_modules
+    - ui\bower_components
+    - ui\typings

@@ -25,9 +25,9 @@ after_test:
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 
 cache:
-- '%USERPROFILE%\.nuget\packages'
-- 'ui\node_modules'
-- 'ui\bower_components'
-- 'ui\typings'
-- 'node_modules'
-- 'packages'
+- '%USERPROFILE%\.nuget\packages-delete-cache'
+- 'ui\node_modules-delete-cache'
+- 'ui\bower_components-delete-cache'
+- 'ui\typings-delete-cache'
+- 'node_modules-delete-cache'
+- 'packages-delete-cache'

@@ -39,7 +39,7 @@ namespace HelloWorldApp
         {
             var loadContext = AssemblyLoadContext.GetLoadContext(Assembly.GetEntryAssembly());
             loadContext.Unloading += ctx =>
-                Cancel("SIGTERM");
+                Cancel("Application unloading, probably SIGTERM");
             Console.CancelKeyPress += (s, e) =>
                 Cancel(e.SpecialKey == ConsoleSpecialKey.ControlC ? "SIGINT" : "SIGQUIT");
         }

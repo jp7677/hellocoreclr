@@ -47,7 +47,7 @@ namespace HelloWorldApp
         private static void Cancel(string signal)
         {
             var logger = LogManager.GetCurrentClassLogger();
-            logger.Info("{0} received, request shutdown...", signal);
+            logger.Info("{0} received, initiating shutdown.", signal);
             if (!ShutdownCancellationTokenSource.IsCancellationRequested)
                 ShutdownCancellationTokenSource.Cancel();
             LogManager.Flush();

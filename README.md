@@ -71,7 +71,7 @@ to run the web server. Now open <http://localhost:5000/> in you favorite browser
 ### Development setup
 
 For a nice programming experience I'm using Visual Studio Code with the following extensions:
-> C#, tslint, standardjs, stylelint, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint, Spelling and Grammar Checker
+> C#, tslint, standardjs, stylelint, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint, Spelling and Grammar Checker, Debugger for Chrome
 
 Note that Wallabyjs is a commercial extension.
 Use the following command to set up required node packages for these extensions if you haven't installed them globally.

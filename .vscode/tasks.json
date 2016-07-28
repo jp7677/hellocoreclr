@@ -15,7 +15,7 @@
 	"tasks": [
         {
             "taskName": "Build All",
-            "args": ["dotnet build ${workspaceRoot}/src/app;${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
+            "args": ["dotnet build ${workspaceRoot}/src/app/project.json;${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
             "isBuildCommand": true
         },
         {
@@ -25,7 +25,7 @@
         },
         {
             "taskName": "Build C#/dotnet",
-            "args": ["dotnet build ${workspaceRoot}/src/app"],
+            "args": ["dotnet build ${workspaceRoot}/src/app/project.json"],
 			"problemMatcher": "$msCompile"
         }
     ]

@@ -6,7 +6,7 @@
     "compile": "**/*.fs"
   },
   "dependencies": {
-    "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160629"
+    "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160727"
   },
 
   "frameworks": {

@@ -107,8 +107,8 @@ gulp.task('lint:ts', function (done) {
 
   var tslint = require('gulp-tslint')
   return gulp.src([paths.srcTs, paths.testTs])
-    .pipe(tslint())
-    .pipe(tslint.report('verbose', {emitError: false}))
+    .pipe(tslint({formatter: 'verbose'}))
+    .pipe(tslint.report({emitError: false}))
 })
 
 gulp.task('tscompile', ['lint:ts', 'clean:js'], function () {

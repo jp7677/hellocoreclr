@@ -1,5 +1,6 @@
 node_modules/**
 artifacts/**
+packages/**
 reports/**
 ui/node_modules/**
 ui/bower_components/**

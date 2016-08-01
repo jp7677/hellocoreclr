@@ -2,7 +2,8 @@
   "version": "0.1.0",
   
   "buildOptions": {
-    "outputName": "HelloCoreClrApp.Tests"
+    "outputName": "HelloCoreClrApp.Tests",
+    "debugType": "portable"
   },
  
   "dependencies": {

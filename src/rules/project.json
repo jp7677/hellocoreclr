@@ -3,7 +3,8 @@
   "buildOptions": {
     "outputName": "HelloCoreClrApp.Rules",
     "compilerName": "fsc",
-    "compile": "**/*.fs"
+    "compile": "**/*.fs",
+    "debugType": "portable"
   },
   "dependencies": {
     "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160727"

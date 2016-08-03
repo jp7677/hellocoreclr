@@ -25,7 +25,7 @@ env:
 
 script:
 - dotnet restore
-- dotnet publish --configuration Release --output artifacts/approot src/app
+- dotnet publish --configuration Release --output artifacts/approot src/app --version-suffix $TRAVIS_BUILD_NUMBER
 
 - npm install --production --prefix ui
 - ui/node_modules/.bin/bower install --config.cwd=ui

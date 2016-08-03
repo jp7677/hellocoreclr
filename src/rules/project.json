@@ -4,7 +4,8 @@
     "outputName": "HelloCoreClrApp.Rules",
     "compilerName": "fsc",
     "compile": "**/*.fs",
-    "debugType": "portable"
+    "debugType": "portable",
+    "warningsAsErrors": true
   },
   "dependencies": {
     "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160727"

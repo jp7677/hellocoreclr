@@ -5,7 +5,8 @@
     "outputName": "HelloCoreClrApp",
     "emitEntryPoint": true,
     "copyToOutput": "nlog.config",
-    "warningsAsErrors": true
+    "warningsAsErrors": true,
+    "debugType": "portable"
   },
  
   "dependencies": {

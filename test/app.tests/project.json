@@ -3,7 +3,6 @@
   
   "buildOptions": {
     "outputName": "HelloCoreClrApp.Tests",
-    "debugType": "portable",
     "warningsAsErrors": true
   },
  

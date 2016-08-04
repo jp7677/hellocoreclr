@@ -40,7 +40,9 @@
   "tools": {
     "Microsoft.DotNet.Watcher.Tools": {
       "version": "1.0.0-preview2-final",
-      "imports": "portable-net45"
+      "imports": [
+        "portable-net45"
+      ]
     }
   }
 }

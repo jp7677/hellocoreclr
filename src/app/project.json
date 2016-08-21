@@ -38,7 +38,7 @@
     "SimpleInjector.Integration.AspNetCore.Mvc": "3.2.3",
     "NLog": "4.4.0-betav15",
     "NLog.Extensions.Logging": "1.0.0-rtm-alpha4",
-    "Swashbuckle": "6.0.0-beta901"
+    "Swashbuckle": "6.0.0-beta902"
   },
 
   "frameworks": {

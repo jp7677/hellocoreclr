@@ -7,7 +7,7 @@
     "warningsAsErrors": true
   },
   "dependencies": {
-    "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160805"
+    "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160831"
   },
 
   "frameworks": {

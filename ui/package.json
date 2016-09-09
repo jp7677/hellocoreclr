@@ -9,7 +9,7 @@
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "dependencies": {
     "bower": "~1.7.9",
-    "typings": "~1.3.2",
+    "typings": "~1.3.3",
     "gulp": "~3.9.1",
     "run-sequence": "~1.2.2",
     "gulp-if": "~2.0.1",
@@ -25,13 +25,13 @@
     "gulp-image-optimization": "~0.1.3",
     "main-bower-files": "~2.13.1",
     "gulp-flatten": "~0.3.1",
-    "gulp-hash-filename": "~1.0.1",
+    "gulp-hash-filename": "~1.2.0",
     "gulp-util": "~3.0.7",
     "del": "~2.2.2"
   },
   "devDependencies": {
-    "gulp-tslint": "~6.0.2",
-    "gulp-stylelint": "~3.1.0",
+    "gulp-tslint": "~6.1.1",
+    "gulp-stylelint": "~3.2.0",
     "gulp-htmlhint": "~0.3.1",
     "mocha": "~3.0.2",
     "chai": "~3.5.0",
@@ -41,10 +41,10 @@
     "karma-mocha": "~1.1.1",
     "karma-chai": "~0.1.0",
     "karma-sinon": "~1.0.5",
-    "karma-phantomjs-launcher": "~1.0.1",
+    "karma-phantomjs-launcher": "~1.0.2",
     "gulp-watch": "~4.3.9",
     "gulp-batch": "~1.0.5",
-    "browser-sync": "~2.14.0",
+    "browser-sync": "~2.15.0",
     "proxy-middleware": "~0.15.0"
   }
 }

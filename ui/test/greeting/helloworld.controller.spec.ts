@@ -1,6 +1,9 @@
 /// <reference path="../../typings/index.d.ts" />
 "use strict";
 
+import { HelloWorldController } from "../../src/app/greeting/helloworld.controller";
+import {GetHelloWorldResponse} from "../../src/app/greeting/gethelloworldresponse";
+
 describe("HelloWorldController Test ", () => {
     let $http: ng.IHttpService;
     let $httpBackend: ng.IHttpBackendService;
@@ -22,7 +25,7 @@ describe("HelloWorldController Test ", () => {
 
     it("does nothing when there is no input", () => {
         let logSpy = sinon.spy($log, "warn");
-        let sut = new app.greeting.HelloWorldController(apiBaseUrl, $http, $log);
+        let sut = new HelloWorldController(apiBaseUrl, $http, $log);
 
         sut.executeHelloWorld();
 
@@ -31,13 +34,13 @@ describe("HelloWorldController Test ", () => {
     });
 
     it("can handle a valid response", () => {
-        let res = new app.greeting.GetHelloWorldResponse();
+        let res = new GetHelloWorldResponse();
         res.name = "Hello World!";
         $httpBackend.whenGET(apiBaseUrl + "helloworld/Hello").respond(200, res);
 
         let toastrSpy = sinon.spy(toastr, "success");
         let logSpy = sinon.spy($log, "info");
-        let sut = new app.greeting.HelloWorldController(apiBaseUrl, $http, $log);
+        let sut = new HelloWorldController(apiBaseUrl, $http, $log);
         sut.inputText = "Hello";
 
         sut.executeHelloWorld();
@@ -53,7 +56,7 @@ describe("HelloWorldController Test ", () => {
 
         let toastrSpy = sinon.spy(toastr, "warning");
         let logSpy = sinon.spy($log, "warn");
-        let sut = new app.greeting.HelloWorldController(apiBaseUrl, $http, $log);
+        let sut = new HelloWorldController(apiBaseUrl, $http, $log);
         sut.inputText = "Error";
 
         sut.executeHelloWorld();

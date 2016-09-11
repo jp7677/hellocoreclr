@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="app" ng-strict-di="true">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <meta charset="utf-8" />
     <title>Hello World</title>
@@ -26,19 +26,11 @@
         </div>
     </div>
 
-    <!-- build:vendorjs -->
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="../bower_components/toastr/toastr.js"></script>
-    <!-- endbuild -->
-    <!-- build:appjs -->
-    <script src="app/app.config.js"></script>
-    <script src="app/appsettings.dev.js"></script>    
-    <script src="app/greeting/gethelloworldresponse.js"></script>
-    <script src="app/greeting/helloworld.controller.js"></script>
-    <!-- endbuild -->
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../jspm.conf.js"></script>
+    <script>
+        System.import('../src/app')
+            .catch(console.error.bind(console)); // make sure any errors are print to console
+    </script>
 </body>
 </html>

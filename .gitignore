@@ -4,6 +4,7 @@ packages/**
 reports/**
 ui/node_modules/**
 ui/bower_components/**
+ui/jspm_packages/**
 ui/typings/**
 ui/wwwroot/**
 ui/src/**/*.js

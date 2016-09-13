@@ -34,11 +34,10 @@
     "gulp-tslint": "~6.1.1",
     "gulp-stylelint": "~3.2.0",
     "gulp-htmlhint": "~0.3.1",
-    "mocha": "~3.0.2",
-    "chai": "~3.5.0",
-    "sinon": "~1.17.5",
     "angular-mocks": "~1.5.8",
     "karma": "~1.2.0",
+    "karma-systemjs": "~0.14.0",
+    "systemjs": "~0.19.38",
     "karma-mocha": "~1.1.1",
     "karma-chai": "~0.1.0",
     "karma-sinon": "~1.0.5",
@@ -59,6 +58,11 @@
       "jquery": "npm:jquery@~3.1.0",
       "toastr": "npm:toastr@~2.1.2"
     },
-    "devDependencies": {}
+    "devDependencies": {
+      "angular-mocks": "npm:angular-mocks@^1.5.8",
+      "chai": "npm:chai@^3.5.0",
+      "mocha": "npm:mocha@^3.0.2",
+      "sinon": "npm:sinon@^1.17.5"
+    }
   }
 }

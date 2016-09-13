@@ -3,7 +3,7 @@
 "use strict";
 
 import {GetHelloWorldResponse} from "gethelloworldresponse";
-import * as toastr from "toastr";
+import toastr from "toastr";
 
 export class HelloWorldController {
     public static $inject = ["apiBaseUrl", "$http", "$log"];

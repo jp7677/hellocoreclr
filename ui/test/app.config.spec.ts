@@ -2,7 +2,7 @@
 "use strict";
 
 import { Config } from "../src/app/app.config";
-import { StateProvider, UrlRouterProvider } from "stubs";
+import { StateProvider, UrlRouterProvider } from "./stubs";
 
 describe("Config Test ", () => {
     it("initializes correctly", () => {

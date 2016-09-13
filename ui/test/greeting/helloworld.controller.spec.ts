@@ -1,8 +1,10 @@
 /// <reference path="../../typings/index.d.ts" />
 "use strict";
 
+import "angular-mocks";
+import toastr from "toastr";
 import { HelloWorldController } from "../../src/app/greeting/helloworld.controller";
-import {GetHelloWorldResponse} from "../../src/app/greeting/gethelloworldresponse";
+import { GetHelloWorldResponse } from "../../src/app/greeting/gethelloworldresponse";
 
 describe("HelloWorldController Test ", () => {
     let $http: ng.IHttpService;

@@ -33,5 +33,8 @@
   },
   "stylelint.config": {
     "extends": "./ui/stylelint.config.js" 
+  },
+  "standard.options": {
+    "ignore": [ "ui/src/jspm.conf.js" ]
   }
 }

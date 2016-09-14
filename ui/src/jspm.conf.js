@@ -8,25 +8,33 @@ System.config({
   },
 
   map: {
-    'angular': 'npm:angular@1.5.8',
-    'angular-bootstrap': 'npm:angular-bootstrap@0.12.2',
-    'angular-mocks': 'npm:angular-mocks@1.5.8',
-    'angular-ui-router': 'npm:angular-ui-router@1.0.0-beta.2',
-    'bootstrap': 'npm:bootstrap@3.3.7',
+    'angular': 'github:angular/bower-angular@1.5.8',
+    'angular-bootstrap': 'github:angular-ui/bootstrap-bower@2.1.3',
+    'angular-mocks': 'github:angular/bower-angular-mocks@1.5.8',
+    'angular-ui-router': 'github:angular-ui/angular-ui-router-bower@0.3.1',
+    'bootstrap': 'github:twbs/bootstrap@3.3.7',
     'chai': 'npm:chai@3.5.0',
+    'css': 'github:systemjs/plugin-css@0.1.27',
     'font-awesome': 'npm:font-awesome@4.6.3',
     'jquery': 'npm:jquery@3.1.0',
     'mocha': 'npm:mocha@3.0.2',
     'sinon': 'npm:sinon@1.17.5',
-    'toastr': 'npm:toastr@2.1.2',
+    'toastr': 'github:CodeSeven/toastr@2.1.3',
+    'github:CodeSeven/toastr@2.1.3': {
+      'css': 'github:systemjs/plugin-css@0.1.27',
+      'jquery': 'github:components/jquery@3.1.0'
+    },
+    'github:angular-ui/angular-ui-router-bower@0.3.1': {
+      'angular': 'github:angular/bower-angular@1.5.8'
+    },
+    'github:angular/bower-angular-mocks@1.5.8': {
+      'angular': 'github:angular/bower-angular@1.5.8'
+    },
     'github:jspm/nodelibs-assert@0.1.0': {
       'assert': 'npm:assert@1.4.1'
     },
     'github:jspm/nodelibs-buffer@0.1.0': {
       'buffer': 'npm:buffer@3.6.0'
-    },
-    'github:jspm/nodelibs-path@0.1.0': {
-      'path-browserify': 'npm:path-browserify@0.0.0'
     },
     'github:jspm/nodelibs-process@0.1.2': {
       'process': 'npm:process@0.11.9'
@@ -37,20 +45,14 @@ System.config({
     'github:jspm/nodelibs-vm@0.1.0': {
       'vm-browserify': 'npm:vm-browserify@0.0.4'
     },
-    'npm:angular-ui-router@1.0.0-beta.2': {
-      'angular': 'npm:angular@1.5.8',
-      'process': 'github:jspm/nodelibs-process@0.1.2'
+    'github:twbs/bootstrap@3.3.7': {
+      'jquery': 'npm:jquery@3.1.0'
     },
     'npm:assert@1.4.1': {
       'assert': 'github:jspm/nodelibs-assert@0.1.0',
       'buffer': 'github:jspm/nodelibs-buffer@0.1.0',
       'process': 'github:jspm/nodelibs-process@0.1.2',
       'util': 'npm:util@0.10.3'
-    },
-    'npm:bootstrap@3.3.7': {
-      'fs': 'github:jspm/nodelibs-fs@0.1.2',
-      'path': 'github:jspm/nodelibs-path@0.1.0',
-      'process': 'github:jspm/nodelibs-process@0.1.2'
     },
     'npm:buffer@3.6.0': {
       'base64-js': 'npm:base64-js@0.0.8',
@@ -105,9 +107,6 @@ System.config({
       'json3': 'npm:json3@3.3.2',
       'lodash.create': 'npm:lodash.create@3.1.1'
     },
-    'npm:path-browserify@0.0.0': {
-      'process': 'github:jspm/nodelibs-process@0.1.2'
-    },
     'npm:process@0.11.9': {
       'assert': 'github:jspm/nodelibs-assert@0.1.0',
       'fs': 'github:jspm/nodelibs-fs@0.1.2',
@@ -119,9 +118,6 @@ System.config({
       'process': 'github:jspm/nodelibs-process@0.1.2',
       'samsam': 'npm:samsam@1.1.2',
       'util': 'npm:util@0.10.3'
-    },
-    'npm:toastr@2.1.2': {
-      'process': 'github:jspm/nodelibs-process@0.1.2'
     },
     'npm:util@0.10.3': {
       'inherits': 'npm:inherits@2.0.1',

@@ -23,7 +23,6 @@
     "ui/test/**/*.js.map": true,
     "ui/wwwroot/**": true,
     "ui/node_modules/**": true,
-    "ui/bower_components/**": true,
     "ui/jspm_packages/**": true,
     "ui/typings/**": true,
     "ui/project.lock.json": true,

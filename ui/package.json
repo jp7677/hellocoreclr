@@ -36,8 +36,7 @@
     "gulp-htmlhint": "~0.3.1",
     "angular-mocks": "~1.5.8",
     "karma": "~1.2.0",
-    "karma-systemjs": "~0.14.0",
-    "systemjs": "~0.19.38",
+    "karma-jspm": "~2.2.0",
     "karma-mocha": "~1.1.1",
     "karma-chai": "~0.1.0",
     "karma-sinon": "~1.0.5",
@@ -48,7 +47,10 @@
     "proxy-middleware": "~0.15.0"
   },
   "jspm": {
-    "configFile": "jspm.conf.js",
+    "directories": {
+      "baseURL": "src"
+    },
+    "configFile": "src/jspm.conf.js",
     "dependencies": {
       "angular": "npm:angular@~1.5.8",
       "angular-bootstrap": "npm:angular-bootstrap@~0.12.2",
@@ -59,10 +61,10 @@
       "toastr": "npm:toastr@~2.1.2"
     },
     "devDependencies": {
-      "angular-mocks": "npm:angular-mocks@^1.5.8",
-      "chai": "npm:chai@^3.5.0",
-      "mocha": "npm:mocha@^3.0.2",
-      "sinon": "npm:sinon@^1.17.5"
+      "angular-mocks": "npm:angular-mocks@~1.5.8",
+      "chai": "npm:chai@~3.5.0",
+      "mocha": "npm:mocha@~3.0.2",
+      "sinon": "npm:sinon@~1.17.5"
     }
   }
 }

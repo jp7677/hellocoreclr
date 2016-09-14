@@ -1,4 +1,5 @@
 System.config({
+  baseURL: './',
   defaultJSExtensions: true,
   transpiler: false,
   paths: {
@@ -9,8 +10,8 @@ System.config({
   map: {
     'angular': 'npm:angular@1.5.8',
     'angular-bootstrap': 'npm:angular-bootstrap@0.12.2',
-    'angular-mocks': 'github:angular/bower-angular-mocks@1.5.8',
-    'angular-ui-router': 'npm:angular-ui-router@0.3.1',
+    'angular-mocks': 'npm:angular-mocks@1.5.8',
+    'angular-ui-router': 'npm:angular-ui-router@1.0.0-beta.2',
     'bootstrap': 'npm:bootstrap@3.3.7',
     'chai': 'npm:chai@3.5.0',
     'font-awesome': 'npm:font-awesome@4.6.3',
@@ -18,9 +19,6 @@ System.config({
     'mocha': 'npm:mocha@3.0.2',
     'sinon': 'npm:sinon@1.17.5',
     'toastr': 'npm:toastr@2.1.2',
-    'github:angular/bower-angular-mocks@1.5.8': {
-      'angular': 'github:angular/bower-angular@1.5.8'
-    },
     'github:jspm/nodelibs-assert@0.1.0': {
       'assert': 'npm:assert@1.4.1'
     },
@@ -39,7 +37,7 @@ System.config({
     'github:jspm/nodelibs-vm@0.1.0': {
       'vm-browserify': 'npm:vm-browserify@0.0.4'
     },
-    'npm:angular-ui-router@0.3.1': {
+    'npm:angular-ui-router@1.0.0-beta.2': {
       'angular': 'npm:angular@1.5.8',
       'process': 'github:jspm/nodelibs-process@0.1.2'
     },

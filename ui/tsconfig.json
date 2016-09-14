@@ -8,7 +8,7 @@
     "wwwroot",
     "node_modules",
     "bower_components",
-    "jspm_packages",
+    "src/jspm_packages",
     "typings/index.d.ts"
   ]
 }

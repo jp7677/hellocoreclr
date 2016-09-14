@@ -2,26 +2,23 @@ module.exports = function (config) {
   'use strict'
 
   config.set({
-    frameworks: ['systemjs', 'mocha', 'chai', 'sinon'],
+    frameworks: ['jspm', 'mocha', 'chai', 'sinon'],
 
-    files: [
-      'src/app/**/*.js',
-      'test/stubs.js',
-      'test/*.spec.js',
-      'test/**/*.spec.js'
-    ],
-
-    systemjs: {
-      configFile: 'jspm.conf.js',
-      serveFiles: [
-        'jspm_packages/**/*.js'
+    jspm: {
+      config: 'src/jspm.conf.js',
+      loadFiles: [
+        'test/**/*.spec.js'
       ],
-      config: {
-        paths: {
-          'systemjs': 'node_modules/systemjs/dist/system.js',
-          'system-polyfills': 'node_modules/systemjs/dist/system-polyfills.js'
-        }
-      }
+      serveFiles: [
+        'src/**/*.js',
+        'src/**/*.html',
+        'test/stubs.js'
+      ]
+    },
+    proxies: {
+      '/jspm_packages/': '/base/src/jspm_packages/',
+      '/test/': '/base/test/',
+      '/src/': '/base/src/'
     },
 
     autoWatchBatchDelay: 10000,

@@ -26,13 +26,10 @@
         </div>
     </div>
 
-    <script src="../jspm_packages/system.js"></script>
+    <script src="jspm_packages/system.js"></script>
+    <script src="jspm.conf.js"></script>
     <script>
-        System.baseURL='../';
-    </script>
-    <script src="../jspm.conf.js"></script>
-    <script>
-        System.import('src/app')
+        System.import('./app')
             .catch(console.error.bind(console)); // make sure any errors are print to console
     </script>
 </body>

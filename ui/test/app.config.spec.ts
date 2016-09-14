@@ -1,6 +1,7 @@
 /// <reference path="../typings/index.d.ts" />
 "use strict";
 
+import chai from "chai";
 import { Config } from "../src/app/app.config";
 import { StateProvider, UrlRouterProvider } from "./stubs";
 

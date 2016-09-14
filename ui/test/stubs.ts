@@ -2,6 +2,8 @@
 
 "use strict";
 
+import sinon from "sinon";
+
 export class StateProvider implements ng.ui.IStateProvider {
     public state = sinon.stub();
     public decorator = sinon.stub();

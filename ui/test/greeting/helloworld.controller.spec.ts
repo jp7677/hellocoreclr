@@ -1,6 +1,8 @@
 /// <reference path="../../typings/index.d.ts" />
 "use strict";
 
+import sinon from "sinon";
+import chai from "chai";
 import "angular-mocks";
 import toastr from "toastr";
 import { HelloWorldController } from "../../src/app/greeting/helloworld.controller";

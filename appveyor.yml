@@ -9,7 +9,7 @@ build_script:
 - dotnet build src\app\project.json
 
 - cd %APPVEYOR_BUILD_FOLDER%\ui
-- npm install --prefix ui
+- npm install
 - node_modules\.bin\jspm install
 - node_modules\.bin\typings install
 - node_modules\.bin\gulp

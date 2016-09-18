@@ -29,7 +29,7 @@ Building, assembling and publishing goes like
 ```bash
 dotnet publish --configuration Release --output artifacts/approot src/app
 npm install --production --prefix ui
-ui/node_modules/.bin/bower install --config.cwd=ui
+(cd ui; ui/node_modules/.bin/jspm install --production)
 ui/node_modules/.bin/typings install --cwd ui
 ui/node_modules/.bin/gulp production --cwd ui
 dotnet publish --output artifacts ui
@@ -45,7 +45,7 @@ Use
 dotnet restore
 dotnet build src/app/project.json
 npm install --prefix ui
-ui/node_modules/.bin/bower install --config.cwd=ui
+(cd ui; ui/node_modules/.bin/jspm install)
 ui/node_modules/.bin/typings install --cwd ui
 ui/node_modules/.bin/gulp --cwd ui
 ```
@@ -85,7 +85,7 @@ Use again
 ```bash
 dotnet restore
 npm install --prefix ui
-ui/node_modules/.bin/bower install --config.cwd=ui
+(cd ui; ui/node_modules/.bin/jspm install)
 ui/node_modules/.bin/typings install --cwd ui
 ui/node_modules/.bin/gulp --cwd ui
 ```
@@ -94,16 +94,18 @@ to restore packages and bindings. Finally run the following commands in separate
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Development
-cd src/app;dotnet watch run
+(cd src/app;dotnet watch run)
 ui/node_modules/.bin/karma start --no-single-run ui/karma.conf.js
-cd test/app.tests;dotnet watch test
-ui/node_modules/.bin/gulp watch:browsersync --cwd ui
+(cd test/app.tests;dotnet watch test)
+ui/node_modules/.bin/gulp watch --cwd ui
 ```
 
 Your favorite browser should fire up and should open <http://localhost:3000/>. Happy coding!
 
 ## To-do
 
+- Do something for jspm/github rate limit (https://gist.github.com/topheman/25241e48a1b4f91ec6d4)
+- Restore typescript linter formatter
+- Enter github jspm issue for missing --cwd
 - Switch from Angular to Aurelia.
-- Gulp: Throw hinting errors when running in non-watch mode.
 - App: Rethink the way we find the webroot. Eventually we shouldn't use webroot and static files at all in a production scenario.

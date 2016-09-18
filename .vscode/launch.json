@@ -2,12 +2,11 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Launch Chrome - ui with sourcemaps",
+			"name": "Launch Chrome - ui",
 			"type": "chrome",
-			"runtimeArgs": ["--allow-file-access-from-files"],
 			"request": "launch",
 			"preLaunchTask": "Build All",
-			"file": "${workspaceRoot}/ui/src/index.html",
+			"url": "http://localhost:3000",
 			"sourceMaps": true,
 			"webRoot": "${workspaceRoot}/ui/src"
 		},

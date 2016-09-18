@@ -13,7 +13,10 @@ module.exports = function (config) {
         'src/**/*.js',
         'src/**/*.html',
         'test/stubs.js'
-      ]
+      ],
+      meta: {
+        'src/app/*': { format: 'register' }
+      }
     },
     proxies: {
       '/jspm_packages/': '/base/src/jspm_packages/',

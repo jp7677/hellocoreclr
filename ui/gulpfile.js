@@ -179,3 +179,50 @@ gulp.task('production', function (done) {
 })
 
 gulp.task('default', ['build'])
+
+// -- Watch
+
+gulp.task('watch:ts', function () {
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+
+  watch(paths.src + '**/*.ts', batch(function (events, done) {
+    gulp.start('tscompile', done)
+  }))
+})
+
+gulp.task('watch', function () {
+  var browserSync = require('browser-sync').create()
+  var proxy = require('proxy-middleware')
+  var url = require('url')
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+
+  var proxyOptions = url.parse('http://localhost:5000/api')
+  proxyOptions.route = '/api'
+
+  browserSync.init({
+    server: {
+      baseDir: paths.src,
+      middleware: [proxy(proxyOptions)]
+    }
+  })
+
+  var sync = function (vinyl) {
+    if (vinyl.event === 'add' || vinyl.event === 'change') {
+      return gulp.src(vinyl.path)
+        .pipe(browserSync.stream())
+    }
+  }
+
+  watch(paths.src + '**/*.js', sync)
+  watch(paths.src + '**/*.css', sync)
+  watch(paths.src + '**/*.{html,png,jpg,gif,svg,ico}',
+    batch(function (events, done) {
+      browserSync.reload()
+      done()
+    }
+  ))
+
+  gulp.start('watch:ts')
+})

@@ -3,7 +3,7 @@ module.exports = function (wallaby) {
 
   return {
     files: [
-      {pattern: 'src/jspm_packages/system.js', instrument: false},
+      {pattern: 'node_modules/systemjs/dist/system.js', instrument: false},
       {pattern: 'src/jspm.conf.js', instrument: false},
       {pattern: 'src/app/**/*.ts', load: false},
       {pattern: 'test/stubs.ts', load: false}
@@ -15,8 +15,8 @@ module.exports = function (wallaby) {
     // telling wallaby to serve jspm_packages project folder
     // as is from wallaby web server
     middleware: (app, express) => {
-      app.use('/src/jspm_packages',
-              express.static('src/jspm_packages'))
+      app.use('/node_modules/systemjs/dist',
+              express.static('node_modules/systemjs/dist'))
       app.use('/jspm_packages',
               express.static('src/jspm_packages'))
     },

@@ -186,8 +186,30 @@ gulp.task('watch:ts', function () {
   var watch = require('gulp-watch')
   var batch = require('gulp-batch')
 
-  watch(paths.src + '**/*.ts', batch(function (events, done) {
+  watch([paths.src + '**/*.ts', '!' + paths.jspmPackages], batch(function (events, done) {
+    gulp.start('lint:ts', done)
     gulp.start('tscompile', done)
+    done()
+  }))
+})
+
+gulp.task('watch:css', function () {
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+
+  watch([paths.src + '**/*.css', '!' + paths.jspmPackages], batch(function (events, done) {
+    gulp.start('lint:css', done)
+    done()
+  }))
+})
+
+gulp.task('watch:html', function () {
+  var watch = require('gulp-watch')
+  var batch = require('gulp-batch')
+
+  watch([paths.src + '**/*.html', '!' + paths.jspmPackages], batch(function (events, done) {
+    gulp.start('lint:html', done)
+    done()
   }))
 })
 
@@ -225,4 +247,6 @@ gulp.task('watch', function () {
   ))
 
   gulp.start('watch:ts')
+  gulp.start('watch:css')
+  gulp.start('watch:html')
 })

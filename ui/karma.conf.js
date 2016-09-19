@@ -7,8 +7,6 @@ module.exports = function (config) {
     jspm: {
       config: 'src/jspm.conf.js',
       loadFiles: [
-        'src/app.js',
-        'src/main.js',
         'test/**/*.spec.js'
       ],
       serveFiles: [
@@ -21,7 +19,6 @@ module.exports = function (config) {
     },
     proxies: {
       '/jspm_packages/': '/base/src/jspm_packages/',
-      '/src/styles.css': '/styles.css',
       '/src/': '/base/src/',
       '/test/': '/base/test/'
     },

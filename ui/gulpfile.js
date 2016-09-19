@@ -215,9 +215,9 @@ gulp.task('watch', function () {
     }
   }
 
-  watch(paths.src + '**/*.js', sync)
-  watch(paths.src + '**/*.css', sync)
-  watch(paths.src + '**/*.{html,png,jpg,gif,svg,ico}',
+  watch([paths.src + '**/*.js', '!' + paths.jspmPackages], sync)
+  watch([paths.src + '**/*.css', '!' + paths.jspmPackages], sync)
+  watch([paths.src + '**/*.{html,png,jpg,gif,svg,ico}', '!' + paths.jspmPackages],
     batch(function (events, done) {
       browserSync.reload()
       done()

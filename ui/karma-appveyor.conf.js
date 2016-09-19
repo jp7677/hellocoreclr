@@ -7,6 +7,8 @@ module.exports = function (config) {
     jspm: {
       config: 'src/jspm.conf.js',
       loadFiles: [
+        'src/app.js',
+        'src/main.js',
         'test/**/*.spec.js'
       ],
       serveFiles: [
@@ -15,13 +17,14 @@ module.exports = function (config) {
         'test/stubs.js'
       ],
       meta: {
-        'src/app/*': { format: 'register' }
+        'src/*': { format: 'register' }
       }
     },
     proxies: {
       '/jspm_packages/': '/base/src/jspm_packages/',
       '/test/': '/base/test/',
-      '/src/': '/base/src/'
+      '/src/': '/base/src/',
+      '/app/': '/base/src/app/'
     },
 
     autoWatchBatchDelay: 10000,
@@ -29,6 +32,8 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
 
     preprocessors: {
+      'src/app.js': ['coverage', 'sourcemap'],
+      'src/main.js': ['coverage', 'sourcemap'],
       'src/app/**/*.js': ['coverage', 'sourcemap']
     },
     reporters: ['progress', 'coverage', 'appveyor'],

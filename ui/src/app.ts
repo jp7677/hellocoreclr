@@ -12,7 +12,7 @@ import "angular-ui-router";
 
 import * as main from "./main";
 
-angular.element(document).ready(function (){
+angular.element(document).ready(function (): void {
   angular.bootstrap(document, [main.name], {
     strictDi: true
   });

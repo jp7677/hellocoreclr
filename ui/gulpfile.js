@@ -23,7 +23,6 @@ var paths = {
   jspmPackages: './src/jspm_packages/**/*'
 }
 
-var tsProject = ts.createProject('tsconfig.json')
 var production = false
 
 gulp.task('clean:dest', function () {
@@ -107,7 +106,8 @@ gulp.task('lint', ['lint:ts', 'lint:css', 'lint:html'])
 // -- Compile/bundle
 
 gulp.task('tscompile', ['clean:js'], function () {
-  var tsResult = tsProject.src()
+  var tsProject = ts.createProject('tsconfig.json')
+  var tsResult = gulp.src([paths.src + '**/*.ts', paths.test + '**/*.ts', '!' + paths.jspmPackages], { base: '.' })
     .pipe(iif(!production, sourcemaps.init()))
     .pipe(ts(tsProject))
 

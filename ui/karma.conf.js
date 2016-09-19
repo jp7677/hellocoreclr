@@ -13,7 +13,6 @@ module.exports = function (config) {
       ],
       serveFiles: [
         'src/**/*.js',
-        'src/**/*.html',
         'test/stubs.js'
       ],
       meta: {
@@ -22,9 +21,9 @@ module.exports = function (config) {
     },
     proxies: {
       '/jspm_packages/': '/base/src/jspm_packages/',
-      '/test/': '/base/test/',
+      '/src/styles.css': '/styles.css',
       '/src/': '/base/src/',
-      '/app/': '/base/src/app/'
+      '/test/': '/base/test/'
     },
 
     autoWatchBatchDelay: 10000,

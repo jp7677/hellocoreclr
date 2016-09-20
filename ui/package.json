@@ -11,6 +11,7 @@
     "jspm": "~0.16.45",
     "typings": "~1.3.3",
     "gulp": "~3.9.1",
+    "gulp-require-tasks": "~1.0.5",
     "run-sequence": "~1.2.2",
     "gulp-if": "~2.0.1",
     "gulp-typescript": "~2.14.0",

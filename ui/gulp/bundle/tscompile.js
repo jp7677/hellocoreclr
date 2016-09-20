@@ -10,17 +10,17 @@ module.exports = {
   fn: function (gulp, paths, mode, done) {
     var tsProject = ts.createProject('tsconfig.json')
     var tsResult = tsProject.src()
-        .pipe(iif(!mode.production, sourcemaps.init()))
-        .pipe(ts(tsProject))
+      .pipe(iif(!mode.production, sourcemaps.init()))
+      .pipe(ts(tsProject))
 
     return tsResult.js
-        .pipe(iif(!mode.production, sourcemaps.write('.', {
-          mapSources: function (sourcePath) {
-            var truncatedSourcePath = sourcePath.substr(sourcePath.lastIndexOf('/') + 1)
-            util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
-            return truncatedSourcePath
-          }
-        })))
-        .pipe(gulp.dest('.'))
+      .pipe(iif(!mode.production, sourcemaps.write('.', {
+        mapSources: function (sourcePath) {
+          var truncatedSourcePath = sourcePath.substr(sourcePath.lastIndexOf('/') + 1)
+          util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
+          return truncatedSourcePath
+        }
+      })))
+      .pipe(gulp.dest('.'))
   }
 }

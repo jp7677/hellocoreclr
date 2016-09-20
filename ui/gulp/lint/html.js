@@ -15,8 +15,8 @@ module.exports = {
       results.htmlhint.messages.forEach(function (warning) {
         var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
         var message = '[' + util.colors.cyan('lint') + '] ' +
-                util.colors.red(warning.error.type) + ' ' + file +
-                '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
+          util.colors.red(warning.error.type) + ' ' + file +
+          '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
         util.log(message)
       })
     }

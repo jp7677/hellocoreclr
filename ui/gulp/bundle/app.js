@@ -11,12 +11,12 @@ module.exports = {
   dep: ['bundle:tscompile'],
   fn: function (gulp, paths, mode, done) {
     return gulp.src(paths.src + './app.js', { base: '.' })
-        .pipe(iif(!mode.production, sourcemaps.init({loadMaps: true})))
-        .pipe(jspm({selfExecutingBundle: true, minify: true, fileName: 'app-bundle'}))
-        .pipe(iif(mode.production, hash({'format': '{hash}{ext}'})))
-        .pipe(filenames('appbundle'))
-        .pipe(iif(!mode.production, sourcemaps.write('.')))
-        .pipe(flatten())
-        .pipe(gulp.dest('wwwroot/'))
+      .pipe(iif(!mode.production, sourcemaps.init({loadMaps: true})))
+      .pipe(jspm({selfExecutingBundle: true, minify: true, fileName: 'app-bundle'}))
+      .pipe(iif(mode.production, hash({'format': '{hash}{ext}'})))
+      .pipe(filenames('appbundle'))
+      .pipe(iif(!mode.production, sourcemaps.write('.')))
+      .pipe(flatten())
+      .pipe(gulp.dest('wwwroot/'))
   }
 }

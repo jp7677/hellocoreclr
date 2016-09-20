@@ -4,14 +4,13 @@ const gulp = require('gulp')
 const load = require('gulp-require-tasks')
 const run = require('run-sequence')
 
+const mode = { production: false }
 const paths = {
   wwwroot: './wwwroot/',
   src: './src/',
   test: './test/',
   jspmPackages: './src/jspm_packages/**/*'
 }
-
-const mode = { production: false }
 
 load({
   path: process.cwd() + '/gulp',

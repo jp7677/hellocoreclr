@@ -107,7 +107,7 @@ gulp.task('lint', ['lint:ts', 'lint:css', 'lint:html'])
 
 gulp.task('tscompile', ['clean:js'], function () {
   var tsProject = ts.createProject('tsconfig.json')
-  var tsResult = gulp.src([paths.src + '**/*.ts', paths.test + '**/*.ts', '!' + paths.jspmPackages], { base: '.' })
+  var tsResult = tsProject.src()
     .pipe(iif(!production, sourcemaps.init()))
     .pipe(ts(tsProject))
 

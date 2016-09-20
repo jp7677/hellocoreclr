@@ -3,7 +3,7 @@
 const image = require('gulp-image-optimization')
 
 module.exports = {
-  fn: function (gulp, paths, production, done) {
+  fn: function (gulp, paths, mode, done) {
     return gulp.src([paths.src + '**/*.{png,jpg,gif,svg}', '!' + paths.jspmPackages])
     .pipe(image({
       optimizationLevel: 3,

@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-  fn: function (gulp, paths, production, done) {
+  fn: function (gulp, paths, mode, done) {
     var watch = require('gulp-watch')
     var batch = require('gulp-batch')
 

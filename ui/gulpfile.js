@@ -11,11 +11,11 @@ const paths = {
   jspmPackages: './src/jspm_packages/**/*'
 }
 
-var production = false
+const mode = { production: false }
 
 load({
   path: process.cwd() + '/gulp',
-  arguments: [paths, production]
+  arguments: [paths, mode]
 })
 
 gulp.task('lint', ['lint:ts', 'lint:css', 'lint:html'])
@@ -25,7 +25,7 @@ gulp.task('build', function (done) {
 })
 
 gulp.task('production', function (done) {
-  production = true
+  mode.production = true
   run('build', done)
 })
 

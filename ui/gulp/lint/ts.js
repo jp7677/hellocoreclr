@@ -3,8 +3,8 @@
 const util = require('gulp-util')
 
 module.exports = {
-  fn: function (gulp, paths, production, done) {
-    if (production) {
+  fn: function (gulp, paths, mode, done) {
+    if (mode.production) {
       util.log('Skipping \'' + util.colors.cyan('gulp-tslint') + '\'')
       done()
       return

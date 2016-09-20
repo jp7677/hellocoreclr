@@ -7,14 +7,14 @@ const util = require('gulp-util')
 
 module.exports = {
   dep: ['clean:js'],
-  fn: function (gulp, paths, production, done) {
+  fn: function (gulp, paths, mode, done) {
     var tsProject = ts.createProject('tsconfig.json')
     var tsResult = tsProject.src()
-        .pipe(iif(!production, sourcemaps.init()))
+        .pipe(iif(!mode.production, sourcemaps.init()))
         .pipe(ts(tsProject))
 
     return tsResult.js
-        .pipe(iif(!production, sourcemaps.write('.', {
+        .pipe(iif(!mode.production, sourcemaps.write('.', {
           mapSources: function (sourcePath) {
             var truncatedSourcePath = sourcePath.substr(sourcePath.lastIndexOf('/') + 1)
             util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))

@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-  fn: function (gulp, paths, production, done) {
+  fn: function (gulp, paths, mode, done) {
     var browserSync = require('browser-sync').create()
     var proxy = require('proxy-middleware')
     var url = require('url')

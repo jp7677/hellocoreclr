@@ -43,9 +43,23 @@ gulp.task('lint:ts', function (done) {
     return
   }
 
+  var consoleFormatter = function () {
+    consoleFormatter.prototype.format = function (results) {
+      var now = new Date()
+      var message = ''
+      results.forEach(function (element) {
+        var line = '[' + util.colors.cyan('lint') + '] ' +
+          util.colors.red('error') + ' ' + element.fileName +
+          '[' + (element.startPosition.lineAndCharacter.line + 1) + ', ' + (element.startPosition.lineAndCharacter.character + 1) + ']: ' + element.failure
+        message += '[' + util.colors.gray(now.toLocaleTimeString([], {hour12: false})) + '] ' + line + '\n'
+      })
+      return message.trim()
+    }
+  }
+
   var tslint = require('gulp-tslint')
   return gulp.src([paths.src + '**/*.ts', paths.test + '**/*.ts', '!' + paths.jspmPackages])
-    .pipe(tslint({formatter: 'verbose'}))
+    .pipe(tslint({formatter: consoleFormatter}))
     .pipe(tslint.report({emitError: false}))
 })
 
@@ -60,7 +74,7 @@ gulp.task('lint:css', function (done) {
     results.forEach(function (element) {
       var file = path.relative(path.join(process.cwd(), paths.src), element.source)
       element.warnings.forEach(function (warning) {
-        var message = '[' + util.colors.cyan('gulp-stylelint') + '] ' +
+        var message = '[' + util.colors.cyan('lint') + '] ' +
           util.colors.red(warning.severity) + ' ' + file +
           '[' + warning.line + ', ' + warning.column + ']: ' + warning.text
         util.log(message)
@@ -88,7 +102,7 @@ gulp.task('lint:html', function (done) {
   var consoleReporter = function (results) {
     results.htmlhint.messages.forEach(function (warning) {
       var file = path.relative(path.join(process.cwd(), paths.src), warning.file)
-      var message = '[' + util.colors.cyan('gulp-htmlhint') + '] ' +
+      var message = '[' + util.colors.cyan('lint') + '] ' +
               util.colors.red(warning.error.type) + ' ' + file +
               '[' + warning.error.line + ', ' + warning.error.col + ']: ' + warning.error.message
       util.log(message)

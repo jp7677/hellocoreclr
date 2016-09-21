@@ -28,13 +28,13 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
 
     preprocessors: {
-      'src/app.js': ['coverage', 'sourcemap'],
-      'src/main.js': ['coverage', 'sourcemap'],
+      'src/!(jspm.conf).js': ['coverage', 'sourcemap'],
       'src/app/**/*.js': ['coverage', 'sourcemap']
     },
     reporters: ['progress', 'coverage', 'appveyor'],
     coverageReporter: {
       dir: '../reports',
+      includeAllSources: true,
       reporters: [
         {
           type: 'json',

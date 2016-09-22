@@ -21,22 +21,28 @@ before_install:
 - sudo apt-get -y install dotnet-hostfxr-1.0.1
 
 env:
-- DOTNET_CLI_TELEMETRY_OPTOUT=1
+  global:
+  - secure: "Ed1fIc/HxOKH3eZ6rWP2hI8chQQqn0YuwuLY1uRZVUxyeYDEZuL3yHJ52K7hRxhDzAR7GdVMt6IizzIoBgfP7EpWiGWkwzRCmbD7dMZkHx0IUWVddq6DV2nAyCWre7cO3SeMPWaYadsOKn0HhVYrqKYCkfQ1F+B8eRo9i5vT6TQ2MiN7cUIJi4ESWdSFCq6VWXu+bEFAb0+mUa4AUhO8BTlOWcr6duQeEJBSsBm2QDAxN88hWBy2JlWIyQKZFyDUfPOOaG0IWtB0CwBtjhweyCIwvPdMeXnxPce1eMS/Rh4dHjhNp4Mjx1XxoU6FN9B09BCiJYqqbS0fD/8fWZxUMMbhh0p8SfKjzEpMR/bZ9CDfhHI1qaRnEPxH2cHQiDeQj0aDbjqMllP9GjNvYL71mG4CO7zOTaaidYvAPiqfxqN3PkRnzWPizvd5hyOLJ/95LOoUwSmXItuGMpXpw6lj0Izk7FgCau/tzIAbqFgm6PGtsLWiYV9COljH19TNgIqbGWMtVUU3DyEpy4DZhJJbgog/8E9vzbuWE2SmNPobCsWgxaqqoDx0oHOICQ8mNXmyZ5uuLdAGHIVxTCL+QBlzOYgLiJFlMfhgdxtz+ZwKqR4CyPvQo/uKMU2YCQI7yMc1SuFDfzNELVrRBV3PtDjXifaopuM0AgN6ypkfii8Jyl0="
+  - DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 script:
+- cd $TRAVIS_BUILD_DIR
 - dotnet restore
 - dotnet publish --configuration Release --output artifacts/approot src/app --version-suffix build$TRAVIS_BUILD_NUMBER
 
-- npm install --production --prefix ui
-- ui/node_modules/.bin/bower install --config.cwd=ui
-- ui/node_modules/.bin/typings install --cwd ui
-- ui/node_modules/.bin/gulp production --cwd ui
+- cd $TRAVIS_BUILD_DIR/ui
+- npm install --production
+- node_modules/.bin/jspm install --production
+- node_modules/.bin/typings install
+- node_modules/.bin/gulp production
+
+- cd $TRAVIS_BUILD_DIR
 - dotnet publish --output artifacts ui
 
 cache:
   directories:
     - $HOME/.nuget/packages
     - node_modules
-    - ui\node_modules
-    - ui\bower_components
-    - ui\typings
+    - ui/node_modules
+    - ui/typings
+    - ui/src/jspm_packages

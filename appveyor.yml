@@ -1,22 +1,29 @@
 version: '0.1.{build}'
 
 environment:
+    JSPM_GITHUB_AUTH_TOKEN:
+        secure: 8yy1+CdU2STK+rAWEV4Lc8fdORrxQmN3HU+UQLSftg1eoKGMbUolGPr6gQ9avpCC
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
 build_script:
+- cd %APPVEYOR_BUILD_FOLDER%
 - dotnet restore
 - dotnet build src\app\project.json
-- npm install --prefix ui
-- ui\node_modules\.bin\bower install --config.cwd=ui
-- ui\node_modules\.bin\typings install --cwd ui
-- ui\node_modules\.bin\gulp --cwd ui
+
+- cd %APPVEYOR_BUILD_FOLDER%\ui
+- npm install
+- node_modules\.bin\jspm install
+- node_modules\.bin\typings install
+- node_modules\.bin\gulp
 
 test_script:
+- cd %APPVEYOR_BUILD_FOLDER%
 - dotnet test test\app.tests
 - npm install karma-coverage karma-sourcemap-loader karma-appveyor-reporter --prefix ui
 - ui\node_modules\.bin\karma start ui\karma-appveyor.conf.js
 
 after_test:
+- cd %APPVEYOR_BUILD_FOLDER%
 - nuget install OpenCover -Version 4.6.519 -o .\packages
 - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\app.tests" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Tests*]*" -hideskipped:Filter -mergeoutput -output:reports\coverage-dotnet.xml
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-dotnet.xml
@@ -27,7 +34,7 @@ after_test:
 cache:
 - '%USERPROFILE%\.nuget\packages'
 - 'ui\node_modules'
-- 'ui\bower_components'
+- 'ui\src\jspm_packages'
 - 'ui\typings'
 - 'node_modules'
 - 'packages'

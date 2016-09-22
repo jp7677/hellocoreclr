@@ -3,10 +3,11 @@ artifacts/**
 packages/**
 reports/**
 ui/node_modules/**
-ui/bower_components/**
+ui/src/jspm_packages/**
 ui/typings/**
 ui/wwwroot/**
 ui/src/**/*.js
+!ui/src/jspm.conf.js
 ui/src/**/*.js.map
 ui/test/**/*.js
 ui/test/**/*.js.map

@@ -8,22 +8,21 @@
   },
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "dependencies": {
-    "bower": "~1.7.9",
+    "jspm": "~0.16.45",
     "typings": "~1.3.3",
     "gulp": "~3.9.1",
+    "gulp-require-tasks": "~1.0.5",
     "run-sequence": "~1.2.2",
     "gulp-if": "~2.0.1",
-    "gulp-typescript": "~2.13.6",
-    "gulp-ng-config": "~1.3.1",
+    "gulp-typescript": "~2.14.0",
+    "gulp-jspm": "~0.5.13",
     "gulp-sourcemaps": "~2.0.0-alpha",
     "gulp-concat": "~2.6.0",
-    "gulp-uglify": "~2.0.0",
     "gulp-cssmin": "~0.1.7",
     "gulp-html-replace": "~1.6.1",
     "gulp-filenames": "~3.0.0",
     "gulp-htmlmin": "~2.0.0",
     "gulp-image-optimization": "~0.1.3",
-    "main-bower-files": "~2.13.1",
     "gulp-flatten": "~0.3.1",
     "gulp-hash-filename": "~1.2.0",
     "gulp-util": "~3.0.7",
@@ -33,18 +32,38 @@
     "gulp-tslint": "~6.1.1",
     "gulp-stylelint": "~3.2.0",
     "gulp-htmlhint": "~0.3.1",
-    "mocha": "~3.0.2",
-    "chai": "~3.5.0",
-    "sinon": "~1.17.5",
-    "angular-mocks": "~1.5.8",
-    "karma": "~1.2.0",
+    "karma": "~1.3.0",
+    "karma-jspm": "~2.2.0",
+    "systemjs": "~0.19.38",
     "karma-mocha": "~1.1.1",
     "karma-chai": "~0.1.0",
     "karma-sinon": "~1.0.5",
     "karma-phantomjs-launcher": "~1.0.2",
     "gulp-watch": "~4.3.9",
     "gulp-batch": "~1.0.5",
-    "browser-sync": "~2.15.0",
+    "browser-sync": "~2.16.0",
     "proxy-middleware": "~0.15.0"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "src"
+    },
+    "configFile": "src/jspm.conf.js",
+    "dependencies": {
+      "angular": "github:angular/bower-angular@~1.5.8",
+      "angular-bootstrap": "github:angular-ui/bootstrap-bower@~2.1.3",
+      "angular-ui-router": "github:angular-ui/angular-ui-router-bower@~0.3.1",
+      "bootstrap": "github:twbs/bootstrap@~3.3.7",
+      "font-awesome": "npm:font-awesome@~4.6.3",
+      "jquery": "npm:jquery@~3.1.0",
+      "toastr": "github:CodeSeven/toastr@~2.1.3"
+    },
+    "devDependencies": {
+      "css": "github:systemjs/plugin-css@~0.1.27",
+      "angular-mocks": "github:angular/bower-angular-mocks@~1.5.8",
+      "chai": "npm:chai@~3.5.0",
+      "mocha": "npm:mocha@~3.0.2",
+      "sinon": "npm:sinon@~1.17.5"
+    }
   }
 }

@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "system",
     "sourceMap": true
   },
   "exclude": [
     "wwwroot",
     "node_modules",
-    "bower_components",
+    "src/jspm_packages",
     "typings/index.d.ts"
   ]
 }

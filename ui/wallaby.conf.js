@@ -3,18 +3,37 @@ module.exports = function (wallaby) {
 
   return {
     files: [
-      {pattern: 'node_modules/chai/chai.js', instrument: false},
-      {pattern: 'node_modules/sinon/pkg/sinon.js', instrument: false},
-      {pattern: 'bower_components/jquery/dist/jquery.js', instrument: false},
-      {pattern: 'bower_components/toastr/toastr.js', instrument: false},
-      {pattern: 'bower_components/angular/angular.js', instrument: false},
-      {pattern: 'node_modules/angular-mocks/angular-mocks.js', instrument: false},
-      'src/app/**/*.ts',
-      'test/stubs.ts'
+      {pattern: 'node_modules/systemjs/dist/system.js', instrument: false},
+      {pattern: 'src/jspm.conf.js', instrument: false},
+      {pattern: 'src/app/**/*.ts', load: false},
+      {pattern: 'test/stubs.ts', load: false}
     ],
     tests: [
-      'test/**/*.spec.ts'
+      {pattern: 'test/**/*.spec.ts', load: false}
     ],
-    testFramework: 'mocha'
+
+    // telling wallaby to serve jspm_packages project folder
+    // as is from wallaby web server
+    middleware: (app, express) => {
+      app.use('/node_modules/systemjs/dist',
+              express.static('node_modules/systemjs/dist'))
+      app.use('/jspm_packages',
+              express.static('src/jspm_packages'))
+    },
+
+    setup: function (wallaby) {
+      // Preventing wallaby from starting the test run
+      wallaby.delayStart()
+
+      var promises = []
+      for (var i = 0, len = wallaby.tests.length; i < len; i++) {
+        promises.push(System['import'](wallaby.tests[i]))
+      }
+
+      // starting wallaby test run when everything required is loaded
+      Promise.all(promises).then(function () {
+        wallaby.start()
+      }).catch(function (e) { setTimeout(function () { throw e }, 0) })
+    }
   }
 }

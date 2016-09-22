@@ -7,6 +7,10 @@
     "warningsAsErrors": true
   },
   "dependencies": {
+    "Microsoft.NETCore.App": {  
+      "version": "1.0.1",
+      "type": "platform"
+    },
     "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-160831"
   },
 

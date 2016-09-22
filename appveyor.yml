@@ -1,8 +1,8 @@
 version: '0.1.{build}'
 
 environment:
-    TSD_GITHUB_TOKEN: 
-        secure: 5ly/jOonRmc+aQyNOJOb0UMxpFY9jHgIhyDp94lrJ+8BEnvPwZQcaJ5B0B/E+kXRdekB7pvShvpSwIRMx7W1FQ==
+    JSPM_GITHUB_AUTH_TOKEN:
+        secure: 8yy1+CdU2STK+rAWEV4Lc8fdORrxQmN3HU+UQLSftg1eoKGMbUolGPr6gQ9avpCC
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
 build_script:

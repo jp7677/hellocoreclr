@@ -1,6 +1,8 @@
 version: '0.1.{build}'
 
 environment:
+    TSD_GITHUB_TOKEN: 
+        secure: LFkjwxOI6tLQe6UjbKuQsGecTjxGWzh2tUvsgrf0CW4uQY0Zweh9yKwnu6M6ByJA
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
 build_script:

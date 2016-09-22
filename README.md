@@ -104,6 +104,5 @@ Your favorite browser should fire up and should open <http://localhost:3000/>. H
 
 ## To-do
 
-- Do something for jspm/github rate limit (https://gist.github.com/topheman/25241e48a1b4f91ec6d4)
 - Switch from Angular to Aurelia.
 - App: Rethink the way we find the webroot. Eventually we shouldn't use webroot and static files at all in a production scenario.

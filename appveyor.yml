@@ -34,9 +34,9 @@ after_test:
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 
 cache:
-- '%USERPROFILE%\.nuget\packages'
-- 'ui\node_modules'
-- 'ui\src\jspm_packages'
-- 'ui\typings'
-- 'node_modules'
-- 'packages'
+- '%USERPROFILE%\.nuget\packages' -> appveyor.yml
+- 'ui\node_modules' -> appveyor.yml
+- 'ui\src\jspm_packages' -> appveyor.yml
+- 'ui\typings' -> appveyor.yml
+- 'node_modules' -> appveyor.yml
+- 'packages' -> appveyor.yml

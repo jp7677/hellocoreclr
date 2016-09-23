@@ -10,7 +10,7 @@ exports.dep = ['clean:js']
 exports.fn = function (gulp, paths, mode, done) {
   var tsProject = ts.createProject('tsconfig.json')
   var tsResult = tsProject.src()
-    .pipe(iif(mode.production, filter(['**/*.ts', '!**/*.spec.ts', '!**/stubs.ts'])))
+    .pipe(iif(mode.production, filter(['**/*', '!test/**'])))
     .pipe(iif(!mode.production, sourcemaps.init()))
     .pipe(ts(tsProject))
 

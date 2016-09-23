@@ -21,7 +21,7 @@ exports.fn = function (gulp, paths, mode, done) {
     .pipe(iif(!mode.production, sourcemaps.init()))
     .pipe(concat(paths.wwwroot + 'app-bundle.css'))
     .pipe(cssmin())
-    .pipe(iif(mode.production, hash({'format': '2-{hash}{ext}'})))
+    .pipe(iif(mode.production, hash({'format': '{hash}{ext}'})))
     .pipe(filenames('cssbundle'))
     .pipe(iif(!mode.production, sourcemaps.write('.', {
       mapSources: function (sourcePath) {

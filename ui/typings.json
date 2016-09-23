@@ -3,13 +3,15 @@
   "version": false,
   "dependencies": {},
   "globalDependencies": {
-    "angular": "registry:dt/angular#1.5.0+20160909133806",
-    "angular-mocks": "registry:dt/angular-mocks#1.5.0+20160608104721",
+    "angular": "registry:dt/angular#1.5.0+20160922195358",
     "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160810191828",
-    "chai": "registry:dt/chai#3.4.0+20160601211834",
     "jquery": "registry:dt/jquery#1.10.0+20160908203239",
-    "mocha": "registry:dt/mocha#2.2.5+20160720003353",
-    "sinon": "registry:dt/sinon#1.16.0+20160517064723",
     "toastr": "registry:dt/toastr#2.1.1+20160510010435"
+  },
+  "globalDevDependencies": {
+    "angular-mocks": "registry:dt/angular-mocks#1.5.0+20160608104721",
+    "chai": "registry:dt/chai#3.4.0+20160601211834",
+    "mocha": "registry:dt/mocha#2.2.5+20160720003353",
+    "sinon": "registry:dt/sinon#1.16.0+20160517064723"
   }
 }

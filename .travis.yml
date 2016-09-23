@@ -33,7 +33,7 @@ script:
 - cd $TRAVIS_BUILD_DIR/ui
 - npm install --production
 - node_modules/.bin/jspm install --production
-- node_modules/.bin/typings install
+- node_modules/.bin/typings install --production
 - node_modules/.bin/gulp production
 
 - cd $TRAVIS_BUILD_DIR

@@ -12,7 +12,7 @@ exports.fn = function (gulp, paths, mode, done) {
   var tsResult = tsProject.src()
     .pipe(iif(mode.production, filter(['**/*', '!test/**'])))
     .pipe(iif(!mode.production, sourcemaps.init()))
-    .pipe(ts(tsProject))
+    .pipe(tsProject())
 
   return tsResult.js
     .pipe(iif(!mode.production, sourcemaps.write('.', {

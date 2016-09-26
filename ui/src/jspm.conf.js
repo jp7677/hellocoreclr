@@ -9,20 +9,20 @@ System.config({
 
   map: {
     "angular": "github:angular/bower-angular@1.5.8",
-    "angular-bootstrap": "github:angular-ui/bootstrap-bower@2.1.3",
+    "angular-bootstrap": "github:angular-ui/bootstrap-bower@2.1.4",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.8",
     "angular-ui-router": "github:angular-ui/angular-ui-router-bower@0.3.1",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "chai": "npm:chai@3.5.0",
     "css": "github:systemjs/plugin-css@0.1.29",
     "font-awesome": "npm:font-awesome@4.6.3",
-    "jquery": "npm:jquery@3.1.0",
+    "jquery": "npm:jquery@3.1.1",
     "mocha": "npm:mocha@3.0.2",
-    "sinon": "npm:sinon@1.17.5",
+    "sinon": "npm:sinon@1.17.6",
     "toastr": "github:CodeSeven/toastr@2.1.3",
     "github:CodeSeven/toastr@2.1.3": {
       "css": "github:systemjs/plugin-css@0.1.29",
-      "jquery": "github:components/jquery@3.1.0"
+      "jquery": "github:components/jquery@3.1.1"
     },
     "github:angular-ui/angular-ui-router-bower@0.3.1": {
       "angular": "github:angular/bower-angular@1.5.8"
@@ -46,7 +46,7 @@ System.config({
       "vm-browserify": "npm:vm-browserify@0.0.4"
     },
     "github:twbs/bootstrap@3.3.7": {
-      "jquery": "npm:jquery@3.1.0"
+      "jquery": "npm:jquery@3.1.1"
     },
     "npm:assert@1.4.1": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
@@ -112,7 +112,7 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
     },
-    "npm:sinon@1.17.5": {
+    "npm:sinon@1.17.6": {
       "formatio": "npm:formatio@1.1.1",
       "lolex": "npm:lolex@1.3.2",
       "process": "github:jspm/nodelibs-process@0.1.2",

@@ -6,7 +6,7 @@ exports.fn = function (gulp, paths, mode, done) {
 
   watch([paths.src + '**/*.ts', '!' + paths.jspmPackages], batch(function (events, done) {
     gulp.start('lint:ts', done)
-    gulp.start('tscompile', done)
+    gulp.start('bundle:tscompile', done)
     done()
   }))
 }

@@ -14,14 +14,14 @@ System.config({
     "angular-ui-router": "github:angular-ui/angular-ui-router-bower@0.3.1",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "chai": "npm:chai@3.5.0",
-    "css": "github:systemjs/plugin-css@0.1.27",
+    "css": "github:systemjs/plugin-css@0.1.29",
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@3.1.0",
     "mocha": "npm:mocha@3.0.2",
     "sinon": "npm:sinon@1.17.5",
     "toastr": "github:CodeSeven/toastr@2.1.3",
     "github:CodeSeven/toastr@2.1.3": {
-      "css": "github:systemjs/plugin-css@0.1.27",
+      "css": "github:systemjs/plugin-css@0.1.29",
       "jquery": "github:components/jquery@3.1.0"
     },
     "github:angular-ui/angular-ui-router-bower@0.3.1": {
@@ -78,7 +78,7 @@ System.config({
       "type-detect": "npm:type-detect@0.1.1"
     },
     "npm:font-awesome@4.6.3": {
-      "css": "github:systemjs/plugin-css@0.1.27"
+      "css": "github:systemjs/plugin-css@0.1.29"
     },
     "npm:formatio@1.1.1": {
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -102,7 +102,7 @@ System.config({
       "lodash.isarray": "npm:lodash.isarray@3.0.4"
     },
     "npm:mocha@3.0.2": {
-      "css": "github:systemjs/plugin-css@0.1.27",
+      "css": "github:systemjs/plugin-css@0.1.29",
       "debug": "npm:debug@2.2.0",
       "json3": "npm:json3@3.3.2",
       "lodash.create": "npm:lodash.create@3.1.1"

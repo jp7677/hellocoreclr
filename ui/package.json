@@ -65,9 +65,9 @@
       "toastr": "github:CodeSeven/toastr@~2.1.3"
     },
     "devDependencies": {
-      "css": "github:systemjs/plugin-css@~0.1.27",
       "angular-mocks": "github:angular/bower-angular-mocks@~1.5.8",
       "chai": "npm:chai@~3.5.0",
+      "css": "github:systemjs/plugin-css@~0.1.29",
       "mocha": "npm:mocha@~3.0.2",
       "sinon": "npm:sinon@~1.17.5"
     }

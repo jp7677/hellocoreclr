@@ -11,7 +11,7 @@ exports.dep = ['bundle:tscompile']
 exports.fn = function (gulp, paths, mode, done) {
   return gulp.src(paths.src + './app.js', { base: '.' })
     .pipe(iif(!mode.production, sourcemaps.init({loadMaps: true})))
-    .pipe(jspm({selfExecutingBundle: true, minify: mode.production, fileName: 'app-bundle'}))
+    .pipe(jspm({selfExecutingBundle: true, minify: mode.production, mangle: mode.production, fileName: 'app-bundle'}))
     .pipe(iif(mode.production, hash({'format': '{hash}{ext}'})))
     .pipe(filenames('appbundle'))
     .pipe(iif(!mode.production, sourcemaps.write('.')))

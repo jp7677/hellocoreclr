@@ -24,7 +24,11 @@ exports.fn = function (gulp, paths, mode, done) {
     .pipe(filenames('cssbundle'))
     .pipe(iif(!mode.production, sourcemaps.write('.', {
       mapSources: function (sourcePath) {
-        var extendedSourcePath = paths.src.substr(2) + sourcePath
+        var prefix = ''
+        if (sourcePath.indexOf('/') === -1) {
+          prefix = 'css/'
+        }
+        var extendedSourcePath = paths.src.substr(2) + prefix + sourcePath
         util.log('SourcePath within source map extended to:', util.colors.cyan(extendedSourcePath))
         return extendedSourcePath
       }

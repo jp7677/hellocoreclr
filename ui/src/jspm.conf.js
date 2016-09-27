@@ -19,11 +19,7 @@ System.config({
     "jquery": "npm:jquery@3.1.1",
     "mocha": "npm:mocha@3.0.2",
     "sinon": "npm:sinon@1.17.6",
-    "toastr": "github:CodeSeven/toastr@2.1.3",
-    "github:CodeSeven/toastr@2.1.3": {
-      "css": "github:systemjs/plugin-css@0.1.29",
-      "jquery": "github:components/jquery@3.1.1"
-    },
+    "toastr": "npm:toastr@2.1.2",
     "github:angular-ui/angular-ui-router-bower@0.3.1": {
       "angular": "github:angular/bower-angular@1.5.8"
     },
@@ -118,6 +114,9 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "samsam": "npm:samsam@1.1.2",
       "util": "npm:util@0.10.3"
+    },
+    "npm:toastr@2.1.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:util@0.10.3": {
       "inherits": "npm:inherits@2.0.1",

@@ -45,8 +45,6 @@
     "karma-sinon": "~1.0.5",
     "sinon": "~1.17.6",
     "karma-phantomjs-launcher": "~1.0.2",
-    "gulp-watch": "~4.3.9",
-    "gulp-batch": "~1.0.5",
     "browser-sync": "~2.16.0",
     "proxy-middleware": "~0.15.0"
   },

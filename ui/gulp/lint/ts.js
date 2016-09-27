@@ -11,16 +11,13 @@ exports.fn = function (gulp, paths, mode, done) {
 
   var consoleFormatter = function () {
     consoleFormatter.prototype.format = function (results) {
-      var now = new Date()
-      var message = ''
       results.forEach(function (element) {
-        var line = '[' + util.colors.cyan('lint') + '] ' +
+        var message = '[' + util.colors.cyan('lint') + '] ' +
           util.colors.red('error') + ' ' + element.fileName +
           '[' + (element.startPosition.lineAndCharacter.line + 1) + ', ' + (element.startPosition.lineAndCharacter.character + 1) + ']: ' +
           element.failure
-        message += '[' + util.colors.gray(now.toLocaleTimeString([], {hour12: false})) + '] ' + line + '\n'
+        util.log(message)
       })
-      return message.trim()
     }
   }
 

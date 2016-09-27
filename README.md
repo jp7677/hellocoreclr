@@ -31,7 +31,7 @@ dotnet publish --configuration Release --output artifacts/approot src/app
 npm install --production --prefix ui
 (cd ui; ui/node_modules/.bin/jspm install --production)
 ui/node_modules/.bin/typings install --production --cwd ui
-ui/node_modules/.bin/gulp production --cwd ui
+ui/node_modules/.bin/gulp --production --cwd ui
 dotnet publish --output artifacts ui
 ```
 

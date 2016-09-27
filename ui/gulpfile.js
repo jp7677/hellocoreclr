@@ -3,8 +3,9 @@
 const gulp = require('gulp')
 const load = require('gulp-require-tasks')
 const run = require('run-sequence')
+const util = require('gulp-util')
 
-const mode = { production: false }
+const mode = { production: !!util.env.production }
 const paths = {
   wwwroot: './wwwroot/',
   src: './src/',
@@ -21,11 +22,6 @@ gulp.task('lint', ['lint:ts', 'lint:css', 'lint:html'])
 
 gulp.task('build', function (done) {
   run('clean:dest', ['lint', 'bundle:app', 'bundle:css', 'bundle:html', 'bundle:image', 'bundle:assets', 'bundle:fonts'], done)
-})
-
-gulp.task('production', function (done) {
-  mode.production = true
-  run('build', done)
 })
 
 gulp.task('default', ['build'])

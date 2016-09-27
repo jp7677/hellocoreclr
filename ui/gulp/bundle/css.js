@@ -1,6 +1,5 @@
 'use strict'
 
-const iif = require('gulp-if')
 const concat = require('gulp-concat')
 const cssmin = require('gulp-cssmin')
 const sourcemaps = require('gulp-sourcemaps')
@@ -17,12 +16,12 @@ exports.fn = function (gulp, paths, mode, done) {
     paths.src + 'css/*.css'
   ]
   return gulp.src(srcCss)
-    .pipe(iif(!mode.production, sourcemaps.init()))
+    .pipe(!mode.production ? sourcemaps.init() : util.noop())
     .pipe(concat(paths.wwwroot + 'app-bundle.css'))
     .pipe(cssmin())
-    .pipe(iif(mode.production, hash({'format': '{hash}{ext}'})))
+    .pipe(mode.production ? hash({'format': '{hash}{ext}'}) : util.noop())
     .pipe(filenames('cssbundle'))
-    .pipe(iif(!mode.production, sourcemaps.write('.', {
+    .pipe(!mode.production ? sourcemaps.write('.', {
       mapSources: function (sourcePath) {
         var prefix = ''
         if (sourcePath.indexOf('/') === -1) {
@@ -32,7 +31,7 @@ exports.fn = function (gulp, paths, mode, done) {
         util.log('SourcePath within source map extended to:', util.colors.cyan(extendedSourcePath))
         return extendedSourcePath
       }
-    })))
+    }) : util.noop())
     .pipe(flatten())
     .pipe(gulp.dest('wwwroot/'))
 }

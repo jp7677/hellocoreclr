@@ -32,7 +32,7 @@
     "artifacts/**": true
   },
   "stylelint.config": {
-    "extends": "./ui/stylelint.config.js" 
+    "extends": "./ui/stylelint.conf.js" 
   },
   "eslint.options": {
     "configFile": "ui/eslint.json",

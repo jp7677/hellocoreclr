@@ -14,7 +14,7 @@ const paths = {
 }
 
 load({
-  path: process.cwd() + '/gulp',
+  path: process.cwd() + '/build',
   arguments: [paths, mode]
 })
 

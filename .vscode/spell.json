@@ -10,7 +10,8 @@
     "HTMLHint",
     "Wallabyjs",
     "markdownlint",
-    "webroot"
+    "webroot",
+    "ESLint"
   ],
   "mistakeTypeToStatus": {
     "Passive voice": "Hint",

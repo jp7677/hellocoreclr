@@ -193,6 +193,7 @@ button.toast-close-button {
     padding: 8px 8px 8px 50px;
     width: 11em;
   }
+
   #toast-container .toast-close-button {
     right: -0.2em;
     top: -0.2em;
@@ -204,6 +205,7 @@ button.toast-close-button {
     padding: 8px 8px 8px 50px;
     width: 18em;
   }
+
   #toast-container .toast-close-button {
     right: -0.2em;
     top: -0.2em;

@@ -3,6 +3,7 @@
 const filter = require('gulp-filter')
 const ts = require('gulp-typescript')
 const sourcemaps = require('gulp-sourcemaps')
+const path = require('path')
 const util = require('gulp-util')
 
 exports.dep = ['clean:js']
@@ -16,7 +17,7 @@ exports.fn = function (gulp, paths, mode, done) {
   return tsResult.js
     .pipe(!mode.production ? sourcemaps.write('.', {
       mapSources: function (sourcePath) {
-        var truncatedSourcePath = sourcePath.substr(sourcePath.lastIndexOf('/') + 1)
+        var truncatedSourcePath = sourcePath.substr(sourcePath.lastIndexOf(path.sep) + 1)
         util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
         return truncatedSourcePath
       }

@@ -33,5 +33,5 @@ exports.fn = function (gulp, paths, mode, done) {
       }
     }) : util.noop())
     .pipe(flatten())
-    .pipe(gulp.dest('wwwroot/'))
+    .pipe(gulp.dest('wwwroot'))
 }

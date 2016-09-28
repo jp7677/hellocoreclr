@@ -16,5 +16,5 @@ exports.fn = function (gulp, paths, mode, done) {
     .pipe(filenames('appbundle'))
     .pipe(!mode.production ? sourcemaps.write('.') : util.noop())
     .pipe(flatten())
-    .pipe(gulp.dest('wwwroot/'))
+    .pipe(gulp.dest('wwwroot'))
 }

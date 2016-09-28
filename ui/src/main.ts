@@ -10,6 +10,5 @@ const main = angular.module("app", ["ui.router", "ui.bootstrap"])
 
 const name = main.name;
 
-
 export default main;
 export { name }

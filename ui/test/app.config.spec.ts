@@ -1,8 +1,8 @@
 "use strict";
 
-import chai from "chai";
 import { Config } from "../src/app/app.config";
 import { StateProvider, UrlRouterProvider } from "./stubs";
+import chai from "chai";
 
 describe("Config Test ", () => {
     it("initializes correctly", () => {
@@ -14,10 +14,12 @@ describe("Config Test ", () => {
         chai.expect(urlRouterProvider.otherwise.calledWithExactly("/helloworld")).to.equals(true);
         chai.expect(stateProvider.state.called).to.equals(true);
         chai.expect(stateProvider.state.calledWithExactly("helloworld", {
-                    url: "/helloworld",
-                    templateUrl: "app/greeting/helloworld.html",
                     controller: "HelloWorldController",
-                    controllerAs: "vm"
+                    controllerAs: "vm",
+                    templateUrl: "app/greeting/helloworld.html",
+                    url: "/helloworld"
                 })).to.equals(true);
+
+        chai.expect(sut).to.be.exist;
     });
 });

@@ -1,11 +1,11 @@
 "use strict";
 
-import sinon from "sinon";
-import chai from "chai";
-import "angular-mocks";
-import toastr from "toastr";
-import { HelloWorldController } from "../../src/app/greeting/helloworld.controller";
 import { GetHelloWorldResponse } from "../../src/app/greeting/gethelloworldresponse";
+import { HelloWorldController } from "../../src/app/greeting/helloworld.controller";
+import "angular-mocks";
+import chai from "chai";
+import sinon from "sinon";
+import toastr from "toastr";
 
 describe("HelloWorldController Test ", () => {
     let $http: ng.IHttpService;
@@ -14,6 +14,7 @@ describe("HelloWorldController Test ", () => {
     let apiBaseUrl = "/api/";
 
     beforeEach(() => {
+        // tslint:disable-next-line:variable-name
         inject((_$http_: ng.IHttpService, _$httpBackend_: ng.IHttpBackendService, _$log_: ng.ILogService) => {
             $http = _$http_;
             $httpBackend = _$httpBackend_;

@@ -3,4 +3,3 @@
 export class GetHelloWorldResponse {
     public name: string;
 }
-

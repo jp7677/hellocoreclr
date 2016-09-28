@@ -8,10 +8,10 @@ export class Config {
 
         $stateProvider
             .state("helloworld", {
-                url: "/helloworld",
-                templateUrl: "app/greeting/helloworld.html",
                 controller: "HelloWorldController",
-                controllerAs: "vm"
+                controllerAs: "vm",
+                templateUrl: "app/greeting/helloworld.html",
+                url: "/helloworld"
             });
     }
 }

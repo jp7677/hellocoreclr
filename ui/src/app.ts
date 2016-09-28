@@ -6,7 +6,7 @@ import "angular-ui-router";
 
 import * as main from "./main";
 
-angular.element(document).ready(function (): void {
+angular.element(document).ready(() => {
   angular.bootstrap(document, [main.name], {
     strictDi: true
   });

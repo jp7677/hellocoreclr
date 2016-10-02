@@ -15,7 +15,7 @@ exports.fn = function (gulp, paths, mode, done) {
     paths.src + 'css/*'
   ]
   return gulp.src(srcCss)
-    .pipe(!mode.production ? sourcemaps.init() : util.noop())
+    .pipe(!mode.production ? sourcemaps.init({loadMaps: true}) : util.noop())
     .pipe(concat('app-bundle.css'))
     .pipe(cleancss({keepSpecialComments: 0, sourceMap: false}))
     .pipe(mode.production ? hash({'format': '{hash}{ext}'}) : util.noop())

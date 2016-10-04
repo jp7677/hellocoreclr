@@ -14,7 +14,7 @@ System.config({
     "angular-ui-router": "github:angular-ui/angular-ui-router-bower@0.3.1",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "chai": "npm:chai@3.5.0",
-    "css": "github:systemjs/plugin-css@0.1.29",
+    "css": "github:systemjs/plugin-css@0.1.30",
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@3.1.1",
     "mocha": "npm:mocha@3.0.2",
@@ -54,7 +54,7 @@ System.config({
       "base64-js": "npm:base64-js@0.0.8",
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "ieee754": "npm:ieee754@1.1.6",
+      "ieee754": "npm:ieee754@1.1.8",
       "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -74,7 +74,7 @@ System.config({
       "type-detect": "npm:type-detect@0.1.1"
     },
     "npm:font-awesome@4.6.3": {
-      "css": "github:systemjs/plugin-css@0.1.29"
+      "css": "github:systemjs/plugin-css@0.1.30"
     },
     "npm:formatio@1.1.1": {
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -98,7 +98,7 @@ System.config({
       "lodash.isarray": "npm:lodash.isarray@3.0.4"
     },
     "npm:mocha@3.0.2": {
-      "css": "github:systemjs/plugin-css@0.1.29",
+      "css": "github:systemjs/plugin-css@0.1.30",
       "debug": "npm:debug@2.2.0",
       "json3": "npm:json3@3.3.2",
       "lodash.create": "npm:lodash.create@3.1.1"

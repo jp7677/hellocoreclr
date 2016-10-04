@@ -8,14 +8,14 @@
   },
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "dependencies": {
-    "jspm": "~0.16.45",
+    "jspm": "~0.16.46",
     "typescript": "~2.0.3",
     "typings": "~1.4.0",
     "gulp": "~3.9.1",
     "gulp-require-tasks": "~1.0.5",
     "run-sequence": "~1.2.2",
     "gulp-filter": "~4.0.0",
-    "gulp-typescript": "~3.0.1",
+    "gulp-typescript": "~3.0.2",
     "gulp-jspm": "~0.5.13",
     "gulp-sourcemaps": "~2.0.0-alpha",
     "gulp-concat": "~2.6.0",
@@ -46,7 +46,7 @@
     "karma-sinon": "~1.0.5",
     "sinon": "~1.17.6",
     "karma-phantomjs-launcher": "~1.0.2",
-    "browser-sync": "~2.16.1",
+    "browser-sync": "~2.17.0",
     "proxy-middleware": "~0.15.0"
   },
   "jspm": {

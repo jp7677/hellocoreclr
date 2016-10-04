@@ -5,7 +5,7 @@
   "globalDependencies": {
     "angular": "registry:dt/angular#1.5.0+20160922195358",
     "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160810191828",
-    "jquery": "registry:dt/jquery#1.10.0+20160908203239",
+    "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "toastr": "registry:dt/toastr#2.1.1+20160510010435"
   },
   "globalDevDependencies": {

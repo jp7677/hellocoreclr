@@ -4,7 +4,8 @@ using System.Reflection;
 using System.Runtime.Loader;
 using System.Threading;
 using Microsoft.AspNetCore.Hosting;
-using NLog;
+using Microsoft.Extensions.Configuration;
+using Serilog;
 
 namespace HelloWorldApp
 {
@@ -29,10 +30,13 @@ namespace HelloWorldApp
         
         private static void ConfigureNLog()
         {
-            var location = System.Reflection.Assembly.GetEntryAssembly().Location;
-            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
-            location = location + Path.DirectorySeparatorChar + "nlog.config";
-            LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(location, true);
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
         }
 
         private static void ConfigureShutdownHandler()
@@ -46,11 +50,11 @@ namespace HelloWorldApp
 
         private static void Cancel(string signal)
         {
-            var logger = LogManager.GetCurrentClassLogger();
-            logger.Info("{0} received, initiating shutdown.", signal);
+            var log = Log.ForContext<Program>();
+            log.Information("{0} received, initiating shutdown.", signal);
             if (!ShutdownCancellationTokenSource.IsCancellationRequested)
                 ShutdownCancellationTokenSource.Cancel();
-            LogManager.Flush();
+            Log.CloseAndFlush();
         }
         
         private static string FindWebRoot()

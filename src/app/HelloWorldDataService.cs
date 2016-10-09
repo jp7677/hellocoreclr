@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
+using Serilog.Extensions.Logging;
 
 namespace HelloWorldApp
 {
@@ -30,7 +30,7 @@ namespace HelloWorldApp
         {
                 var serviceProvider = db.GetInfrastructure<IServiceProvider>();
                 var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-                loggerFactory.AddProvider(new NLogLoggerProvider());
+                loggerFactory.AddProvider(new SerilogLoggerProvider());
         }
 
         public int GetNumberOfGreetings()

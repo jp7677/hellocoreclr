@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
-using NLog;
+using Serilog;
 
 namespace HelloWorldApp
 {
     public class GetHelloWorldAction : IGetHelloWorldAction
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private ILogger log = Log.ForContext<GetHelloWorldAction>();
         IHelloWorldDataService dataService;
 
         public GetHelloWorldAction(IHelloWorldDataService dataService)
@@ -15,7 +15,7 @@ namespace HelloWorldApp
 
         public async Task<GetHelloWorldResponse> ExecuteAsync(string name)
         {
-            logger.Info("Calculating result.");
+            log.Information("Calculating result.");
 
             // VS Code doesn't know yet about referenced F# project, that why intellisense complains :(, though it builds just fine. 
             var res = GetHelloWorldRule.Process(name);
@@ -28,7 +28,7 @@ namespace HelloWorldApp
 
         private async Task SaveGreetingAsync(string response)
         {
-            logger.Info("Save greeting.");
+            log.Information("Save greeting.");
             await dataService.SaveGreetingAsync(response);
         }
     }

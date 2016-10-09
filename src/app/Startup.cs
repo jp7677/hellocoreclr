@@ -9,8 +9,7 @@ using Newtonsoft.Json.Serialization;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore;
 using SimpleInjector.Integration.AspNetCore.Mvc;
-using NLog;
-using NLog.Extensions.Logging;
+using Serilog;
 using Swashbuckle.SwaggerGen.Application;
 using Swashbuckle.Swagger.Model;
 
@@ -18,18 +17,18 @@ namespace HelloWorldApp
 {
     public class Startup
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private Serilog.ILogger log = Log.ForContext<Startup>(); 
         private readonly Container container = new Container();
         
         public Startup(IHostingEnvironment env)
         {
-            logger.Info("Starting up.");
+            log.Information("Starting up.");
         }
                 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            logger.Info("Configuring services.");
+            log.Information("Configuring services.");
             
             services.AddCors(options =>
                 options.AddPolicy("AllowFileOrigin", builder => 
@@ -64,13 +63,13 @@ namespace HelloWorldApp
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            logger.Info("Configuring.");
+            log.Information("Configuring.");
             
             SetupSimpleInjector(app);
             SetupDatabaseAsync().Wait();
             
             //add NLog to ASP.NET Core
-            loggerFactory.AddNLog();
+            loggerFactory.AddSerilog();
             
             if (env.IsDevelopment())
                 app.UseCors("AllowFileOrigin");
@@ -114,7 +113,7 @@ namespace HelloWorldApp
             var dataService = container.GetInstance<IHelloWorldDataService>();
 
             await dataService.EnsureCreatedAsync();
-            logger.Info("Currently we have {0} saved Greetings.", dataService.GetNumberOfGreetings());
+            log.Information("Currently we have {0} saved Greetings.", dataService.GetNumberOfGreetings());
         }
     }
 }

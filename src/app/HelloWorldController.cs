@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
+using Serilog;
 
 namespace HelloWorldApp
 {
@@ -8,7 +8,7 @@ namespace HelloWorldApp
     [Route("api")]
     public class HelloWorldController
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private ILogger log = Log.ForContext<HelloWorldController>();
         IActionFactory actionFactory;
         
         public HelloWorldController(IActionFactory actionFactory)
@@ -20,7 +20,7 @@ namespace HelloWorldApp
         [HttpGet]
         public async Task<IActionResult> GetHelloWorldAsync(string name)
         {
-            logger.Info("'HelloWorld' Request received with '{0}'.", name);
+            log.Information("'HelloWorld' Request received with '{0}'.", name);
             
             var action = actionFactory.CreateGetHelloWorldAction();
             var response = await action.ExecuteAsync(name);

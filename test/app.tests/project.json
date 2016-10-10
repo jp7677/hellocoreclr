@@ -26,23 +26,14 @@
    },
 
   "frameworks": {
-    "netcoreapp1.0": {
-      "imports": [
-        "dotnet",
-        "dotnet54",
-        "portable-net45"
-      ]
-    }
+    "netcoreapp1.0": { }
   },
   
   "testRunner": "xunit",
   
   "tools": {
     "Microsoft.DotNet.Watcher.Tools": {
-      "version": "1.0.0-preview2-final",
-      "imports": [
-        "portable-net45"
-      ]
+      "version": "1.0.0-preview2-final"
     }
   }
 }

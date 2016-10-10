@@ -45,11 +45,7 @@
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
-      "imports": [
-        "portable-net45"
-      ]
-    }
+    "netcoreapp1.0": { }
   },
   
   "tools": {
@@ -57,17 +53,10 @@
       "version": "1.0.1"
     },
     "Microsoft.EntityFrameworkCore.Tools": {
-      "version": "1.0.0-preview2-final",
-      "imports": [
-        "dnxcore50",
-        "portable-net45"
-      ]
+      "version": "1.0.0-preview2-final"
     },
     "Microsoft.DotNet.Watcher.Tools": {
-      "version": "1.0.0-preview2-final",
-      "imports": [
-        "portable-net451"
-      ]
+      "version": "1.0.0-preview2-final"
     }
   }
 }

@@ -19,13 +19,19 @@ namespace HelloWorldApp
             ConfigureNLog();
             ConfigureShutdownHandler();
 
-            var host = new WebHostBuilder()
+            var builder = new WebHostBuilder()
                 .UseKestrel()
-                .UseWebRoot(FindWebRoot())
-                .UseStartup<Startup>()
-                .Build();
-
-           host.Run(ShutdownCancellationTokenSource.Token);
+                .UseStartup<Startup>();
+            
+#if DEBUG
+            var log = Log.ForContext<Program>();
+            var webroot = FindWebRoot();
+            log.Warning("Running in Debug mode, hosting static files from '{0}'.", webroot);
+            builder.UseWebRoot(webroot);
+#endif
+                
+            var host = builder.Build();
+            host.Run(ShutdownCancellationTokenSource.Token);
         }
         
         private static void ConfigureNLog()
@@ -59,29 +65,11 @@ namespace HelloWorldApp
         
         private static string FindWebRoot()
         {
-            var currentDir = Directory.GetCurrentDirectory();
-            
-            var webRoot = currentDir + Path.DirectorySeparatorChar + 
-                            ".." + Path.DirectorySeparatorChar + 
-                            "wwwroot";
+            var location = System.Reflection.Assembly.GetEntryAssembly().Location;
+            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
                             
-            if (!Directory.Exists(webRoot))
-                webRoot = currentDir + Path.DirectorySeparatorChar + 
-                            "ui" + Path.DirectorySeparatorChar + 
-                            "wwwroot";
-
-            if (!Directory.Exists(webRoot))
-                webRoot = currentDir + Path.DirectorySeparatorChar + 
-                            ".." + Path.DirectorySeparatorChar +
-                            ".." + Path.DirectorySeparatorChar +
-                            "ui" + Path.DirectorySeparatorChar + 
-                            "wwwroot";  
-
-            if (!Directory.Exists(webRoot))
-                webRoot = currentDir + Path.DirectorySeparatorChar + 
-                            "wwwroot";
-            
-            return webRoot;          
+            var webroot = Path.Combine(new []{location, "..", "..", "..", "..", "..", "ui", "wwwroot"});
+            return Path.GetFullPath(webroot);
         }
     }
 }

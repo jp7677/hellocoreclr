@@ -28,16 +28,7 @@ export class HelloWorld {
 
         let client = new HttpClient();
 
-        client.configure(config => {
-            config.withInterceptor({ response(response) {
-                if (response.status !== 200) {
-                    throw response;
-                } else {
-                    return response;
-                }
-            }});
-        });
-
+        client.configure(config => config.useStandardConfiguration());
         client.fetch(baseUrl + "helloworld/" + name)
             .then(response => {
                 this.log.info("Received http code " + response.status);

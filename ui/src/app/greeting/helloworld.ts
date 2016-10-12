@@ -7,6 +7,7 @@ import toastr from "toastr";
 
 export class HelloWorld {
     public static inject() { return [HttpClient]; }
+
     public inputText: string;
     public labelText: string;
     private log = LogManager.getLogger("HelloWorld");

@@ -11,8 +11,10 @@ export class HelloWorld {
     public inputText: string;
     public labelText: string;
     private log = LogManager.getLogger("HelloWorld");
+    private httpClient: HttpClient;
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private $httpClient) {
+        this.httpClient = $httpClient;
         this.SetToastrOptions();
     }
 

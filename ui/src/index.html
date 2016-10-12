@@ -15,7 +15,7 @@
         System.import('font-awesome/css/font-awesome.css!')
         System.import('./css/toastr.css!')
         System.import('./css/styles.css!')
-        System.import('./app')
+        System.import('aurelia-bootstrapper')
             .catch(console.error.bind(console)); // make sure any errors are print to console
     </script>
     <!-- endbuild -->
@@ -26,9 +26,9 @@
     </div>
     <p />
 
-    <div class="container-fluid">
+     <div class="container-fluid">
         <div>
-            <div ui-view></div>
+            <div aurelia-app="main"></div>
         </div>
     </div>
 </body>

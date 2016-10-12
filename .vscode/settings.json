@@ -31,6 +31,9 @@
     "reports/**": true,
     "artifacts/**": true
   },
+  "htmlhint.options": {
+    "spec-char-escape": false
+  },
   "stylelint.config": {
     "extends": "./ui/stylelint.config.js" 
   },

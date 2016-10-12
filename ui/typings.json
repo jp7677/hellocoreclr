@@ -1,15 +1,33 @@
 {
   "name": "aspnet",
   "version": false,
-  "dependencies": {},
+  "dependencies": {
+    "aurelia-binding": "github:aurelia/binding",
+    "aurelia-bootstrapper": "github:aurelia/bootstrapper",
+    "aurelia-dependency-injection": "github:aurelia/dependency-injection",
+    "aurelia-event-aggregator": "github:aurelia/event-aggregator",
+    "aurelia-fetch-client": "github:aurelia/fetch-client",
+    "aurelia-framework": "github:aurelia/framework",
+    "aurelia-history": "github:aurelia/history",
+    "aurelia-loader": "github:aurelia/loader",
+    "aurelia-logging": "github:aurelia/logging",
+    "aurelia-metadata": "github:aurelia/metadata",
+    "aurelia-pal": "github:aurelia/pal",
+    "aurelia-pal-browser": "github:aurelia/pal-browser",
+    "aurelia-path": "github:aurelia/path",
+    "aurelia-route-recognizer": "github:aurelia/route-recognizer",
+    "aurelia-router": "github:aurelia/router",
+    "aurelia-task-queue": "github:aurelia/task-queue",
+    "aurelia-templating": "github:aurelia/templating"
+  },
   "globalDependencies": {
-    "angular": "registry:dt/angular#1.5.0+20160922195358",
-    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160810191828",
+    "core-js": "registry:dt/core-js#0.0.0+20160914114559",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
-    "toastr": "registry:dt/toastr#2.1.1+20160510010435"
+    "toastr": "registry:dt/toastr#2.1.1+20160510010435",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20161004182750",
+    "whatwg-streams": "registry:dt/whatwg-streams#0.0.0+20160829180742"
   },
   "globalDevDependencies": {
-    "angular-mocks": "registry:dt/angular-mocks#1.5.0+20160608104721",
     "chai": "registry:dt/chai#3.4.0+20160601211834",
     "mocha": "registry:dt/mocha#2.2.5+20160720003353",
     "sinon": "registry:dt/sinon#1.16.0+20160924120326"

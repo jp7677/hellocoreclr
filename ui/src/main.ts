@@ -1,14 +1,13 @@
 "use strict";
 
-import { Config } from "./app/app.config";
-import { HelloWorldController } from "./app/greeting/helloworld.controller";
+import {Aurelia} from "aurelia-framework";
+import "bootstrap";
 
-const main = angular.module("app", ["ui.router", "ui.bootstrap"])
-                 .constant("apiBaseUrl", "/api/")
-                 .config(Config)
-                 .controller("HelloWorldController", HelloWorldController);
+export function configure(aurelia: Aurelia) {
+  aurelia.use
+    .standardConfiguration()
+    .developmentLogging();
 
-const name = main.name;
-
-export default main;
-export { name }
+  aurelia.start().then(() =>
+    aurelia.setRoot("app/config"));
+}

@@ -1,17 +1,17 @@
 "use strict";
 
-import {baseUrl} from "../constants";
 import {HttpClient} from "aurelia-fetch-client";
 import {LogManager} from "aurelia-framework";
 import {GetHelloWorldResponse} from "gethelloworldresponse";
 import toastr from "toastr";
 
 export class HelloWorld {
+    public static inject() { return [HttpClient]; }
     public inputText: string;
     public labelText: string;
     private log = LogManager.getLogger("HelloWorld");
 
-    constructor() {
+    constructor(private httpClient: HttpClient) {
         this.SetToastrOptions();
     }
 
@@ -26,10 +26,7 @@ export class HelloWorld {
         this.log.info("We got the following name: " + name);
         toastr.info("Working...");
 
-        let client = new HttpClient();
-
-        client.configure(config => config.useStandardConfiguration());
-        client.fetch(baseUrl + "helloworld/" + name)
+        this.httpClient.fetch("helloworld/" + name)
             .then(response => {
                 this.log.info("Received http code " + response.status);
 

@@ -1,10 +1,14 @@
 version: '0.1.{build}'
 environment:
+    nodejs_version: "6.7"
     JSPM_GITHUB_AUTH_TOKEN:
         secure: iQJv6hQfYn6ykJpUPhNSnEcKJBMP1WKynxm70Xqdr3cOGdkLU06VFfRFmOvJwx58
     typings_githubToken:
         secure: iQJv6hQfYn6ykJpUPhNSnEcKJBMP1WKynxm70Xqdr3cOGdkLU06VFfRFmOvJwx58
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+install:
+- ps: Install-Product node $env:nodejs_version
 
 build_script:
 - cd %APPVEYOR_BUILD_FOLDER%

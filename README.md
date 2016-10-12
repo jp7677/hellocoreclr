@@ -12,7 +12,7 @@ Just a playground...
 
 ## Instructions
 
-Obviously you should have Net Core 1.0 and Nodejs/npm 4.x already up and running for everything that follows.
+Obviously you should have Net Core 1.0 and Nodejs/npm 6.x already up and running for everything that follows.
 
 ### Production build and publish
 
@@ -77,7 +77,7 @@ Note that Wallabyjs is a commercial extension.
 Use the following command to set up required node packages for these extensions if you haven't installed them globally.
 
 ```bash
-npm install tslint eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise stylelint stylelint-config-standard htmlhint
+npm install tslint typescript eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise stylelint stylelint-config-standard htmlhint
 ```
 
 Use again

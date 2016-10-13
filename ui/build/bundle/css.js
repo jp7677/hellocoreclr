@@ -4,7 +4,7 @@ const concat = require('gulp-concat')
 const cleancss = require('gulp-clean-css')
 const sourcemaps = require('gulp-sourcemaps')
 const filenames = require('gulp-filenames')
-const hash = require('gulp-hash-filename')
+const rev = require('gulp-rev')
 const util = require('gulp-util')
 
 exports.fn = function (gulp, paths, mode, done) {
@@ -18,7 +18,7 @@ exports.fn = function (gulp, paths, mode, done) {
     .pipe(!mode.production ? sourcemaps.init({loadMaps: true}) : util.noop())
     .pipe(concat('app-bundle.css'))
     .pipe(cleancss({keepSpecialComments: 0, sourceMap: false}))
-    .pipe(mode.production ? hash({'format': '{hash}{ext}'}) : util.noop())
+    .pipe(mode.production ? rev() : util.noop())
     .pipe(filenames('cssbundle'))
     .pipe(!mode.production ? sourcemaps.write('.', {
       mapSources: function (sourcePath) {

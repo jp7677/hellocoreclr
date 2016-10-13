@@ -1,10 +1,37 @@
 'use strict'
 
-const flatten = require('gulp-flatten')
+const bundle = require('aurelia-bundler').bundle
 
-exports.dep = ['bundle:appbundle']
+exports.dep = ['bundle:tscompile', 'bundle:prepare']
 exports.fn = function (gulp, paths, mode, done) {
-  return gulp.src([paths.src + './jspm_packages/system.js', paths.src + './jspm.conf.js', paths.src + './app-bundle*.js'], { base: '.' })
-  .pipe(flatten())
-  .pipe(gulp.dest('wwwroot'))
+  return bundle({
+    force: true,
+    baseURL: paths.src,
+    configPath: paths.src + 'app-bundle.conf.js',
+    bundles: {
+      'app-bundle': {
+        includes: [
+          '[./src/main.js]',
+          '[./src/app/**/*.js]',
+          'aurelia-framework',
+          'aurelia-bootstrapper',
+          'aurelia-loader-default',
+          'aurelia-fetch-client',
+          'aurelia-router',
+          'aurelia-logging-console',
+          'aurelia-templating-binding',
+          'aurelia-templating-resources',
+          'aurelia-history-browser',
+          'aurelia-templating-router',
+          'toastr'
+        ],
+        options: {
+          inject: true,
+          minify: mode.production,
+          rev: mode.production,
+          sourceMaps: !mode.production
+        }
+      }
+    }
+  })
 }

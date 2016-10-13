@@ -6,19 +6,24 @@
     
     <!-- build:cssbundle -->
     <!-- endbuild -->
-    <!-- build:appbundle -->
+   <!-- build:systemjs -->
     <script src="jspm_packages/system.js"></script>
+    <!-- endbuild -->
+
     <script src="jspm.conf.js"></script>
+    <!-- build:clear -->
     <script>
         System.import('bootstrap/css/bootstrap.css!')
         System.import('bootstrap/css/bootstrap-theme.css!')
         System.import('font-awesome/css/font-awesome.css!')
         System.import('./css/toastr.css!')
         System.import('./css/styles.css!')
+    </script>
+    <!-- endbuild -->
+    <script>
         System.import('aurelia-bootstrapper')
             .catch(console.error.bind(console)); // make sure any errors are print to console
     </script>
-    <!-- endbuild -->
 </head>
 <body>
     <div class="modal-header">

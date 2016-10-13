@@ -7,13 +7,12 @@ const path = require('path')
 
 exports.dep = ['bundle:app', 'bundle:css']
 exports.fn = function (gulp, paths, mode, done) {
-  var appbundle = filenames.get('appbundle')[0].substr(filenames.get('appbundle')[0].indexOf(path.sep) + 1)
   var cssbundle = filenames.get('cssbundle')[0].substr(filenames.get('cssbundle')[0].indexOf(path.sep) + 1)
 
   return gulp.src([paths.src + '**/*.html', '!' + paths.jspmPackages])
     .pipe(htmlreplace({
-      'appbundle': appbundle,
-      'cssbundle': cssbundle
+      'cssbundle': cssbundle,
+      'systemjs': 'system.js'
     }))
     .pipe(htmlmin({
       collapseWhitespace: mode.production,

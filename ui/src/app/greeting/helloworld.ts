@@ -30,18 +30,18 @@ export class HelloWorld {
         toastr.info("Working...");
 
         this.httpClient.fetch("helloworld/" + name)
-            .then(response => {
+            .then((response: Response) => {
                 this.log.info("Received http code " + response.status);
 
                 toastr.clear();
                 toastr.success("HTTP/" + response.status);
-                response.json()
-                    .then((data: GetHelloWorldResponse) => {
-                        this.log.info("Received data was: " + data.name);
-                        this.labelText = data.name;
-                    });
+                return response.json();
             })
-            .catch(response => {
+            .then((data: GetHelloWorldResponse) => {
+                this.log.info("Received data was: " + data.name);
+                this.labelText = data.name;
+            })
+            .catch((response: Response) => {
                 this.log.info("Received http code " + response.status);
                 this.log.warn("Oops... something went wrong.");
 

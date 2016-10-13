@@ -8,8 +8,8 @@ describe("Config Test ", () => {
 
     it("initializes correctly", () => {
         let routerConfiguration = new RouterConfigurationStub();
-
         let sut = new Config();
+
         sut.configureRouter(routerConfiguration);
 
         chai.expect(routerConfiguration.title).to.equals("Hello World");

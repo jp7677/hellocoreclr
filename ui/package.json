@@ -17,7 +17,7 @@
     "gulp-filter": "~4.0.0",
     "gulp-typescript": "~3.0.2",
     "aurelia-bundler": "~0.4.0",
-    "gulp-sourcemaps": "~2.0.1",
+    "gulp-sourcemaps": "~2.1.0",
     "gulp-concat": "~2.6.0",
     "gulp-clean-css": "~2.0.13",
     "gulp-html-replace": "~1.6.1",

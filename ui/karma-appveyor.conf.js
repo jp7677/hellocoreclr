@@ -29,6 +29,10 @@ module.exports = function (config) {
     autoWatchBatchDelay: 10000,
     singleRun: true,
     browsers: ['PhantomJS'],
+    captureTimeout: 2000,
+    browserDisconnectTimeout: 2000,
+    browserDisconnectTolerance: 3,
+    browserNoActivityTimeout: 10000,
 
     preprocessors: {
       'src/!(jspm.conf).js': ['coverage', 'sourcemap'],

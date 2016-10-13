@@ -7,19 +7,28 @@ import chai from "chai";
 import sinon from "sinon";
 import toastr from "toastr";
 
+function wait() {
+    return new Promise((resolve, reject) => {
+            setTimeout(resolve, 200);
+        });
+}
+
 describe("HelloWorldController Test ", () => {
 
     it("does nothing when there is no input", () => {
-        let sut = new HelloWorld(new HttpClientStub());
+        let sut = new HelloWorld(HttpClientStub.ok());
+        sut.inputText = undefined;
+        sut.labelText = "Hello";
+
         sut.submit();
+
         chai.expect(sut.labelText).to.empty;
     });
 
-    it.skip("can handle a valid response", () => {
+    it("can handle a valid response", () => {
         let res = new GetHelloWorldResponse();
         res.name = "Hello World!";
-        let httpStub = new HttpClientStub();
-        httpStub.responseData = res;
+        let httpStub = HttpClientStub.ok(res);
 
         let toastrSpy = sinon.spy(toastr, "success");
         let sut = new HelloWorld(httpStub);
@@ -27,21 +36,26 @@ describe("HelloWorldController Test ", () => {
 
         sut.submit();
 
-        chai.expect(sut.labelText, "Hello World!").to.equals("Hello World!");
-        chai.expect(toastrSpy.called).to.true;
+        return wait().then(() => {
+            chai.expect(sut.labelText).to.equal("Hello World!");
+            chai.expect(toastrSpy.called).to.true;
+        });
     });
 
-    it.skip("can handle an error response", () => {
-        let httpStub = new HttpClientStub();
+    it("can handle an error response", () => {
+        let httpStub = HttpClientStub.error();
 
         let toastrSpy = sinon.spy(toastr, "warning");
         let sut = new HelloWorld(httpStub);
         sut.inputText = "Error";
+        sut.labelText = "Hello";
 
         sut.submit();
 
-        chai.expect(sut.labelText).to.empty;
-        chai.expect(toastrSpy.called).to.true;
+        return wait().then(() => {
+            chai.expect(sut.labelText).to.empty;
+            chai.expect(toastrSpy.called).to.true;
+        });
     });
 
 });

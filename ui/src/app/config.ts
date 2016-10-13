@@ -1,11 +1,12 @@
 "use strict";
 
-import {Router, RouterConfiguration} from "aurelia-router";
+import {RouterConfiguration} from "aurelia-router";
 
 export class Config {
-  public router: Router;
 
-  public configureRouter(config: RouterConfiguration, router: Router) {
+  public configureRouter($config) {
+    let config: RouterConfiguration = $config;
+
     config.title = "Hello World";
     config.map([
       {
@@ -16,7 +17,5 @@ export class Config {
         title: "Hello World"
       }
     ]);
-
-    this.router = router;
   }
 }

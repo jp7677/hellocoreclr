@@ -1,5 +1,7 @@
 "use strict";
 
+import sinon from "sinon";
+
 export class HttpClientStub {
     public static ok(responseData: any = {}) {
         return new HttpClientStub(responseData, 200);
@@ -21,4 +23,9 @@ export class HttpClientStub {
                 status: this.status
             });
     }
+}
+
+export class RouterConfigurationStub {
+    public title = sinon.stub();
+    public map = sinon.stub();
 }

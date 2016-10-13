@@ -1,15 +1,15 @@
 "use strict";
 
 import {HttpClient} from "aurelia-fetch-client";
-import {LogManager} from "aurelia-framework";
+import {LogManager, inject} from "aurelia-framework";
 import {GetHelloWorldResponse} from "gethelloworldresponse";
 import toastr from "toastr";
 
+@inject(HttpClient)
 export class HelloWorld {
-    public static inject() { return [HttpClient]; }
-
     public inputText: string;
     public labelText: string;
+
     private log = LogManager.getLogger("HelloWorld");
     private httpClient: HttpClient;
 

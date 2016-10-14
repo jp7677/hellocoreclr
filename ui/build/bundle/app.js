@@ -1,16 +1,13 @@
 'use strict'
 
-const filenames = require('gulp-filenames')
 const bundle = require('aurelia-bundler').bundle
 
 exports.dep = ['bundle:tscompile', 'bundle:prepare']
 exports.fn = function (gulp, paths, mode, done) {
-  var configjs = filenames.get('configjs')
-
   return bundle({
     force: true,
     baseURL: paths.src,
-    configPath: paths.src + configjs,
+    configPath: paths.src + 'app-bundle.conf.js',
     bundles: {
       'app-bundle': {
         includes: [

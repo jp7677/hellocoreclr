@@ -19,6 +19,8 @@
     "aurelia-bundler": "~0.4.0",
     "gulp-sourcemaps": "~2.1.0",
     "gulp-concat": "~2.6.0",
+    "gulp-uglify": "~2.0.0",
+    "gulp-footer": "~1.0.5",
     "gulp-clean-css": "~2.0.13",
     "gulp-html-replace": "~1.6.1",
     "gulp-filenames": "~4.0.0",

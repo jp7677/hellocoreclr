@@ -29,7 +29,8 @@ exports.fn = function (gulp, paths, mode, done) {
           inject: true,
           minify: mode.production,
           rev: mode.production,
-          sourceMaps: !mode.production
+          sourceMaps: !mode.production,
+          sourceMapContents: !mode.production
         }
       }
     }

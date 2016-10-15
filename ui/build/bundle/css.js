@@ -12,7 +12,7 @@ exports.fn = function (gulp, paths, mode, done) {
     paths.src + '**/css/bootstrap.css',
     paths.src + '**/css/bootstrap-theme.css',
     paths.src + '**/css/font-awesome.css',
-    paths.src + 'css/*'
+    paths.src + 'styles/*'
   ]
   return gulp.src(srcCss)
     .pipe(!mode.production ? sourcemaps.init({loadMaps: true}) : util.noop())
@@ -22,12 +22,11 @@ exports.fn = function (gulp, paths, mode, done) {
     .pipe(filenames('cssbundle'))
     .pipe(!mode.production ? sourcemaps.write('.', {
       mapSources: function (sourcePath) {
-        var prefix = ''
+        var extendedSourcePath = sourcePath
         if (sourcePath.indexOf('/') === -1) {
-          prefix = 'css/'
+          extendedSourcePath = 'styles/' + sourcePath
+          util.log('SourcePath within source map extended to:', util.colors.cyan(extendedSourcePath))
         }
-        var extendedSourcePath = paths.src.substr(2) + prefix + sourcePath
-        util.log('SourcePath within source map extended to:', util.colors.cyan(extendedSourcePath))
         return extendedSourcePath
       }
     }) : util.noop())

@@ -10,7 +10,7 @@ exports.fn = function (gulp, paths, mode, done) {
   var cssbundle = filenames.get('cssbundle')[0].substr(filenames.get('cssbundle')[0].indexOf(path.sep) + 1)
   var bootstrapjs = filenames.get('bootstrapjs')
 
-  return gulp.src([paths.src + '**/*.html', '!' + paths.jspmPackages])
+  return gulp.src(paths.src + 'index.html')
     .pipe(htmlreplace({
       'cssbundle': cssbundle,
       'bootstrapjs': bootstrapjs

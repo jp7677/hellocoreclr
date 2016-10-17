@@ -19,6 +19,7 @@ System.config({
     "jquery": "npm:jquery@3.1.1",
     "mocha": "npm:mocha@3.0.2",
     "sinon": "npm:sinon@1.17.6",
+    "text": "github:systemjs/plugin-text@0.0.9",
     "toastr": "npm:toastr@2.1.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"

@@ -11,8 +11,7 @@ exports.fn = function (gulp, paths, mode, done) {
   var srcCss = [
     paths.src + '**/css/bootstrap.css',
     paths.src + '**/css/bootstrap-theme.css',
-    paths.src + '**/css/font-awesome.css',
-    paths.src + 'styles/*'
+    paths.src + '**/css/font-awesome.css'
   ]
   return gulp.src(srcCss)
     .pipe(!mode.production ? sourcemaps.init({loadMaps: true}) : util.noop())

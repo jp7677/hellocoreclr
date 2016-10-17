@@ -7,7 +7,6 @@ const uglify = require('gulp-uglify')
 const flatten = require('gulp-flatten')
 const rev = require('gulp-rev')
 const util = require('gulp-util')
-const path = require('path')
 const filenames = require('gulp-filenames')
 
 exports.dep = ['bundle:app']
@@ -23,7 +22,7 @@ exports.fn = function (gulp, paths, mode, done) {
     .pipe(filenames('bootstrapjs'))
     .pipe(!mode.production ? sourcemaps.write('.', {
       mapSources: function (sourcePath) {
-        var truncatedSourcePath = sourcePath.substr(sourcePath.indexOf(path.sep) + 1)
+        var truncatedSourcePath = sourcePath.substr(sourcePath.indexOf('/') + 1)
         util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
         return truncatedSourcePath
       }

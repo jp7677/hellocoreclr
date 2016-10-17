@@ -13,6 +13,7 @@ exports.fn = function (gulp, paths, mode, done) {
         includes: [
           '[./src/main.js]',
           '[./src/app/**/*.js]',
+          './src/styles/**/*.css!text',
           './src/app/**/*.html!text',
           'aurelia-framework',
           'aurelia-bootstrapper',

@@ -1,5 +1,7 @@
 'use strict'
 
+const run = require('run-sequence')
+
 exports.fn = function (gulp, paths, mode, done) {
   var browserSync = require('browser-sync').create('server')
   var proxy = require('proxy-middleware')
@@ -19,4 +21,6 @@ exports.fn = function (gulp, paths, mode, done) {
   gulp.watch([paths.src + '**/*.css', '!' + paths.jspmPackages], ['lint:css', 'watch:css'])
   gulp.watch([paths.src + '**/*.html', '!' + paths.jspmPackages], ['lint:html', 'watch:reload'])
   gulp.watch([paths.src + '**/*.{png,jpg,gif,svg,ico}', '!' + paths.jspmPackages], ['watch:reload'])
+
+  run('watch:js')
 }

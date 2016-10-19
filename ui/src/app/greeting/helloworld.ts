@@ -2,8 +2,9 @@
 
 import {HttpClient} from "aurelia-fetch-client";
 import {LogManager, inject} from "aurelia-framework";
-import {GetHelloWorldResponse} from "gethelloworldresponse";
-import toastr from "toastr";
+
+import {GetHelloWorldResponse} from "./gethelloworldresponse";
+import {Notifier} from "./notifier";
 
 @inject(HttpClient)
 export class HelloWorld {
@@ -12,10 +13,11 @@ export class HelloWorld {
 
     private log = LogManager.getLogger("HelloWorld");
     private httpClient: HttpClient;
+    private notifier: Notifier;
 
     constructor(private $httpClient) {
         this.httpClient = $httpClient;
-        this.SetToastrOptions();
+        this.notifier = new Notifier();
     }
 
     public submit() {
@@ -27,14 +29,12 @@ export class HelloWorld {
         }
 
         this.log.info("We got the following name: " + name);
-        toastr.info("Working...");
+        this.notifier.Info("Working...");
 
         this.httpClient.fetch("helloworld/" + name)
             .then((response: Response) => {
                 this.log.info("Received http code " + response.status);
-
-                toastr.clear();
-                toastr.success("HTTP/" + response.status);
+                this.notifier.Info("HTTP/" + response.status);
                 return response.json();
             })
             .then((data: GetHelloWorldResponse) => {
@@ -44,17 +44,8 @@ export class HelloWorld {
             .catch((response: Response) => {
                 this.log.info("Received http code " + response.status);
                 this.log.warn("Oops... something went wrong.");
-
-                toastr.clear();
-                toastr.warning("Oops... HTTP/" + response.status);
+                this.notifier.Warn("Oops... HTTP/" + response.status);
                 this.labelText = "";
             });
-    }
-
-    private SetToastrOptions(): void {
-        toastr.options.positionClass = "toast-bottom-right";
-        toastr.options.timeOut = 1500;
-        toastr.options.showDuration = 100;
-        toastr.options.hideDuration = 250;
     }
 }

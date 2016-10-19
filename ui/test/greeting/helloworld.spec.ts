@@ -4,8 +4,6 @@ import {GetHelloWorldResponse} from "../../src/app/greeting/gethelloworldrespons
 import {HelloWorld} from "../../src/app/greeting/helloworld";
 import {HttpClientStub} from "../stubs";
 import chai from "chai";
-import sinon from "sinon";
-import toastr from "toastr";
 
 function wait() {
     return new Promise((resolve, reject) => {
@@ -29,8 +27,6 @@ describe("HelloWorldController Test ", () => {
         let res = new GetHelloWorldResponse();
         res.name = "Hello World!";
         let httpStub = HttpClientStub.ok(res);
-
-        let toastrSpy = sinon.spy(toastr, "success");
         let sut = new HelloWorld(httpStub);
         sut.inputText = "Hello";
 
@@ -38,14 +34,11 @@ describe("HelloWorldController Test ", () => {
 
         return wait().then(() => {
             chai.expect(sut.labelText).to.equal("Hello World!");
-            chai.expect(toastrSpy.called).to.true;
         });
     });
 
     it("can handle an error response", () => {
         let httpStub = HttpClientStub.error();
-
-        let toastrSpy = sinon.spy(toastr, "warning");
         let sut = new HelloWorld(httpStub);
         sut.inputText = "Error";
         sut.labelText = "Hello";
@@ -54,7 +47,6 @@ describe("HelloWorldController Test ", () => {
 
         return wait().then(() => {
             chai.expect(sut.labelText).to.empty;
-            chai.expect(toastrSpy.called).to.true;
         });
     });
 

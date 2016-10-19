@@ -12,6 +12,7 @@ module.exports = function (wallaby) {
       {pattern: 'test/stubs.ts', load: false}
     ],
     tests: [
+      {pattern: 'test/*.spec.ts', load: false},
       {pattern: 'test/**/*.spec.ts', load: false}
     ],
 

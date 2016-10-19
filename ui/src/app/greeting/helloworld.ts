@@ -1,0 +1,51 @@
+"use strict";
+
+import {HttpClient} from "aurelia-fetch-client";
+import {LogManager, inject} from "aurelia-framework";
+
+import {GetHelloWorldResponse} from "./gethelloworldresponse";
+import {Notifier} from "./notifier";
+
+@inject(HttpClient)
+export class HelloWorld {
+    public inputText: string;
+    public labelText: string;
+
+    private log = LogManager.getLogger("HelloWorld");
+    private httpClient: HttpClient;
+    private notifier: Notifier;
+
+    constructor(private $httpClient) {
+        this.httpClient = $httpClient;
+        this.notifier = new Notifier();
+    }
+
+    public submit() {
+        let name = this.inputText;
+        if (name === undefined || name.length === 0) {
+            this.log.warn("No name received. abort.. ");
+            this.labelText = "";
+            return;
+        }
+
+        this.log.info("We got the following name: " + name);
+        this.notifier.Info("Working...");
+
+        this.httpClient.fetch("helloworld/" + name)
+            .then((response: Response) => {
+                this.log.info("Received http code " + response.status);
+                this.notifier.Info("HTTP/" + response.status);
+                return response.json();
+            })
+            .then((data: GetHelloWorldResponse) => {
+                this.log.info("Received data was: " + data.name);
+                this.labelText = data.name;
+            })
+            .catch((response: Response) => {
+                this.log.info("Received http code " + response.status);
+                this.log.warn("Oops... something went wrong.");
+                this.notifier.Warn("Oops... HTTP/" + response.status);
+                this.labelText = "";
+            });
+    }
+}

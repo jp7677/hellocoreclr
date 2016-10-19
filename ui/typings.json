@@ -1,15 +1,33 @@
 {
   "name": "aspnet",
   "version": false,
-  "dependencies": {},
+  "dependencies": {
+    "aurelia-binding": "github:aurelia/binding#1.0.0",
+    "aurelia-bootstrapper": "github:aurelia/bootstrapper#1.0.0",
+    "aurelia-dependency-injection": "github:aurelia/dependency-injection#1.2.0",
+    "aurelia-event-aggregator": "github:aurelia/event-aggregator#1.0.0",
+    "aurelia-fetch-client": "github:aurelia/fetch-client#1.0.0",
+    "aurelia-framework": "github:aurelia/framework#1.0.0",
+    "aurelia-history": "github:aurelia/history#1.0.0",
+    "aurelia-loader": "github:aurelia/loader#1.0.0",
+    "aurelia-logging": "github:aurelia/logging#1.1.0",
+    "aurelia-metadata": "github:aurelia/metadata#1.0.0",
+    "aurelia-pal": "github:aurelia/pal#1.0.0",
+    "aurelia-pal-browser": "github:aurelia/pal-browser#1.0.0",
+    "aurelia-path": "github:aurelia/path#1.1.0",
+    "aurelia-route-recognizer": "github:aurelia/route-recognizer#1.1.0",
+    "aurelia-router": "github:aurelia/router#1.0.0",
+    "aurelia-task-queue": "github:aurelia/task-queue#1.1.0",
+    "aurelia-templating": "github:aurelia/templating#1.1.0"
+  },
   "globalDependencies": {
-    "angular": "registry:dt/angular#1.5.0+20160922195358",
-    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160810191828",
+    "core-js": "registry:dt/core-js#0.0.0+20160914114559",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
-    "toastr": "registry:dt/toastr#2.1.1+20160510010435"
+    "toastr": "registry:dt/toastr#2.1.1+20160510010435",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20161004182750",
+    "whatwg-streams": "registry:dt/whatwg-streams#0.0.0+20160829180742"
   },
   "globalDevDependencies": {
-    "angular-mocks": "registry:dt/angular-mocks#1.5.0+20160608104721",
     "chai": "registry:dt/chai#3.4.0+20160601211834",
     "mocha": "registry:dt/mocha#2.2.5+20160720003353",
     "sinon": "registry:dt/sinon#1.16.0+20160924120326"

@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "target": "es5",
     "module": "system",
-    "sourceMap": true
+    "sourceMap": false
   },
   "exclude": [
     "wwwroot",

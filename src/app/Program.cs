@@ -16,10 +16,15 @@ namespace HelloWorldApp
         // Entry point for the application.
         public static void Main(string[] args)
         {
-            ConfigureNLog();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            ConfigureSerilog(configuration);
             ConfigureShutdownHandler();
 
             var builder = new WebHostBuilder()
+                .UseConfiguration(configuration)
                 .UseKestrel()
                 .UseStartup<Startup>();
             
@@ -34,12 +39,8 @@ namespace HelloWorldApp
             host.Run(ShutdownCancellationTokenSource.Token);
         }
         
-        private static void ConfigureNLog()
+        private static void ConfigureSerilog(IConfigurationRoot configuration)
         {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();

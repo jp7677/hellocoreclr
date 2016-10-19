@@ -2,16 +2,30 @@
 
 import sinon from "sinon";
 
-export class StateProvider implements ng.ui.IStateProvider {
-    public state = sinon.stub();
-    public decorator = sinon.stub();
-    public $get = sinon.stub();
+export class HttpClientStub {
+    public static ok(responseData: any = {}) {
+        return new HttpClientStub(responseData, 200);
+    }
+
+    public static error() {
+        return new HttpClientStub(undefined, 500);
+    }
+
+    private success: boolean;
+
+    constructor(private responseData: any = {}, private status: number = 200) {
+        this.success = this.status >= 200 && this.status < 400;
+    }
+
+    public fetch (url) {
+        return Promise.resolve({
+                json: () => this.success ? Promise.resolve(this.responseData) : Promise.reject("An error occured"),
+                status: this.status
+            });
+    }
 }
 
-export class UrlRouterProvider implements ng.ui.IUrlRouterProvider {
-    public when = sinon.stub();
-    public otherwise = sinon.stub();
-    public rule = sinon.stub();
-    public deferIntercept = sinon.stub();
-    public $get = sinon.stub();
+export class RouterConfigurationStub {
+    public title = sinon.stub();
+    public map = sinon.stub();
 }

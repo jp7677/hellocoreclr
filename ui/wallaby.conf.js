@@ -2,13 +2,17 @@ module.exports = function (wallaby) {
   'use strict'
 
   return {
+    testFramework: 'mocha',
+
     files: [
       {pattern: 'node_modules/systemjs/dist/system.js', instrument: false},
+      {pattern: 'node_modules/es6-shim/es6-shim.js', instrument: false},
       {pattern: 'src/jspm.conf.js', instrument: false},
       {pattern: 'src/app/**/*.ts', load: false},
       {pattern: 'test/stubs.ts', load: false}
     ],
     tests: [
+      {pattern: 'test/*.spec.ts', load: false},
       {pattern: 'test/**/*.spec.ts', load: false}
     ],
 

@@ -21,7 +21,7 @@ load({
 gulp.task('lint', ['lint:ts', 'lint:css', 'lint:html'])
 
 gulp.task('build', function (done) {
-  run('clean:dest', ['lint', 'bundle:app', 'bundle:css', 'bundle:html', 'bundle:image', 'bundle:assets', 'bundle:fonts'], done)
+  run('clean:dest', ['lint', 'bundle:systemjs', 'bundle:js', 'clean:bundle', 'bundle:css', 'bundle:html', 'bundle:image', 'bundle:assets', 'bundle:fonts'], done)
 })
 
 gulp.task('default', ['build'])

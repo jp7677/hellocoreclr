@@ -101,7 +101,3 @@ ui/node_modules/.bin/gulp watch --cwd ui
 ```
 
 Your favorite browser should fire up and should open <http://localhost:3000/>. Happy coding!
-
-## To-do
-
-- Switch from Angular to Aurelia.

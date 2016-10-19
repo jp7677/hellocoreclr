@@ -1,14 +1,26 @@
 "use strict";
 
-import { Config } from "./app/app.config";
-import { HelloWorldController } from "./app/greeting/helloworld.controller";
+import {HttpClient} from "aurelia-fetch-client";
+import {Aurelia} from "aurelia-framework";
 
-const main = angular.module("app", ["ui.router", "ui.bootstrap"])
-                 .constant("apiBaseUrl", "/api/")
-                 .config(Config)
-                 .controller("HelloWorldController", HelloWorldController);
+export function configure(aurelia: Aurelia) {
+  aurelia.use
+    .standardConfiguration()
+    .developmentLogging();
 
-const name = main.name;
+  configureContainer(aurelia.container);
 
-export default main;
-export { name }
+  aurelia.start().then(() =>
+    aurelia.setRoot("app/config"));
+}
+
+function configureContainer(container) {
+  let http = new HttpClient();
+  http.configure(config => {
+    config
+      .useStandardConfiguration()
+      .withBaseUrl("/api/");
+  });
+
+  container.registerInstance(HttpClient, http);
+}

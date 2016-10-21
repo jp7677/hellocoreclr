@@ -1,6 +1,6 @@
 version: '0.1.{build}'
 environment:
-    nodejs_version: "6.7"
+    nodejs_version: "6"
     JSPM_GITHUB_AUTH_TOKEN:
         secure: iQJv6hQfYn6ykJpUPhNSnEcKJBMP1WKynxm70Xqdr3cOGdkLU06VFfRFmOvJwx58
     typings_githubToken:

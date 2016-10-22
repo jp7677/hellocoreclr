@@ -14,7 +14,7 @@ namespace HelloWorldApp.Test
         public override DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()
         {
             return new DbContextOptionsBuilder<GreetingDbContext>()
-                .UseInMemoryDatabase();
+                .UseInMemoryDatabase("TestserverStartup");
         }
     }
 }

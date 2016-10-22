@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HelloWorldApp.Data.Entities;
@@ -56,7 +57,7 @@ namespace HelloWorldApp.Data
             }
         }
 
-        public async Task<IQueryable<Greeting>> GetLastTenGreetingsAsync(int numberOfResults)
+        public async Task<IList<Greeting>> GetLastTenGreetingsAsync(int numberOfResults)
         {
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
@@ -64,8 +65,7 @@ namespace HelloWorldApp.Data
                     .OrderByDescending(g => g.TimestampUtc)
                     .Take(numberOfResults);
 
-                var list = await items.ToListAsync();
-                return list.AsQueryable();
+                return await items.ToListAsync();
             }
         }
     }

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using System.Linq;
 using HelloWorldApp.Data.Entities;
+using System.Collections.Generic;
 
 namespace HelloWorldApp.Data
 {
@@ -9,6 +9,6 @@ namespace HelloWorldApp.Data
         Task EnsureCreatedAsync();
         Task<int> GetNumberOfGreetingsAsync();
         Task SaveGreetingAsync(string greeting);
-        Task<IQueryable<Greeting>> GetLastTenGreetingsAsync(int numberOfResults);
+        Task<IList<Greeting>> GetLastTenGreetingsAsync(int numberOfResults);
     }
 }

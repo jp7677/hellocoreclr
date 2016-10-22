@@ -1,20 +1,22 @@
 using Xunit;
 using Moq;
 using FluentAssertions;
+using HelloWorldApp.WebApi.Actions;
+using HelloWorldApp.WebApi;
 
-namespace HelloWorldApp.Test
+namespace HelloWorldApp.Test.WebApi
 {
     public class ActionFactoryTest
     {
         [Fact]
         public void CreateGetHelloWorldActionTest()
         {
-            var getHelloWorldAction = Mock.Of<IGetHelloWorldAction>();
+            var sayHelloWorldAction = Mock.Of<ISayHelloWorldAction>();
             var resourceProvider = Mock.Of<IResourceProvider>(r => 
-                r.CreateResource<IGetHelloWorldAction>() == getHelloWorldAction);
+                r.CreateResource<ISayHelloWorldAction>() == sayHelloWorldAction);
             var sut = new ActionFactory(resourceProvider);
 
-            var action = sut.CreateGetHelloWorldAction();
+            var action = sut.CreateSayHelloWorldAction();
 
             action.Should().NotBeNull();
         }

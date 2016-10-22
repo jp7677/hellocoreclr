@@ -1,3 +1,4 @@
+using HelloWorldApp.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +11,9 @@ namespace HelloWorldApp.Test
         {
         }
         
-        public override DbContextOptionsBuilder<HelloWorldDbContext> CreateDatabaseOptions()
+        public override DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()
         {
-            return new DbContextOptionsBuilder<HelloWorldDbContext>()
+            return new DbContextOptionsBuilder<GreetingDbContext>()
                 .UseInMemoryDatabase();
         }
     }

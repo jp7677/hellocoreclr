@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
 using FluentAssertions;
+using HelloWorldApp.WebApi.Messages;
 
 namespace HelloWorldApp.Test
 {
@@ -25,9 +26,9 @@ namespace HelloWorldApp.Test
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
 
                 var content = await response.Content.ReadAsStringAsync();
-                var data = JsonConvert.DeserializeObject<GetHelloWorldResponse>(content);
+                var data = JsonConvert.DeserializeObject<SayHelloWorldResponse>(content);
                 data.Should().NotBeNull();
-                data.Name.Should().Be("Hello World!");
+                data.Greeting.Should().Be("Hello World!");
             }
         }
 
@@ -36,7 +37,7 @@ namespace HelloWorldApp.Test
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/api/helloworld/");
+                var response = await client.GetAsync("/api/");
                 response.StatusCode.Should().Be(HttpStatusCode.NotFound);
             }
         }

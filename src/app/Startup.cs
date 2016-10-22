@@ -33,10 +33,6 @@ namespace HelloWorldApp
         {
             log.Information("Configuring services.");
             
-            services.AddCors(options =>
-                options.AddPolicy("AllowFileOrigin", builder => 
-                    builder.WithOrigins("file://")));
-            
             // Add framework services.
             services.AddMvc();
             services.AddMvcCore()
@@ -73,10 +69,7 @@ namespace HelloWorldApp
             
             //add NLog to ASP.NET Core
             loggerFactory.AddSerilog();
-            
-            if (env.IsDevelopment())
-                app.UseCors("AllowFileOrigin");
-            
+
             // Serve the default file, if present.
             app.UseDefaultFiles();
             // Add static files to the request pipeline.

@@ -34,7 +34,7 @@ namespace HelloWorldApp.WebApi
         {
             log.Information("'helloworld' Request received.");
             
-            var action = actionFactory.CreateGetLastTenHelloWorldsAction();
+            var action = actionFactory.CreateGetLastTenGreetingsAction();
             var response = await action.ExecuteAsync();
 
             return new OkObjectResult(response);

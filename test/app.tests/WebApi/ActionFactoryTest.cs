@@ -9,7 +9,7 @@ namespace HelloWorldApp.Test.WebApi
     public class ActionFactoryTest
     {
         [Fact]
-        public void CreateGetHelloWorldActionTest()
+        public void CreateSayHelloWorldActionTest()
         {
             var sayHelloWorldAction = Mock.Of<ISayHelloWorldAction>();
             var resourceProvider = Mock.Of<IResourceProvider>(r => 
@@ -17,6 +17,19 @@ namespace HelloWorldApp.Test.WebApi
             var sut = new ActionFactory(resourceProvider);
 
             var action = sut.CreateSayHelloWorldAction();
+
+            action.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void CreateGetLastTenGreetingsActionTest()
+        {
+            var getLastTenGreetingsAction = Mock.Of<IGetLastTenGreetingsAction>();
+            var resourceProvider = Mock.Of<IResourceProvider>(r => 
+                r.CreateResource<IGetLastTenGreetingsAction>() == getLastTenGreetingsAction);
+            var sut = new ActionFactory(resourceProvider);
+
+            var action = sut.CreateGetLastTenGreetingsAction();
 
             action.Should().NotBeNull();
         }

@@ -5,6 +5,6 @@ namespace HelloWorldApp.WebApi
     public interface IActionFactory
     {
         ISayHelloWorldAction CreateSayHelloWorldAction();
-        IGetLastTenGreetingsAction CreateGetLastTenHelloWorldsAction();
+        IGetLastTenGreetingsAction CreateGetLastTenGreetingsAction();
     }
 }

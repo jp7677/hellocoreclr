@@ -16,7 +16,7 @@ namespace HelloWorldApp.WebApi
             return resourceProvider.CreateResource<ISayHelloWorldAction>();            
         }
 
-        public IGetLastTenGreetingsAction CreateGetLastTenHelloWorldsAction()
+        public IGetLastTenGreetingsAction CreateGetLastTenGreetingsAction()
         {
             return resourceProvider.CreateResource<IGetLastTenGreetingsAction>();
         }

@@ -18,7 +18,17 @@ namespace HelloWorldApp.Test
         }
 
         [Fact]
-        public async void ValidRequestReturnsOkTest()
+        public async void InvalidRequestReturnsNotFoundTest()
+        {
+            using (var client = server.CreateClient())
+            {
+                var response = await client.GetAsync("/api/");
+                response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+            }
+        }
+
+        [Fact]
+        public async void ValidSayHelloWorldRequestReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
@@ -33,12 +43,16 @@ namespace HelloWorldApp.Test
         }
 
         [Fact]
-        public async void InvalidRequestReturnsNotFoundTest()
+        public async void ValidGetTenHelloWorldsRequestReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/api/");
-                response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+                var response = await client.GetAsync("/api/helloworld");
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+                var content = await response.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<GetLastTenGreetingsResponse>(content);
+                data.Should().NotBeNull();
             }
         }
 

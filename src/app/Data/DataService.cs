@@ -1,18 +1,20 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using HelloWorldApp.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging;
 
-namespace HelloWorldApp
+namespace HelloWorldApp.Data
 {
-    public class HelloWorldDataService : IHelloWorldDataService
+    public class DataService : IDataService
     {
-        IHelloWorldDbContextFactory dbContextFactory;
+        IGreetingDbContextFactory dbContextFactory;
 
-        public HelloWorldDataService(IHelloWorldDbContextFactory dbContextFactory)
+        public DataService(IGreetingDbContextFactory dbContextFactory)
         {
             this.dbContextFactory = dbContextFactory;
         }
@@ -26,18 +28,18 @@ namespace HelloWorldApp
             }
         }
 
-        private void RegisterNLog(HelloWorldDbContext db)
+        private void RegisterNLog(GreetingDbContext db)
         {
                 var serviceProvider = db.GetInfrastructure<IServiceProvider>();
                 var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
                 loggerFactory.AddProvider(new SerilogLoggerProvider());
         }
 
-        public int GetNumberOfGreetings()
+        public async Task<int> GetNumberOfGreetingsAsync()
         {
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
-                return db.Greetings.Count();
+                return await db.Greetings.CountAsync();
             }
         }
 
@@ -51,6 +53,19 @@ namespace HelloWorldApp
                         TimestampUtc = DateTime.Now.ToUniversalTime()
                     });
                 await db.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IQueryable<Greeting>> GetLastTenGreetingsAsync(int numberOfResults)
+        {
+            using(var db = dbContextFactory.CreateHelloWorldDbContext())
+            {
+                var items = db.Greetings
+                    .OrderByDescending(g => g.TimestampUtc)
+                    .Take(numberOfResults);
+
+                var list = await items.ToListAsync();
+                return list.AsQueryable();
             }
         }
     }

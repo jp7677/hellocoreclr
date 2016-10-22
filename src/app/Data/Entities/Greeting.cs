@@ -1,6 +1,6 @@
 using System;
 
-namespace HelloWorldApp
+namespace HelloWorldApp.Data.Entities
 {
     public class Greeting
     {

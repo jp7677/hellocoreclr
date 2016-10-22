@@ -12,6 +12,9 @@ using SimpleInjector.Integration.AspNetCore.Mvc;
 using Serilog;
 using Swashbuckle.SwaggerGen.Application;
 using Swashbuckle.Swagger.Model;
+using HelloWorldApp.WebApi;
+using HelloWorldApp.WebApi.Actions;
+using HelloWorldApp.Data;
 
 namespace HelloWorldApp
 {
@@ -93,27 +96,28 @@ namespace HelloWorldApp
             
             container.RegisterSingleton<IResourceProvider, ResourceProvider>();
             container.RegisterSingleton<IActionFactory, ActionFactory>();
-            container.Register<IGetHelloWorldAction, GetHelloWorldAction>();
+            container.Register<ISayHelloWorldAction, SayHelloWorldAction>();
+            container.Register<IGetLastTenGreetingsAction, GetLastTenHelloWorldsAction>();
 
-            container.RegisterSingleton<IHelloWorldDbContextFactory>(() =>
-                new HelloWorldDbContextFactory(CreateDatabaseOptions().Options));
-            container.Register<IHelloWorldDataService,HelloWorldDataService>();
+            container.RegisterSingleton<IGreetingDbContextFactory>(() =>
+                new GreetingDbContextFactory(CreateDatabaseOptions().Options));
+            container.Register<IDataService,DataService>();
             
             container.Verify();
         }
 
-        public virtual DbContextOptionsBuilder<HelloWorldDbContext> CreateDatabaseOptions()
+        public virtual DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()
         {
-            return new DbContextOptionsBuilder<HelloWorldDbContext>()
+            return new DbContextOptionsBuilder<GreetingDbContext>()
                 .UseSqlite("Filename=./helloworld.db");
         }
 
         private async Task SetupDatabaseAsync()
         {
-            var dataService = container.GetInstance<IHelloWorldDataService>();
+            var dataService = container.GetInstance<IDataService>();
 
             await dataService.EnsureCreatedAsync();
-            log.Information("Currently we have {0} saved Greetings.", dataService.GetNumberOfGreetings());
+            log.Information("Currently we have {0} saved Greetings.", await dataService.GetNumberOfGreetingsAsync());
         }
     }
 }

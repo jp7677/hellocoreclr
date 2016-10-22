@@ -1,14 +1,15 @@
 using System.Threading.Tasks;
+using HelloWorldApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace HelloWorldApp
+namespace HelloWorldApp.Data
 {
-    public class HelloWorldDbContext : DbContext
+    public class GreetingDbContext : DbContext
     {
-        public HelloWorldDbContext()
+        public GreetingDbContext()
         { }
         
-        public HelloWorldDbContext(DbContextOptions<HelloWorldDbContext> options)
+        public GreetingDbContext(DbContextOptions<GreetingDbContext> options)
             : base(options)
         { }
 

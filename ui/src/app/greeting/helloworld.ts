@@ -3,8 +3,8 @@
 import {HttpClient} from "aurelia-fetch-client";
 import {LogManager, inject} from "aurelia-framework";
 
-import {GetHelloWorldResponse} from "./gethelloworldresponse";
 import {Notifier} from "./notifier";
+import {SayHelloWorldResponse} from "./sayhelloworldresponse";
 
 @inject(HttpClient)
 export class HelloWorld {
@@ -37,9 +37,9 @@ export class HelloWorld {
                 this.notifier.Info("HTTP/" + response.status);
                 return response.json();
             })
-            .then((data: GetHelloWorldResponse) => {
-                this.log.info("Received data was: " + data.name);
-                this.labelText = data.name;
+            .then((data: SayHelloWorldResponse) => {
+                this.log.info("Received data was: " + data.greeting);
+                this.labelText = data.greeting;
             })
             .catch((response: Response) => {
                 this.log.info("Received http code " + response.status);

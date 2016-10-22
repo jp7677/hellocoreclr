@@ -1,7 +1,7 @@
 "use strict";
 
-import {GetHelloWorldResponse} from "../../src/app/greeting/gethelloworldresponse";
 import {HelloWorld} from "../../src/app/greeting/helloworld";
+import {SayHelloWorldResponse} from "../../src/app/greeting/sayhelloworldresponse";
 import {HttpClientStub} from "../stubs";
 import chai from "chai";
 
@@ -24,8 +24,8 @@ describe("HelloWorldController Test ", () => {
     });
 
     it("can handle a valid response", () => {
-        let res = new GetHelloWorldResponse();
-        res.name = "Hello World!";
+        let res = new SayHelloWorldResponse();
+        res.greeting = "Hello World!";
         let httpStub = HttpClientStub.ok(res);
         let sut = new HelloWorld(httpStub);
         sut.inputText = "Hello";

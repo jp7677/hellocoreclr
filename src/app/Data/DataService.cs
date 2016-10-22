@@ -13,7 +13,7 @@ namespace HelloWorldApp.Data
 {
     public class DataService : IDataService
     {
-        IGreetingDbContextFactory dbContextFactory;
+        private readonly IGreetingDbContextFactory dbContextFactory;
 
         public DataService(IGreetingDbContextFactory dbContextFactory)
         {
@@ -29,9 +29,9 @@ namespace HelloWorldApp.Data
             }
         }
 
-        private void RegisterNLog(GreetingDbContext db)
+        private static void RegisterNLog(GreetingDbContext db)
         {
-                var serviceProvider = db.GetInfrastructure<IServiceProvider>();
+                var serviceProvider = db.GetInfrastructure();
                 var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
                 loggerFactory.AddProvider(new SerilogLoggerProvider());
         }

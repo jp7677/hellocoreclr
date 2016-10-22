@@ -17,7 +17,7 @@ namespace HelloWorldApp.Test
             var sayHelloWorldAction = new Mock<ISayHelloWorldAction>();
             sayHelloWorldAction.Setup(a =>
                 a.ExecuteAsync("You")).Returns(
-                    Task.FromResult<SayHelloWorldResponse>(new SayHelloWorldResponse{ Greeting = "Hello You!" }));
+                    Task.FromResult(new SayHelloWorldResponse{ Greeting = "Hello You!" }));
             var actionFactory = Mock.Of<IActionFactory>(f =>
                 f.CreateSayHelloWorldAction() == sayHelloWorldAction.Object);
             

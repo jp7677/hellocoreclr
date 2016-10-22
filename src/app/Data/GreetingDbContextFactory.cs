@@ -4,7 +4,7 @@ namespace HelloWorldApp.Data
 {
     public class GreetingDbContextFactory : IGreetingDbContextFactory
     {
-        private DbContextOptions<GreetingDbContext> options;
+        private readonly DbContextOptions<GreetingDbContext> options;
 
         public GreetingDbContextFactory(DbContextOptions<GreetingDbContext> options)
         {

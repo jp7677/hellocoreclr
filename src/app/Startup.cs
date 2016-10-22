@@ -20,12 +20,12 @@ namespace HelloWorldApp
 {
     public class Startup
     {
-        private Serilog.ILogger log = Log.ForContext<Startup>(); 
+        private readonly Serilog.ILogger log = Log.ForContext<Startup>();
         private readonly Container container = new Container();
         
         public Startup(IHostingEnvironment env)
         {
-            log.Information("Starting up.");
+            log.Information("Starting up in {0} mode.", env.EnvironmentName);
         }
                 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -40,8 +40,7 @@ namespace HelloWorldApp
                     options.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             services.AddSwaggerGen();
-            services.ConfigureSwaggerGen(options =>
-                SetupSwagger(options));
+            services.ConfigureSwaggerGen(SetupSwagger);
 
             // Add SimpleInjector Controller Activator
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));

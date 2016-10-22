@@ -8,8 +8,8 @@ namespace HelloWorldApp.WebApi
     [Route("api")]
     public class HelloWorldController
     {
-        private ILogger log = Log.ForContext<HelloWorldController>();
-        IActionFactory actionFactory;
+        private readonly ILogger log = Log.ForContext<HelloWorldController>();
+        private readonly IActionFactory actionFactory;
         
         public HelloWorldController(IActionFactory actionFactory)
         {

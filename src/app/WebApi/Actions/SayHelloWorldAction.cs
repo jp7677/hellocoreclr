@@ -7,8 +7,8 @@ namespace HelloWorldApp.WebApi.Actions
 {
     public class SayHelloWorldAction : ISayHelloWorldAction
     {
-        private ILogger log = Log.ForContext<SayHelloWorldAction>();
-        IDataService dataService;
+        private readonly ILogger log = Log.ForContext<SayHelloWorldAction>();
+        private readonly IDataService dataService;
 
         public SayHelloWorldAction(IDataService dataService)
         {

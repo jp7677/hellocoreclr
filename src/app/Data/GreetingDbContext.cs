@@ -9,7 +9,7 @@ namespace HelloWorldApp.Data
         public GreetingDbContext()
         { }
         
-        public GreetingDbContext(DbContextOptions<GreetingDbContext> options)
+        public GreetingDbContext(DbContextOptions options)
             : base(options)
         { }
 

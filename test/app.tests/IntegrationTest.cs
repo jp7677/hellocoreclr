@@ -10,7 +10,7 @@ namespace HelloWorldApp.Test
 {
     public class IntegrationTest
     {
-        private TestServer server;
+        private readonly TestServer server;
 
         public IntegrationTest()
         {

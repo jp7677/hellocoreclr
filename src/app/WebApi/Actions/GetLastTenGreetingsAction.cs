@@ -8,8 +8,8 @@ namespace HelloWorldApp.WebApi.Actions
 {
     public class GetLastTenHelloWorldsAction : IGetLastTenGreetingsAction
     {
-        private ILogger log = Log.ForContext<SayHelloWorldAction>();
-        IDataService dataService;
+        private readonly ILogger log = Log.ForContext<SayHelloWorldAction>();
+        private readonly IDataService dataService;
 
         public GetLastTenHelloWorldsAction(IDataService dataService)
         {
@@ -19,7 +19,7 @@ namespace HelloWorldApp.WebApi.Actions
         public async Task<GetLastTenGreetingsResponse> ExecuteAsync()
         {
             log.Information("Looking for the last ten greetings.");
-            var numberOfResults = 10;
+            const int numberOfResults = 10;
             var items = await dataService.GetLastTenGreetingsAsync(numberOfResults);
 
             var savedGreetingsList = new List<SavedGreeting>();

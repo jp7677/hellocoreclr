@@ -39,7 +39,7 @@ namespace HelloWorldApp
             host.Run(ShutdownCancellationTokenSource.Token);
         }
         
-        private static void ConfigureSerilog(IConfigurationRoot configuration)
+        private static void ConfigureSerilog(IConfiguration configuration)
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
@@ -69,7 +69,7 @@ namespace HelloWorldApp
             var location = Assembly.GetEntryAssembly().Location;
             location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
                             
-            var webroot = Path.Combine(new []{location, "..", "..", "..", "..", "..", "ui", "wwwroot"});
+            var webroot = Path.Combine(location, "..", "..", "..", "..", "..", "ui", "wwwroot");
             return Path.GetFullPath(webroot);
         }
     }

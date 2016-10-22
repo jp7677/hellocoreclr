@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using HelloWorldApp.Data;
 using HelloWorldApp.WebApi.Messages;
@@ -22,12 +22,10 @@ namespace HelloWorldApp.WebApi.Actions
             const int numberOfResults = 10;
             var items = await dataService.GetLastTenGreetingsAsync(numberOfResults);
 
-            var savedGreetingsList = new List<SavedGreeting>();
-            foreach(var i in items)
-                savedGreetingsList.Add(new SavedGreeting{Greeting = i.Name, TimestampUtc = i.TimestampUtc});
-
-            var response = new GetLastTenGreetingsResponse{SavedGreetings = savedGreetingsList.ToArray()};
-            return response;
+            return new GetLastTenGreetingsResponse
+            {
+                SavedGreetings = items.Select(i => new SavedGreeting {Greeting = i.Name, TimestampUtc = i.TimestampUtc}).ToArray()
+            };
         }
     }
 }

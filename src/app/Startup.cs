@@ -46,7 +46,7 @@ namespace HelloWorldApp
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
         }
 
-        private void SetupSwagger(SwaggerGenOptions options)
+        private static void SetupSwagger(SwaggerGenOptions options)
         {
             options.SingleApiVersion(new Info
                 {

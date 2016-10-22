@@ -9,6 +9,7 @@ const util = require('gulp-util')
 
 exports.fn = function (gulp, paths, mode, done) {
   var srcCss = [
+    paths.src + 'styles/splash.css',
     paths.src + '**/css/bootstrap.css',
     paths.src + '**/css/bootstrap-theme.css',
     paths.src + '**/css/font-awesome.css'

@@ -31,3 +31,7 @@
 #toast-container > .toast-success::before {
   content: "\f087";
 }
+
+body {
+  margin: 0;
+}

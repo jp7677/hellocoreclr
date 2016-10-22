@@ -11,10 +11,9 @@ exports.fn = function (gulp, paths, mode, done) {
     bundles: {
       'app-bundle': {
         includes: [
-          '[./src/main.js]',
           '[./src/app/**/*.js]',
-          './src/styles/**/*.css!text',
           './src/app/**/*.html!text',
+          './src/styles/**/*.css!text',
           'aurelia-framework',
           'aurelia-bootstrapper',
           'aurelia-loader-default',

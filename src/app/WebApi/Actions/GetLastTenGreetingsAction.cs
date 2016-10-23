@@ -16,16 +16,13 @@ namespace HelloWorldApp.WebApi.Actions
             this.dataService = dataService;
         }
 
-        public async Task<GetLastTenGreetingsResponse> ExecuteAsync()
+        public async Task<SavedGreeting[]> ExecuteAsync()
         {
             log.Information("Looking for the last ten greetings.");
             const int numberOfResults = 10;
             var items = await dataService.GetLastTenGreetingsAsync(numberOfResults);
 
-            return new GetLastTenGreetingsResponse
-            {
-                SavedGreetings = items.Select(i => new SavedGreeting {Greeting = i.Name, TimestampUtc = i.TimestampUtc}).ToArray()
-            };
+            return items.Select(i => new SavedGreeting {Greeting = i.Name, TimestampUtc = i.TimestampUtc}).ToArray();
         }
     }
 }

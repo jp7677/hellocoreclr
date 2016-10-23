@@ -16,7 +16,7 @@ namespace HelloWorldApp.WebApi
             this.actionFactory = actionFactory;
         }
         
-        [Route("helloworld/{name}")]
+        [Route("sayhelloworld/{name}")]
         [HttpGet]
         public async Task<IActionResult> SayHelloWorldAsync(string name)
         {
@@ -28,7 +28,7 @@ namespace HelloWorldApp.WebApi
             return new OkObjectResult(response);
         }
 
-        [Route("helloworld")]
+        [Route("greetings")]
         [HttpGet]
         public async Task<IActionResult> GetLastTenGreetingsAsync()
         {
@@ -36,6 +36,9 @@ namespace HelloWorldApp.WebApi
             
             var action = actionFactory.CreateGetLastTenGreetingsAction();
             var response = await action.ExecuteAsync();
+
+            if(response.GetLength(0) == 0)
+                return new NoContentResult();
 
             return new OkObjectResult(response);
         }

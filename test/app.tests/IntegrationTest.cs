@@ -32,7 +32,7 @@ namespace HelloWorldApp.Test
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/api/helloworld/World");
+                var response = await client.GetAsync("/api/sayhelloworld/World");
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
 
                 var content = await response.Content.ReadAsStringAsync();
@@ -47,12 +47,13 @@ namespace HelloWorldApp.Test
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/api/helloworld");
+                var response = await client.GetAsync("/api/greetings");
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
 
                 var content = await response.Content.ReadAsStringAsync();
-                var data = JsonConvert.DeserializeObject<GetLastTenGreetingsResponse>(content);
+                var data = JsonConvert.DeserializeObject<SavedGreeting[]>(content);
                 data.Should().NotBeNull();
+                data.GetLength(0).Should().BeGreaterThan(0);
             }
         }
 

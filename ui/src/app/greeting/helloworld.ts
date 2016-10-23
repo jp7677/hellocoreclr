@@ -31,7 +31,7 @@ export class HelloWorld {
         this.log.info("We got the following name: " + name);
         this.notifier.Info("Working...");
 
-        this.httpClient.fetch("helloworld/" + name)
+        this.httpClient.fetch("sayhelloworld/" + name)
             .then((response: Response) => {
                 this.log.info("Received http code " + response.status);
                 this.notifier.Info("HTTP/" + response.status);

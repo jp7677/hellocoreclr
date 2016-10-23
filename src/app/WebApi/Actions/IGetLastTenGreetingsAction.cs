@@ -5,6 +5,6 @@ namespace HelloWorldApp.WebApi.Actions
 {
     public interface IGetLastTenGreetingsAction
     {
-        Task<GetLastTenGreetingsResponse> ExecuteAsync();
+        Task<SavedGreeting[]> ExecuteAsync();
     }
 }

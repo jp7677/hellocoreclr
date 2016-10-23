@@ -22,8 +22,8 @@ namespace HelloWorldApp.Test.WebApi.Actions
             
             var result = await sut.ExecuteAsync();
             
-            result.SavedGreetings.Should().NotBeNull();
-            result.SavedGreetings.GetLength(0).Should().Be(0);
+            result.Should().NotBeNull();
+            result.GetLength(0).Should().Be(0);
         }
 
         [Fact]
@@ -41,8 +41,8 @@ namespace HelloWorldApp.Test.WebApi.Actions
             
             var result = await sut.ExecuteAsync();
             
-            result.SavedGreetings.Should().NotBeNull();
-            result.SavedGreetings.GetLength(0).Should().Be(10);
+            result.Should().NotBeNull();
+            result.GetLength(0).Should().Be(10);
         }
     }
 }

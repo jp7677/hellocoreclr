@@ -20,7 +20,7 @@ namespace HelloWorldApp.WebApi
         [HttpGet]
         public async Task<IActionResult> SayHelloWorldAsync(string name)
         {
-            log.Information("'helloworld' Request received with '{0}'.", name);
+            log.Information("'sayhelloworld' Request received with '{0}'.", name);
             
             var action = actionFactory.CreateSayHelloWorldAction();
             var response = await action.ExecuteAsync(name);
@@ -32,13 +32,25 @@ namespace HelloWorldApp.WebApi
         [HttpGet]
         public async Task<IActionResult> GetLastTenGreetingsAsync()
         {
-            log.Information("'helloworld' Request received.");
+            log.Information("'greetings' Request received.");
             
             var action = actionFactory.CreateGetLastTenGreetingsAction();
             var response = await action.ExecuteAsync();
 
             if(response.GetLength(0) == 0)
                 return new NoContentResult();
+
+            return new OkObjectResult(response);
+        }
+
+        [Route("greetings/count")]
+        [HttpGet]
+        public async Task<IActionResult> GetTotalNumberOfGreetingsAsync()
+        {
+            log.Information("'greetings/count' Request received.");
+            
+            var action = actionFactory.CreateGetTotalNumberOfGreetingsAction();
+            var response = await action.ExecuteAsync();
 
             return new OkObjectResult(response);
         }

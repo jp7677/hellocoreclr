@@ -6,5 +6,6 @@ namespace HelloWorldApp.WebApi
     {
         ISayHelloWorldAction CreateSayHelloWorldAction();
         IGetLastTenGreetingsAction CreateGetLastTenGreetingsAction();
+        IGetTotalNumberOfGreetingsAction CreateGetTotalNumberOfGreetingsAction();
     }
 }

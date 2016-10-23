@@ -43,7 +43,7 @@ namespace HelloWorldApp.Test
         }
 
         [Fact]
-        public async void ValidGetTenHelloWorldsRequestReturnsOkTest()
+        public async void ValidGetTenGreetingsRequestReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
@@ -54,6 +54,20 @@ namespace HelloWorldApp.Test
                 var data = JsonConvert.DeserializeObject<SavedGreeting[]>(content);
                 data.Should().NotBeNull();
                 data.GetLength(0).Should().BeGreaterThan(0);
+            }
+        }
+
+        [Fact]
+        public async void ValidGetNumberOfGreetingsRequestReturnsOkTest()
+        {
+            using (var client = server.CreateClient())
+            {
+                var response = await client.GetAsync("/api/greetings/count");
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+                var content = await response.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<int>(content);
+                data.Should().BeGreaterThan(0);
             }
         }
 

@@ -20,5 +20,10 @@ namespace HelloWorldApp.WebApi
         {
             return resourceProvider.CreateResource<IGetLastTenGreetingsAction>();
         }
+
+        public IGetTotalNumberOfGreetingsAction CreateGetTotalNumberOfGreetingsAction()
+        {
+            return resourceProvider.CreateResource<IGetTotalNumberOfGreetingsAction>();
+        }
     }
 }

@@ -90,6 +90,7 @@ namespace HelloWorldApp
             container.RegisterSingleton<IActionFactory, ActionFactory>();
             container.Register<ISayHelloWorldAction, SayHelloWorldAction>();
             container.Register<IGetLastTenGreetingsAction, GetLastTenHelloWorldsAction>();
+            container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();
 
             container.RegisterSingleton<IGreetingDbContextFactory>(() =>
                 new GreetingDbContextFactory(CreateDatabaseOptions().Options));

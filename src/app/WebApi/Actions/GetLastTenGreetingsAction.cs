@@ -22,6 +22,7 @@ namespace HelloWorldApp.WebApi.Actions
             const int numberOfResults = 10;
             var items = await dataService.GetLastTenGreetingsAsync(numberOfResults);
 
+            log.Information("We are returning {0} greetings.", items.Count());
             return items.Select(i => new SavedGreeting {Greeting = i.Name, TimestampUtc = i.TimestampUtc}).ToArray();
         }
     }

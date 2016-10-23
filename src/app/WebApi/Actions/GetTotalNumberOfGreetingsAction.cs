@@ -17,7 +17,10 @@ namespace HelloWorldApp.WebApi.Actions
         public async Task<int> ExecuteAsync()
         {
             log.Information("Looking for the total count of greetings.");
-            return  await dataService.GetNumberOfGreetingsAsync();
+            var result = await dataService.GetNumberOfGreetingsAsync();
+
+            log.Information("We have {0} greetings totally.", result);
+            return result;
         }
     }
 }

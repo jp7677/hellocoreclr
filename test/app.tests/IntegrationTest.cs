@@ -23,6 +23,7 @@ namespace HelloWorldApp.Test
             using (var client = server.CreateClient())
             {
                 var response = await client.GetAsync("/api/");
+
                 response.StatusCode.Should().Be(HttpStatusCode.NotFound);
             }
         }
@@ -33,8 +34,8 @@ namespace HelloWorldApp.Test
             using (var client = server.CreateClient())
             {
                 var response = await client.GetAsync("/api/sayhelloworld/World");
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
 
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var content = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<SayHelloWorldResponse>(content);
                 data.Should().NotBeNull();
@@ -48,8 +49,8 @@ namespace HelloWorldApp.Test
             using (var client = server.CreateClient())
             {
                 var response = await client.GetAsync("/api/greetings");
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
 
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var content = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<SavedGreeting[]>(content);
                 data.Should().NotBeNull();
@@ -63,8 +64,8 @@ namespace HelloWorldApp.Test
             using (var client = server.CreateClient())
             {
                 var response = await client.GetAsync("/api/greetings/count");
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
 
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var content = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<int>(content);
                 data.Should().BeGreaterThan(0);
@@ -77,6 +78,7 @@ namespace HelloWorldApp.Test
             using (var client = server.CreateClient())
             {
                 var response = await client.GetAsync("/swagger/v1/swagger.json");
+
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
             }
         }
@@ -87,6 +89,7 @@ namespace HelloWorldApp.Test
             using (var client = server.CreateClient())
             {
                 var response = await client.GetAsync("/swagger/ui/index.html");
+
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
             }
         }

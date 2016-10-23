@@ -17,7 +17,6 @@ namespace HelloWorldApp.Test.WebApi.Actions
         {
             var dataService = new Mock<IDataService>();
             dataService.Setup(m => m.GetLastTenGreetingsAsync(It.IsAny<int>())).ReturnsAsync(new List<Greeting>());
-
             var sut = new GetLastTenHelloWorldsAction(dataService.Object);
             
             var result = await sut.ExecuteAsync();
@@ -36,7 +35,6 @@ namespace HelloWorldApp.Test.WebApi.Actions
 
             var dataService = new Mock<IDataService>();
             dataService.Setup(m => m.GetLastTenGreetingsAsync(10)).ReturnsAsync(greetingList);
-
             var sut = new GetLastTenHelloWorldsAction(dataService.Object);
             
             var result = await sut.ExecuteAsync();

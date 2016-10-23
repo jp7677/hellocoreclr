@@ -13,7 +13,6 @@ namespace HelloWorldApp.Test.Data
         {
             var options = new DbContextOptionsBuilder<GreetingDbContext>()
                 .UseInMemoryDatabase("SaveOneGreetingShouldResultInOneSavedGreetingTest");
-
             var factory = new GreetingDbContextFactory(options.Options);
             var sut = new DataService(factory);
 
@@ -29,7 +28,6 @@ namespace HelloWorldApp.Test.Data
         {
             var options = new DbContextOptionsBuilder<GreetingDbContext>()
                 .UseInMemoryDatabase("SaveTenGreetingShouldResultInTenSavedGreetingTest");
-
             var factory = new GreetingDbContextFactory(options.Options);
             var sut = new DataService(factory);
 

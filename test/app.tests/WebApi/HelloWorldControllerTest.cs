@@ -20,8 +20,8 @@ namespace HelloWorldApp.Test
                 m.ExecuteAsync("You")).ReturnsAsync(new SayHelloWorldResponse{ Greeting = "Hello You!" });
             var actionFactory = Mock.Of<IActionFactory>(m =>
                 m.CreateSayHelloWorldAction() == action.Object);
-            
             var sut = new HelloWorldController(actionFactory);
+
             var response = await sut.SayHelloWorldAsync("You");
 
             response.Should().NotBeNull();
@@ -41,8 +41,8 @@ namespace HelloWorldApp.Test
                 m.ExecuteAsync()).ReturnsAsync(new SavedGreeting[0]);
             var actionFactory = Mock.Of<IActionFactory>(m =>
                 m.CreateGetLastTenGreetingsAction() == action.Object);
-            
             var sut = new HelloWorldController(actionFactory);
+
             var response = await sut.GetLastTenGreetingsAsync();
 
             response.Should().NotBeNull();
@@ -58,8 +58,8 @@ namespace HelloWorldApp.Test
                 m.ExecuteAsync()).ReturnsAsync(new []{new SavedGreeting{Greeting = "mygreeting"}});
             var actionFactory = Mock.Of<IActionFactory>(m =>
                 m.CreateGetLastTenGreetingsAction() == action.Object);
-            
             var sut = new HelloWorldController(actionFactory);
+
             var response = await sut.GetLastTenGreetingsAsync();
 
             var okResponse = response.As<OkObjectResult>();
@@ -78,8 +78,8 @@ namespace HelloWorldApp.Test
                 m.ExecuteAsync()).ReturnsAsync(6);
             var actionFactory = Mock.Of<IActionFactory>(m =>
                 m.CreateGetTotalNumberOfGreetingsAction() == action.Object);
-            
             var sut = new HelloWorldController(actionFactory);
+
             var response = await sut.GetTotalNumberOfGreetingsAsync();
 
             var okResponse = response.As<OkObjectResult>();

@@ -14,7 +14,6 @@ namespace HelloWorldApp.Test.WebApi.Actions
         {
             var dataService = new Mock<IDataService>();
             dataService.Setup(m => m.GetNumberOfGreetingsAsync()).ReturnsAsync(6);
-
             var sut = new GetTotalNumberOfGreetingsAction(dataService.Object);
             
             var result = await sut.ExecuteAsync();

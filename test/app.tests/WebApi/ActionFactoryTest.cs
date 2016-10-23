@@ -11,27 +11,40 @@ namespace HelloWorldApp.Test.WebApi
         [Fact]
         public void CreateSayHelloWorldActionTest()
         {
-            var sayHelloWorldAction = Mock.Of<ISayHelloWorldAction>();
+            var action = Mock.Of<ISayHelloWorldAction>();
             var resourceProvider = Mock.Of<IResourceProvider>(r => 
-                r.CreateResource<ISayHelloWorldAction>() == sayHelloWorldAction);
+                r.CreateResource<ISayHelloWorldAction>() == action);
             var sut = new ActionFactory(resourceProvider);
 
-            var action = sut.CreateSayHelloWorldAction();
+            var result = sut.CreateSayHelloWorldAction();
 
-            action.Should().NotBeNull();
+            result.Should().NotBeNull();
         }
 
         [Fact]
         public void CreateGetLastTenGreetingsActionTest()
         {
-            var getLastTenGreetingsAction = Mock.Of<IGetLastTenGreetingsAction>();
+            var action = Mock.Of<IGetLastTenGreetingsAction>();
             var resourceProvider = Mock.Of<IResourceProvider>(r => 
-                r.CreateResource<IGetLastTenGreetingsAction>() == getLastTenGreetingsAction);
+                r.CreateResource<IGetLastTenGreetingsAction>() == action);
             var sut = new ActionFactory(resourceProvider);
 
-            var action = sut.CreateGetLastTenGreetingsAction();
+            var result = sut.CreateGetLastTenGreetingsAction();
 
-            action.Should().NotBeNull();
+            result.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void CreateGetTotalNumberOfGreetingsActionTest()
+        {
+            var action = Mock.Of<IGetTotalNumberOfGreetingsAction>();
+            var resourceProvider = Mock.Of<IResourceProvider>(r => 
+                r.CreateResource<GetTotalNumberOfGreetingsAction>() == action);
+            var sut = new ActionFactory(resourceProvider);
+
+            var result = sut.CreateGetTotalNumberOfGreetingsAction();
+
+            result.Should().NotBeNull();
         }
     }
 }

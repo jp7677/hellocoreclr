@@ -39,7 +39,7 @@ namespace HelloWorldApp.Test.WebApi
         {
             var action = Mock.Of<IGetTotalNumberOfGreetingsAction>();
             var resourceProvider = Mock.Of<IResourceProvider>(r => 
-                r.CreateResource<GetTotalNumberOfGreetingsAction>() == action);
+                r.CreateResource<IGetTotalNumberOfGreetingsAction>() == action);
             var sut = new ActionFactory(resourceProvider);
 
             var result = sut.CreateGetTotalNumberOfGreetingsAction();

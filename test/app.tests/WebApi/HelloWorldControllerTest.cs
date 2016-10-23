@@ -15,11 +15,11 @@ namespace HelloWorldApp.Test
         [Fact]
         public async Task SayHelloWorldTest()
         { 
-            var sayHelloWorldAction = new Mock<ISayHelloWorldAction>();
-            sayHelloWorldAction.Setup(m =>
+            var action = new Mock<ISayHelloWorldAction>();
+            action.Setup(m =>
                 m.ExecuteAsync("You")).ReturnsAsync(new SayHelloWorldResponse{ Greeting = "Hello You!" });
             var actionFactory = Mock.Of<IActionFactory>(m =>
-                m.CreateSayHelloWorldAction() == sayHelloWorldAction.Object);
+                m.CreateSayHelloWorldAction() == action.Object);
             
             var sut = new HelloWorldController(actionFactory);
             var response = await sut.SayHelloWorldAsync("You");
@@ -36,11 +36,11 @@ namespace HelloWorldApp.Test
         [Fact]
         public async Task NoGreetingsShouldReturnNoContentTest()
         { 
-            var getLastTenGreetingsAction = new Mock<IGetLastTenGreetingsAction>();
-            getLastTenGreetingsAction.Setup(m =>
+            var action = new Mock<IGetLastTenGreetingsAction>();
+            action.Setup(m =>
                 m.ExecuteAsync()).ReturnsAsync(new SavedGreeting[0]);
             var actionFactory = Mock.Of<IActionFactory>(m =>
-                m.CreateGetLastTenGreetingsAction() == getLastTenGreetingsAction.Object);
+                m.CreateGetLastTenGreetingsAction() == action.Object);
             
             var sut = new HelloWorldController(actionFactory);
             var response = await sut.GetLastTenGreetingsAsync();
@@ -53,11 +53,11 @@ namespace HelloWorldApp.Test
         [Fact]
         public async Task SomeGreetingsShouldReturnGreetingsTest()
         { 
-            var getLastTenGreetingsAction = new Mock<IGetLastTenGreetingsAction>();
-            getLastTenGreetingsAction.Setup(m =>
+            var action = new Mock<IGetLastTenGreetingsAction>();
+            action.Setup(m =>
                 m.ExecuteAsync()).ReturnsAsync(new []{new SavedGreeting{Greeting = "mygreeting"}});
             var actionFactory = Mock.Of<IActionFactory>(m =>
-                m.CreateGetLastTenGreetingsAction() == getLastTenGreetingsAction.Object);
+                m.CreateGetLastTenGreetingsAction() == action.Object);
             
             var sut = new HelloWorldController(actionFactory);
             var response = await sut.GetLastTenGreetingsAsync();
@@ -68,6 +68,25 @@ namespace HelloWorldApp.Test
             var content = okResponse.Value.As<SavedGreeting[]>();
             content.Should().NotBeNull();
             content[0].Greeting.Should().Be("mygreeting");
+        }
+
+        [Fact]
+        public async Task GetNumberOfGreetingsShouldReturnSomeNumberTest()
+        { 
+            var action = new Mock<IGetTotalNumberOfGreetingsAction>();
+            action.Setup(m =>
+                m.ExecuteAsync()).ReturnsAsync(6);
+            var actionFactory = Mock.Of<IActionFactory>(m =>
+                m.CreateGetTotalNumberOfGreetingsAction() == action.Object);
+            
+            var sut = new HelloWorldController(actionFactory);
+            var response = await sut.GetTotalNumberOfGreetingsAsync();
+
+            var okResponse = response.As<OkObjectResult>();
+            okResponse.Should().NotBeNull();
+            okResponse.StatusCode.Should().Be((int)HttpStatusCode.OK);
+            var content = okResponse.Value.As<int>();
+            content.Should().Be(6);
         }
     }
 }

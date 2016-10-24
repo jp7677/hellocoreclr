@@ -3,7 +3,6 @@
 import {RouterConfiguration} from "aurelia-router";
 
 export class Config {
-
   public configureRouter($config) {
     let config: RouterConfiguration = $config;
 

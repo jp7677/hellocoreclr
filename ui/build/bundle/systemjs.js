@@ -15,7 +15,7 @@ exports.fn = function (gulp, paths, mode, done) {
       paths.src + 'app-bundle.conf.js'], { base: '.' })
     .pipe(!mode.production ? sourcemaps.init({loadMaps: true}) : util.noop())
     .pipe(concat('app-bootstrap.js'))
-    .pipe(footer('\nSystem.import(\'aurelia-bootstrapper\').catch(console.error.bind(console));'))
+    .pipe(footer('\nSystem.import(\'app/splash\').catch(console.error.bind(console));\nSystem.import(\'aurelia-bootstrapper\').catch(console.error.bind(console));'))
     .pipe(uglify({mangle: mode.production}))
     .pipe(flatten())
     .pipe(mode.production ? rev() : util.noop())

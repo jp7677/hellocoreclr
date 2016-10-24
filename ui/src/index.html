@@ -3,25 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <title>Hello World</title>
-    <!-- build:cssbundle -->
-    <!-- endbuild -->
 </head>
-<body aurelia-app="app/main">
-    <div class="splash">
-        <div class="message">Loading Hello World...</div>
-        <i class="fa fa-spinner fa-spin"></i>
+<body>
+    <div aurelia-app="app/main">
+        <!-- build:bootstrapjs -->
+        <script src="jspm_packages/system.js"></script>
+        <script src="jspm.conf.js"></script>
+        <script>
+            System.import('app/splash')
+                .catch(console.error.bind(console));
+            System.import('aurelia-bootstrapper')
+                .catch(console.error.bind(console));
+        </script>
+        <!-- endbuild -->
     </div>
-    <!-- build:bootstrapjs -->
-    <script src="jspm_packages/system.js"></script>
-    <script src="jspm.conf.js"></script>
-    <script>
-        System.import('./styles/splash.css!')
-        System.import('bootstrap/css/bootstrap.css!')
-        System.import('bootstrap/css/bootstrap-theme.css!')
-        System.import('font-awesome/css/font-awesome.css!')
-        System.import('aurelia-bootstrapper')
-            .catch(console.error.bind(console)); // make sure any errors are print to console
-    </script>
-    <!-- endbuild -->
 </body>
 </html>

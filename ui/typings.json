@@ -23,6 +23,7 @@
   "globalDependencies": {
     "core-js": "registry:dt/core-js#0.0.0+20160914114559",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
+    "nprogress": "registry:dt/nprogress#0.0.0+20161003122759",
     "toastr": "registry:dt/toastr#2.1.1+20160510010435",
     "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20161004182750",
     "whatwg-streams": "registry:dt/whatwg-streams#0.0.0+20160829180742"

@@ -18,6 +18,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@3.1.1",
     "mocha": "npm:mocha@3.1.2",
+    "nprogress": "github:rstacruz/nprogress@0.2.0",
     "sinon": "npm:sinon@1.17.6",
     "text": "github:systemjs/plugin-text@0.0.9",
     "toastr": "npm:toastr@2.1.2",
@@ -35,6 +36,9 @@ System.config({
     },
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
+    },
+    "github:rstacruz/nprogress@0.2.0": {
+      "css": "github:systemjs/plugin-css@0.1.31"
     },
     "github:twbs/bootstrap@3.3.7": {
       "jquery": "npm:jquery@3.1.1"

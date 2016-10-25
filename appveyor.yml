@@ -11,24 +11,20 @@ install:
 - ps: Install-Product node $env:nodejs_version
 
 build_script:
-- cd %APPVEYOR_BUILD_FOLDER%
 - dotnet restore
 - dotnet build src\app\project.json
 
-- cd %APPVEYOR_BUILD_FOLDER%\ui
-- npm install
-- node_modules\.bin\jspm install
-- node_modules\.bin\typings install
-- node_modules\.bin\gulp
+- npm install --prefix ui
+- ui\node_modules\.bin\jspm install --cwd ui
+- ui\node_modules\.bin\typings install --cwd ui
+- ui\node_modules\.bin\gulp --cwd ui
 
 test_script:
-- cd %APPVEYOR_BUILD_FOLDER%
 - dotnet test test\app.tests
 - npm install karma-coverage karma-sourcemap-loader karma-appveyor-reporter --prefix ui
 - ui\node_modules\.bin\karma start ui\karma-appveyor.conf.js
 
 after_test:
-- cd %APPVEYOR_BUILD_FOLDER%
 - nuget install OpenCover -Version 4.6.519 -o .\packages
 - npm install codecov remap-istanbul
 - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\app.tests" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Tests*]*" -hideskipped:Filter -mergeoutput -output:reports\coverage-dotnet.xml

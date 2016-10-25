@@ -14,7 +14,7 @@ build_script:
 - dotnet restore
 - dotnet build src\app\project.json
 
-- npm install --prefix ui
+- npm install -g --prefix ui
 - ui\node_modules\.bin\jspm install --cwd ui
 - ui\node_modules\.bin\typings install --cwd ui
 - ui\node_modules\.bin\gulp --cwd ui

@@ -11,7 +11,8 @@ const filenames = require('gulp-filenames')
 
 exports.dep = ['bundle:app']
 exports.fn = function (gulp, paths, mode, done) {
-  return gulp.src([paths.src + 'jspm_packages/system.js',
+  return gulp.src([paths.src + 'jspm_packages/system-polyfills.js',
+      paths.src + 'jspm_packages/system.js',
       paths.src + 'app-bundle.conf.js'], { base: '.' })
     .pipe(!mode.production ? sourcemaps.init({loadMaps: true}) : util.noop())
     .pipe(concat('app-bootstrap.js'))

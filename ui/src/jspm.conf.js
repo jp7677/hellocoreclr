@@ -15,6 +15,7 @@ System.config({
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "chai": "npm:chai@3.5.0",
     "css": "github:systemjs/plugin-css@0.1.31",
+    "fetch": "github:github/fetch@1.0.0",
     "font-awesome": "npm:font-awesome@4.6.3",
     "jquery": "npm:jquery@3.1.1",
     "mocha": "npm:mocha@3.1.2",

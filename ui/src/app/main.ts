@@ -1,5 +1,8 @@
 "use strict";
 
+// Import the fetch polifill before the Aurelia fetch client to keep compatibility with Safari
+import "fetch";
+
 import {Statusbar} from "./statusbar";
 import {HttpClient} from "aurelia-fetch-client";
 import {Aurelia} from "aurelia-framework";

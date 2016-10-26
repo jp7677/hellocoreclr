@@ -63,6 +63,7 @@
       "aurelia-framework": "npm:aurelia-framework@~1.0.7",
       "aurelia-router": "npm:aurelia-router@~1.0.7",
       "bootstrap": "github:twbs/bootstrap@~3.3.7",
+      "fetch": "github:github/fetch@~1.0.0",
       "font-awesome": "npm:font-awesome@~4.6.3",
       "jquery": "npm:jquery@~3.1.1",
       "nprogress": "github:rstacruz/nprogress@~0.2.0",

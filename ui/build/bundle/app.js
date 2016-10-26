@@ -31,6 +31,7 @@ exports.fn = function (gulp, paths, mode, done) {
           'font-awesome/css/font-awesome.css!text',
           'bootstrap/css/bootstrap.css!text',
           'bootstrap/css/bootstrap-theme.css!text',
+          'fetch',
           'aurelia-framework',
           'aurelia-bootstrapper',
           'aurelia-loader-default',

@@ -11,9 +11,13 @@ const filenames = require('gulp-filenames')
 
 exports.dep = ['bundle:app']
 exports.fn = function (gulp, paths, mode, done) {
-  return gulp.src([paths.src + 'jspm_packages/system-polyfills.js',
-      paths.src + 'jspm_packages/system.js',
-      paths.src + 'app-bundle.conf.js'], { base: '.' })
+  // Import the systemjs polyfill to keep compatibility with Safari 7 and IE
+  let systemjsFiles = [
+    paths.src + 'jspm_packages/system-polyfills.js',
+    paths.src + 'jspm_packages/system.js',
+    paths.src + 'app-bundle.conf.js']
+
+  return gulp.src(systemjsFiles, { base: '.' })
     .pipe(!mode.production ? sourcemaps.init({loadMaps: true}) : util.noop())
     .pipe(concat('app-bootstrap.js'))
     .pipe(footer('\nSystem.import(\'app/splash\').catch(console.error.bind(console));\nSystem.import(\'aurelia-bootstrapper\').catch(console.error.bind(console));'))

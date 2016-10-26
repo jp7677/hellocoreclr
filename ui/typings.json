@@ -10,7 +10,7 @@
     "aurelia-framework": "github:aurelia/framework#1.0.0",
     "aurelia-history": "github:aurelia/history#1.0.0",
     "aurelia-loader": "github:aurelia/loader#1.0.0",
-    "aurelia-logging": "github:aurelia/logging#1.1.0",
+    "aurelia-logging": "github:aurelia/logging#1.0.0",
     "aurelia-metadata": "github:aurelia/metadata#1.0.0",
     "aurelia-pal": "github:aurelia/pal#1.0.0",
     "aurelia-pal-browser": "github:aurelia/pal-browser#1.0.0",

@@ -7,11 +7,10 @@ module.exports = function (config) {
     jspm: {
       config: 'src/jspm.conf.js',
       loadFiles: [
-        'node_modules/es6-shim/es6-shim.js',
+        'node_modules/core-js/client/core.js',
         'test/**/*.spec.js'
       ],
       serveFiles: [
-        'node_modules/es6-shim/es6-shim.js',
         'src/**/*.js',
         'test/stubs.js'
       ],

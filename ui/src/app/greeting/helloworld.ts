@@ -29,23 +29,23 @@ export class HelloWorld {
             return;
         }
 
-        this.log.info("We got the following name: " + name);
+        this.log.info(`We got the following name: ${name}`);
         this.notifier.Info("Working...");
 
         this.httpClient.fetch("sayhelloworld/" + name)
             .then((response: Response) => {
-                this.log.info("Received http code " + response.status);
+                this.log.info(`Received http code ${response.status}`);
                 this.notifier.Info("HTTP/" + response.status);
                 return response.json();
             })
             .then((data: SayHelloWorldResponse) => {
-                this.log.info("Received data was: " + data.greeting);
+                this.log.info(`Received data was: ${data.greeting}`);
                 this.labelText = data.greeting;
             })
             .catch((response: Response) => {
-                this.log.info("Received http code " + response.status);
+                this.log.info(`Received http code ${response.status}`);
                 this.log.warn("Oops... something went wrong.");
-                this.notifier.Warn("Oops... HTTP/" + response.status);
+                this.notifier.Warn(`Oops... HTTP/${response.status}`);
                 this.labelText = "";
             });
     }

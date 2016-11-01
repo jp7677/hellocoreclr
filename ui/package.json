@@ -15,6 +15,7 @@
     "gulp-require-tasks": "~1.0.5",
     "run-sequence": "~1.2.2",
     "gulp-filter": "~4.0.0",
+    "gulp-replace": "~0.5.4",
     "gulp-typescript": "~3.1.2",
     "aurelia-bundler": "~0.4.0",
     "gulp-sourcemaps": "~2.2.0",

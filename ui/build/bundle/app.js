@@ -25,6 +25,7 @@ exports.fn = function (gulp, paths, mode, done) {
       },
       'app-bundle': {
         includes: [
+          './src/appsettings.json!json',
           '[./src/app/**/*.js]',
           './src/app/**/*.html!text',
           './src/styles/**/*.css!text',

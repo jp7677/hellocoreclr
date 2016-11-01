@@ -2,6 +2,7 @@
 
 import {HttpClient} from "aurelia-fetch-client";
 import {LogManager, inject} from "aurelia-framework";
+import {Logger} from "aurelia-logging";
 
 import {Notifier} from "./notifier";
 import {SayHelloWorldResponse} from "./sayhelloworldresponse";
@@ -11,7 +12,7 @@ export class HelloWorld {
     public inputText: string;
     public labelText: string;
 
-    private log = LogManager.getLogger("HelloWorld");
+    private log: Logger = LogManager.getLogger("HelloWorld");
     private httpClient: HttpClient;
     private notifier: Notifier;
 

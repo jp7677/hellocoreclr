@@ -8,10 +8,11 @@ import {Environment} from "./environment";
 import {Statusbar} from "./statusbar";
 import {HttpClient} from "aurelia-fetch-client";
 import {Aurelia, Container, LogManager} from "aurelia-framework";
+import {Logger} from "aurelia-logging";
 import {ConsoleAppender} from "aurelia-logging-console";
 
 export function configure(aurelia: Aurelia) {
-  let log = LogManager.getLogger("Main");
+  let log: Logger = LogManager.getLogger("Main");
   let env: Environment = new Environment(appsettingsJson);
 
   Statusbar.Inc();

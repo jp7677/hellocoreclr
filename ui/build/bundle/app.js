@@ -23,6 +23,17 @@ exports.fn = function (gulp, paths, mode, done) {
           sourceMapContents: !mode.production
         }
       },
+      'app-bundle-settings': {
+        includes: [
+          './src/appsettings.json!json'
+        ],
+        options: {
+          inject: true,
+          minify: false,
+          rev: mode.production,
+          sourceMaps: false
+        }
+      },
       'app-bundle': {
         includes: [
           '[./src/app/**/*.js]',

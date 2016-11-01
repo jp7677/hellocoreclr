@@ -15,6 +15,7 @@
     "gulp-require-tasks": "~1.0.5",
     "run-sequence": "~1.2.2",
     "gulp-filter": "~4.0.0",
+    "gulp-replace": "~0.5.4",
     "gulp-typescript": "~3.1.2",
     "aurelia-bundler": "~0.4.0",
     "gulp-sourcemaps": "~2.2.0",
@@ -84,6 +85,7 @@
       "fetch": "github:github/fetch@~1.0.0",
       "font-awesome": "npm:font-awesome@~4.7.0",
       "jquery": "npm:jquery@~3.1.1",
+      "json": "github:systemjs/plugin-json@~0.2.1",
       "nprogress": "github:rstacruz/nprogress@~0.2.0",
       "text": "github:systemjs/plugin-text@~0.0.9",
       "toastr": "npm:toastr@~2.1.2"

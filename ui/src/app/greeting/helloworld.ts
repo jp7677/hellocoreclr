@@ -2,6 +2,7 @@
 
 import {HttpClient} from "aurelia-fetch-client";
 import {LogManager, inject} from "aurelia-framework";
+import {Logger} from "aurelia-logging";
 
 import {Notifier} from "./notifier";
 import {SayHelloWorldResponse} from "./sayhelloworldresponse";
@@ -11,7 +12,7 @@ export class HelloWorld {
     public inputText: string;
     public labelText: string;
 
-    private log = LogManager.getLogger("HelloWorld");
+    private log: Logger = LogManager.getLogger("HelloWorld");
     private httpClient: HttpClient;
     private notifier: Notifier;
 
@@ -28,23 +29,23 @@ export class HelloWorld {
             return;
         }
 
-        this.log.info("We got the following name: " + name);
+        this.log.info(`We got the following name: ${name}`);
         this.notifier.Info("Working...");
 
         this.httpClient.fetch("sayhelloworld/" + name)
             .then((response: Response) => {
-                this.log.info("Received http code " + response.status);
+                this.log.info(`Received http code ${response.status}`);
                 this.notifier.Info("HTTP/" + response.status);
                 return response.json();
             })
             .then((data: SayHelloWorldResponse) => {
-                this.log.info("Received data was: " + data.greeting);
+                this.log.info(`Received data was: ${data.greeting}`);
                 this.labelText = data.greeting;
             })
             .catch((response: Response) => {
-                this.log.info("Received http code " + response.status);
+                this.log.info(`Received http code ${response.status}`);
                 this.log.warn("Oops... something went wrong.");
-                this.notifier.Warn("Oops... HTTP/" + response.status);
+                this.notifier.Warn(`Oops... HTTP/${response.status}`);
                 this.labelText = "";
             });
     }

@@ -4,31 +4,33 @@
 import "fetch";
 
 import appsettingsJson from "../appsettings.json!";
-import {AppSettings} from "./appsettings";
+import {Environment} from "./environment";
 import {Statusbar} from "./statusbar";
 import {HttpClient} from "aurelia-fetch-client";
 import {Aurelia, Container, LogManager} from "aurelia-framework";
 import {ConsoleAppender} from "aurelia-logging-console";
 
 export function configure(aurelia: Aurelia) {
+  let log = LogManager.getLogger("Main");
+  let env: Environment = new Environment(appsettingsJson);
+
   Statusbar.Inc();
 
   aurelia.use
     .standardConfiguration();
 
-  let appSettings: AppSettings = new AppSettings(appsettingsJson);
-  configureLogging(appSettings);
-
-  registerAppSettings(aurelia.container, appSettings);
+  configureLogging(env);
+  registerEnvironment(aurelia.container, env);
   registerHttClient(aurelia.container);
 
+  log.info(`Starting in ${appsettingsJson.applicationMode} mode.`);
   aurelia.start().then(() => {
     aurelia.setRoot("app/config");
     Statusbar.Done();
   });
 }
 
-function configureLogging(settings: AppSettings) {
+function configureLogging(settings: Environment) {
   LogManager.addAppender(new ConsoleAppender());
 
   if (settings.IsDevelopment()) {
@@ -38,13 +40,10 @@ function configureLogging(settings: AppSettings) {
   } else if (settings.IsProduction()) {
     LogManager.setLevel(LogManager.logLevel.error);
   }
-
-  let log = LogManager.getLogger("Main");
-  log.info(`Starting in ${settings.applicationMode} mode.`);
 }
 
-function registerAppSettings(container: Container, settings: AppSettings) {
-  container.registerInstance(AppSettings, settings);
+function registerEnvironment(container: Container, settings: Environment) {
+  container.registerInstance(Environment, settings);
 }
 
 function registerHttClient(container: Container) {

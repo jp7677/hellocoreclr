@@ -1,7 +1,7 @@
 "use strict";
 
-export class AppSettings {
-    public applicationMode: string;
+export class Environment {
+    private applicationMode: string;
 
     constructor(appsettingsJson) {
         this.applicationMode = appsettingsJson.applicationMode;

@@ -30,7 +30,7 @@ exports.fn = function (gulp, paths, mode, done) {
         options: {
           inject: true,
           minify: false,
-          rev: true,
+          rev: mode.production,
           sourceMaps: false
         }
       },

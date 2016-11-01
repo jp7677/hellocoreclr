@@ -12,17 +12,15 @@ import {Logger} from "aurelia-logging";
 import {ConsoleAppender} from "aurelia-logging-console";
 
 export function configure(aurelia: Aurelia) {
+  Statusbar.Inc();
   let log: Logger = LogManager.getLogger("Main");
   let env: Environment = new Environment(appsettingsJson);
-
-  Statusbar.Inc();
 
   aurelia.use
     .standardConfiguration();
 
   configureLogging(env);
-  registerEnvironment(aurelia.container, env);
-  registerHttClient(aurelia.container);
+  configureContainer(aurelia.container, env);
 
   log.info(`Starting in ${appsettingsJson.applicationMode} mode.`);
   aurelia.start().then(() => {
@@ -31,28 +29,33 @@ export function configure(aurelia: Aurelia) {
   });
 }
 
-function configureLogging(settings: Environment) {
+function configureLogging(env: Environment) {
   LogManager.addAppender(new ConsoleAppender());
 
-  if (settings.IsDevelopment()) {
+  if (env.IsDevelopment()) {
     LogManager.setLevel(LogManager.logLevel.debug);
-  } else if (settings.IsStaging()) {
+  } else if (env.IsStaging()) {
     LogManager.setLevel(LogManager.logLevel.info);
-  } else if (settings.IsProduction()) {
+  } else if (env.IsProduction()) {
     LogManager.setLevel(LogManager.logLevel.error);
   }
 }
 
-function registerEnvironment(container: Container, settings: Environment) {
-  container.registerInstance(Environment, settings);
+function configureContainer(container: Container, env: Environment) {
+  registerEnvironment(container, env);
+  registerHttClient(container, env);
 }
 
-function registerHttClient(container: Container) {
+function registerEnvironment(container: Container, env: Environment) {
+  container.registerInstance(Environment, env);
+}
+
+function registerHttClient(container: Container, env: Environment) {
   let http = new HttpClient();
   http.configure(config => {
     config
       .useStandardConfiguration()
-      .withBaseUrl("/api/");
+      .withBaseUrl(env.baseUrl);
   });
 
   container.registerInstance(HttpClient, http);

@@ -1,9 +1,12 @@
 "use strict";
 
 export class Environment {
+    public baseUrl: string;
+
     private applicationMode: string;
 
     constructor(appsettingsJson) {
+        this.baseUrl = appsettingsJson.baseUrl;
         this.applicationMode = appsettingsJson.applicationMode;
     }
 

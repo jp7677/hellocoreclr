@@ -11,7 +11,7 @@ function wait() {
         });
 }
 
-describe("HelloWorldController Test ", () => {
+describe("HelloWorldController tests", () => {
 
     it("does nothing when there is no input", () => {
         let sut = new HelloWorld(HttpClientStub.ok());

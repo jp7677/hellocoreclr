@@ -3,7 +3,7 @@
 // Import the fetch polyfill before the Aurelia fetch client to keep compatibility with Safari
 import "fetch";
 
-import appsettingsJson from "../appsettings.json!";
+import appsettings from "../appsettings.json!";
 import {Environment} from "./environment";
 import {Statusbar} from "./statusbar";
 import {HttpClient} from "aurelia-fetch-client";
@@ -14,7 +14,7 @@ import {ConsoleAppender} from "aurelia-logging-console";
 export function configure(aurelia: Aurelia) {
   Statusbar.Inc();
   let log: Logger = LogManager.getLogger("Main");
-  let env: Environment = new Environment(appsettingsJson);
+  let env: Environment = new Environment(appsettings);
 
   aurelia.use
     .standardConfiguration();
@@ -22,7 +22,7 @@ export function configure(aurelia: Aurelia) {
   configureLogging(env);
   configureContainer(aurelia.container, env);
 
-  log.info(`Starting in ${appsettingsJson.applicationMode} mode.`);
+  log.info(`Starting application in ${env.applicationMode} mode.`);
   aurelia.start().then(() => {
     aurelia.setRoot("app/config");
     Statusbar.Done();

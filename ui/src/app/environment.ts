@@ -1,13 +1,12 @@
 "use strict";
 
 export class Environment {
+    public applicationMode: string;
     public baseUrl: string;
 
-    private applicationMode: string;
-
-    constructor(appsettingsJson) {
-        this.baseUrl = appsettingsJson.baseUrl;
-        this.applicationMode = appsettingsJson.applicationMode;
+    constructor(appsettings) {
+        this.applicationMode = appsettings.applicationMode;
+        this.baseUrl = appsettings.baseUrl;
     }
 
     public IsDevelopment(): boolean {

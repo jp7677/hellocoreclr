@@ -2,7 +2,7 @@
 
 import {Statusbar} from "../src/app/statusbar";
 
-describe("Statusbar tests", () => {
+describe("Statusbar test suite", () => {
 
     it("should start and finish", () => {
         Statusbar.Start();

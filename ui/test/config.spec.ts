@@ -4,9 +4,9 @@ import {Config} from "../src/app/config";
 import {RouterConfigurationStub} from "./stubs";
 import chai from "chai";
 
-describe("Config tests", () => {
+describe("Config test suite", () => {
 
-    it("initializes correctly", () => {
+    it("should initialize correctly", () => {
         let routerConfiguration = new RouterConfigurationStub();
         let sut = new Config();
 

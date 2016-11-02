@@ -38,6 +38,9 @@ module.exports = function (config) {
       'src/app/**/*.js': ['coverage', 'sourcemap']
     },
     reporters: ['mocha', 'coverage', 'remap-coverage'],
+    mochaReporter: {
+      showDiff: true
+    },
     coverageReporter: {
       type: 'in-memory',
       includeAllSources: true

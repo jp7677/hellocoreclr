@@ -11,9 +11,9 @@ function wait() {
         });
 }
 
-describe("HelloWorldController tests", () => {
+describe("HelloWorldController test suite", () => {
 
-    it("does nothing when there is no input", () => {
+    it("should do nothing when there is no input", () => {
         let sut = new HelloWorld(HttpClientStub.ok());
         sut.inputText = undefined;
         sut.labelText = "Hello";
@@ -23,7 +23,7 @@ describe("HelloWorldController tests", () => {
         chai.expect(sut.labelText).to.empty;
     });
 
-    it("can handle a valid response", () => {
+    it("should handle a valid response", () => {
         let res = new SayHelloWorldResponse();
         res.greeting = "Hello World!";
         let httpStub = HttpClientStub.ok(res);
@@ -37,7 +37,7 @@ describe("HelloWorldController tests", () => {
         });
     });
 
-    it("can handle an error response", () => {
+    it("should handle an error response", () => {
         let httpStub = HttpClientStub.error();
         let sut = new HelloWorld(httpStub);
         sut.inputText = "Error";

@@ -3,9 +3,9 @@
 import {Environment} from "../src/app/environment";
 import chai from "chai";
 
-describe("Environment tests", () => {
+describe("Environment test suite", () => {
 
-    it("initializes correctly", () => {
+    it("should initialize correctly", () => {
         let appsettings = {applicationMode: "appMode", baseUrl: "api"};
         let sut = new Environment(appsettings);
 
@@ -16,7 +16,7 @@ describe("Environment tests", () => {
         chai.expect(sut.IsProduction()).to.be.false;
     });
 
-    it("detects development", () => {
+    it("should detect development", () => {
         let appsettings = {applicationMode: "Development", baseUrl: ""};
         let sut = new Environment(appsettings);
 
@@ -25,7 +25,7 @@ describe("Environment tests", () => {
         chai.expect(sut.IsProduction()).to.be.false;
     });
 
-    it("detects staging", () => {
+    it("should detect staging", () => {
         let appsettings = {applicationMode: "Staging", baseUrl: ""};
         let sut = new Environment(appsettings);
 
@@ -34,7 +34,7 @@ describe("Environment tests", () => {
         chai.expect(sut.IsProduction()).to.be.false;
     });
 
-    it("detects production", () => {
+    it("should detect production", () => {
         let appsettings = {applicationMode: "Production", baseUrl: ""};
         let sut = new Environment(appsettings);
 

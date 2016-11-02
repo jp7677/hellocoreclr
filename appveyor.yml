@@ -21,18 +21,20 @@ build_script:
 - node_modules\.bin\typings install
 - node_modules\.bin\gulp
 
+before_test:
+- cd %APPVEYOR_BUILD_FOLDER%\ui
+- npm install karma-appveyor-reporter
+
 test_script:
 - cd %APPVEYOR_BUILD_FOLDER%
 - dotnet test test\app.tests
-- npm install karma-coverage karma-sourcemap-loader karma-appveyor-reporter --prefix ui
-- ui\node_modules\.bin\karma start ui\karma-appveyor.conf.js
+- ui\node_modules\.bin\karma start ui\karma.conf.js --reporters progress,coverage,remap-coverage,appveyor
 
 after_test:
 - cd %APPVEYOR_BUILD_FOLDER%
 - nuget install OpenCover -Version 4.6.519 -o .\packages
-- npm install codecov remap-istanbul
 - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\app.tests" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Tests*]*" -hideskipped:Filter -mergeoutput -output:reports\coverage-dotnet.xml
-- node_modules\.bin\remap-istanbul -i reports\coverage-js.json -o reports\coverage-ts.json -t json
+- npm install codecov
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-dotnet.xml
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 

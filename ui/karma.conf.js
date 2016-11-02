@@ -27,6 +27,24 @@ module.exports = function (config) {
 
     autoWatchBatchDelay: 10000,
     singleRun: true,
-    browsers: ['PhantomJS']
+    browsers: ['PhantomJS'],
+    captureTimeout: 2000,
+    browserDisconnectTimeout: 2000,
+    browserDisconnectTolerance: 3,
+    browserNoActivityTimeout: 10000,
+
+    preprocessors: {
+      'src/!(jspm.conf).js': ['coverage', 'sourcemap'],
+      'src/app/**/*.js': ['coverage', 'sourcemap']
+    },
+    reporters: ['progress', 'coverage', 'remap-coverage'],
+    coverageReporter: {
+      type: 'in-memory',
+      includeAllSources: true
+    },
+    remapCoverageReporter: {
+      'text-summary': null,
+      json: '../reports/coverage-ts.json'
+    }
   })
 }

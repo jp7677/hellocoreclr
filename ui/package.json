@@ -50,6 +50,9 @@
     "karma-sinon": "~1.0.5",
     "sinon": "~1.17.6",
     "karma-phantomjs-launcher": "~1.0.2",
+    "karma-sourcemap-loader": "~0.3.7",
+    "karma-coverage": "~1.1.1",
+    "karma-remap-coverage": "~0.1.2",
     "browser-sync": "~2.17.5",
     "proxy-middleware": "~0.15.0"
   },

@@ -37,14 +37,14 @@ module.exports = function (config) {
       'src/!(jspm.conf).js': ['coverage', 'sourcemap'],
       'src/app/**/*.js': ['coverage', 'sourcemap']
     },
-    reporters: ['progress', 'coverage', 'remap-coverage'],
+    reporters: ['progress', 'coverage'],
     coverageReporter: {
       type: 'in-memory',
       includeAllSources: true
     },
     remapCoverageReporter: {
       'text-summary': null,
-      json: '../reports/coverage-ts.json'
+      json: 'reports/coverage-ts.json'
     }
   })
 }

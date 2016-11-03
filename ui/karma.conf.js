@@ -2,6 +2,7 @@ module.exports = function (config) {
   'use strict'
 
   config.set({
+    logLevel: 'warn',
     frameworks: ['jspm', 'mocha', 'chai', 'sinon'],
 
     jspm: {
@@ -39,7 +40,7 @@ module.exports = function (config) {
     },
     reporters: ['mocha', 'coverage', 'remap-coverage'],
     mochaReporter: {
-      showDiff: true
+      output: 'autowatch'
     },
     coverageReporter: {
       type: 'in-memory',

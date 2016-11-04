@@ -27,9 +27,7 @@ exports.fn = function (gulp, paths, mode, done) {
     .pipe(filenames('bootstrapjs'))
     .pipe(!mode.production ? sourcemaps.write('.', {
       mapSources: function (sourcePath) {
-        var truncatedSourcePath = sourcePath.substr(sourcePath.indexOf('/') + 1)
-        util.log('SourcePath within source map truncated to:', util.colors.cyan(truncatedSourcePath))
-        return truncatedSourcePath
+        return sourcePath.substr(sourcePath.indexOf('/') + 1)
       }
     }) : util.noop())
     .pipe(gulp.dest(paths.wwwroot))

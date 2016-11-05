@@ -28,6 +28,7 @@ before_test:
 
 test_script:
 - cd %APPVEYOR_BUILD_FOLDER%
+- mkdir reports
 - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\app.tests" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Tests*]*" -hideskipped:Filter -mergeoutput -output:reports\coverage-dotnet.xml
 - ui\node_modules\.bin\karma start ui\karma.conf.js --reporters progress,coverage,remap-coverage,appveyor
 

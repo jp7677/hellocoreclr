@@ -11,7 +11,6 @@ install:
 - ps: Install-Product node $env:nodejs_version
 
 build_script:
-- cd %APPVEYOR_BUILD_FOLDER%
 - dotnet restore
 - dotnet build src\app\project.json
 
@@ -25,15 +24,12 @@ before_test:
 - cd %APPVEYOR_BUILD_FOLDER%
 - nuget install OpenCover -Version 4.6.519 -o .\packages
 - npm install karma-appveyor-reporter --prefix ui
-- mkdir reports
 
 test_script:
-- cd %APPVEYOR_BUILD_FOLDER%
 - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\app.tests" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Tests*]*" -hideskipped:Filter -mergeoutput -output:reports\coverage-dotnet.xml
 - ui\node_modules\.bin\karma start ui\karma.conf.js --reporters progress,coverage,remap-coverage,appveyor
 
 after_test:
-- cd %APPVEYOR_BUILD_FOLDER%
 - npm install codecov
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-dotnet.xml
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json

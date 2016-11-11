@@ -9,7 +9,7 @@
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "dependencies": {
     "jspm": "~0.16.48",
-    "typescript": "~2.0.8",
+    "typescript": "~2.0.9",
     "typings": "~2.0.0",
     "gulp": "~3.9.1",
     "gulp-require-tasks": "~1.0.5",

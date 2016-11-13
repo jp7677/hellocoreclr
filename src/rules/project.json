@@ -11,7 +11,7 @@
       "version": "1.0.1",
       "type": "platform"
     },
-    "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-161103"
+    "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-161111"
   },
 
   "frameworks": {

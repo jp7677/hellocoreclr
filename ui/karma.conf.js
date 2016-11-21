@@ -12,7 +12,8 @@ module.exports = function (config) {
         'test/**/*.spec.js'
       ],
       serveFiles: [
-        'src/**/*.js',
+        'src/jspm_packages/*.js',
+        'src/app/**/*.js',
         'test/stubs.js'
       ],
       meta: {

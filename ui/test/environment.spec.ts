@@ -1,7 +1,7 @@
 "use strict";
 
-import {Environment} from "../src/app/environment";
 import chai from "chai";
+import {Environment} from "../src/app/environment";
 
 describe("Environment test suite", () => {
 

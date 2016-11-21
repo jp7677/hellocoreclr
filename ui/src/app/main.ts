@@ -6,6 +6,7 @@ import "fetch";
 import appsettings from "../appsettings.json!";
 import {Environment} from "./environment";
 import {Statusbar} from "./statusbar";
+
 import {HttpClient} from "aurelia-fetch-client";
 import {Aurelia, Container, LogManager} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
@@ -52,7 +53,7 @@ function registerEnvironment(container: Container, env: Environment) {
 
 function registerHttClient(container: Container, env: Environment) {
     let http = new HttpClient();
-    http.configure(config => {
+    http.configure((config) => {
         config
             .useStandardConfiguration()
             .withBaseUrl(env.baseUrl);

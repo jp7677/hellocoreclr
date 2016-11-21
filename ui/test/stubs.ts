@@ -2,6 +2,8 @@
 
 import sinon from "sinon";
 
+// tslint:disable:max-classes-per-file
+
 export class HttpClientStub {
     public static ok(responseData: any = {}) {
         return new HttpClientStub(responseData, 200);

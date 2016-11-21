@@ -1,9 +1,9 @@
 "use strict";
 
+import chai from "chai";
 import {HelloWorld} from "../../src/app/greeting/helloworld";
 import {SayHelloWorldResponse} from "../../src/app/greeting/sayhelloworldresponse";
 import {HttpClientStub} from "../stubs";
-import chai from "chai";
 
 function wait() {
     return new Promise((resolve, reject) => {

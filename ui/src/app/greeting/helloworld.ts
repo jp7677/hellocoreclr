@@ -1,7 +1,7 @@
 "use strict";
 
 import {HttpClient} from "aurelia-fetch-client";
-import {LogManager, inject} from "aurelia-framework";
+import {inject, LogManager} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
 
 import {Notifier} from "./notifier";

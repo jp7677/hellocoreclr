@@ -1,8 +1,8 @@
 "use strict";
 
+import chai from "chai";
 import {Config} from "../src/app/config";
 import {RouterConfigurationStub} from "./stubs";
-import chai from "chai";
 
 describe("Config test suite", () => {
 

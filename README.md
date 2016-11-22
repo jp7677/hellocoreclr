@@ -27,7 +27,7 @@ to restore packages.
 Building, assembling and publishing goes like
 
 ```bash
-dotnet publish --configuration Release --output artifacts/approot src/app
+dotnet publish --configuration Release --output artifacts/approot src/HelloCoreClrApp
 npm install --production --prefix ui
 ui/node_modules/.bin/jspm install --production --cwd ui
 ui/node_modules/.bin/typings install --production --cwd ui
@@ -43,7 +43,7 @@ Use
 
 ```bash
 dotnet restore
-dotnet build src/app/project.json
+dotnet build src/HelloCoreClrApp/project.json
 npm install --prefix ui
 ui/node_modules/.bin/jspm install --cwd ui
 ui/node_modules/.bin/typings install --cwd ui
@@ -53,7 +53,7 @@ ui/node_modules/.bin/gulp --cwd ui
 to restore packages, bindings, building and for assembling the web application. Use
 
 ```bash
-dotnet test test/app.tests
+dotnet test test/HelloCoreClrApp.Test
 ui/node_modules/.bin/karma start ui/karma.conf.js
 ```
 
@@ -63,7 +63,7 @@ Use
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Staging
-dotnet run --project src/app
+dotnet run --project src/HelloCoreClrApp
 ```
 
 to run the web server. Now open <http://localhost:5000/> in you favorite browser. Enjoy source maps in your browser when testing manually.
@@ -94,8 +94,8 @@ to restore packages and bindings. Finally run the following commands in separate
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Development
-(cd src/app;dotnet watch run)
-(cd test/app.tests;dotnet watch test)
+(cd src/HelloCoreClrApp;dotnet watch run)
+(cd test/HelloCoreClrApp.Test;dotnet watch test)
 ui/node_modules/.bin/gulp watch --cwd ui
 ```
 

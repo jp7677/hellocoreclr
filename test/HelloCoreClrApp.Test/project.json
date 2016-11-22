@@ -1,0 +1,38 @@
+{
+  "version": "0.1.0-*",
+  
+  "buildOptions": {
+    "warningsAsErrors": true
+  },
+ 
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
+    },
+    "HelloCoreClrApp": {
+      "version": "0.1.0-*",
+      "target": "project"
+    },
+    "Microsoft.AspNetCore.TestHost": "1.0.0",
+    "Microsoft.EntityFrameworkCore": "1.0.1",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.0.1",
+    "Newtonsoft.Json": "9.0.1",
+    "xunit": "2.2.0-beta4-build3444",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Moq": "4.6.38-alpha",
+    "FluentAssertions": "4.17.0"
+   },
+
+  "frameworks": {
+    "netcoreapp1.0": { }
+  },
+  
+  "testRunner": "xunit",
+  
+  "tools": {
+    "Microsoft.DotNet.Watcher.Tools": {
+      "version": "1.0.0-preview2-final"
+    }
+  }
+}

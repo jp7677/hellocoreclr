@@ -9,24 +9,24 @@
 	"version": "0.1.0",
 	"command": "sh",
 	"args": ["-c"],
-    "isShellCommand": true,
+	"isShellCommand": true,
 	"showOutput": "always",
 	"suppressTaskName": true,
 	"tasks": [
-        {
-            "taskName": "Build All",
-            "args": ["dotnet build ${workspaceRoot}/src/app/project.json;${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
-            "isBuildCommand": true
-        },
-        {
-            "taskName": "Compile Typescript/tsc",
-            "args": ["${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
+		{
+			"taskName": "Build All",
+			"args": ["dotnet build ${workspaceRoot}/src/HelloCoreClrApp/project.json;${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
+			"isBuildCommand": true
+		},
+		{
+			"taskName": "Compile Typescript/tsc",
+			"args": ["${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
 			"problemMatcher": "$tsc"
-        },
-        {
-            "taskName": "Build C#/dotnet",
-            "args": ["dotnet build ${workspaceRoot}/src/app/project.json"],
+		},
+		{
+			"taskName": "Build C#/dotnet",
+			"args": ["dotnet build ${workspaceRoot}/src/HelloCoreClrApp/project.json"],
 			"problemMatcher": "$msCompile"
-        }
-    ]
+		}
+	]
 }

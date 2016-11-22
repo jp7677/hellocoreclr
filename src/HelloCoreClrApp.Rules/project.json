@@ -1,0 +1,25 @@
+{
+  "version": "0.1.0",
+  "buildOptions": {
+    "compilerName": "fsc",
+    "compile": "**/*.fs",
+    "warningsAsErrors": true
+  },
+  "dependencies": {
+    "Microsoft.NETCore.App": {  
+      "version": "1.0.1",
+      "type": "platform"
+    },
+    "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-161111"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": { }
+  },
+
+  "tools": {
+    "dotnet-compile-fsc": {
+      "version": "1.0.0-preview2-020000"
+    }
+  }
+}

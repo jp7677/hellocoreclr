@@ -28,7 +28,7 @@ env:
 
 script:
 - dotnet restore
-- dotnet publish --configuration Release --output artifacts/approot src/app --version-suffix build$TRAVIS_BUILD_NUMBER
+- dotnet publish --configuration Release --output artifacts/approot src/HelloCoreClrApp --version-suffix build$TRAVIS_BUILD_NUMBER
 
 - npm install --production --prefix ui
 - ui/node_modules/.bin/jspm install --production --cwd ui

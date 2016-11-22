@@ -15,19 +15,19 @@
 			"type": "coreclr",
 			"request": "launch",
 			"preLaunchTask": "Build All",
-			"program": "${workspaceRoot}/src/app/bin/Debug/netcoreapp1.0/HelloCoreClrApp.dll",
+			"program": "${workspaceRoot}/src/HelloCoreClrApp/bin/Debug/netcoreapp1.0/HelloCoreClrApp.dll",
 			"args": [],
 			"cwd": "${workspaceRoot}",
 			"stopAtEntry": false,
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            }
+			"env": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			}
 		},
-        {
-            "name": "Attach .NET Core",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command.pickProcess}"
-        }
+		{
+			"name": "Attach .NET Core",
+			"type": "coreclr",
+			"request": "attach",
+			"processId": "${command.pickProcess}"
+		}
 	]
 }

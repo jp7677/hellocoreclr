@@ -4,18 +4,15 @@
     "**/.git": true,
     "**/.DS_Store": true,
 
-    "src/app/bin/**": true,
-    "src/app/obj/**": true,
-    "src/app/project.lock.json": true,
-    "src/rules/bin/**": true,
-    "src/rules/obj/**": true,
-    "src/rules/project.lock.json": true,
-    "test/app.tests/bin/**": true,
-    "test/app.tests/obj/**": true,
-    "test/app.tests/project.lock.json": true,
-    "test/rules.tests/bin/**": true,
-    "test/rules.tests/obj/**": true,
-    "test/rules.tests/project.lock.json": true,
+    "src/HelloCoreClrApp/bin/**": true,
+    "src/HelloCoreClrApp/obj/**": true,
+    "src/HelloCoreClrApp/project.lock.json": true,
+    "src/HelloCoreClrApp.Rules/bin/**": true,
+    "src/HelloCoreClrApp.Rules/obj/**": true,
+    "src/HelloCoreClrApp.Rles/project.lock.json": true,
+    "test/HelloCoreClrApp.Test/bin/**": true,
+    "test/HelloCoreClrApp.Test/obj/**": true,
+    "test/HelloCoreClrApp.Test/project.lock.json": true,
     "ui/src/jspm_packages/**": true,
     "ui/src/**/*.js": { "when": "$(basename).ts"},
     "ui/src/**/*.js.map": true,
@@ -27,6 +24,7 @@
     "ui/typings/**": true,
     "ui/project.lock.json": true,
     ".vscode/**": true,
+    ".idea/**": true,
     "node_modules/**": true,
     "reports/**": true,
     "artifacts/**": true
@@ -42,3 +40,4 @@
     "ignorePattern": "ui/src/jspm.conf.js"
   }
 }
+

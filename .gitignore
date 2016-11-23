@@ -22,3 +22,5 @@ test/HelloCoreClrApp.Test/project.lock.json
 test/HelloCoreClrApp.Test/bin/**
 test/HelloCoreClrApp.Test/obj/**
 .idea/**
+.vs/**
+**/*.xproj.user

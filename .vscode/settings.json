@@ -25,6 +25,8 @@
     "ui/project.lock.json": true,
     ".vscode/**": true,
     ".idea/**": true,
+    ".vs/**": true,
+    "**/*.xproj.user": true,
     "node_modules/**": true,
     "reports/**": true,
     "artifacts/**": true

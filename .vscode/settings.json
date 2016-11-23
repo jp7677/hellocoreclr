@@ -9,7 +9,7 @@
     "src/HelloCoreClrApp/project.lock.json": true,
     "src/HelloCoreClrApp.Rules/bin/**": true,
     "src/HelloCoreClrApp.Rules/obj/**": true,
-    "src/HelloCoreClrApp.Rles/project.lock.json": true,
+    "src/HelloCoreClrApp.Rules/project.lock.json": true,
     "test/HelloCoreClrApp.Test/bin/**": true,
     "test/HelloCoreClrApp.Test/obj/**": true,
     "test/HelloCoreClrApp.Test/project.lock.json": true,
@@ -25,6 +25,9 @@
     "ui/project.lock.json": true,
     ".vscode/**": true,
     ".idea/**": true,
+    ".vs/**": true,
+    "**/*.xproj*": true,
+    "**/*.sln*": true,
     "node_modules/**": true,
     "reports/**": true,
     "artifacts/**": true

@@ -32,6 +32,7 @@
     "reports/**": true,
     "artifacts/**": true
   },
+  "tslint.exclude": "**/*.js",
   "htmlhint.options": {
     "spec-char-escape": false
   },

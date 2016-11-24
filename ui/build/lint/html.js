@@ -22,6 +22,6 @@ exports.fn = function (gulp, paths, mode, done) {
 
   var htmlhint = require('gulp-htmlhint')
   return gulp.src([paths.src + '**/*.html', '!' + paths.jspmPackages])
-    .pipe(htmlhint())
+    .pipe(htmlhint('.htmlhintrc'))
     .pipe(htmlhint.reporter(consoleReporter))
 }

@@ -33,9 +33,6 @@
     "artifacts/**": true
   },
   "tslint.exclude": "**/*.js",
-  "htmlhint.options": {
-    "spec-char-escape": false
-  },
   "stylelint.config": {
     "extends": "./ui/stylelint.config.js" 
   },

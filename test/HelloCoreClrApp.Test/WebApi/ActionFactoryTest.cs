@@ -1,7 +1,7 @@
 using FluentAssertions;
 using HelloCoreClrApp.WebApi;
 using HelloCoreClrApp.WebApi.Actions;
-using Moq;
+using FakeItEasy;
 using Xunit;
 
 namespace HelloCoreClrApp.Test.WebApi
@@ -11,9 +11,9 @@ namespace HelloCoreClrApp.Test.WebApi
         [Fact]
         public void CreateSayHelloWorldActionTest()
         {
-            var action = Mock.Of<ISayHelloWorldAction>();
-            var resourceProvider = Mock.Of<IResourceProvider>(r => 
-                r.CreateResource<ISayHelloWorldAction>() == action);
+            var action = A.Fake<ISayHelloWorldAction>();
+            var resourceProvider = A.Fake<IResourceProvider>();
+            A.CallTo(()  => resourceProvider.CreateResource<ISayHelloWorldAction>()).Returns(action);
             var sut = new ActionFactory(resourceProvider);
 
             var result = sut.CreateSayHelloWorldAction();
@@ -24,9 +24,9 @@ namespace HelloCoreClrApp.Test.WebApi
         [Fact]
         public void CreateGetLastTenGreetingsActionTest()
         {
-            var action = Mock.Of<IGetLastTenGreetingsAction>();
-            var resourceProvider = Mock.Of<IResourceProvider>(r => 
-                r.CreateResource<IGetLastTenGreetingsAction>() == action);
+            var action = A.Fake<IGetLastTenGreetingsAction>();
+            var resourceProvider = A.Fake<IResourceProvider>();
+            A.CallTo(()  => resourceProvider.CreateResource<IGetLastTenGreetingsAction>()).Returns(action);
             var sut = new ActionFactory(resourceProvider);
 
             var result = sut.CreateGetLastTenGreetingsAction();
@@ -37,9 +37,9 @@ namespace HelloCoreClrApp.Test.WebApi
         [Fact]
         public void CreateGetTotalNumberOfGreetingsActionTest()
         {
-            var action = Mock.Of<IGetTotalNumberOfGreetingsAction>();
-            var resourceProvider = Mock.Of<IResourceProvider>(r => 
-                r.CreateResource<IGetTotalNumberOfGreetingsAction>() == action);
+            var action = A.Fake<IGetTotalNumberOfGreetingsAction>();
+            var resourceProvider = A.Fake<IResourceProvider>();
+            A.CallTo(()  => resourceProvider.CreateResource<IGetTotalNumberOfGreetingsAction>()).Returns(action);
             var sut = new ActionFactory(resourceProvider);
 
             var result = sut.CreateGetTotalNumberOfGreetingsAction();

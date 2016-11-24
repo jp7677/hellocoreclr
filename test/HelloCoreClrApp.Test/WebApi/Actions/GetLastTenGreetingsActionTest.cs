@@ -5,7 +5,7 @@ using FluentAssertions;
 using HelloCoreClrApp.Data;
 using HelloCoreClrApp.Data.Entities;
 using HelloCoreClrApp.WebApi.Actions;
-using Moq;
+using FakeItEasy;
 using Xunit;
 
 namespace HelloCoreClrApp.Test.WebApi.Actions
@@ -15,9 +15,9 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
         [Fact]
         public async Task ExecuteAsyncTest()
         {
-            var dataService = new Mock<IDataService>();
-            dataService.Setup(m => m.GetLastTenGreetingsAsync(It.IsAny<int>())).ReturnsAsync(new List<Greeting>());
-            var sut = new GetLastTenHelloWorldsAction(dataService.Object);
+            var dataService = A.Fake<IDataService>();
+            A.CallTo(() => dataService.GetLastTenGreetingsAsync(A<int>.Ignored)).Returns((new List<Greeting>()));
+            var sut = new GetLastTenHelloWorldsAction(dataService);
             
             var result = await sut.ExecuteAsync();
             
@@ -29,13 +29,13 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
         public async Task ExecuteAsyncWithTenGreetingsTest()
         {
             var greetingList = new List<Greeting>(10);
-            for(int i = 1; i <= 10; i++)
+            for(var i = 1; i <= 10; i++)
                 greetingList.Add(
                     new Greeting{Name = string.Format("mygreeting {0}", i), TimestampUtc = DateTime.Now.ToUniversalTime()});
 
-            var dataService = new Mock<IDataService>();
-            dataService.Setup(m => m.GetLastTenGreetingsAsync(10)).ReturnsAsync(greetingList);
-            var sut = new GetLastTenHelloWorldsAction(dataService.Object);
+            var dataService = A.Fake<IDataService>();
+            A.CallTo(() => dataService.GetLastTenGreetingsAsync(10)).Returns(greetingList);
+            var sut = new GetLastTenHelloWorldsAction(dataService);
             
             var result = await sut.ExecuteAsync();
             

@@ -20,7 +20,7 @@
     "Newtonsoft.Json": "9.0.1",
     "xunit": "2.2.0-beta4-build3444",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "Moq": "4.6.38-alpha",
+    "FakeItEasy":"3.0.0-alpha001-build000041",
     "FluentAssertions": "4.17.0"
    },
 

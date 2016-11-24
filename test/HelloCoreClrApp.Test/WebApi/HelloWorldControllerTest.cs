@@ -5,7 +5,7 @@ using HelloCoreClrApp.WebApi;
 using HelloCoreClrApp.WebApi.Actions;
 using HelloCoreClrApp.WebApi.Messages;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
+using FakeItEasy;
 using Xunit;
 
 namespace HelloCoreClrApp.Test.WebApi
@@ -15,11 +15,10 @@ namespace HelloCoreClrApp.Test.WebApi
         [Fact]
         public async Task SayHelloWorldTest()
         { 
-            var action = new Mock<ISayHelloWorldAction>();
-            action.Setup(m =>
-                m.ExecuteAsync("You")).ReturnsAsync(new SayHelloWorldResponse{ Greeting = "Hello You!" });
-            var actionFactory = Mock.Of<IActionFactory>(m =>
-                m.CreateSayHelloWorldAction() == action.Object);
+            var action = A.Fake<ISayHelloWorldAction>();
+            A.CallTo(() => action.ExecuteAsync("You")).Returns(new SayHelloWorldResponse{ Greeting = "Hello You!" });
+            var actionFactory = A.Fake<ActionFactory>();
+            A.CallTo(() => actionFactory.CreateSayHelloWorldAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
 
             var response = await sut.SayHelloWorldAsync("You");
@@ -36,11 +35,10 @@ namespace HelloCoreClrApp.Test.WebApi
         [Fact]
         public async Task NoGreetingsShouldReturnNoContentTest()
         { 
-            var action = new Mock<IGetLastTenGreetingsAction>();
-            action.Setup(m =>
-                m.ExecuteAsync()).ReturnsAsync(new SavedGreeting[0]);
-            var actionFactory = Mock.Of<IActionFactory>(m =>
-                m.CreateGetLastTenGreetingsAction() == action.Object);
+            var action = A.Fake<IGetLastTenGreetingsAction>();
+            A.CallTo(() => action.ExecuteAsync()).Returns(new SavedGreeting[0]);
+            var actionFactory = A.Fake<IActionFactory>();
+            A.CallTo(() => actionFactory.CreateGetLastTenGreetingsAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
 
             var response = await sut.GetLastTenGreetingsAsync();
@@ -53,11 +51,10 @@ namespace HelloCoreClrApp.Test.WebApi
         [Fact]
         public async Task SomeGreetingsShouldReturnGreetingsTest()
         { 
-            var action = new Mock<IGetLastTenGreetingsAction>();
-            action.Setup(m =>
-                m.ExecuteAsync()).ReturnsAsync(new []{new SavedGreeting{Greeting = "mygreeting"}});
-            var actionFactory = Mock.Of<IActionFactory>(m =>
-                m.CreateGetLastTenGreetingsAction() == action.Object);
+            var action = A.Fake<IGetLastTenGreetingsAction>();
+            A.CallTo(() => action.ExecuteAsync()).Returns(new []{new SavedGreeting{Greeting = "mygreeting"}});
+            var actionFactory = A.Fake<IActionFactory>();
+            A.CallTo(() => actionFactory.CreateGetLastTenGreetingsAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
 
             var response = await sut.GetLastTenGreetingsAsync();
@@ -73,11 +70,10 @@ namespace HelloCoreClrApp.Test.WebApi
         [Fact]
         public async Task GetNumberOfGreetingsShouldReturnSomeNumberTest()
         { 
-            var action = new Mock<IGetTotalNumberOfGreetingsAction>();
-            action.Setup(m =>
-                m.ExecuteAsync()).ReturnsAsync(6);
-            var actionFactory = Mock.Of<IActionFactory>(m =>
-                m.CreateGetTotalNumberOfGreetingsAction() == action.Object);
+            var action = A.Fake<IGetTotalNumberOfGreetingsAction>();
+            A.CallTo(() => action.ExecuteAsync()).Returns(6);
+            var actionFactory = A.Fake<IActionFactory>();
+            A.CallTo(() => actionFactory.CreateGetTotalNumberOfGreetingsAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
 
             var response = await sut.GetTotalNumberOfGreetingsAsync();

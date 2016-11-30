@@ -17,7 +17,7 @@ namespace HelloCoreClrApp.Test.WebApi
         { 
             var action = A.Fake<ISayHelloWorldAction>();
             A.CallTo(() => action.ExecuteAsync("You")).Returns(new SayHelloWorldResponse{ Greeting = "Hello You!" });
-            var actionFactory = A.Fake<ActionFactory>();
+            var actionFactory = A.Fake<IActionFactory>();
             A.CallTo(() => actionFactory.CreateSayHelloWorldAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
 

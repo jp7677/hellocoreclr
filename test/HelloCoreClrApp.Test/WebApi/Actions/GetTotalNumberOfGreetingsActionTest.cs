@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using HelloCoreClrApp.Data;
 using HelloCoreClrApp.WebApi.Actions;
-using Moq;
+using FakeItEasy;
 using Xunit;
 
 namespace HelloCoreClrApp.Test.WebApi.Actions
@@ -12,9 +12,9 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
         [Fact]
         public async Task ExecuteAsyncTest()
         {
-            var dataService = new Mock<IDataService>();
-            dataService.Setup(m => m.GetNumberOfGreetingsAsync()).ReturnsAsync(6);
-            var sut = new GetTotalNumberOfGreetingsAction(dataService.Object);
+            var dataService = A.Fake<IDataService>();
+            A.CallTo(() => dataService.GetNumberOfGreetingsAsync()).Returns(6);
+            var sut = new GetTotalNumberOfGreetingsAction(dataService);
             
             var result = await sut.ExecuteAsync();
             

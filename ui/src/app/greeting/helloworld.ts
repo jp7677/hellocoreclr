@@ -21,8 +21,8 @@ export class HelloWorld {
         this.notifier = new Notifier();
     }
 
-    public submit() {
-        let name = this.inputText;
+    public async submit() {
+        let name: string = this.inputText;
         if (name === undefined || name.length === 0) {
             this.log.warn("No name received. abort.. ");
             this.labelText = "";
@@ -32,21 +32,20 @@ export class HelloWorld {
         this.log.info(`We got the following name: ${name}`);
         this.notifier.Info("Working...");
 
-        this.httpClient.fetch("sayhelloworld/" + name)
-            .then((response: Response) => {
-                this.log.info(`Received http code ${response.status}`);
-                this.notifier.Info("HTTP/" + response.status);
-                return response.json();
-            })
-            .then((data: SayHelloWorldResponse) => {
-                this.log.info(`Received data was: ${data.greeting}`);
-                this.labelText = data.greeting;
-            })
-            .catch((response: Response) => {
-                this.log.info(`Received http code ${response.status}`);
-                this.log.warn("Oops... something went wrong.");
-                this.notifier.Warn(`Oops... HTTP/${response.status}`);
-                this.labelText = "";
-            });
+        try {
+            let response: Response = await this.httpClient.fetch("sayhelloworld/" + name);
+            this.log.info(`Received http code ${response.status}`);
+            this.notifier.Info("HTTP/" + response.status);
+
+            let data: SayHelloWorldResponse = await response.json();
+            this.log.info(`Received data was: ${data.greeting}`);
+            this.labelText = data.greeting;
+        } catch (error) {
+            let response: Response = error;
+            this.log.info(`Received http code ${response.status}`);
+            this.log.warn("Oops... something went wrong.");
+            this.notifier.Warn(`Oops... HTTP/${response.status}`);
+            this.labelText = "";
+        }
     }
 }

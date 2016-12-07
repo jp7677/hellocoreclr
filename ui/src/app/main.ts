@@ -12,7 +12,7 @@ import {Aurelia, Container, LogManager} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
 import {ConsoleAppender} from "aurelia-logging-console";
 
-export function configure(aurelia: Aurelia) {
+export async function configure(aurelia: Aurelia) {
     Statusbar.Inc();
     let log: Logger = LogManager.getLogger("Main");
     let env: Environment = new Environment(appsettings);
@@ -24,10 +24,10 @@ export function configure(aurelia: Aurelia) {
     configureContainer(aurelia.container, env);
 
     log.info(`Starting application in ${env.applicationMode} mode.`);
-    aurelia.start().then(() => {
-        aurelia.setRoot("app/config");
-        Statusbar.Done();
-    });
+    await aurelia.start();
+
+    aurelia.setRoot("app/config");
+    Statusbar.Done();
 }
 
 function configureLogging(env: Environment) {

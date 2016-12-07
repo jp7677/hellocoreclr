@@ -23,7 +23,7 @@ describe("HelloWorldController test suite", () => {
         chai.expect(sut.labelText).to.empty;
     });
 
-    it("should handle a valid response", () => {
+    it("should handle a valid response", async () => {
         let res = new SayHelloWorldResponse();
         res.greeting = "Hello World!";
         let httpStub = HttpClientStub.ok(res);
@@ -32,12 +32,11 @@ describe("HelloWorldController test suite", () => {
 
         sut.submit();
 
-        return wait().then(() => {
-            chai.expect(sut.labelText).to.equal("Hello World!");
-        });
+        await wait();
+        chai.expect(sut.labelText).to.equal("Hello World!");
     });
 
-    it("should handle an error response", () => {
+    it("should handle an error response", async () => {
         let httpStub = HttpClientStub.error();
         let sut = new HelloWorld(httpStub);
         sut.inputText = "Error";
@@ -45,9 +44,8 @@ describe("HelloWorldController test suite", () => {
 
         sut.submit();
 
-        return wait().then(() => {
-            chai.expect(sut.labelText).to.empty;
-        });
+        await wait();
+        chai.expect(sut.labelText).to.empty;
     });
 
 });

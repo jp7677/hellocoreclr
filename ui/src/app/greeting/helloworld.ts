@@ -40,8 +40,8 @@ export class HelloWorld {
             let data: SayHelloWorldResponse = await response.json();
             this.log.info(`Received data was: ${data.greeting}`);
             this.labelText = data.greeting;
-        } catch (error) {
-            let response: Response = error;
+        } catch (err) {
+            let response: Response = err;
             this.log.info(`Received http code ${response.status}`);
             this.log.warn("Oops... something went wrong.");
             this.notifier.Warn(`Oops... HTTP/${response.status}`);

@@ -24,12 +24,12 @@ namespace HelloCoreClrApp.Data
         {
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
-                RegisterNLog(db);
+                RegisterSeriLog(db);
                 await db.EnsureCreatedAsync();
             }
         }
 
-        private static void RegisterNLog(GreetingDbContext db)
+        private static void RegisterSeriLog(GreetingDbContext db)
         {
                 var serviceProvider = db.GetInfrastructure();
                 var loggerFactory = serviceProvider.GetService<ILoggerFactory>();

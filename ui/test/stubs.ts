@@ -20,10 +20,13 @@ export class HttpClientStub {
     }
 
     public fetch (url) {
-        return Promise.resolve({
-                json: () => this.success ? Promise.resolve(this.responseData) : Promise.reject("An error occured"),
+        if (this.success) {
+            return Promise.resolve({
+                json: () => Promise.resolve(this.responseData),
                 status: this.status
             });
+        }
+        return Promise.reject("An error occured");
     }
 }
 

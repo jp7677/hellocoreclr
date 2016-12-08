@@ -16,11 +16,11 @@ describe("HelloWorldController test suite", () => {
     it("should do nothing when there is no input", () => {
         let sut = new HelloWorld(HttpClientStub.ok());
         sut.inputText = undefined;
-        sut.labelText = "Hello";
+        sut.greetingText = "Hello";
 
         sut.submit();
 
-        chai.expect(sut.labelText).to.empty;
+        chai.expect(sut.greetingText).to.empty;
     });
 
     it("should handle a valid response", async () => {
@@ -33,19 +33,19 @@ describe("HelloWorldController test suite", () => {
         sut.submit();
 
         await wait();
-        chai.expect(sut.labelText).to.equal("Hello World!");
+        chai.expect(sut.greetingText).to.equal("Hello World!");
     });
 
     it("should handle an error response", async () => {
         let httpStub = HttpClientStub.error();
         let sut = new HelloWorld(httpStub);
         sut.inputText = "Error";
-        sut.labelText = "Hello";
+        sut.greetingText = "Hello";
 
         sut.submit();
 
         await wait();
-        chai.expect(sut.labelText).to.empty;
+        chai.expect(sut.greetingText).to.empty;
     });
 
 });

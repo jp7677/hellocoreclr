@@ -5,16 +5,17 @@
     "compile": "**/*.fs",
     "warningsAsErrors": true
   },
-  "dependencies": {
-    "Microsoft.NETCore.App": {  
-      "version": "1.1.0",
-      "type": "platform"
-    },
-    "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-161111"
-  },
 
   "frameworks": {
-    "netcoreapp1.1": { }
+    "netcoreapp1.1": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {  
+          "version": "1.1.0",
+          "type": "platform"
+        },
+        "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-161111"
+      }
+    }
   },
 
   "tools": {

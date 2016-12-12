@@ -12,7 +12,7 @@ Just a playground...
 
 ## Instructions
 
-Obviously you should have Net Core 1.0 and Nodejs/npm 6.x already up and running for everything that follows.
+Obviously you should have Net Core 1.1 and Nodejs/npm 6.x already up and running for everything that follows.
 
 ### Production build and publish
 

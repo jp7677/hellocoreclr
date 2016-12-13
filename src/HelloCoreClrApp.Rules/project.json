@@ -7,13 +7,10 @@
   },
 
   "frameworks": {
-    "netcoreapp1.1": {
+    "netstandard1.6": {
       "dependencies": {
-        "Microsoft.NETCore.App": {  
-          "version": "1.1.0",
-          "type": "platform"
-        },
-        "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-161111"
+        "NETStandard.Library": "1.6.1",
+        "Microsoft.FSharp.Core.netcore": "1.0.0-alpha-161205"
       }
     }
   },

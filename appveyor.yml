@@ -22,7 +22,7 @@ build_script:
 
 before_test:
 - cd %APPVEYOR_BUILD_FOLDER%
-- nuget install OpenCover -Version 4.6.519 -o .\packages
+- nuget install OpenCover -Version 4.6.589 -o .\packages
 - npm install karma-appveyor-reporter --prefix ui
 
 test_script:

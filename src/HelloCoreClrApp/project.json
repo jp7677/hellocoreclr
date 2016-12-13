@@ -1,13 +1,13 @@
 {
   "version": "0.1.0-*",
-  
+
   "buildOptions": {
     "emitEntryPoint": true,
     "copyToOutput": "appsettings.json",
     "warningsAsErrors": true,
     "debugType": "portable"
   },
- 
+
   "frameworks": {
     "netcoreapp1.1": {
       "dependencies": {
@@ -46,7 +46,7 @@
       }
     }
   },
-  
+
   "tools": {
     "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final",
     "Microsoft.DotNet.Watcher.Tools": "1.1.0-preview4-final"

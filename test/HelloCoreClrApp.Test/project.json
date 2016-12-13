@@ -1,11 +1,11 @@
 {
   "version": "0.1.0-*",
-  
+
   "buildOptions": {
     "warningsAsErrors": true,
     "debugType": "portable"
   },
- 
+
  "frameworks": {
     "netcoreapp1.1": {
       "dependencies": {
@@ -29,9 +29,9 @@
       }
     }
   },
-  
+
   "testRunner": "xunit",
-  
+
   "tools": {
     "Microsoft.DotNet.Watcher.Tools": "1.1.0-preview4-final"
   }

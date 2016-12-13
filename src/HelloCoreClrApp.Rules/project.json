@@ -1,5 +1,6 @@
 {
   "version": "0.1.0",
+
   "buildOptions": {
     "compilerName": "fsc",
     "compile": "**/*.fs",

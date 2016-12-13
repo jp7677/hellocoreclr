@@ -2,7 +2,7 @@
   "publishOptions": {
     "include": "wwwroot"
   },
-  
+
   "buildOptions": {
     "outputName": "HelloCoreClrApp.Ui"
   },

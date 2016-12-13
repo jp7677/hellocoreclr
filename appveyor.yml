@@ -26,7 +26,7 @@ before_test:
 - npm install karma-appveyor-reporter --prefix ui
 
 test_script:
-- packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -mergeoutput -output:reports\coverage-dotnet.xml
+- packages\OpenCover.4.6.589\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -mergeoutput -output:reports\coverage-dotnet.xml
 - ui\node_modules\.bin\karma start ui\karma.conf.js --reporters progress,coverage,remap-coverage,appveyor
 
 after_test:

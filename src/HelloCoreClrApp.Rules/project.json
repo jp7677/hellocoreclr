@@ -3,7 +3,8 @@
   "buildOptions": {
     "compilerName": "fsc",
     "compile": "**/*.fs",
-    "warningsAsErrors": true
+    "warningsAsErrors": true,
+    "debugType": "portable"
   },
 
   "frameworks": {

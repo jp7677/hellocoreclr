@@ -2,7 +2,8 @@
   "version": "0.1.0-*",
   
   "buildOptions": {
-    "warningsAsErrors": true
+    "warningsAsErrors": true,
+    "debugType": "portable"
   },
  
  "frameworks": {

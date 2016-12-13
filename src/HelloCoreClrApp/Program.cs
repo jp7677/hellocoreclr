@@ -52,7 +52,10 @@ namespace HelloCoreClrApp
             loadContext.Unloading += ctx =>
                 Cancel("Application unloading, probably SIGTERM");
             Console.CancelKeyPress += (s, e) =>
+            {
+                e.Cancel = true;
                 Cancel(e.SpecialKey == ConsoleSpecialKey.ControlC ? "SIGINT" : "SIGQUIT");
+            };
         }
 
         private static void Cancel(string signal)

@@ -1,4 +1,5 @@
 using System.Net;
+using System.Threading.Tasks;
 using FluentAssertions;
 using HelloCoreClrApp.WebApi.Messages;
 using Microsoft.AspNetCore.Hosting;
@@ -18,7 +19,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async void InvalidRequestReturnsNotFoundTest()
+        public async Task InvalidRequestReturnsNotFoundTest()
         {
             using (var client = server.CreateClient())
             {
@@ -29,7 +30,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async void ValidSayHelloWorldRequestReturnsOkTest()
+        public async Task ValidSayHelloWorldRequestReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
@@ -44,7 +45,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async void ValidGetTenGreetingsRequestReturnsOkTest()
+        public async Task ValidGetTenGreetingsRequestReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
@@ -59,7 +60,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async void ValidGetNumberOfGreetingsRequestReturnsOkTest()
+        public async Task ValidGetNumberOfGreetingsRequestReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
@@ -73,7 +74,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async void SwaggerReturnsOk()
+        public async Task SwaggerReturnsOk()
         {
             using (var client = server.CreateClient())
             {
@@ -84,7 +85,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async void SwaggerUiReturnsOk()
+        public async Task SwaggerUiReturnsOk()
         {
             using (var client = server.CreateClient())
             {

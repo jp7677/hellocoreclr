@@ -64,9 +64,9 @@ namespace HelloCoreClrApp
             log.Information("Configuring.");
             
             SetupSimpleInjector(app);
-            SetupDatabaseAsync().Wait();
-            
-            //add NLog to ASP.NET Core
+            var setupDbTask = SetupDatabaseAsync();
+
+            //add SeriLog to ASP.NET Core
             loggerFactory.AddSerilog();
 
             // Serve the default file, if present.
@@ -79,6 +79,8 @@ namespace HelloCoreClrApp
 
             app.UseSwagger();
             app.UseSwaggerUi();
+
+            setupDbTask.Wait();
         }
 
         private void SetupSimpleInjector(IApplicationBuilder app)

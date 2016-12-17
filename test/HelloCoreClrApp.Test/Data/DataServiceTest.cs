@@ -9,10 +9,10 @@ namespace HelloCoreClrApp.Test.Data
     public class DataServiceTest
     {
         [Fact]
-        public async Task SaveOneGreetingShouldResultInOneSavedGreetingTest()
+        public async Task SaveOneGreetingShouldResultInOneSavedGreetingAsyncTest()
         {
             var options = new DbContextOptionsBuilder<GreetingDbContext>()
-                .UseInMemoryDatabase("SaveOneGreetingShouldResultInOneSavedGreetingTest");
+                .UseInMemoryDatabase("SaveOneGreetingShouldResultInOneSavedGreetingAsyncTest");
             var factory = new GreetingDbContextFactory(options.Options);
             var sut = new DataService(factory);
 
@@ -24,10 +24,10 @@ namespace HelloCoreClrApp.Test.Data
         }
 
         [Fact]
-        public async Task SaveTenGreetingShouldResultInTenSavedGreetingTest()
+        public async Task SaveTenGreetingShouldResultInTenSavedGreetingAsyncTest()
         {
             var options = new DbContextOptionsBuilder<GreetingDbContext>()
-                .UseInMemoryDatabase("SaveTenGreetingShouldResultInTenSavedGreetingTest");
+                .UseInMemoryDatabase("SaveTenGreetingShouldResultInTenSavedGreetingAsyncTest");
             var factory = new GreetingDbContextFactory(options.Options);
             var sut = new DataService(factory);
 

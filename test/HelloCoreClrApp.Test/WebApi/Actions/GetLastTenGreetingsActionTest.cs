@@ -26,7 +26,7 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
         }
 
         [Fact]
-        public async Task ExecuteAsyncWithTenGreetingsTest()
+        public async Task ExecuteWithTenGreetingsAsyncTest()
         {
             var greetingList = new List<Greeting>(10);
             for(var i = 1; i <= 10; i++)

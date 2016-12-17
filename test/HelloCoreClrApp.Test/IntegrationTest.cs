@@ -19,7 +19,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task InvalidRequestReturnsNotFoundTest()
+        public async Task InvalidRequestReturnsNotFoundAsyncTest()
         {
             using (var client = server.CreateClient())
             {
@@ -30,7 +30,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task ValidSayHelloWorldRequestReturnsOkTest()
+        public async Task ValidSayHelloWorldRequestReturnsOkAsyncTest()
         {
             using (var client = server.CreateClient())
             {
@@ -45,7 +45,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task ValidGetTenGreetingsRequestReturnsOkTest()
+        public async Task ValidGetTenGreetingsRequestReturnsOkAsyncTest()
         {
             using (var client = server.CreateClient())
             {
@@ -60,7 +60,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task ValidGetNumberOfGreetingsRequestReturnsOkTest()
+        public async Task ValidGetNumberOfGreetingsRequestReturnsOkAsyncTest()
         {
             using (var client = server.CreateClient())
             {
@@ -74,7 +74,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task SwaggerReturnsOk()
+        public async Task SwaggerReturnsOkAsyncTest()
         {
             using (var client = server.CreateClient())
             {
@@ -85,7 +85,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task SwaggerUiReturnsOk()
+        public async Task SwaggerUiReturnsOkAsyncTest()
         {
             using (var client = server.CreateClient())
             {

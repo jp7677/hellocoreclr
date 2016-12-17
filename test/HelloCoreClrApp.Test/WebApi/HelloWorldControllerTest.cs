@@ -13,7 +13,7 @@ namespace HelloCoreClrApp.Test.WebApi
     public class HelloWorldControllerTest
     {
         [Fact]
-        public async Task SayHelloWorldTest()
+        public async Task SayHelloWorldAsyncTest()
         { 
             var action = A.Fake<ISayHelloWorldAction>();
             A.CallTo(() => action.ExecuteAsync("You")).Returns(new SayHelloWorldResponse{ Greeting = "Hello You!" });
@@ -33,7 +33,7 @@ namespace HelloCoreClrApp.Test.WebApi
         }
 
         [Fact]
-        public async Task NoGreetingsShouldReturnNoContentTest()
+        public async Task NoGreetingsShouldReturnNoContentAsyncTest()
         { 
             var action = A.Fake<IGetLastTenGreetingsAction>();
             A.CallTo(() => action.ExecuteAsync()).Returns(new SavedGreeting[0]);
@@ -49,7 +49,7 @@ namespace HelloCoreClrApp.Test.WebApi
         }
 
         [Fact]
-        public async Task SomeGreetingsShouldReturnGreetingsTest()
+        public async Task SomeGreetingsShouldReturnGreetingsAsyncTest()
         { 
             var action = A.Fake<IGetLastTenGreetingsAction>();
             A.CallTo(() => action.ExecuteAsync()).Returns(new []{new SavedGreeting{Greeting = "mygreeting"}});
@@ -68,7 +68,7 @@ namespace HelloCoreClrApp.Test.WebApi
         }
 
         [Fact]
-        public async Task GetNumberOfGreetingsShouldReturnSomeNumberTest()
+        public async Task GetNumberOfGreetingsShouldReturnSomeNumberAsyncTest()
         { 
             var action = A.Fake<IGetTotalNumberOfGreetingsAction>();
             A.CallTo(() => action.ExecuteAsync()).Returns(6);

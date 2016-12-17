@@ -22,7 +22,7 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
         }
         
         [Fact]
-        public async Task ExecuteAsyncWithNullTest()
+        public async Task ExecuteWithNullAsyncTest()
         {
             var dataService = A.Fake<IDataService>();
             var sut = new SayHelloWorldAction(dataService);
@@ -34,7 +34,7 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
         }
         
         [Fact]
-        public async Task ExecuteAsyncTestWithEmptyStringTest()
+        public async Task ExecuteTestWithEmptyStringAsyncTest()
         {
             var dataService = A.Fake<IDataService>();
             var sut = new SayHelloWorldAction(dataService);

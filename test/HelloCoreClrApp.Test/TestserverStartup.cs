@@ -23,7 +23,7 @@ namespace HelloCoreClrApp.Test
             return builder;
         }
 
-        private void SeedDatabase(DbContextOptions<GreetingDbContext> options)
+        private static void SeedDatabase(DbContextOptions options)
         {
             using (var db = new GreetingDbContext(options))
             {

@@ -24,10 +24,7 @@ describe("HelloWorld test suite", () => {
     });
 
     it("should handle a valid response", async () => {
-        let res = new SayHelloWorld();
-        res.greeting = "Hello World!";
-        let httpStub = HttpClientStub.ok(res);
-        let sut = new HelloWorld(httpStub);
+        let sut = new HelloWorld(HttpClientStub.ok({greeting: "Hello World!"}));
         sut.inputText = "Hello";
 
         sut.submit();
@@ -37,8 +34,7 @@ describe("HelloWorld test suite", () => {
     });
 
     it("should handle an error response", async () => {
-        let httpStub = HttpClientStub.error();
-        let sut = new HelloWorld(httpStub);
+        let sut = new HelloWorld(HttpClientStub.error());
         sut.inputText = "Error";
         sut.greetingText = "Hello";
 

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <template>
-    <div class="alert alert-info" role="alert">
-        We have <strong><span>${numberOfSavedGreetings}</span></strong> saved greeting(s).
-    </div>
-    <p/>
+    <span class="label label-primary">The last ten greetings were:</span>
     <ul class="list-group">
         <template repeat.for="greeting of savedGreetings">
             <li class="list-group-item">
@@ -12,6 +9,9 @@
             </li>
         </template>
     </ul>
+    <div class="alert alert-success">
+        We have <strong><span>${numberOfSavedGreetings}</span></strong> saved greeting(s) totally.
+    </div>
     <hr/>
     <a href="#/helloworld">Say Hello</a>
 </template>

@@ -65,12 +65,24 @@ exports.fn = function (gulp, paths, mode, done) {
           'aurelia-templating-binding',
           'aurelia-templating-resources',
           'aurelia-templating-router',
-          'toastr',
+          'toastr'
+        ],
+        options: {
+          inject: true,
+          minify: mode.production,
+          rev: mode.production,
+          sourceMaps: !mode.production,
+          sourceMapContents: !mode.production
+        }
+      },
+      'app-bundle-nm': {
+        includes: [
           'moment'
         ],
         options: {
           inject: true,
           minify: mode.production,
+          mangle: false,
           rev: mode.production,
           sourceMaps: !mode.production,
           sourceMapContents: !mode.production

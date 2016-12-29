@@ -74,7 +74,7 @@ export class Greetings {
         data.forEach((element) => {
             let formatedSavedGreeting = new FormattedSavedGreeting();
             formatedSavedGreeting.greeting = element.greeting;
-            formatedSavedGreeting.timestamp = moment(element.timestampUtc).fromNow();
+            formatedSavedGreeting.timestamp = moment.utc(element.timestampUtc).fromNow();
             this.savedGreetings.push(formatedSavedGreeting);
         });
     }

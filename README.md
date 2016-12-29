@@ -100,3 +100,9 @@ ui/node_modules/.bin/gulp watch --cwd ui
 ```
 
 Your favorite browser should fire up and should open <http://localhost:3000/>. Happy coding!
+
+## TODO
+
+- Remove our custom typings once Typescript 2.2 is available <https://github.com/Microsoft/TypeScript/issues/12517>.
+- Remove our local OpenCover package once OpenCover with portable pdb support is available on NuGet <https://github.com/OpenCover/opencover/issues/610>.
+- Remove our local dotnet-compile-fsc package once a version with support for NetCore 1.1 is available on NuGet <https://github.com/dotnet/netcorecli-fsc/issues/42>.

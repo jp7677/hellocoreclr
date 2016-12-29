@@ -21,9 +21,11 @@
     "aurelia-task-queue": "github:aurelia/task-queue#1.1.0",
     "aurelia-templating": "github:aurelia/templating#1.1.0",
     "aurelia-templating-binding": "github:aurelia/templating-binding#1.1.0",
-    "aurelia-templating-resources": "github:aurelia/templating-resources#1.2.0"
+    "aurelia-templating-resources": "github:aurelia/templating-resources#1.2.0",
+    "aurelia-templating-router": "github:aurelia/templating-router#1.0.0"
   },
   "globalDependencies": {
+    "bootstrap": "registry:dt/bootstrap#3.3.5+20160726204056",
     "core-js": "registry:dt/core-js#0.0.0+20160914114559",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "nprogress": "registry:dt/nprogress#0.0.0+20161003122759",

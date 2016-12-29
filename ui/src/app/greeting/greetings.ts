@@ -10,7 +10,7 @@ import {Notifier} from "./notifier";
 @inject(HttpClient)
 export class Greetings {
     public numberOfSavedGreetings: string = "0";
-    public savedGreetings: SavedGreeting[];
+    public savedGreetings: SavedGreeting[] = [];
 
     private log: Logger = LogManager.getLogger("greetings");
     private httpClient: HttpClient;
@@ -57,6 +57,11 @@ export class Greetings {
         this.handleFetchLastGreetingsValidResponse(response);
     }
 
+    private handleErrorResponse(response: Response): void {
+        this.log.warn(`Oops... something went wrong. Received http code was: ${response.status}`);
+        this.notifier.Warn(`Oops... HTTP/${response.status}`);
+    }
+
     private async handleFetchLastGreetingsValidResponse(response: Response): Promise<any> {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
@@ -64,10 +69,5 @@ export class Greetings {
         let data: SavedGreeting[] = await response.json();
         this.log.info(`Received data was: ${data.length} elements`);
         this.savedGreetings = data;
-    }
-
-    private handleErrorResponse(response: Response): void {
-        this.log.warn(`Oops... something went wrong. Received http code was: ${response.status}`);
-        this.notifier.Warn(`Oops... HTTP/${response.status}`);
     }
 }

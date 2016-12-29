@@ -43,6 +43,7 @@ exports.fn = function (gulp, paths, mode, done) {
           'bootstrap/css/bootstrap.css!text',
           'bootstrap/css/bootstrap-theme.css!text',
           'fetch',
+          'jquery',
           'aurelia-binding',
           'aurelia-bootstrapper',
           'aurelia-dependency-injection',
@@ -77,6 +78,7 @@ exports.fn = function (gulp, paths, mode, done) {
       },
       'app-bundle-nm': {
         includes: [
+          'bootstrap',
           'moment'
         ],
         options: {

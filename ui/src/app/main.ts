@@ -3,6 +3,9 @@
 // Import the fetch polyfill before the Aurelia fetch client to keep compatibility with Safari
 import "fetch";
 
+import "bootstrap";
+import "jquery";
+
 import appsettings from "../appsettings.json!";
 import {Environment} from "./environment";
 import {Statusbar} from "./statusbar";

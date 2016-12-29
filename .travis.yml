@@ -18,7 +18,6 @@ before_install:
 - sudo apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893
 - sudo apt-get update
 - sudo apt-get -y install dotnet-dev-1.0.0-preview2-1-003177
-- sudo apt-get -y install dotnet-hostfxr-1.1.0
 
 env:
   global:

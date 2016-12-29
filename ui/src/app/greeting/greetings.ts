@@ -22,8 +22,13 @@ export class Greetings {
         this.httpClient = $httpClient;
         this.notifier = new Notifier();
 
+        this.prepareRequests();
         this.fetchNumberOfSavedGreetings();
         this.fetchLastGreetings();
+    }
+
+    private prepareRequests(): void {
+        this.notifier.Info("Working...");
     }
 
     private async fetchNumberOfSavedGreetings(): Promise<any> {

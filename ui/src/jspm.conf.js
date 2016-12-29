@@ -38,6 +38,7 @@ System.config({
     "jquery": "npm:jquery@3.1.1",
     "json": "github:systemjs/plugin-json@0.2.2",
     "mocha": "npm:mocha@3.2.0",
+    "moment": "npm:moment@2.17.1",
     "nprogress": "github:rstacruz/nprogress@0.2.0",
     "sinon": "npm:sinon@1.17.6",
     "text": "github:systemjs/plugin-text@0.0.9",

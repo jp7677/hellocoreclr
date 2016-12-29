@@ -28,6 +28,7 @@
     "bootstrap": "registry:dt/bootstrap#3.3.5+20160726204056",
     "core-js": "registry:dt/core-js#0.0.0+20160914114559",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
+    "moment": "registry:dt/moment#2.11.1+20161010105546",
     "nprogress": "registry:dt/nprogress#0.0.0+20161003122759",
     "toastr": "registry:dt/toastr#2.1.3+20161117180135",
     "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20161004182750",

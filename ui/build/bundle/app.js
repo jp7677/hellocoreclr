@@ -65,7 +65,8 @@ exports.fn = function (gulp, paths, mode, done) {
           'aurelia-templating-binding',
           'aurelia-templating-resources',
           'aurelia-templating-router',
-          'toastr'
+          'toastr',
+          'moment'
         ],
         options: {
           inject: true,

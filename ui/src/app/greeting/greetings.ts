@@ -3,14 +3,16 @@
 import {HttpClient} from "aurelia-fetch-client";
 import {inject, LogManager} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
+import moment from "moment";
 
+import {FormattedSavedGreeting} from "./formattedsavedgreeting";
 import {SavedGreeting} from "./messages/savedgreeting";
 import {Notifier} from "./notifier";
 
 @inject(HttpClient)
 export class Greetings {
     public numberOfSavedGreetings: string = "0";
-    public savedGreetings: SavedGreeting[] = [];
+    public savedGreetings: FormattedSavedGreeting[] = [];
 
     private log: Logger = LogManager.getLogger("greetings");
     private httpClient: HttpClient;
@@ -68,6 +70,12 @@ export class Greetings {
 
         let data: SavedGreeting[] = await response.json();
         this.log.info(`Received data was: ${data.length} elements`);
-        this.savedGreetings = data;
+
+        data.forEach((element) => {
+            let formatedSavedGreeting = new FormattedSavedGreeting();
+            formatedSavedGreeting.greeting = element.greeting;
+            formatedSavedGreeting.timestamp = moment(element.timestampUtc).fromNow();
+            this.savedGreetings.push(formatedSavedGreeting);
+        });
     }
 }

@@ -23,6 +23,7 @@
     "ui/wwwroot/**": true,
     "ui/node_modules/**": true,
     "ui/typings/**": true,
+    "ui/custom_typings/**": true,
     "ui/project.lock.json": true,
     ".vscode/**": true,
     ".idea/**": true,

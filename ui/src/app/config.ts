@@ -7,12 +7,20 @@ export class Config {
         let config: RouterConfiguration = $config;
 
         config.title = "Hello World";
-        config.map([{
+        config.map([
+        {
             moduleId: "app/greeting/helloworld",
             name: "helloworld",
             nav: true,
             route: ["", "helloworld"],
             title: "Hello World"
+        },
+        {
+            moduleId: "app/greeting/greetings",
+            name: "greetings",
+            nav: true,
+            route: "greetings",
+            title: "Greetings"
         }]);
     }
 }

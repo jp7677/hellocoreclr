@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<template>
+    <div class="alert alert-info" role="alert">
+        We have <strong><span>${numberOfSavedGreetings}</span></strong> saved greeting(s).
+    </div>
+    <p/>
+    <ul class="list-group">
+        <template repeat.for="greeting of savedGreetings">
+            <li class="list-group-item">
+                ${greeting.greeting}
+                <span class="badge">${greeting.timestampUtc}</span>
+            </li>
+        </template>
+    </ul>
+    <hr/>
+    <a href="#/helloworld">Say Hello</a>
+</template>

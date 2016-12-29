@@ -2,7 +2,7 @@
 
 import chai from "chai";
 import {HelloWorld} from "../../src/app/greeting/helloworld";
-import {SayHelloWorldResponse} from "../../src/app/greeting/sayhelloworldresponse";
+import {SayHelloWorld} from "../../src/app/greeting/messages/sayhelloworld";
 import {HttpClientStub} from "../stubs";
 
 function wait() {
@@ -24,7 +24,7 @@ describe("HelloWorldController test suite", () => {
     });
 
     it("should handle a valid response", async () => {
-        let res = new SayHelloWorldResponse();
+        let res = new SayHelloWorld();
         res.greeting = "Hello World!";
         let httpStub = HttpClientStub.ok(res);
         let sut = new HelloWorld(httpStub);

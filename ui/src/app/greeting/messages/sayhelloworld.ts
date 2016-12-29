@@ -1,5 +1,5 @@
 "use strict";
 
-export class SayHelloWorldResponse {
+export class SayHelloWorld {
     public greeting: string;
 }

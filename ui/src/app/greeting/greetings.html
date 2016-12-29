@@ -7,7 +7,7 @@
     <ul class="list-group">
         <template repeat.for="greeting of savedGreetings">
             <li class="list-group-item">
-                ${greeting.greeting}
+                ${greeting.greeting | sanitizeHTML}
                 <span class="badge">${greeting.timestampUtc}</span>
             </li>
         </template>

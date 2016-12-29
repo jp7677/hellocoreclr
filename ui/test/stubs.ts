@@ -6,6 +6,12 @@ import sinon from "sinon";
 
 export class HttpClientStub {
     public static ok(responseData: any = {}) {
+        let map: Map<string, any> = new Map<string, any>();
+        map.set("*", responseData);
+        return new HttpClientStub(map, 200);
+    }
+
+    public static okWithResponseMap(responseData: Map<string, any>) {
         return new HttpClientStub(responseData, 200);
     }
 
@@ -15,14 +21,20 @@ export class HttpClientStub {
 
     private success: boolean;
 
-    constructor(private responseData: any = {}, private status: number = 200) {
+    constructor(private responseData: Map<string, any>, private status: number = 200) {
         this.success = this.status >= 200 && this.status < 400;
     }
 
     public fetch (url) {
         if (this.success) {
             return Promise.resolve({
-                json: () => Promise.resolve(this.responseData),
+                json: () => {
+                    if (this.responseData.has("*")) {
+                        return Promise.resolve(this.responseData.get("*"));
+                    } else {
+                        return Promise.resolve(this.responseData.get(url));
+                    }
+                },
                 status: this.status
             });
         }

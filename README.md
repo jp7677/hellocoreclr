@@ -1,6 +1,7 @@
 # hellocoreclr
 
 Just a playground...
+P.S. I'm a terrible designer :)
 
 ## Continuous integration status
 

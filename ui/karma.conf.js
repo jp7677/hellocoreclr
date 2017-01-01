@@ -9,7 +9,7 @@ module.exports = function (config) {
       config: 'src/jspm.conf.js',
       loadFiles: [
         'node_modules/core-js/client/core.js',
-        'test/**/*.spec.js'
+        'test/**/!(e2e)*.spec.js'
       ],
       serveFiles: [
         'src/jspm_packages/*.js',

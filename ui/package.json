@@ -47,6 +47,7 @@
     "mocha": "~3.2.0",
     "karma-chai": "~0.1.0",
     "chai": "~3.5.0",
+    "chai-as-promised": "~6.0.0",
     "karma-sinon": "~1.0.5",
     "sinon": "~1.17.6",
     "karma-phantomjs-launcher": "~1.0.2",
@@ -55,7 +56,10 @@
     "karma-coverage": "~1.1.1",
     "karma-remap-coverage": "~0.1.4",
     "browser-sync": "~2.18.5",
-    "proxy-middleware": "~0.15.0"
+    "proxy-middleware": "~0.15.0",
+    "protractor": "~4.0.14",
+    "selenium-jar": "~2.52.1",
+    "aurelia-protractor-plugin": "~1.0.1"
   },
   "jspm": {
     "directories": {

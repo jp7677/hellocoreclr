@@ -61,6 +61,7 @@
     "proxy-middleware": "~0.15.0",
     "gulp-protractor": "~3.0.0",
     "protractor": "~4.0.14",
+    "protractor-console": "~2.0.1",
     "selenium-jar": "~2.52.1",
     "aurelia-protractor-plugin": "~1.0.1"
   },

@@ -5,7 +5,7 @@ const load = require('gulp-require-tasks')
 const run = require('run-sequence')
 const util = require('gulp-util')
 
-const mode = { production: !!util.env.production }
+const mode = { production: !!util.env.production, watch: false }
 const paths = {
   wwwroot: './wwwroot/',
   src: './src/',
@@ -26,10 +26,17 @@ gulp.task('build', function (done) {
 
 gulp.task('default', ['build'])
 
-gulp.task('watch', ['watch:all'])
+gulp.task('watch', function (done) {
+  mode.watch = true
+  run('watch:all', done)
+})
 
-gulp.task('serve', ['serve:wwwroot'])
+gulp.task('unit-tests', function (done) {
+  run('test:js', done)
+})
 
 gulp.task('e2e-tests', function (done) {
   run('test:e2e', 'serve:stop', done)
 })
+
+gulp.task('serve', ['serve:wwwroot'])

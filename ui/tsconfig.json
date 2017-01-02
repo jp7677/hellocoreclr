@@ -3,7 +3,12 @@
     "experimentalDecorators": true,
     "target": "es5",
     "module": "system",
-    "sourceMap": false
+    "sourceMap": false,
+    "typeRoots": [
+      "./typings/modules",
+      "./typings/globaals",
+      "./custom_typings"
+    ]
   },
   "exclude": [
     "wwwroot",

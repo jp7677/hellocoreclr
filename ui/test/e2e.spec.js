@@ -6,7 +6,6 @@ var protractor = require('protractor')
 
 mocha.describe('End2end test suite', () => {
   mocha.it('should load completely and have a title', (done) => {
-    protractor.browser.ignoreSynchronization = true
     protractor.browser.loadAndWaitForAureliaPage('/')
     chai.expect(protractor.browser.getTitle()).to.eventually.be.equal('Hello World | Hello World')
       .notify(done)

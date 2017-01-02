@@ -16,6 +16,7 @@ exports.config = {
     args: ['-Djna.nosys=true']
   },
 
+  baseUrl: 'http://localhost:3000',
   specs: ['test/e2e.spec.js'],
 
   onPrepare: () => {

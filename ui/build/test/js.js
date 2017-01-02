@@ -7,8 +7,7 @@ exports.fn = function (gulp, paths, mode, done) {
   var karma = require('karma').Server
 
   karma.start({
-    configFile: path.join(__dirname, '..', '..', 'karma.conf.js'),
-    singleRun: true
+    configFile: path.join(__dirname, '..', '..', 'karma.conf.js')
   }, function (exitCode) {
     // We are supposed to run i.c.w. watch/browsersync.
     // So regardless of the karma exit code we just tell gulp

@@ -27,3 +27,9 @@ gulp.task('build', function (done) {
 gulp.task('default', ['build'])
 
 gulp.task('watch', ['watch:all'])
+
+gulp.task('serve', ['serve:wwwroot'])
+
+gulp.task('e2e-tests', function (done) {
+  run('test:e2e', 'serve:stop', done)
+})

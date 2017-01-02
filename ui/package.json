@@ -56,7 +56,10 @@
     "karma-coverage": "~1.1.1",
     "karma-remap-coverage": "~0.1.4",
     "browser-sync": "~2.18.5",
+    "gulp-connect": "~5.0.0",
+    "connect-history-api-fallback": "~1.3.0",
     "proxy-middleware": "~0.15.0",
+    "gulp-protractor": "~3.0.0",
     "protractor": "~4.0.14",
     "selenium-jar": "~2.52.1",
     "aurelia-protractor-plugin": "~1.0.1"

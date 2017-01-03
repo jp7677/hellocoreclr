@@ -2,7 +2,7 @@
 
 const util = require('gulp-util')
 
-exports.fn = function (gulp, paths, argv, done) {
+exports.fn = (gulp, paths, argv, done) => {
   if (argv.production) {
     util.log('Skipping \'' + util.colors.cyan('gulp-tslint') + '\'')
     done()
@@ -10,8 +10,8 @@ exports.fn = function (gulp, paths, argv, done) {
   }
 
   var consoleFormatter = function () {
-    consoleFormatter.prototype.format = function (results) {
-      results.forEach(function (element) {
+    consoleFormatter.prototype.format = (results) => {
+      results.forEach((element) => {
         var message = '[' + util.colors.cyan('lint') + '] ' +
           util.colors.red('error') + ' ' + element.fileName +
           '[' + (element.startPosition.lineAndCharacter.line + 1) + ', ' + (element.startPosition.lineAndCharacter.character + 1) + ']: ' +

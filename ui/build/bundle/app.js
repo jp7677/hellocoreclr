@@ -3,7 +3,7 @@
 const bundle = require('aurelia-bundler').bundle
 
 exports.dep = ['bundle:tscompile', 'bundle:prepare']
-exports.fn = function (gulp, paths, argv, done) {
+exports.fn = (gulp, paths, argv, done) => {
   return bundle({
     force: true,
     baseURL: paths.src,

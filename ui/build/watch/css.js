@@ -1,6 +1,6 @@
 'use strict'
 
-exports.fn = function (gulp, paths, argv, done) {
+exports.fn = (gulp, paths, argv, done) => {
   var browserSync = require('browser-sync').get('server')
 
   return gulp.src([paths.src + '**/*.css', '!' + paths.jspmPackages])

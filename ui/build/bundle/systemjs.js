@@ -10,7 +10,7 @@ const util = require('gulp-util')
 const filenames = require('gulp-filenames')
 
 exports.dep = ['bundle:app']
-exports.fn = function (gulp, paths, argv, done) {
+exports.fn = (gulp, paths, argv, done) => {
   // Import the systemjs polyfill to keep compatibility with Safari 7 and IE
   let systemjsFiles = [
     paths.src + 'jspm_packages/system-polyfills.js',

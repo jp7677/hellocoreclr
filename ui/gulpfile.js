@@ -23,17 +23,17 @@ load({
 
 gulp.task('lint', ['lint:ts', 'lint:css', 'lint:html'])
 
-gulp.task('build', function (done) {
+gulp.task('build', (done) => {
   run('clean:dest', ['lint', 'bundle:js', 'bundle:html', 'clean:bundle', 'bundle:image', 'bundle:assets', 'bundle:fonts'], done)
 })
 
 gulp.task('default', ['build'])
 
-gulp.task('watch', function (done) {
+gulp.task('watch', (done) => {
   run('watch:all', done)
 })
 
-gulp.task('unit-tests', function (done) {
+gulp.task('unit-tests', (done) => {
   if (!argv.nobuild) {
     run('bundle:tscompile', 'test:js', done)
   } else {
@@ -41,7 +41,7 @@ gulp.task('unit-tests', function (done) {
   }
 })
 
-gulp.task('e2e-tests', function (done) {
+gulp.task('e2e-tests', (done) => {
   if (!argv.nobuild) {
     run('build', 'test:e2e', 'serve:stop', done)
   } else {

@@ -25,7 +25,7 @@ module.exports = function (wallaby) {
               express.static('src/jspm_packages'))
     },
 
-    setup: function (wallaby) {
+    setup: (wallaby) => {
       // Preventing wallaby from starting the test run
       wallaby.delayStart()
 
@@ -35,9 +35,11 @@ module.exports = function (wallaby) {
       }
 
       // starting wallaby test run when everything required is loaded
-      Promise.all(promises).then(function () {
+      Promise.all(promises).then(() => {
         wallaby.start()
-      }).catch(function (e) { setTimeout(function () { throw e }, 0) })
+      }).catch((e) => {
+        setTimeout(() => { throw e }, 0)
+      })
     }
   }
 }

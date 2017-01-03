@@ -5,7 +5,7 @@ const filter = require('gulp-filter')
 const replace = require('gulp-replace')
 
 exports.dep = ['bundle:app']
-exports.fn = function (gulp, paths, argv, done) {
+exports.fn = (gulp, paths, argv, done) => {
   const filterSettingsJs = filter(['app-bundle-settings*.js'], {restore: true})
   const regex = /"?applicationMode"?:\s*"\w*"/
 

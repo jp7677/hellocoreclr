@@ -1,6 +1,6 @@
 'use strict'
 
-exports.fn = function (gulp, paths, argv, done) {
+exports.fn = (gulp, paths, argv, done) => {
   var connect = require('gulp-connect')
   var proxy = require('proxy-middleware')
   var url = require('url')
@@ -12,7 +12,7 @@ exports.fn = function (gulp, paths, argv, done) {
   connect.server({
     root: ['wwwroot'],
     port: 3000,
-    middleware: function (connect, options) {
+    middleware: (connect, options) => {
       return [proxy(proxyOptions), historyApiFallback()]
     }
   })

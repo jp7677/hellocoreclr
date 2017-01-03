@@ -9,7 +9,7 @@ const util = require('gulp-util')
 const tsProject = ts.createProject('tsconfig.json')
 
 exports.dep = ['clean:js']
-exports.fn = function (gulp, paths, argv, done) {
+exports.fn = (gulp, paths, argv, done) => {
   var tsResult = tsProject.src()
     .pipe(argv.production ? filter(['**/*', '!test/**']) : util.noop())
     .pipe(!argv.production ? sourcemaps.init() : util.noop())
@@ -17,7 +17,7 @@ exports.fn = function (gulp, paths, argv, done) {
 
   return tsResult.js
     .pipe(!argv.production ? sourcemaps.write('.', {
-      mapSources: function (sourcePath) {
+      mapSources: (sourcePath) => {
         return sourcePath.substr(sourcePath.lastIndexOf(path.sep) + 1)
       }
     }) : util.noop())

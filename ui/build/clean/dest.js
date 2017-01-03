@@ -2,6 +2,6 @@
 
 const del = require('del')
 
-exports.fn = function (gulp, paths, argv, done) {
+exports.fn = (gulp, paths, argv, done) => {
   return del(paths.wwwroot)
 }

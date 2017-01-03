@@ -1,4 +1,4 @@
-module.exports = function (wallaby) {
+module.exports = (wallaby) => {
   'use strict'
 
   return {
@@ -35,10 +35,10 @@ module.exports = function (wallaby) {
       }
 
       // starting wallaby test run when everything required is loaded
-      Promise.all(promises).then(() => {
+      Promise.all(promises).then(function () {
         wallaby.start()
-      }).catch((e) => {
-        setTimeout(() => { throw e }, 0)
+      }).catch(function (e) {
+        setTimeout(function () { throw e }, 0)
       })
     }
   }

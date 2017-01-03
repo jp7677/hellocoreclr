@@ -1,4 +1,4 @@
-var protractor = require('protractor')
+const protractor = require('protractor')
 const phantomjs = require('phantomjs-prebuilt')
 
 exports.config = {

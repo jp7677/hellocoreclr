@@ -22,7 +22,7 @@ namespace HelloCoreClrApp
     {
         private readonly Serilog.ILogger log = Log.ForContext<Startup>();
         private readonly Container container = new Container();
-        private const string APIVERSION = "v1";
+        private const string ApiVersion = "v1";
         
         public Startup(IHostingEnvironment env)
         {
@@ -53,7 +53,7 @@ namespace HelloCoreClrApp
                     Title = "Hello CoreCLR Service API",
                     Description = "Just a playground...",
                     TermsOfService = "None",
-                    Version = APIVERSION
+                    Version = ApiVersion
                 });
         }
         
@@ -79,7 +79,7 @@ namespace HelloCoreClrApp
 
             app.UseSwagger();
             app.UseSwaggerUi(c => 
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", APIVERSION));
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", ApiVersion));
 
             setupDbTask.Wait();
         }

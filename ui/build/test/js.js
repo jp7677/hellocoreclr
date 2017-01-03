@@ -1,9 +1,9 @@
 'use strict'
 
+const argv = require('yargs').argv
 const path = require('path')
 
 exports.fn = function (gulp, paths, mode, done) {
-  var argv = require('yargs').argv
   var karma = require('karma').Server
 
   let reporters = argv.karmareporters === undefined

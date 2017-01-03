@@ -1,6 +1,7 @@
 ﻿'use strict'
 
 const gulp = require('gulp')
+const argv = require('yargs').argv
 const load = require('gulp-require-tasks')
 const run = require('run-sequence')
 const util = require('gulp-util')
@@ -32,11 +33,19 @@ gulp.task('watch', function (done) {
 })
 
 gulp.task('unit-tests', function (done) {
-  run('bundle:tscompile', 'test:js', done)
+  if (argv.nobuild === undefined) {
+    run('bundle:tscompile', 'test:js', done)
+  } else {
+    run('test:js', done)
+  }
 })
 
 gulp.task('e2e-tests', function (done) {
-  run('build', 'test:e2e', 'serve:stop', done)
+  if (argv.nobuild === undefined) {
+    run('build', 'test:e2e', 'serve:stop', done)
+  } else {
+    run('test:e2e', 'serve:stop', done)
+  }
 })
 
 gulp.task('serve', ['serve:wwwroot'])

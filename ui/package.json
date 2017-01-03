@@ -12,6 +12,7 @@
     "typescript": "~2.1.4",
     "typings": "~2.1.0",
     "gulp": "~3.9.1",
+    "yargs": "~6.6.0",
     "gulp-require-tasks": "~1.0.5",
     "run-sequence": "~1.2.2",
     "gulp-filter": "~4.0.0",
@@ -33,7 +34,6 @@
     "del": "~2.2.2"
   },
   "devDependencies": {
-    "yargs": "~6.6.0",
     "gulp-tslint": "~7.0.1",
     "tslint": "~4.2.0",
     "gulp-stylelint": "~3.7.0",

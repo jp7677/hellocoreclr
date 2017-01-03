@@ -27,8 +27,8 @@ before_test:
 
 test_script:
 - packages\OpenCover.4.6.589\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -mergeoutput -output:reports\coverage-dotnet.xml
-- ui\node_modules\.bin\gulp unit-tests --cwd ui --karmareporters progress,coverage,remap-coverage,appveyor
-- ui\node_modules\.bin\gulp e2e-tests --cwd ui
+- ui\node_modules\.bin\gulp unit-tests --cwd ui --nobuild --karmareporters progress,coverage,remap-coverage,appveyor
+- ui\node_modules\.bin\gulp e2e-tests --cwd ui --nobuild
 
 after_test:
 - npm install codecov

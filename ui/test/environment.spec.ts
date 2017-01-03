@@ -1,5 +1,3 @@
-"use strict";
-
 import chai from "chai";
 import {Environment} from "../src/app/environment";
 

@@ -1,5 +1,3 @@
-"use strict";
-
 // Import the fetch polyfill before the Aurelia fetch client to keep compatibility with Safari
 import "fetch";
 

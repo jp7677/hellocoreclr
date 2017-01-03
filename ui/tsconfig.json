@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
     "target": "es5",
     "module": "system",
     "sourceMap": false,
@@ -8,7 +7,9 @@
       "./typings/modules",
       "./typings/globaals",
       "./custom_typings"
-    ]
+    ],
+    "alwaysStrict": true,
+    "experimentalDecorators": true
   },
   "exclude": [
     "wwwroot",

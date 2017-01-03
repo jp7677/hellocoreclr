@@ -1,5 +1,3 @@
-"use strict";
-
 export class Environment {
     public applicationMode: string;
     public baseUrl: string;

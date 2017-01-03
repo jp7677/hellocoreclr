@@ -1,5 +1,3 @@
-"use strict";
-
 import toastr from "toastr";
 
 export class Notifier {

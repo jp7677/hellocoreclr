@@ -1,5 +1,3 @@
-"use strict";
-
 import * as nprogress from "nprogress";
 
 export class Statusbar {

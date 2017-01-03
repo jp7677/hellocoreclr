@@ -1,5 +1,3 @@
-"use strict";
-
 import {Statusbar} from "../src/app/statusbar";
 
 describe("Statusbar test suite", () => {

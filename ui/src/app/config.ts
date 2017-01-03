@@ -1,5 +1,3 @@
-"use strict";
-
 import {RouterConfiguration} from "aurelia-router";
 
 export class Config {

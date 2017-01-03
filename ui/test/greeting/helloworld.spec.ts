@@ -1,5 +1,3 @@
-"use strict";
-
 import chai from "chai";
 import {HelloWorld} from "../../src/app/greeting/helloworld";
 import {SayHelloWorld} from "../../src/app/greeting/messages/sayhelloworld";

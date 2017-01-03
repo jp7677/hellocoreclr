@@ -1,5 +1,3 @@
-"use strict";
-
 import sinon from "sinon";
 
 // tslint:disable:max-classes-per-file

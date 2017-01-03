@@ -89,7 +89,7 @@ namespace HelloCoreClrApp.Test
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/swagger/ui/index.html");
+                var response = await client.GetAsync("/swagger/index.html");
 
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
             }

@@ -13,8 +13,8 @@ using Serilog;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore;
 using SimpleInjector.Integration.AspNetCore.Mvc;
-using Swashbuckle.Swagger.Model;
-using Swashbuckle.SwaggerGen.Application;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace HelloCoreClrApp
 {
@@ -22,6 +22,7 @@ namespace HelloCoreClrApp
     {
         private readonly Serilog.ILogger log = Log.ForContext<Startup>();
         private readonly Container container = new Container();
+        private const string APIVERSION = "v1";
         
         public Startup(IHostingEnvironment env)
         {
@@ -39,8 +40,7 @@ namespace HelloCoreClrApp
                 .AddJsonFormatters(options => 
                     options.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
-            services.AddSwaggerGen();
-            services.ConfigureSwaggerGen(SetupSwagger);
+            services.AddSwaggerGen(o => SetupSwagger(o));
 
             // Add SimpleInjector Controller Activator
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
@@ -48,12 +48,12 @@ namespace HelloCoreClrApp
 
         private static void SetupSwagger(SwaggerGenOptions options)
         {
-            options.SingleApiVersion(new Info
+            options.SwaggerDoc("v1", new Info
                 {
                     Title = "Hello CoreCLR Service API",
                     Description = "Just a playground...",
                     TermsOfService = "None",
-                    Version = "v1"
+                    Version = APIVERSION
                 });
         }
         
@@ -78,7 +78,8 @@ namespace HelloCoreClrApp
             app.UseMvc();
 
             app.UseSwagger();
-            app.UseSwaggerUi();
+            app.UseSwaggerUi(c => 
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", APIVERSION));
 
             setupDbTask.Wait();
         }

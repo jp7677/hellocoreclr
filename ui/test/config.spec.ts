@@ -12,7 +12,7 @@ describe("Config test suite", () => {
 
         sut.configureRouter(routerConfiguration);
 
-        chai.expect(routerConfiguration.title).to.equals("Hello World");
+        chai.expect(routerConfiguration.title).to.equals("Hello Worl1d");
         chai.expect(routerConfiguration.map.calledOnce).to.equals(true);
     });
 

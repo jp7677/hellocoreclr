@@ -33,6 +33,7 @@
     "del": "~2.2.2"
   },
   "devDependencies": {
+    "yargs": "~6.6.0",
     "gulp-tslint": "~7.0.1",
     "tslint": "~4.2.0",
     "gulp-stylelint": "~3.7.0",

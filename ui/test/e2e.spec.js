@@ -9,7 +9,7 @@ var protractor = require('protractor')
 describe('End2end test suite', () => {
   it('should load completely and have a title', (done) => {
     protractor.browser.loadAndWaitForAureliaPage('/')
-    chai.expect(protractor.browser.getTitle()).to.eventually.be.equal('Hello World | Hello World')
+    chai.expect(protractor.browser.getTitle()).to.eventually.be.equal('Say Hello World! | Hello World')
       .notify(done)
   })
 })

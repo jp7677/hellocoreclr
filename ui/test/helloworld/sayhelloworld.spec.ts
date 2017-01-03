@@ -1,6 +1,6 @@
 import chai from "chai";
-import {HelloWorld} from "../../src/app/greeting/helloworld";
-import {SayHelloWorld} from "../../src/app/greeting/messages/sayhelloworld";
+import {SayHelloWorld as SayHelloWorldMessage} from "../../src/app/helloworld/messages/sayhelloworld";
+import {SayHelloWorld} from "../../src/app/helloworld/sayhelloworld";
 import {HttpClientStub} from "../stubs";
 
 function wait() {
@@ -9,10 +9,10 @@ function wait() {
         });
 }
 
-describe("HelloWorld test suite", () => {
+describe("SayHelloWorld test suite", () => {
 
     it("should do nothing when there is no input", () => {
-        let sut = new HelloWorld(HttpClientStub.ok());
+        let sut = new SayHelloWorld(HttpClientStub.ok());
         sut.inputText = undefined;
         sut.greetingText = "Hello";
 
@@ -22,7 +22,7 @@ describe("HelloWorld test suite", () => {
     });
 
     it("should handle a valid response", async () => {
-        let sut = new HelloWorld(HttpClientStub.ok({greeting: "Hello World!"}));
+        let sut = new SayHelloWorld(HttpClientStub.ok({greeting: "Hello World!"}));
         sut.inputText = "Hello";
 
         sut.submit();
@@ -32,7 +32,7 @@ describe("HelloWorld test suite", () => {
     });
 
     it("should handle an error response", async () => {
-        let sut = new HelloWorld(HttpClientStub.error());
+        let sut = new SayHelloWorld(HttpClientStub.error());
         sut.inputText = "Error";
         sut.greetingText = "Hello";
 

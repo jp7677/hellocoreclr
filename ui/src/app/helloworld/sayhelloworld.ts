@@ -2,11 +2,11 @@ import {HttpClient} from "aurelia-fetch-client";
 import {inject, LogManager} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
 
-import {SayHelloWorld} from "./messages/sayhelloworld";
+import {SayHelloWorld as SayHelloWorldMessage} from "./messages/sayhelloworld";
 import {Notifier} from "./notifier";
 
 @inject(HttpClient)
-export class HelloWorld {
+export class SayHelloWorld {
     public inputText: string;
     public greetingText: string;
 
@@ -67,7 +67,7 @@ export class HelloWorld {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
-        let data: SayHelloWorld = await response.json();
+        let data: SayHelloWorldMessage = await response.json();
         this.log.info(`Received data was: ${data.greeting}`);
         this.greetingText = data.greeting;
     }

@@ -1,6 +1,6 @@
 import chai from "chai";
-import {Greetings} from "../../src/app/greeting/greetings";
-import {SavedGreeting} from "../../src/app/greeting/messages/savedgreeting";
+import {Greetings} from "../../src/app/helloworld/greetings";
+import {SavedGreeting} from "../../src/app/helloworld/messages/savedgreeting";
 import {HttpClientStub} from "../stubs";
 
 function wait() {

@@ -7,14 +7,14 @@ export class Config {
         config.title = "Hello World";
         config.map([
         {
-            moduleId: "app/greeting/helloworld",
+            moduleId: "app/helloworld/sayhelloworld",
             name: "helloworld",
             nav: true,
-            route: ["", "helloworld"],
-            title: "Hello World"
+            route: ["", "sayhelloworld"],
+            title: "Say Hello World!"
         },
         {
-            moduleId: "app/greeting/greetings",
+            moduleId: "app/helloworld/greetings",
             name: "greetings",
             nav: true,
             route: "greetings",

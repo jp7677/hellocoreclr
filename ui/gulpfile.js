@@ -32,11 +32,11 @@ gulp.task('watch', function (done) {
 })
 
 gulp.task('unit-tests', function (done) {
-  run('test:js', done)
+  run('bundle:tscompile', 'test:js', done)
 })
 
 gulp.task('e2e-tests', function (done) {
-  run('test:e2e', 'serve:stop', done)
+  run('build', 'test:e2e', 'serve:stop', done)
 })
 
 gulp.task('serve', ['serve:wwwroot'])

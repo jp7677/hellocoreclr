@@ -2,7 +2,6 @@
 
 const path = require('path')
 
-exports.dep = ['bundle:tscompile']
 exports.fn = function (gulp, paths, mode, done) {
   var argv = require('yargs').argv
   var karma = require('karma').Server

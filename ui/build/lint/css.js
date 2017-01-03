@@ -10,11 +10,11 @@ exports.fn = (gulp, paths, argv, done) => {
     return
   }
 
-  var consoleFormatter = (results) => {
+  const consoleFormatter = (results) => {
     results.forEach((element) => {
-      var file = path.relative(path.join(process.cwd(), paths.src), element.source)
+      let file = path.relative(path.join(process.cwd(), paths.src), element.source)
       element.warnings.forEach((warning) => {
-        var message = '[' + util.colors.cyan('lint') + '] ' +
+        let message = '[' + util.colors.cyan('lint') + '] ' +
           util.colors.red(warning.severity) + ' ' + file +
           '[' + warning.line + ', ' + warning.column + ']: ' + warning.text
         util.log(message)
@@ -22,7 +22,7 @@ exports.fn = (gulp, paths, argv, done) => {
     })
   }
 
-  var stylelint = require('gulp-stylelint')
+  const stylelint = require('gulp-stylelint')
   return gulp.src([paths.src + '**/*.css', '!' + paths.jspmPackages])
     .pipe(stylelint({
       failAfterError: false,

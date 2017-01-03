@@ -3,11 +3,11 @@
 const run = require('run-sequence')
 
 exports.fn = (gulp, paths, argv, done) => {
-  var browserSync = require('browser-sync').create('server')
-  var proxy = require('proxy-middleware')
-  var url = require('url')
+  const browserSync = require('browser-sync').create('server')
+  const proxy = require('proxy-middleware')
+  const url = require('url')
 
-  var proxyOptions = url.parse('http://localhost:5000/api')
+  let proxyOptions = url.parse('http://localhost:5000/api')
   proxyOptions.route = '/api'
 
   browserSync.init({

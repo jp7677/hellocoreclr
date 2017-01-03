@@ -10,7 +10,7 @@ const tsProject = ts.createProject('tsconfig.json')
 
 exports.dep = ['clean:js']
 exports.fn = (gulp, paths, argv, done) => {
-  var tsResult = tsProject.src()
+  let tsResult = tsProject.src()
     .pipe(argv.production ? filter(['**/*', '!test/**']) : util.noop())
     .pipe(!argv.production ? sourcemaps.init() : util.noop())
     .pipe(tsProject())

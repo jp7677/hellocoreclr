@@ -3,7 +3,7 @@
 const path = require('path')
 
 exports.fn = (gulp, paths, argv, done) => {
-  var karma = require('karma').Server
+  const karma = require('karma').Server
 
   karma.start({
     configFile: path.join(__dirname, '..', '..', 'karma.conf.js'),

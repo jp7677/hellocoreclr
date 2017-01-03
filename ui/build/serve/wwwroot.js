@@ -1,12 +1,12 @@
 'use strict'
 
 exports.fn = (gulp, paths, argv, done) => {
-  var connect = require('gulp-connect')
-  var proxy = require('proxy-middleware')
-  var url = require('url')
-  var historyApiFallback = require('connect-history-api-fallback/lib')
+  const connect = require('gulp-connect')
+  const proxy = require('proxy-middleware')
+  const url = require('url')
+  const historyApiFallback = require('connect-history-api-fallback/lib')
 
-  var proxyOptions = url.parse('http://localhost:5000/api')
+  let proxyOptions = url.parse('http://localhost:5000/api')
   proxyOptions.route = '/api'
 
   connect.server({

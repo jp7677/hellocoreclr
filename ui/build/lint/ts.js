@@ -9,10 +9,10 @@ exports.fn = (gulp, paths, argv, done) => {
     return
   }
 
-  var consoleFormatter = function () {
+  const consoleFormatter = function () {
     consoleFormatter.prototype.format = (results) => {
       results.forEach((element) => {
-        var message = '[' + util.colors.cyan('lint') + '] ' +
+        let message = '[' + util.colors.cyan('lint') + '] ' +
           util.colors.red('error') + ' ' + element.fileName +
           '[' + (element.startPosition.lineAndCharacter.line + 1) + ', ' + (element.startPosition.lineAndCharacter.character + 1) + ']: ' +
           element.failure
@@ -21,7 +21,7 @@ exports.fn = (gulp, paths, argv, done) => {
     }
   }
 
-  var tslint = require('gulp-tslint')
+  const tslint = require('gulp-tslint')
   return gulp.src([paths.src + '**/*.ts', paths.test + '**/*.ts', '!' + paths.jspmPackages])
     .pipe(tslint({formatter: consoleFormatter}))
     .pipe(tslint.report({emitError: false}))

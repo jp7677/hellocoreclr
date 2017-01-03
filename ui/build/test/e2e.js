@@ -8,7 +8,7 @@ exports.fn = function (gulp, paths, mode, done) {
     .pipe(protractor({
       configFile: 'protractor.conf.js'
     }))
-    .on('error', (e) => {
-      throw e
+    .on('error', () => {
+      process.exit(1)
     })
 }

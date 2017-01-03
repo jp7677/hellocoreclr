@@ -3,18 +3,18 @@
 const util = require('gulp-util')
 const path = require('path')
 
-exports.fn = function (gulp, paths, mode, done) {
-  if (mode.production) {
+exports.fn = (gulp, paths, argv, done) => {
+  if (argv.production) {
     util.log('Skipping \'' + util.colors.cyan('gulp-stylelint') + '\'')
     done()
     return
   }
 
-  var consoleFormatter = function (results) {
-    results.forEach(function (element) {
-      var file = path.relative(path.join(process.cwd(), paths.src), element.source)
-      element.warnings.forEach(function (warning) {
-        var message = '[' + util.colors.cyan('lint') + '] ' +
+  const consoleFormatter = (results) => {
+    results.forEach((element) => {
+      let file = path.relative(path.join(process.cwd(), paths.src), element.source)
+      element.warnings.forEach((warning) => {
+        let message = '[' + util.colors.cyan('lint') + '] ' +
           util.colors.red(warning.severity) + ' ' + file +
           '[' + warning.line + ', ' + warning.column + ']: ' + warning.text
         util.log(message)
@@ -22,7 +22,7 @@ exports.fn = function (gulp, paths, mode, done) {
     })
   }
 
-  var stylelint = require('gulp-stylelint')
+  const stylelint = require('gulp-stylelint')
   return gulp.src([paths.src + '**/*.css', '!' + paths.jspmPackages])
     .pipe(stylelint({
       failAfterError: false,

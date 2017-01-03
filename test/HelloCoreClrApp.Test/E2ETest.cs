@@ -9,11 +9,11 @@ using Xunit;
 
 namespace HelloCoreClrApp.Test
 {
-    public class IntegrationTest
+    public class E2ETest
     {
         private readonly TestServer server;
 
-        public IntegrationTest()
+        public E2ETest()
         {
             server = new TestServer(new WebHostBuilder().UseStartup<TestserverStartup>());
         }

@@ -2,12 +2,12 @@
 
 const run = require('run-sequence')
 
-exports.fn = function (gulp, paths, mode, done) {
-  var browserSync = require('browser-sync').create('server')
-  var proxy = require('proxy-middleware')
-  var url = require('url')
+exports.fn = (gulp, paths, argv, done) => {
+  const browserSync = require('browser-sync').create('server')
+  const proxy = require('proxy-middleware')
+  const url = require('url')
 
-  var proxyOptions = url.parse('http://localhost:5000/api')
+  let proxyOptions = url.parse('http://localhost:5000/api')
   proxyOptions.route = '/api'
 
   browserSync.init({
@@ -17,7 +17,7 @@ exports.fn = function (gulp, paths, mode, done) {
     }
   })
 
-  gulp.watch([paths.src + '**/*.ts', paths.test + '**/*.ts', '!' + paths.jspmPackages], ['lint:ts', 'watch:js', 'test:js'])
+  gulp.watch([paths.src + '**/*.ts', paths.test + '**/*.ts', '!' + paths.jspmPackages], ['lint:ts', 'watch:js', 'unit-tests'])
   gulp.watch([paths.src + '**/*.css', '!' + paths.jspmPackages], ['lint:css', 'watch:css'])
   gulp.watch([paths.src + '**/*.html', '!' + paths.jspmPackages], ['lint:html', 'watch:reload'])
   gulp.watch([paths.src + '**/*.{png,jpg,gif,svg,ico}', '!' + paths.jspmPackages], ['watch:reload'])

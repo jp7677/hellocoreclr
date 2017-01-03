@@ -17,25 +17,33 @@ import {ConsoleAppender} from "aurelia-logging-console";
 
 export async function configure(aurelia: Aurelia) {
     Statusbar.Inc();
-    let log: Logger = LogManager.getLogger("Main");
     let env: Environment = new Environment(appsettings);
 
     aurelia.use
         .standardConfiguration();
 
-    configureLogging(env);
+    configureLoggingAppender();
+    logAplicationStart(env);
+    configureLoggingLevels(env);
     configureContainer(aurelia.container, env);
 
-    log.info(`Starting application in ${env.applicationMode} mode.`);
     await aurelia.start();
 
     aurelia.setRoot("app/config");
     Statusbar.Done();
 }
 
-function configureLogging(env: Environment) {
+function configureLoggingAppender() {
     LogManager.addAppender(new ConsoleAppender());
+    LogManager.setLevel(LogManager.logLevel.info);
+}
 
+function logAplicationStart(env: Environment) {
+    let log: Logger = LogManager.getLogger("Main");
+    log.info(`Starting application in ${env.applicationMode} mode.`);
+}
+
+function configureLoggingLevels(env: Environment) {
     if (env.IsDevelopment()) {
         LogManager.setLevel(LogManager.logLevel.debug);
     } else if (env.IsStaging()) {

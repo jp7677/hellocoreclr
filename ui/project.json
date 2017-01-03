@@ -6,6 +6,7 @@
   "buildOptions": {
     "outputName": "HelloCoreClrApp.Ui"
   },
+  "exclude": ["node_modules/**", "typings/**","custom_typings/**"],
 
   "dependencies": {
       "Microsoft.NETCore.App": {  

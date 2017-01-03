@@ -1,7 +1,7 @@
 'use strict'
 
 exports.dep = ['serve:wwwroot']
-exports.fn = function (gulp, paths, mode, done) {
+exports.fn = function (gulp, paths, argv, done) {
   var protractor = require('gulp-protractor').protractor
 
   return gulp.src(paths.test + '**/(e2e)*.js')

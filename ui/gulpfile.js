@@ -9,12 +9,6 @@ const argv = require('yargs')
 const load = require('gulp-require-tasks')
 const run = require('run-sequence')
 
-const mode = {
-  production: argv.production,
-  watch: argv._.includes('watch'),
-  reporters: argv.karmareporters
-}
-
 const paths = {
   wwwroot: './wwwroot/',
   src: './src/',
@@ -24,7 +18,7 @@ const paths = {
 
 load({
   path: process.cwd() + '/build',
-  arguments: [paths, mode]
+  arguments: [paths, argv]
 })
 
 gulp.task('lint', ['lint:ts', 'lint:css', 'lint:html'])

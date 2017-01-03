@@ -2,15 +2,15 @@
 
 const path = require('path')
 
-exports.fn = function (gulp, paths, mode, done) {
+exports.fn = function (gulp, paths, argv, done) {
   var karma = require('karma').Server
 
   karma.start({
     configFile: path.join(__dirname, '..', '..', 'karma.conf.js'),
-    reporters: mode.reporters
+    reporters: argv.karmareporters
   }, function (exitCode) {
     done()
-    if (!mode.watch) {
+    if (!argv._.includes('watch')) {
       process.exit(exitCode)
     }
   })

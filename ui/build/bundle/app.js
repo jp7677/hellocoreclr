@@ -3,7 +3,7 @@
 const bundle = require('aurelia-bundler').bundle
 
 exports.dep = ['bundle:tscompile', 'bundle:prepare']
-exports.fn = function (gulp, paths, mode, done) {
+exports.fn = function (gulp, paths, argv, done) {
   return bundle({
     force: true,
     baseURL: paths.src,
@@ -17,10 +17,10 @@ exports.fn = function (gulp, paths, mode, done) {
         ],
         options: {
           inject: true,
-          minify: mode.production,
-          rev: mode.production,
-          sourceMaps: !mode.production,
-          sourceMapContents: !mode.production
+          minify: argv.production,
+          rev: argv.production,
+          sourceMaps: !argv.production,
+          sourceMapContents: !argv.production
         }
       },
       'app-bundle-settings': {
@@ -29,8 +29,8 @@ exports.fn = function (gulp, paths, mode, done) {
         ],
         options: {
           inject: true,
-          minify: mode.production,
-          rev: mode.production,
+          minify: argv.production,
+          rev: argv.production,
           sourceMaps: false
         }
       },
@@ -70,10 +70,10 @@ exports.fn = function (gulp, paths, mode, done) {
         ],
         options: {
           inject: true,
-          minify: mode.production,
-          rev: mode.production,
-          sourceMaps: !mode.production,
-          sourceMapContents: !mode.production
+          minify: argv.production,
+          rev: argv.production,
+          sourceMaps: !argv.production,
+          sourceMapContents: !argv.production
         }
       },
       'app-bundle-nm': {
@@ -83,11 +83,11 @@ exports.fn = function (gulp, paths, mode, done) {
         ],
         options: {
           inject: true,
-          minify: mode.production,
+          minify: argv.production,
           mangle: false,
-          rev: mode.production,
-          sourceMaps: !mode.production,
-          sourceMapContents: !mode.production
+          rev: argv.production,
+          sourceMaps: !argv.production,
+          sourceMapContents: !argv.production
         }
       }
     }

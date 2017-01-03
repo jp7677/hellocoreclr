@@ -3,8 +3,8 @@
 const util = require('gulp-util')
 const path = require('path')
 
-exports.fn = function (gulp, paths, mode, done) {
-  if (mode.production) {
+exports.fn = function (gulp, paths, argv, done) {
+  if (argv.production) {
     util.log('Skipping \'' + util.colors.cyan('gulp-stylelint') + '\'')
     done()
     return

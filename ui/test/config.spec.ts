@@ -5,8 +5,8 @@ import {RouterConfigurationStub} from "./stubs";
 describe("Config test suite", () => {
 
     it("should initialize correctly", () => {
-        let routerConfiguration = new RouterConfigurationStub();
-        let sut = new Config();
+        const routerConfiguration = new RouterConfigurationStub();
+        const sut = new Config();
 
         sut.configureRouter(routerConfiguration);
 

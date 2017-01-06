@@ -4,7 +4,7 @@ import sinon from "sinon";
 
 export class HttpClientStub {
     public static ok(responseData: any = {}) {
-        let map: Map<string, any> = new Map<string, any>();
+        const map: Map<string, any> = new Map<string, any>();
         map.set("*", responseData);
         return new HttpClientStub(map, 200);
     }
@@ -23,7 +23,7 @@ export class HttpClientStub {
         this.success = this.status >= 200 && this.status < 400;
     }
 
-    public fetch (url) {
+    public fetch(url) {
         if (this.success) {
             return Promise.resolve({
                 json: () => {

@@ -15,7 +15,7 @@ import {ConsoleAppender} from "aurelia-logging-console";
 
 export async function configure(aurelia: Aurelia) {
     Statusbar.Inc();
-    let env: Environment = new Environment(appsettings);
+    const env: Environment = new Environment(appsettings);
 
     aurelia.use
         .standardConfiguration();
@@ -37,7 +37,7 @@ function configureLoggingAppender() {
 }
 
 function logAplicationStart(env: Environment) {
-    let log: Logger = LogManager.getLogger("Main");
+    const log: Logger = LogManager.getLogger("Main");
     log.info(`Starting application in ${env.applicationMode} mode.`);
 }
 
@@ -61,7 +61,7 @@ function registerEnvironment(container: Container, env: Environment) {
 }
 
 function registerHttClient(container: Container, env: Environment) {
-    let http = new HttpClient();
+    const http = new HttpClient();
     http.configure((config) => {
         config
             .useStandardConfiguration()

@@ -12,7 +12,7 @@ function wait() {
 describe("SayHelloWorld test suite", () => {
 
     it("should do nothing when there is no input", () => {
-        let sut = new SayHelloWorld(HttpClientStub.ok());
+        const sut = new SayHelloWorld(HttpClientStub.ok());
         sut.inputText = undefined;
         sut.greetingText = "Hello";
 
@@ -21,8 +21,8 @@ describe("SayHelloWorld test suite", () => {
         chai.expect(sut.greetingText).to.empty;
     });
 
-    it("should handle a valid response", async () => {
-        let sut = new SayHelloWorld(HttpClientStub.ok({greeting: "Hello World!"}));
+    it("should handle a valid response", async() => {
+        const sut = new SayHelloWorld(HttpClientStub.ok({greeting: "Hello World!"}));
         sut.inputText = "Hello";
 
         sut.submit();
@@ -31,8 +31,8 @@ describe("SayHelloWorld test suite", () => {
         chai.expect(sut.greetingText).to.equal("Hello World!");
     });
 
-    it("should handle an error response", async () => {
-        let sut = new SayHelloWorld(HttpClientStub.error());
+    it("should handle an error response", async() => {
+        const sut = new SayHelloWorld(HttpClientStub.error());
         sut.inputText = "Error";
         sut.greetingText = "Hello";
 

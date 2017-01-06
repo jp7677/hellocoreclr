@@ -11,16 +11,16 @@ function wait() {
 
 describe("Greetings test suite", () => {
 
-    it("should handle a valid response", async () => {
-        let responses = new Map<string, any>();
+    it("should handle a valid response", async() => {
+        const responses = new Map<string, any>();
         responses.set("greetings/count", "5");
         responses.set("greetings", [
             {greeting: "Hello", timestampUtc: new Date(Date.now)},
             {greeting: "World", timestampUtc: new Date(Date.now)}
         ]);
-        let httpStub = HttpClientStub.okWithResponseMap(responses);
+        const httpStub = HttpClientStub.okWithResponseMap(responses);
 
-        let sut = new Greetings(httpStub);
+        const sut = new Greetings(httpStub);
 
         await wait();
         chai.expect(sut.numberOfSavedGreetings).not.to.be.undefined;
@@ -29,9 +29,9 @@ describe("Greetings test suite", () => {
         chai.expect(sut.savedGreetings.length).to.equal(2);
     });
 
-    it("should handle an error response", async () => {
-        let httpStub = HttpClientStub.error();
-        let sut = new Greetings(httpStub);
+    it("should handle an error response", async() => {
+        const httpStub = HttpClientStub.error();
+        const sut = new Greetings(httpStub);
 
         await wait();
         chai.expect(sut.numberOfSavedGreetings).not.to.be.undefined;

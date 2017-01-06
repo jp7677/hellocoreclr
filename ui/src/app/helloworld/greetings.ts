@@ -45,7 +45,7 @@ export class Greetings {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
-        let data: string = await response.json();
+        const data: string = await response.json();
         this.log.info(`Received data was: ${data}`);
         this.numberOfSavedGreetings = data;
     }
@@ -71,11 +71,11 @@ export class Greetings {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
-        let data: SavedGreeting[] = await response.json();
+        const data: SavedGreeting[] = await response.json();
         this.log.info(`Received data was: ${data.length} elements`);
 
         data.forEach((element) => {
-            let formatedSavedGreeting = new FormattedSavedGreeting();
+            const formatedSavedGreeting = new FormattedSavedGreeting();
             formatedSavedGreeting.greeting = element.greeting;
             formatedSavedGreeting.timestamp = moment.utc(element.timestampUtc).fromNow();
             this.savedGreetings.push(formatedSavedGreeting);

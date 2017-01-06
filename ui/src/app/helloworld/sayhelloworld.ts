@@ -20,7 +20,7 @@ export class SayHelloWorld {
     }
 
     public async submit() {
-        let name: string = this.inputText;
+        const name: string = this.inputText;
 
         if (!this.testPreConditionsAndResetIfNeeded(name)) {
             return;
@@ -67,7 +67,7 @@ export class SayHelloWorld {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
-        let data: SayHelloWorldMessage = await response.json();
+        const data: SayHelloWorldMessage = await response.json();
         this.log.info(`Received data was: ${data.greeting}`);
         this.greetingText = data.greeting;
     }

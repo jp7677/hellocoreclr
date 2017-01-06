@@ -2,7 +2,7 @@ import {RouterConfiguration} from "aurelia-router";
 
 export class Config {
     public configureRouter($config) {
-        let config: RouterConfiguration = $config;
+        const config: RouterConfiguration = $config;
 
         config.title = "Hello World";
         config.map([

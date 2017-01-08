@@ -12,8 +12,8 @@ module.exports = (wallaby) => {
       {pattern: 'test/stubs.ts', load: false}
     ],
     tests: [
-      {pattern: 'test/*.spec.ts', load: false},
-      {pattern: 'test/**/*.spec.ts', load: false}
+      {pattern: 'test/!(e2e)*.spec.ts', load: false},
+      {pattern: 'test/**/!(e2e)*.spec.ts', load: false}
     ],
 
     // telling wallaby to serve jspm_packages project folder

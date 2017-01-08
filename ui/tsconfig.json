@@ -5,7 +5,7 @@
     "sourceMap": false,
     "typeRoots": [
       "./typings/modules",
-      "./typings/globaals",
+      "./typings/globals",
       "./custom_typings"
     ],
     "alwaysStrict": true,

@@ -1,7 +1,7 @@
 import {HttpClient} from "aurelia-fetch-client";
 import {inject, LogManager} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
-import moment from "moment";
+import * as moment from "moment";
 
 import {FormattedSavedGreeting} from "./formattedsavedgreeting";
 import {SavedGreeting} from "./messages/savedgreeting";

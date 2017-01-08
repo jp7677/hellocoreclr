@@ -1,4 +1,4 @@
-import chai from "chai";
+import * as chai from "chai";
 import {Greetings} from "../../src/app/helloworld/greetings";
 import {SavedGreeting} from "../../src/app/helloworld/messages/savedgreeting";
 import {HttpClientStub} from "../stubs";

@@ -7,6 +7,5 @@ exports.fn = (gulp, paths, argv, done) => {
     '!' + paths.src + 'jspm.conf.js',
     '!' + paths.src + 'app-bundle*.js',
     paths.test + '**/*.{js,js.map}',
-    '!' + paths.test + 'e2e.spec.js',
     '!' + paths.jspmPackages])
 }

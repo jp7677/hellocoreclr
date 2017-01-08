@@ -7,8 +7,8 @@ before(() => {
 });
 
 describe("End2end test suite (typescript)", () => {
-  it("should load completely and have a title", () => {
+  it("should load completely and have a title", async() => {
     protractor.browser.loadAndWaitForAureliaPage("/");
-    return chai.expect(protractor.browser.getTitle()).to.eventually.be.equal("Say Hello World! | Hello World");
+    await chai.expect(protractor.browser.getTitle()).to.eventually.be.equal("Say Hello World! | Hello World");
   });
 });

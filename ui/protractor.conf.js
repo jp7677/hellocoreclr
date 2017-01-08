@@ -20,7 +20,7 @@ exports.config = {
   },
 
   baseUrl: 'http://localhost:3000',
-  specs: ['test/e2e.spec.js'],
+  specs: ['test/e2e*.spec.js'],
 
   onPrepare: () => {
     protractor.ignoreSynchronization = true

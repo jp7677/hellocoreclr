@@ -1,5 +1,7 @@
 'use strict'
 
+const util = require('gulp-util')
+
 exports.fn = (gulp, paths, argv, done) => {
   const connect = require('gulp-connect')
   const proxy = require('proxy-middleware')
@@ -13,7 +15,18 @@ exports.fn = (gulp, paths, argv, done) => {
     root: ['wwwroot'],
     port: 3000,
     middleware: (connect, options) => {
-      return [proxy(proxyOptions), historyApiFallback()]
+      return [
+        (req, res, next) => {
+          if (argv.nomiddlewareproxy && req.originalUrl.substring(0, 4) === '/api') {
+            util.log('Returning HTTP/403 for ' + util.colors.green(req.originalUrl))
+            res.statusCode = 403
+            return next()
+          }
+          let handle = proxy(proxyOptions)
+          return handle(req, res, next)
+        },
+        historyApiFallback()
+      ]
     }
   })
 

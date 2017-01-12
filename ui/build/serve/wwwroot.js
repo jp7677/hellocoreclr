@@ -8,8 +8,14 @@ exports.fn = (gulp, paths, argv, done) => {
   const url = require('url')
   const historyApiFallback = require('connect-history-api-fallback/lib')
 
+  const apiBase = '/api'
+
   let proxyOptions = url.parse('http://localhost:5000/api')
-  proxyOptions.route = '/api'
+  proxyOptions.route = apiBase
+
+  if (argv.nomiddlewareproxy) {
+    util.log('Returning HTTP/403 for ' + util.colors.green(apiBase))
+  }
 
   connect.server({
     root: ['wwwroot'],
@@ -17,8 +23,7 @@ exports.fn = (gulp, paths, argv, done) => {
     middleware: (connect, options) => {
       return [
         (req, res, next) => {
-          if (argv.nomiddlewareproxy && req.originalUrl.substring(0, 4) === '/api') {
-            util.log('Returning HTTP/403 for ' + util.colors.green(req.originalUrl))
+          if (argv.nomiddlewareproxy && req.originalUrl.substring(0, apiBase.length) === apiBase) {
             res.statusCode = 403
             return next()
           }

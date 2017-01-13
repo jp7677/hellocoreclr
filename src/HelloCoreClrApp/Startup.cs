@@ -40,7 +40,7 @@ namespace HelloCoreClrApp
                 .AddJsonFormatters(options => 
                     options.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
-            services.AddSwaggerGen(o => SetupSwagger(o));
+            services.AddSwaggerGen(SetupSwagger);
 
             // Add SimpleInjector Controller Activator
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));

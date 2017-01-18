@@ -27,17 +27,54 @@ namespace HelloCoreClrApp
         public Startup(IHostingEnvironment env)
         {
             log.Information("Starting up in {0} mode.", env.EnvironmentName);
+
+            SetupSimpleInjector();
+            SetupDatabaseAsync().Wait();
         }
+
+        private void SetupSimpleInjector()
+        {
+            log.Information("Setup dependencies.");
+            container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();
+
+            container.RegisterSingleton<IResourceProvider, ResourceProvider>();
+            container.RegisterSingleton<IActionFactory, ActionFactory>();
+            container.Register<ISayHelloWorldAction, SayHelloWorldAction>();
+            container.Register<IGetLastTenGreetingsAction, GetLastTenHelloWorldsAction>();
+            container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();
+
+            container.RegisterSingleton<IGreetingDbContextFactory>(() =>
+                new GreetingDbContextFactory(CreateDatabaseOptions().Options));
+            container.Register<IDataService,DataService>();
+
+            container.Verify();
+        }
+
+        public virtual DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()
+        {
+            return new DbContextOptionsBuilder<GreetingDbContext>()
+                .UseSqlite("Filename=./helloworld.db");
+        }
+
+        private async Task SetupDatabaseAsync()
+        {
+            log.Information("Setup database.");
+            var dataService = container.GetInstance<IDataService>();
+
+            await dataService.EnsureCreatedAsync();
+            log.Information("Currently we have {0} saved Greetings.", await dataService.GetNumberOfGreetingsAsync());
+        }
+
                 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             log.Information("Configuring services.");
-            
+
             // Add framework services.
             services.AddMvc();
             services.AddMvcCore()
-                .AddJsonFormatters(options => 
+                .AddJsonFormatters(options =>
                     options.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             services.AddSwaggerGen(SetupSwagger);
@@ -56,16 +93,13 @@ namespace HelloCoreClrApp
                     Version = ApiVersion
                 });
         }
-        
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            log.Information("Configuring.");
+            log.Information("Configuring request pipeline.");
             
-            SetupSimpleInjector(app);
-            var setupDbTask = SetupDatabaseAsync();
-
             //add SeriLog to ASP.NET Core
             loggerFactory.AddSerilog();
 
@@ -81,39 +115,7 @@ namespace HelloCoreClrApp
             app.UseSwaggerUi(c => 
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", ApiVersion));
 
-            setupDbTask.Wait();
-        }
-
-        private void SetupSimpleInjector(IApplicationBuilder app)
-        {
             app.UseSimpleInjectorAspNetRequestScoping(container);
-            container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();
-            
-            container.RegisterSingleton<IResourceProvider, ResourceProvider>();
-            container.RegisterSingleton<IActionFactory, ActionFactory>();
-            container.Register<ISayHelloWorldAction, SayHelloWorldAction>();
-            container.Register<IGetLastTenGreetingsAction, GetLastTenHelloWorldsAction>();
-            container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();
-
-            container.RegisterSingleton<IGreetingDbContextFactory>(() =>
-                new GreetingDbContextFactory(CreateDatabaseOptions().Options));
-            container.Register<IDataService,DataService>();
-            
-            container.Verify();
-        }
-
-        public virtual DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()
-        {
-            return new DbContextOptionsBuilder<GreetingDbContext>()
-                .UseSqlite("Filename=./helloworld.db");
-        }
-
-        private async Task SetupDatabaseAsync()
-        {
-            var dataService = container.GetInstance<IDataService>();
-
-            await dataService.EnsureCreatedAsync();
-            log.Information("Currently we have {0} saved Greetings.", await dataService.GetNumberOfGreetingsAsync());
         }
     }
 }

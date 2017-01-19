@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloCoreClrApp.Data;
@@ -19,25 +18,18 @@ namespace HelloCoreClrApp
         public static void Main(string[] args)
         {
             var configuration = BuildConfiguration();
-            var log = ConfigureSerilog(configuration);
+            ConfigureSerilog(configuration);
             SetupResourceProvider();
 
-            try
-            {
-                Task.WaitAll(
-                    ShutdownHandlerTask.Run(ShutdownCancellationTokenSource),
-                    SetupDatabaseTask.RunAsync(Container),
-                    WebHostTask.Run(configuration, Container, ShutdownCancellationTokenSource.Token),
-                    SystemMonitorTask.Run(ShutdownCancellationTokenSource.Token));
-            }
-            catch (Exception ae)
-            {
-                log.Error(ae, "Shutdown unexpectedly ended");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
+            Task.WaitAll(
+                ShutdownHandlerTask.Run(ShutdownCancellationTokenSource),
+                SetupDatabaseTask.RunAsync(Container));
+
+            Task.WaitAll(
+                WebHostTask.Run(configuration, Container, ShutdownCancellationTokenSource.Token),
+                SystemMonitorTask.Run(ShutdownCancellationTokenSource.Token));
+
+            Log.CloseAndFlush();
         }
 
         private static IConfigurationRoot BuildConfiguration()
@@ -47,13 +39,11 @@ namespace HelloCoreClrApp
                 .Build();
         }
 
-        private static ILogger ConfigureSerilog(IConfiguration configuration)
+        private static void ConfigureSerilog(IConfiguration configuration)
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
-
-            return Log.ForContext<Program>();
         }
 
         private static void SetupResourceProvider()

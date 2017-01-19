@@ -38,7 +38,7 @@ namespace HelloCoreClrApp.SystemMonitor
                     current + $"{ByteSize.FromBytes(drive.AvailableFreeSpace).GigaBytes:0.00GB} of " +
                     $"{ByteSize.FromBytes(drive.TotalSize).GigaBytes:0.00GB} free for " +
                     $"{drive.Name}{Environment.NewLine}");
-            Log.Information("Available disk space:{0}{1}", Environment.NewLine, summary);
+            Log.Information("Available disk space:{0}{1}", Environment.NewLine, summary.TrimEnd());
         }
 
         private static async Task Delay(CancellationToken token)

@@ -2,24 +2,15 @@
 using System.Reflection;
 using System.Runtime.Loader;
 using System.Threading;
-using System.Threading.Tasks;
 using Serilog;
 
 namespace HelloCoreClrApp
 {
-    public class ShutdownHandlerTask
+    public class ShutdownHandler
     {
-        private static readonly ILogger Log = Serilog.Log.ForContext<ShutdownHandlerTask>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<ShutdownHandler>();
 
-        public static Task Run(CancellationTokenSource shutdownCancellationTokenSource)
-        {
-            return Task.Run(() =>
-            {
-                Configure(shutdownCancellationTokenSource);
-            }, shutdownCancellationTokenSource.Token);
-        }
-
-        private static void Configure(CancellationTokenSource shutdownCancellationTokenSource)
+        public static void Configure(CancellationTokenSource shutdownCancellationTokenSource)
         {
             Log.Information("Setup shutdown handler.");
             var loadContext = AssemblyLoadContext.GetLoadContext(Assembly.GetEntryAssembly());

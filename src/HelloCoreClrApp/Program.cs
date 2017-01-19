@@ -22,8 +22,8 @@ namespace HelloCoreClrApp
             SetupResourceProvider();
 
             Task.WaitAll(
-                ShutdownHandlerTask.Run(ShutdownCancellationTokenSource),
-                SetupDatabaseTask.RunAsync(Container));
+                ConfigureShutdownHandler(),
+                SetupDatabase());
 
             Task.WaitAll(
                 WebHostTask.Run(configuration, Container, ShutdownCancellationTokenSource.Token),
@@ -50,6 +50,18 @@ namespace HelloCoreClrApp
         {
             var resourceProvider = new ResourceProvider(Container);
             resourceProvider.SetupApplicationComponents();
+        }
+
+        private static Task ConfigureShutdownHandler()
+        {
+            return Task.Run(() =>
+                ShutdownHandler.Configure(ShutdownCancellationTokenSource));
+        }
+
+        private static Task SetupDatabase()
+        {
+            return Container.GetInstance<SetupDatabaseTask>()
+                .RunAsync();
         }
     }
 }

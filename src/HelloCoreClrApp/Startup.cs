@@ -24,9 +24,12 @@ namespace HelloCoreClrApp
         private readonly Container container = new Container();
         private const string ApiVersion = "v1";
         
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             log.Information("Starting up in {0} mode.", env.EnvironmentName);
+
+            //add SeriLog to ASP.NET Core
+            loggerFactory.AddSerilog();
 
             SetupSimpleInjector();
             SetupDatabaseAsync().Wait();
@@ -96,12 +99,9 @@ namespace HelloCoreClrApp
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         // Configure is called after ConfigureServices is called.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
             log.Information("Configuring request pipeline.");
-            
-            //add SeriLog to ASP.NET Core
-            loggerFactory.AddSerilog();
 
             // Serve the default file, if present.
             app.UseDefaultFiles();

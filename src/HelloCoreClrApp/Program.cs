@@ -1,79 +1,65 @@
 using System;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Loader;
 using System.Threading;
-using Microsoft.AspNetCore.Hosting;
+using System.Threading.Tasks;
+using HelloCoreClrApp.Data;
+using HelloCoreClrApp.SystemMonitor;
+using HelloCoreClrApp.WebApi;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using SimpleInjector;
 
 namespace HelloCoreClrApp
 {
     public class Program
     {
-        private static readonly CancellationTokenSource ShutdownCancellationTokenSource = new CancellationTokenSource();  
+        private static readonly CancellationTokenSource ShutdownCancellationTokenSource = new CancellationTokenSource();
+        private static readonly Container Container = new Container();
 
         // Entry point for the application.
         public static void Main(string[] args)
         {
-            var configuration = new ConfigurationBuilder()
+            var configuration = BuildConfiguration();
+            var log = ConfigureSerilog(configuration);
+            SetupResourceProvider();
+
+            try
+            {
+                Task.WaitAll(
+                    ShutdownHandlerTask.Run(ShutdownCancellationTokenSource),
+                    SetupDatabaseTask.RunAsync(Container),
+                    WebHostTask.Run(configuration, Container, ShutdownCancellationTokenSource.Token),
+                    SystemMonitorTask.Run(ShutdownCancellationTokenSource.Token));
+            }
+            catch (Exception ae)
+            {
+                log.Error(ae, "Shutdown unexpectedly ended");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+        }
+
+        private static IConfigurationRoot BuildConfiguration()
+        {
+            return new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
-
-            ConfigureSerilog(configuration);
-            ConfigureShutdownHandler();
-
-            var builder = new WebHostBuilder()
-                .UseConfiguration(configuration)
-                .UseKestrel()
-                .UseStartup<Startup>();
-            
-#if DEBUG
-            var log = Log.ForContext<Program>();
-            var webroot = FindWebRoot();
-            log.Warning("Running in Debug mode, hosting static files from '{0}'.", webroot);
-            builder.UseWebRoot(webroot);
-#endif
-                
-            var host = builder.Build();
-            host.Run(ShutdownCancellationTokenSource.Token);
         }
-        
-        private static void ConfigureSerilog(IConfiguration configuration)
+
+        private static ILogger ConfigureSerilog(IConfiguration configuration)
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
+
+            return Log.ForContext<Program>();
         }
 
-        private static void ConfigureShutdownHandler()
+        private static void SetupResourceProvider()
         {
-            var loadContext = AssemblyLoadContext.GetLoadContext(Assembly.GetEntryAssembly());
-            loadContext.Unloading += ctx =>
-                Cancel("Application unloading, probably SIGTERM");
-            Console.CancelKeyPress += (s, e) =>
-            {
-                e.Cancel = true;
-                Cancel(e.SpecialKey == ConsoleSpecialKey.ControlC ? "SIGINT" : "SIGQUIT");
-            };
-        }
-
-        private static void Cancel(string signal)
-        {
-            var log = Log.ForContext<Program>();
-            log.Information("{0} received, initiating shutdown.", signal);
-            if (!ShutdownCancellationTokenSource.IsCancellationRequested)
-                ShutdownCancellationTokenSource.Cancel();
-            Log.CloseAndFlush();
-        }
-        
-        private static string FindWebRoot()
-        {
-            var location = Assembly.GetEntryAssembly().Location;
-            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
-                            
-            var webroot = Path.Combine(location, "..", "..", "..", "..", "..", "ui", "wwwroot");
-            return Path.GetFullPath(webroot);
+            var resourceProvider = new ResourceProvider(Container);
+            resourceProvider.SetupApplicationComponents();
         }
     }
 }

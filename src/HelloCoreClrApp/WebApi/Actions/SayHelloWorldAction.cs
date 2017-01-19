@@ -7,7 +7,7 @@ namespace HelloCoreClrApp.WebApi.Actions
 {
     public class SayHelloWorldAction : ISayHelloWorldAction
     {
-        private readonly ILogger log = Log.ForContext<SayHelloWorldAction>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<SayHelloWorldAction>();
         private readonly IDataService dataService;
 
         public SayHelloWorldAction(IDataService dataService)
@@ -17,7 +17,7 @@ namespace HelloCoreClrApp.WebApi.Actions
 
         public async Task<SayHelloWorldResponse> ExecuteAsync(string name)
         {
-            log.Information("Calculating result.");
+            Log.Information("Calculating result.");
 
             // VS Code doesn't know yet about referenced F# project, that why intellisense complains :(, though it builds just fine. 
             var res = GetHelloWorldRule.Process(name);
@@ -30,7 +30,7 @@ namespace HelloCoreClrApp.WebApi.Actions
 
         private async Task SaveGreetingAsync(string greeting)
         {
-            log.Information("Save greeting.");
+            Log.Information("Save greeting.");
             await dataService.SaveGreetingAsync(greeting);
         }
     }

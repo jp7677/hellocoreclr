@@ -8,7 +8,7 @@ namespace HelloCoreClrApp.WebApi
     [Route("api")]
     public class HelloWorldController
     {
-        private readonly ILogger log = Log.ForContext<HelloWorldController>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<HelloWorldController>();
         private readonly IActionFactory actionFactory;
         
         public HelloWorldController(IActionFactory actionFactory)
@@ -20,7 +20,7 @@ namespace HelloCoreClrApp.WebApi
         [HttpGet]
         public async Task<IActionResult> SayHelloWorldAsync(string name)
         {
-            log.Information("'sayhelloworld' Request received with '{0}'.", name);
+            Log.Information("'sayhelloworld' Request received with '{0}'.", name);
             
             var action = actionFactory.CreateSayHelloWorldAction();
             var response = await action.ExecuteAsync(name);
@@ -32,7 +32,7 @@ namespace HelloCoreClrApp.WebApi
         [HttpGet]
         public async Task<IActionResult> GetLastTenGreetingsAsync()
         {
-            log.Information("'greetings' Request received.");
+            Log.Information("'greetings' Request received.");
             
             var action = actionFactory.CreateGetLastTenGreetingsAction();
             var response = await action.ExecuteAsync();
@@ -47,7 +47,7 @@ namespace HelloCoreClrApp.WebApi
         [HttpGet]
         public async Task<IActionResult> GetTotalNumberOfGreetingsAsync()
         {
-            log.Information("'greetings/count' Request received.");
+            Log.Information("'greetings/count' Request received.");
             
             var action = actionFactory.CreateGetTotalNumberOfGreetingsAction();
             var response = await action.ExecuteAsync();

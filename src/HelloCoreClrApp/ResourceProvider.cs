@@ -10,7 +10,7 @@ namespace HelloCoreClrApp
 {
     public class ResourceProvider : IResourceProvider
     {
-        private readonly ILogger log = Log.ForContext<ResourceProvider>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<ResourceProvider>();
         private readonly Container container;
 
         public ResourceProvider(Container container)
@@ -20,7 +20,7 @@ namespace HelloCoreClrApp
 
         public void SetupApplicationComponents()
         {
-            log.Information("Setup application components.");
+            Log.Information("Setup application components.");
             container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();
 
             container.RegisterSingleton<IResourceProvider>(this);

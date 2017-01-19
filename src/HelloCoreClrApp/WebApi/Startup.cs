@@ -16,12 +16,12 @@ namespace HelloCoreClrApp.WebApi
     {
         private const string ApiVersion = "v1";
 
-        private readonly Serilog.ILogger log = Log.ForContext<Startup>();
+        private static readonly Serilog.ILogger Log = Serilog.Log.ForContext<Startup>();
         public static Container Container { private get; set; }
 
         public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            log.Information("Starting up in {0} mode.", env.EnvironmentName);
+            Log.Information("Starting up in {0} mode.", env.EnvironmentName);
 
             //add SeriLog to ASP.NET Core
             loggerFactory.AddSerilog();
@@ -30,7 +30,7 @@ namespace HelloCoreClrApp.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            log.Information("Configuring services.");
+            Log.Information("Configuring services.");
 
             // Add framework services.
             services.AddMvc();
@@ -59,7 +59,7 @@ namespace HelloCoreClrApp.WebApi
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app)
         {
-            log.Information("Configuring request pipeline.");
+            Log.Information("Configuring request pipeline.");
 
             // Serve the default file, if present.
             app.UseDefaultFiles();

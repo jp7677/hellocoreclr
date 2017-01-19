@@ -26,7 +26,7 @@ namespace HelloCoreClrApp
                 SetupDatabase());
 
             Task.WaitAll(
-                WebHostTask.Run(configuration, Container, ShutdownCancellationTokenSource.Token),
+                WebHostTask.Run(configuration, ShutdownCancellationTokenSource.Token),
                 SystemMonitorTask.Run(ShutdownCancellationTokenSource.Token));
 
             Log.CloseAndFlush();

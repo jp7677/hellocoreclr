@@ -35,6 +35,8 @@ namespace HelloCoreClrApp
             container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();
 
             container.Verify();
+
+            Startup.Container = container;
         }
 
         public virtual DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()

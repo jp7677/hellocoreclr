@@ -13,18 +13,17 @@ namespace HelloCoreClrApp.WebApi
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<Startup>();
 
-        public static Task Run(IConfiguration configuration, Container container, CancellationToken token)
+        public static Task Run(IConfiguration configuration, CancellationToken token)
         {
-            var host = BuildWebHost(configuration, container);
+            var host = BuildWebHost(configuration);
             return Task.Run(() =>
             {
                 host.Run(token);
             }, token);
         }
 
-        private static IWebHost BuildWebHost(IConfiguration configuration, Container container)
+        private static IWebHost BuildWebHost(IConfiguration configuration)
         {
-            Startup.Container = container;
             var builder = new WebHostBuilder()
                 .UseConfiguration(configuration)
                 .UseKestrel()

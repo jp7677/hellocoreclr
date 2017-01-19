@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
@@ -7,12 +8,12 @@ namespace HelloCoreClrApp.Health
 {
     public class SystemMonitor
     {
-        private readonly IMonitor diskMonitor;
+        private readonly IEnumerable<IMonitor> monitors;
         private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitor>();
 
-        public SystemMonitor(IMonitor diskMonitor)
+        public SystemMonitor(IEnumerable<IMonitor> monitors)
         {
-            this.diskMonitor = diskMonitor;
+            this.monitors = monitors;
         }
 
         public Task Run(CancellationToken token)
@@ -27,7 +28,9 @@ namespace HelloCoreClrApp.Health
         {
             while (!token.IsCancellationRequested)
             {
-                diskMonitor.LogUsage();
+                foreach (var monitor in monitors)
+                    monitor.LogUsage();
+
                 await Delay(token);
             }
             Log.Information("System monitor shutdown");

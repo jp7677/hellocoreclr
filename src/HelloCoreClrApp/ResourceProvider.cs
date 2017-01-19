@@ -35,7 +35,7 @@ namespace HelloCoreClrApp
             container.Register<IGetLastTenGreetingsAction, GetLastTenHelloWorldsAction>();
             container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();
 
-            container.Register<IMonitor, DiskMonitor>();
+            container.RegisterCollection<IMonitor>(new [] {typeof(DiskMonitor), typeof(CpuMonitor)});
 
             container.Verify();
 

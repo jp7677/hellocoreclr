@@ -3,7 +3,7 @@ using Xunit;
 
 namespace HelloCoreClrApp.Test.Health
 {
-    public class DisMonitorTest
+    public class DiskMonitorTest
     {
         [Fact]
         public void RunTest()

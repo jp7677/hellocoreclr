@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Serilog;
 
 namespace HelloCoreClrApp.Health
@@ -9,9 +10,13 @@ namespace HelloCoreClrApp.Health
 
         public void LogUsage()
         {
-            Log.Information("Total processor time: {0} {1}",
-                Process.GetCurrentProcess().ProcessName,
-                Process.GetCurrentProcess().TotalProcessorTime);
+            var runningTime = DateTime.Now - Process.GetCurrentProcess().StartTime;
+            var usage = (double)Process.GetCurrentProcess().TotalProcessorTime.Ticks / runningTime.Ticks
+                        / Environment.ProcessorCount;
+            usage = Math.Round(usage * 100, 2);
+
+            Log.Information("Processor usage since application start:{0}",
+                $"{Environment.NewLine}{usage}% for {Process.GetCurrentProcess().ProcessName}");
         }
     }
 }

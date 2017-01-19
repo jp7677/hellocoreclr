@@ -3,13 +3,14 @@ using HelloCoreClrApp.Data;
 using HelloCoreClrApp.Data.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HelloCoreClrApp.Test
 {
     public class TestserverStartup : Startup
     {
-        public TestserverStartup(IHostingEnvironment env)
-            : base(env)
+        public TestserverStartup(IHostingEnvironment env, ILoggerFactory loggerFactory)
+            : base(env, loggerFactory)
         {
         }
         

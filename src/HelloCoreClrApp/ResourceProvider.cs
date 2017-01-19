@@ -1,4 +1,5 @@
 using HelloCoreClrApp.Data;
+using HelloCoreClrApp.Health;
 using HelloCoreClrApp.WebApi;
 using HelloCoreClrApp.WebApi.Actions;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,8 @@ namespace HelloCoreClrApp
             container.Register<ISayHelloWorldAction, SayHelloWorldAction>();
             container.Register<IGetLastTenGreetingsAction, GetLastTenHelloWorldsAction>();
             container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();
+
+            container.Register<IMonitor, DiskMonitor>();
 
             container.Verify();
 

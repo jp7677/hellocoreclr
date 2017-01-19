@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using HelloCoreClrApp.Data;
-using HelloCoreClrApp.SystemMonitor;
+using HelloCoreClrApp.Health;
 using HelloCoreClrApp.WebApi;
 using Microsoft.Extensions.Configuration;
 using Serilog;
@@ -27,7 +27,7 @@ namespace HelloCoreClrApp
 
             Task.WaitAll(
                 WebHostTask.Run(configuration, ShutdownCancellationTokenSource.Token),
-                SystemMonitorTask.Run(ShutdownCancellationTokenSource.Token));
+                RunSystemMonitor(ShutdownCancellationTokenSource.Token));
 
             Log.CloseAndFlush();
         }
@@ -62,6 +62,12 @@ namespace HelloCoreClrApp
         {
             return Container.GetInstance<SetupDatabaseTask>()
                 .RunAsync();
+        }
+
+        private static Task RunSystemMonitor(CancellationToken token)
+        {
+            return Container.GetInstance<SystemMonitor>()
+                .Run(token);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using HelloCoreClrApp.SystemMonitor;
 using Serilog;
 
 namespace HelloCoreClrApp.Data
@@ -7,7 +6,7 @@ namespace HelloCoreClrApp.Data
     public class SetupDatabaseTask
     {
         private readonly IDataService dataService;
-        private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitorTask>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<SetupDatabaseTask>();
 
         public SetupDatabaseTask(IDataService dataService)
         {

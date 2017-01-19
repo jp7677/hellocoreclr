@@ -13,6 +13,7 @@ install:
 build_script:
 - dotnet restore
 - dotnet build src\HelloCoreClrApp\project.json
+- dotnet build test\HelloCoreClrApp.Test\project.json
 
 - cd %APPVEYOR_BUILD_FOLDER%\ui
 - npm install

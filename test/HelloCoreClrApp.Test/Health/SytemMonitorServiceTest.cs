@@ -3,22 +3,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using FakeItEasy;
 using FluentAssertions;
-using HelloCoreClrApp.WebApi;
-using Microsoft.Extensions.Configuration;
-using SimpleInjector;
+using HelloCoreClrApp.Health;
 using Xunit;
 
-namespace HelloCoreClrApp.Test.WebApi
+namespace HelloCoreClrApp.Test.Health
 {
-    public class WebHostTaskTest
+    public class SytemMonitorServiceTest
     {
         [Fact]
         public async Task ShouldStartAndStopTestAsync()
         {
-            Startup.Container = new Container();
-            var conf = A.Fake<IConfiguration>();
             var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
-            await WebHostTask.Run(conf, cts.Token);
+            var monitor = A.Fake<IMonitor>();
+            var sut = new SystemMonitorService(new []{monitor});
+
+            await sut.Run(cts.Token);
 
             cts.IsCancellationRequested.Should().BeTrue();
         }

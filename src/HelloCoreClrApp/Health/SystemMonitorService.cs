@@ -6,12 +6,12 @@ using Serilog;
 
 namespace HelloCoreClrApp.Health
 {
-    public class SystemMonitor
+    public class SystemMonitorService
     {
         private readonly IEnumerable<IMonitor> monitors;
-        private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitor>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitorService>();
 
-        public SystemMonitor(IEnumerable<IMonitor> monitors)
+        public SystemMonitorService(IEnumerable<IMonitor> monitors)
         {
             this.monitors = monitors;
         }

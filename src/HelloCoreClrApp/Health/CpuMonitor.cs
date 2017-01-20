@@ -6,7 +6,7 @@ namespace HelloCoreClrApp.Health
 {
     public class CpuMonitor: IMonitor
     {
-        private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitor>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<CpuMonitor>();
 
         public void LogUsage()
         {

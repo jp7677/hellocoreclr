@@ -8,7 +8,7 @@ namespace HelloCoreClrApp.Health
 {
     public class DiskMonitor : IMonitor
     {
-        private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitor>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<DiskMonitor>();
 
         public void LogUsage()
         {

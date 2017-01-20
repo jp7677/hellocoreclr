@@ -8,11 +8,11 @@ using Serilog;
 
 namespace HelloCoreClrApp.WebApi
 {
-    public class WebHostTask
+    public class WebHostService
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<Startup>();
 
-        public static Task Run(IConfiguration configuration, CancellationToken token)
+        public Task Run(IConfiguration configuration, CancellationToken token)
         {
             var host = BuildWebHost(configuration);
             return Task.Run(() =>

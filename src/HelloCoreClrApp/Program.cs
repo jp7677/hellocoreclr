@@ -26,8 +26,8 @@ namespace HelloCoreClrApp
                 SetupDatabase());
 
             Task.WaitAll(
-                WebHostTask.Run(configuration, ShutdownCancellationTokenSource.Token),
-                RunSystemMonitor(ShutdownCancellationTokenSource.Token));
+                RunWebHostService(configuration, ShutdownCancellationTokenSource.Token),
+                RunSystemMonitorService(ShutdownCancellationTokenSource.Token));
 
             Log.CloseAndFlush();
         }
@@ -64,9 +64,15 @@ namespace HelloCoreClrApp
                 .RunAsync();
         }
 
-        private static Task RunSystemMonitor(CancellationToken token)
+        private static Task RunWebHostService(IConfiguration configuration, CancellationToken token)
         {
-            return Container.GetInstance<SystemMonitor>()
+            return Container.GetInstance<WebHostService>()
+                .Run(configuration, token);
+        }
+
+        private static Task RunSystemMonitorService(CancellationToken token)
+        {
+            return Container.GetInstance<SystemMonitorService>()
                 .Run(token);
         }
     }

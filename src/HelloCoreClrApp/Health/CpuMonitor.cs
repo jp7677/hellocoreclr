@@ -15,7 +15,7 @@ namespace HelloCoreClrApp.Health
                         / Environment.ProcessorCount;
             usage = Math.Round(usage * 100, 2);
 
-            Log.Information("Processor usage since application start:{0}",
+            Log.Information("CPU time since application start:{0}",
                 $"{Environment.NewLine}{usage}% for {Process.GetCurrentProcess().ProcessName}");
         }
     }

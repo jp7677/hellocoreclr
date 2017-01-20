@@ -18,7 +18,8 @@ namespace HelloCoreClrApp.Test.WebApi
             Startup.Container = new Container();
             var conf = A.Fake<IConfiguration>();
             var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
-            await WebHostService.Run(conf, cts.Token);
+            var sut = new WebHostService();
+            await sut.Run(conf, cts.Token);
 
             cts.IsCancellationRequested.Should().BeTrue();
         }

@@ -13,13 +13,18 @@ namespace HelloCoreClrApp
         public static void Configure(CancellationTokenSource shutdownCancellationTokenSource)
         {
             Log.Information("Setup shutdown handler.");
-            var loadContext = AssemblyLoadContext.GetLoadContext(Assembly.GetEntryAssembly());
-            loadContext.Unloading += ctx =>
-                Cancel("Application unloading, probably SIGTERM", shutdownCancellationTokenSource);
+
             Console.CancelKeyPress += (s, e) =>
             {
                 e.Cancel = true;
                 Cancel(e.SpecialKey == ConsoleSpecialKey.ControlC ? "SIGINT" : "SIGQUIT", shutdownCancellationTokenSource);
+            };
+
+            var loadContext = AssemblyLoadContext.GetLoadContext(Assembly.GetEntryAssembly());
+            loadContext.Unloading += ctx =>
+            {
+                Cancel("Application unloading, probably SIGTERM", shutdownCancellationTokenSource);
+                Serilog.Log.CloseAndFlush();
             };
         }
 

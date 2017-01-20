@@ -28,8 +28,6 @@ namespace HelloCoreClrApp
             Task.WaitAll(
                 RunWebHostService(configuration, ShutdownCancellationTokenSource.Token),
                 RunSystemMonitorService(ShutdownCancellationTokenSource.Token));
-
-            Log.CloseAndFlush();
         }
 
         private static IConfigurationRoot BuildConfiguration()

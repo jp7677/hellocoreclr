@@ -8,7 +8,7 @@ namespace HelloCoreClrApp.Test.Data
     public class SetupDatabaseTaskTest
     {
         [Fact]
-        public async Task RunAsyncTest()
+        public async Task ShouldRunAsyncTest()
         {
             var dataservice = A.Fake<IDataService>();
             var sut = new SetupDatabaseTask(dataservice);

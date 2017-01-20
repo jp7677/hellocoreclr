@@ -6,7 +6,7 @@ namespace HelloCoreClrApp.Test.Health
     public class CpuMonitorTest
     {
         [Fact]
-        public void RunTest()
+        public void ShouldLogSomethingTest()
         {
             var sut = new CpuMonitor();
 

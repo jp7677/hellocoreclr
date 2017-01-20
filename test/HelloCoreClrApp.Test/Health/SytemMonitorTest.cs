@@ -11,20 +11,15 @@ namespace HelloCoreClrApp.Test.Health
     public class SytemMonitorTest
     {
         [Fact]
-        public async void RunTestAsync()
+        public async Task ShouldStartAndStopTestAsync()
         {
-            var testCts = new CancellationTokenSource(TimeSpan.FromSeconds(1));
+            var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
             var monitor = A.Fake<IMonitor>();
-            var cts = new CancellationTokenSource();
             var sut = new SystemMonitor(new []{monitor});
 
-            var task = sut.Run(cts.Token);
+            await sut.Run(cts.Token);
 
-            await Task.Delay(TimeSpan.FromMilliseconds(100), testCts.Token);
-            cts.Cancel();
-            await Task.Delay(TimeSpan.FromMilliseconds(100), testCts.Token);
-
-            task.Status.Should().Be(TaskStatus.RanToCompletion);
+            cts.IsCancellationRequested.Should().BeTrue();
         }
     }
 }

@@ -1,10 +1,12 @@
 using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
+using HelloCoreClrApp.WebApi;
 using HelloCoreClrApp.WebApi.Messages;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
+using SimpleInjector;
 using Xunit;
 
 namespace HelloCoreClrApp.Test
@@ -15,7 +17,12 @@ namespace HelloCoreClrApp.Test
 
         public E2ETest()
         {
-            server = new TestServer(new WebHostBuilder().UseStartup<TestserverStartup>());
+            var container = new Container();
+            var resourceProvider = new TestResourceProvider(container);
+            resourceProvider.SetupApplicationComponents();
+
+            Startup.Container = container;
+            server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
         }
 
         [Fact]

@@ -1,23 +1,22 @@
 using System;
 using HelloCoreClrApp.Data;
 using HelloCoreClrApp.Data.Entities;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using SimpleInjector;
 
 namespace HelloCoreClrApp.Test
 {
-    public class TestserverStartup : Startup
+    public class TestResourceProvider : ResourceProvider
     {
-        public TestserverStartup(IHostingEnvironment env, ILoggerFactory loggerFactory)
-            : base(env, loggerFactory)
+        public TestResourceProvider(Container container)
+            : base(container)
         {
         }
-        
+
         public override DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()
         {
             var builder = new DbContextOptionsBuilder<GreetingDbContext>()
-                .UseInMemoryDatabase("TestserverStartup");
+                .UseInMemoryDatabase("TestResourceProvider");
 
             SeedDatabase(builder.Options);
 

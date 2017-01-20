@@ -19,7 +19,7 @@ namespace HelloCoreClrApp
             this.container = container;
         }
 
-        public void SetupApplicationComponents()
+        public void RegisterApplicationComponents()
         {
             Log.Information("Setup application components.");
             container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();

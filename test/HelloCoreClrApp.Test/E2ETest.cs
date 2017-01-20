@@ -19,7 +19,7 @@ namespace HelloCoreClrApp.Test
         {
             var container = new Container();
             var resourceProvider = new TestResourceProvider(container);
-            resourceProvider.SetupApplicationComponents();
+            resourceProvider.RegisterApplicationComponents();
 
             Startup.Container = container;
             server = new TestServer(new WebHostBuilder().UseStartup<Startup>());

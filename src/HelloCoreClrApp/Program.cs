@@ -18,8 +18,8 @@ namespace HelloCoreClrApp
         public static void Main(string[] args)
         {
             var configuration = BuildConfiguration();
-            ConfigureSerilog(configuration);
-            SetupResourceProvider();
+            ConfigureLogging(configuration);
+            SetupResources();
 
             Task.WaitAll(
                 ConfigureShutdownHandler(),
@@ -37,17 +37,17 @@ namespace HelloCoreClrApp
                 .Build();
         }
 
-        private static void ConfigureSerilog(IConfiguration configuration)
+        private static void ConfigureLogging(IConfiguration configuration)
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
         }
 
-        private static void SetupResourceProvider()
+        private static void SetupResources()
         {
             var resourceProvider = new ResourceProvider(Container);
-            resourceProvider.SetupApplicationComponents();
+            resourceProvider.RegisterApplicationComponents();
         }
 
         private static Task ConfigureShutdownHandler()

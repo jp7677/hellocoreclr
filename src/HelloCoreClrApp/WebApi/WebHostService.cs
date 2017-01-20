@@ -10,10 +10,11 @@ namespace HelloCoreClrApp.WebApi
 {
     public class WebHostService
     {
-        private static readonly ILogger Log = Serilog.Log.ForContext<Startup>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<WebHostService>();
 
         public Task Run(IConfiguration configuration, CancellationToken token)
         {
+            Log.Information("Starting Web host.");
             var host = BuildWebHost(configuration);
             return Task.Run(() =>
             {

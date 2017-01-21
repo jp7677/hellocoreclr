@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Humanizer;
 using Serilog;
 
 namespace HelloCoreClrApp.Health
@@ -22,7 +23,10 @@ namespace HelloCoreClrApp.Health
             return Task.Run(async () =>
             {
                 await Monitor(token);
-            }, token);
+            }, token)
+            .ContinueWith(t =>
+                Log.Information("System monitor {0}",t.Status.Humanize().Transform(To.LowerCase))
+            );
         }
 
         private async Task Monitor(CancellationToken token)

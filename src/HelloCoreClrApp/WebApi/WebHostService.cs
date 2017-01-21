@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Humanizer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
@@ -19,7 +20,9 @@ namespace HelloCoreClrApp.WebApi
             return Task.Run(() =>
             {
                 host.Run(token);
-            }, token);
+            }, token).ContinueWith(t =>
+                Log.Information("Web host {0}",t.Status.Humanize().Transform(To.LowerCase))
+            );
         }
 
         private static IWebHost BuildWebHost(IConfiguration configuration)

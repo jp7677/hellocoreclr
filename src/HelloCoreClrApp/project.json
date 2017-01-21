@@ -17,7 +17,7 @@
           "type": "platform"
         },
         "HelloCoreClrApp.Rules": {
-          "version": "0.1.0-*",
+          "version": "0.1.0",
           "target": "project"
         },
         "System.IO.FileSystem.DriveInfo": "4.3.0",

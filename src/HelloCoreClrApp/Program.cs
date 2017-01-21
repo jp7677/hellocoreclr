@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using HelloCoreClrApp.Data;
 using HelloCoreClrApp.Health;
 using HelloCoreClrApp.WebApi;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using SimpleInjector;
@@ -13,6 +14,7 @@ namespace HelloCoreClrApp
     {
         private static readonly CancellationTokenSource ShutdownCancellationTokenSource = new CancellationTokenSource();
         private static readonly Container Container = new Container();
+        private const string SqliteConnectionString = "Filename=./helloworld.db";
 
         // Entry point for the application.
         public static void Main(string[] args)
@@ -46,8 +48,12 @@ namespace HelloCoreClrApp
 
         private static void SetupResources()
         {
-            var resourceProvider = new ResourceProvider(Container);
-            resourceProvider.RegisterApplicationComponents();
+            var componentRegistrar = new ComponentRegistrar(Container)
+            {
+                DatabaseOptionsBuilder = new DbContextOptionsBuilder<GreetingDbContext>()
+                    .UseSqlite(SqliteConnectionString)
+            };
+            componentRegistrar.RegisterApplicationComponents();
         }
 
         private static Task ConfigureShutdownHandler()

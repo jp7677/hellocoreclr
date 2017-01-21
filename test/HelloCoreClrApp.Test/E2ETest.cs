@@ -1,10 +1,14 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
+using HelloCoreClrApp.Data;
+using HelloCoreClrApp.Data.Entities;
 using HelloCoreClrApp.WebApi;
 using HelloCoreClrApp.WebApi.Messages;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SimpleInjector;
 using Xunit;
@@ -18,11 +22,34 @@ namespace HelloCoreClrApp.Test
         public E2ETest()
         {
             var container = new Container();
-            var resourceProvider = new TestResourceProvider(container);
-            resourceProvider.RegisterApplicationComponents();
+            var componentRegistrar = new ComponentRegistrar(container)
+            {
+                DatabaseOptionsBuilder = CreateDatabaseOptions()
+            };
+            componentRegistrar.RegisterApplicationComponents();
 
             Startup.Container = container;
             server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+        }
+
+        private static DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()
+        {
+            var builder = new DbContextOptionsBuilder<GreetingDbContext>()
+                .UseInMemoryDatabase("E2ETest");
+
+            SeedDatabase(builder.Options);
+
+            return builder;
+        }
+
+        private static void SeedDatabase(DbContextOptions options)
+        {
+            using (var db = new GreetingDbContext(options))
+            {
+                db.Greetings.Add(new Greeting{Name = "First Greeting", TimestampUtc = DateTime.Now.ToUniversalTime()});
+                db.Greetings.Add(new Greeting{Name = "Second Greeting", TimestampUtc = DateTime.Now.ToUniversalTime()});
+                db.SaveChanges();
+            }
         }
 
         [Fact]

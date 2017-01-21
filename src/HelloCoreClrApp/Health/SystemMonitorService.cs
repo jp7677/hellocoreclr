@@ -25,8 +25,8 @@ namespace HelloCoreClrApp.Health
                 await Monitor(token);
             }, token)
             .ContinueWith(t =>
-                Log.Information("System monitor {0}",t.Status.Humanize().Transform(To.LowerCase))
-            );
+                Log.Information("System monitor {0}",t.Status.Humanize().Transform(To.LowerCase)),
+                TaskContinuationOptions.None);
         }
 
         private async Task Monitor(CancellationToken token)

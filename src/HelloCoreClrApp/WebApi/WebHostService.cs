@@ -21,8 +21,8 @@ namespace HelloCoreClrApp.WebApi
             {
                 host.Run(token);
             }, token).ContinueWith(t =>
-                Log.Information("Web host {0}",t.Status.Humanize().Transform(To.LowerCase))
-            );
+                Log.Information("Web host {0}",t.Status.Humanize().Transform(To.LowerCase)),
+                TaskContinuationOptions.None);
         }
 
         private static IWebHost BuildWebHost(IConfiguration configuration)

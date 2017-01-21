@@ -1,4 +1,5 @@
 {
+  "copyright": "2017 Jens Peters",
   "publishOptions": {
     "include": "wwwroot"
   },

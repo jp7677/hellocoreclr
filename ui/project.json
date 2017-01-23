@@ -4,19 +4,16 @@
     "include": "wwwroot"
   },
 
-  "buildOptions": {
-    "outputName": "HelloCoreClrApp.Ui"
-  },
   "exclude": ["node_modules/**", "typings/**","custom_typings/**"],
 
-  "dependencies": {
-      "Microsoft.NETCore.App": {  
-        "version": "1.1.0",
-        "type": "platform"
-      }
-  },
-
   "frameworks": {
-    "netcoreapp1.1": { }
+    "netcoreapp1.1": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {  
+          "version": "1.1.0",
+          "type": "platform"
+        }
+      }
+    }
   }
 }

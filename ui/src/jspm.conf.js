@@ -33,7 +33,7 @@ System.config({
     "aurelia/templating": "npm:aurelia-templating@1.2.0",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "chai": "npm:chai@3.5.0",
-    "fetch": "github:github/fetch@2.0.1",
+    "fetch": "github:github/fetch@2.0.2",
     "font-awesome": "npm:font-awesome@4.7.0",
     "jquery": "npm:jquery@3.1.1",
     "json": "github:systemjs/plugin-json@0.2.3",

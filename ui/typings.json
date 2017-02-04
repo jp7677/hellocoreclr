@@ -1,6 +1,6 @@
 {
   "name": "aspnet",
-  "version": false,
+  "version": "0.0.1",
   "dependencies": {
     "aurelia-binding": "github:aurelia/binding#1.1.0",
     "aurelia-bootstrapper": "github:aurelia/bootstrapper#2.0.0",

@@ -6,7 +6,7 @@ namespace HelloCoreClrApp.WebApi.Actions
 {
     public class GetTotalNumberOfGreetingsAction : IGetTotalNumberOfGreetingsAction
     {
-        private readonly ILogger log = Log.ForContext<SayHelloWorldAction>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<GetTotalNumberOfGreetingsAction>();
         private readonly IDataService dataService;
 
         public GetTotalNumberOfGreetingsAction(IDataService dataService)
@@ -16,10 +16,10 @@ namespace HelloCoreClrApp.WebApi.Actions
 
         public async Task<int> ExecuteAsync()
         {
-            log.Information("Looking for the total count of greetings.");
+            Log.Information("Looking for the total count of greetings.");
             var result = await dataService.GetNumberOfGreetingsAsync();
 
-            log.Information("We have {0} greetings totally.", result);
+            Log.Information("We have {0} greetings totally.", result);
             return result;
         }
     }

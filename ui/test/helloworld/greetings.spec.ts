@@ -11,7 +11,7 @@ function wait() {
 
 describe("Greetings test suite", () => {
 
-    it("should handle a valid response", async() => {
+    it("should handle a valid response", async () => {
         const responses = new Map<string, any>();
         responses.set("greetings/count", "5");
         responses.set("greetings", [
@@ -29,7 +29,7 @@ describe("Greetings test suite", () => {
         chai.expect(sut.savedGreetings.length).to.equal(2);
     });
 
-    it("should handle an error response", async() => {
+    it("should handle an error response", async () => {
         const httpStub = HttpClientStub.error();
         const sut = new Greetings(httpStub);
 

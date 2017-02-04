@@ -1,79 +1,83 @@
-using System;
-using System.IO;
-using System.Reflection;
-using System.Runtime.Loader;
 using System.Threading;
-using Microsoft.AspNetCore.Hosting;
+using System.Threading.Tasks;
+using HelloCoreClrApp.Data;
+using HelloCoreClrApp.Health;
+using HelloCoreClrApp.WebApi;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using SimpleInjector;
 
 namespace HelloCoreClrApp
 {
     public class Program
     {
-        private static readonly CancellationTokenSource ShutdownCancellationTokenSource = new CancellationTokenSource();  
+        private static readonly CancellationTokenSource ShutdownCancellationTokenSource = new CancellationTokenSource();
+        private static readonly Container Container = new Container();
+        private const string SqliteConnectionString = "Filename=./helloworld.db";
 
         // Entry point for the application.
         public static void Main(string[] args)
         {
-            var configuration = new ConfigurationBuilder()
+            var configuration = BuildConfiguration();
+            ConfigureLogging(configuration);
+            SetupResources();
+
+            Task.WaitAll(
+                ConfigureShutdownHandler(),
+                SetupDatabase());
+
+            Task.WaitAll(
+                RunWebHostService(configuration, ShutdownCancellationTokenSource.Token),
+                RunSystemMonitorService(ShutdownCancellationTokenSource.Token));
+        }
+
+        private static IConfigurationRoot BuildConfiguration()
+        {
+            return new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
-
-            ConfigureSerilog(configuration);
-            ConfigureShutdownHandler();
-
-            var builder = new WebHostBuilder()
-                .UseConfiguration(configuration)
-                .UseKestrel()
-                .UseStartup<Startup>();
-            
-#if DEBUG
-            var log = Log.ForContext<Program>();
-            var webroot = FindWebRoot();
-            log.Warning("Running in Debug mode, hosting static files from '{0}'.", webroot);
-            builder.UseWebRoot(webroot);
-#endif
-                
-            var host = builder.Build();
-            host.Run(ShutdownCancellationTokenSource.Token);
         }
-        
-        private static void ConfigureSerilog(IConfiguration configuration)
+
+        private static void ConfigureLogging(IConfiguration configuration)
         {
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
         }
 
-        private static void ConfigureShutdownHandler()
+        private static void SetupResources()
         {
-            var loadContext = AssemblyLoadContext.GetLoadContext(Assembly.GetEntryAssembly());
-            loadContext.Unloading += ctx =>
-                Cancel("Application unloading, probably SIGTERM");
-            Console.CancelKeyPress += (s, e) =>
+            var componentRegistrar = new ComponentRegistrar(Container)
             {
-                e.Cancel = true;
-                Cancel(e.SpecialKey == ConsoleSpecialKey.ControlC ? "SIGINT" : "SIGQUIT");
+                DatabaseOptionsBuilder = new DbContextOptionsBuilder<GreetingDbContext>()
+                    .UseSqlite(SqliteConnectionString)
             };
+            componentRegistrar.RegisterApplicationComponents();
         }
 
-        private static void Cancel(string signal)
+        private static Task ConfigureShutdownHandler()
         {
-            var log = Log.ForContext<Program>();
-            log.Information("{0} received, initiating shutdown.", signal);
-            if (!ShutdownCancellationTokenSource.IsCancellationRequested)
-                ShutdownCancellationTokenSource.Cancel();
-            Log.CloseAndFlush();
+            return Task.Run(() =>
+                ShutdownHandler.Configure(ShutdownCancellationTokenSource));
         }
-        
-        private static string FindWebRoot()
+
+        private static Task SetupDatabase()
         {
-            var location = Assembly.GetEntryAssembly().Location;
-            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
-                            
-            var webroot = Path.Combine(location, "..", "..", "..", "..", "..", "ui", "wwwroot");
-            return Path.GetFullPath(webroot);
+            return Container.GetInstance<SetupDatabaseTask>()
+                .RunAsync();
+        }
+
+        private static Task RunWebHostService(IConfiguration configuration, CancellationToken token)
+        {
+            return Container.GetInstance<WebHostService>()
+                .Run(configuration, token);
+        }
+
+        private static Task RunSystemMonitorService(CancellationToken token)
+        {
+            return Container.GetInstance<SystemMonitorService>()
+                .Run(token);
         }
     }
 }

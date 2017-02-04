@@ -8,7 +8,7 @@ namespace HelloCoreClrApp.WebApi.Actions
 {
     public class GetLastTenHelloWorldsAction : IGetLastTenGreetingsAction
     {
-        private readonly ILogger log = Log.ForContext<SayHelloWorldAction>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<GetLastTenHelloWorldsAction>();
         private readonly IDataService dataService;
 
         public GetLastTenHelloWorldsAction(IDataService dataService)
@@ -18,11 +18,11 @@ namespace HelloCoreClrApp.WebApi.Actions
 
         public async Task<SavedGreeting[]> ExecuteAsync()
         {
-            log.Information("Looking for the last ten greetings.");
+            Log.Information("Looking for the last ten greetings.");
             const int numberOfResults = 10;
             var items = await dataService.GetLastTenGreetingsAsync(numberOfResults);
 
-            log.Information("We are returning {0} greetings.", items.Count());
+            Log.Information("We are returning {0} greetings.", items.Count());
             return items.Select(i => new SavedGreeting {Greeting = i.Name, TimestampUtc = i.TimestampUtc}).ToArray();
         }
     }

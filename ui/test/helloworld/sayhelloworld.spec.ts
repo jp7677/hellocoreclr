@@ -21,7 +21,7 @@ describe("SayHelloWorld test suite", () => {
         chai.expect(sut.greetingText).to.empty;
     });
 
-    it("should handle a valid response", async() => {
+    it("should handle a valid response", async () => {
         const sut = new SayHelloWorld(HttpClientStub.ok({greeting: "Hello World!"}));
         sut.inputText = "Hello";
 
@@ -31,7 +31,7 @@ describe("SayHelloWorld test suite", () => {
         chai.expect(sut.greetingText).to.equal("Hello World!");
     });
 
-    it("should handle an error response", async() => {
+    it("should handle an error response", async () => {
         const sut = new SayHelloWorld(HttpClientStub.error());
         sut.inputText = "Error";
         sut.greetingText = "Hello";

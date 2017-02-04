@@ -6,16 +6,16 @@ before(() => {
   chai.use(chaiAsPromised);
 });
 
-beforeEach(async() => {
+beforeEach(async () => {
     await protractor.browser.loadAndWaitForAureliaPage("/");
 });
 
 describe("HelloWorld app", () => {
-  it("should load completely and have a title", async() => {
+  it("should load completely and have a title", async () => {
     return chai.expect(protractor.browser.getTitle()).to.eventually.be.equal("Say Hello World! | Hello World");
   });
 
-  it("should navigate to greetings", async() => {
+  it("should navigate to greetings", async () => {
     await protractor.element(protractor.by.css('a[href="#/greetings"]')).click();
     // the sleep statement should be replace with
     // await protractor.browser.waitForRouterComplete();

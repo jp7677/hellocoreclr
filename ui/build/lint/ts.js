@@ -21,8 +21,15 @@ exports.fn = (gulp, paths, argv, done) => {
     }
   }
 
+  let lintFiles = [
+    paths.src + '**/*.ts',
+    '!' + paths.jspmPackages,
+    paths.test + '**/*.ts',
+    paths.testE2e + '**/*.ts',
+    '!' + paths.testE2e + 'custom_typings/*.ts']
+
   const tslint = require('gulp-tslint')
-  return gulp.src([paths.src + '**/*.ts', '!' + paths.jspmPackages, paths.test + '**/*.ts', paths.testE2e + '**/*.ts', '!' + paths.testE2e + 'custom_typings/*.ts',])
+  return gulp.src(lintFiles)
     .pipe(tslint({formatter: consoleFormatter}))
     .pipe(tslint.report({emitError: false}))
 }

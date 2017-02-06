@@ -4,7 +4,7 @@ const util = require('gulp-util')
 
 exports.fn = (gulp, paths, argv, done) => {
   if (argv.production) {
-    util.log('Skipping \'' + util.colors.cyan('gulp-tslint') + '\'')
+    util.log('Skipping \'' + util.colors.cyan('lint:ts') + '\'')
     done()
     return
   }

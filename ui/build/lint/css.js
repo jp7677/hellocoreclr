@@ -5,7 +5,7 @@ const path = require('path')
 
 exports.fn = (gulp, paths, argv, done) => {
   if (argv.production) {
-    util.log('Skipping \'' + util.colors.cyan('gulp-stylelint') + '\'')
+    util.log('Skipping \'' + util.colors.cyan('lint:css') + '\'')
     done()
     return
   }

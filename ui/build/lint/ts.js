@@ -22,7 +22,7 @@ exports.fn = (gulp, paths, argv, done) => {
   }
 
   const tslint = require('gulp-tslint')
-  return gulp.src([paths.src + '**/*.ts', paths.test + '**/*.ts', '!' + paths.jspmPackages])
+  return gulp.src([paths.src + '**/*.ts', '!' + paths.jspmPackages, paths.test + '**/*.ts', paths.testE2e + '**/*.ts', '!' + paths.testE2e + 'custom_typings/*.ts',])
     .pipe(tslint({formatter: consoleFormatter}))
     .pipe(tslint.report({emitError: false}))
 }

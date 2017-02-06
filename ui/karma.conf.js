@@ -15,7 +15,10 @@ module.exports = (config) => {
         'src/jspm_packages/*.js',
         'src/app/**/*.js',
         'test/stubs.js'
-      ]
+      ],
+      meta: {
+        'src/*': { format: 'register' }
+      }
     },
     proxies: {
       '/node_modules/': '/base/node_modules/',

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "system",
     "sourceMap": false,
     "typeRoots": [
       "./typings/modules",
@@ -12,6 +12,7 @@
     "experimentalDecorators": true
   },
   "exclude": [
+    "test-e2e",
     "wwwroot",
     "node_modules",
     "src/jspm_packages",

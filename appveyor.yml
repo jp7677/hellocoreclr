@@ -11,7 +11,6 @@ install:
 - ps: Install-Product node $env:nodejs_version
 
 build_script:
-- dir C:\projects\hellocoreclr\ui\node_modules\protractor\bin\
 - dotnet restore
 - dotnet build src\HelloCoreClrApp\project.json
 - dotnet build test\HelloCoreClrApp.Test\project.json
@@ -21,6 +20,8 @@ build_script:
 - node_modules\.bin\jspm install
 - node_modules\.bin\typings install
 - node_modules\.bin\gulp
+
+- dir C:\projects\hellocoreclr\ui\node_modules\protractor\bin\
 
 before_test:
 - cd %APPVEYOR_BUILD_FOLDER%

@@ -4,7 +4,7 @@ import "fetch";
 import "bootstrap";
 import "jquery";
 
-import appsettings from "../appsettings.json!";
+import * as appsettings from "../appsettings.json!";
 import {Environment} from "./environment";
 import {Statusbar} from "./statusbar";
 

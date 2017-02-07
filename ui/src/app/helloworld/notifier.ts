@@ -1,4 +1,4 @@
-import toastr from "toastr";
+import * as toastr from "toastr";
 
 export class Notifier {
     constructor() {

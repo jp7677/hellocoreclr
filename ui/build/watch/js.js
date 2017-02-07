@@ -1,6 +1,6 @@
 'use strict'
 
-exports.dep = ['bundle:tscompile']
+exports.dep = ['compile:ts']
 exports.fn = (gulp, paths, argv, done) => {
   const browserSync = require('browser-sync').get('server')
 

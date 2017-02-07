@@ -12,6 +12,7 @@
     "experimentalDecorators": true
   },
   "exclude": [
+    "test-e2e",
     "wwwroot",
     "node_modules",
     "src/jspm_packages",

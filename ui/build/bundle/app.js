@@ -2,7 +2,7 @@
 
 const bundle = require('aurelia-bundler').bundle
 
-exports.dep = ['bundle:tscompile', 'bundle:prepare']
+exports.dep = ['compile:ts', 'bundle:prepare']
 exports.fn = (gulp, paths, argv, done) => {
   return bundle({
     force: true,

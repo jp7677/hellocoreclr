@@ -1,4 +1,4 @@
-import chai from "chai";
+import * as chai from "chai";
 import {Config} from "../src/app/config";
 import {RouterConfigurationStub} from "./stubs";
 

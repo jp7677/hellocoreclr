@@ -11,7 +11,8 @@ ui/src/**/*.js
 ui/src/**/*.js.map
 ui/test/**/*.js
 ui/test/**/*.js.map
-!ui/test/e2e.spec.js
+ui/test-e2e/**/*.js
+ui/test-e2e/**/*.js.map
 **/phantomjsdriver.log
 ui/project.lock.json
 src/HelloCoreClrApp/project.lock.json

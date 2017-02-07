@@ -1,4 +1,4 @@
-import chai from "chai";
+import * as chai from "chai";
 import {Environment} from "../src/app/environment";
 
 describe("Environment test suite", () => {

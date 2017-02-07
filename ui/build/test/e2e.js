@@ -8,9 +8,8 @@ exports.fn = (gulp, paths, argv, done) => {
   let args = ['protractor.conf.js']
 
   let winExt = /^win/.test(process.platform) ? '.cmd' : ''
-  let pkgPath = require.resolve('protractor')
-  let protractorDir = path.resolve(path.join(path.dirname(pkgPath), '..', 'bin'))
-  let protractorBin = path.join(protractorDir, 'protractor' + winExt)
+  let nodeBinDir = path.join('node_modules', '.bin')
+  let protractorBin = path.join(nodeBinDir, 'protractor' + winExt)
 
   let child = childprocess.spawn(protractorBin, args, {
     stdio: 'inherit'

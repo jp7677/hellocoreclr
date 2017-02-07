@@ -11,6 +11,7 @@ install:
 - ps: Install-Product node $env:nodejs_version
 
 build_script:
+- dir C:\projects\hellocoreclr\ui\node_modules\protractor\bin\
 - dotnet restore
 - dotnet build src\HelloCoreClrApp\project.json
 - dotnet build test\HelloCoreClrApp.Test\project.json

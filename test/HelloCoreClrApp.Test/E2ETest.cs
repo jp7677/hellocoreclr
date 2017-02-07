@@ -17,12 +17,12 @@ namespace HelloCoreClrApp.Test
 {
     public class E2ETest
     {
-        private static TestServer server = null;
-        private static object lockObject = new object();
+        private static TestServer server;
+        private static readonly object LockObject = new object();
 
         public E2ETest()
         {
-            lock (lockObject)
+            lock (LockObject)
             {
                 if (server != null)
                     return;

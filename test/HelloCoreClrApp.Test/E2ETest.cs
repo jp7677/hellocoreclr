@@ -17,19 +17,26 @@ namespace HelloCoreClrApp.Test
 {
     public class E2ETest
     {
-        private readonly TestServer server;
+        private static TestServer server = null;
+        private static object lockObject = new object();
 
         public E2ETest()
         {
-            var container = new Container();
-            var componentRegistrar = new ComponentRegistrar(container)
+            lock (lockObject)
             {
-                DatabaseOptionsBuilder = CreateDatabaseOptions()
-            };
-            componentRegistrar.RegisterApplicationComponents();
+                if (server != null)
+                    return;
 
-            Startup.Container = container;
-            server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+                var container = new Container();
+                var componentRegistrar = new ComponentRegistrar(container)
+                {
+                    DatabaseOptionsBuilder = CreateDatabaseOptions()
+                };
+                componentRegistrar.RegisterApplicationComponents();
+
+                Startup.Container = container;
+                server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+            }
         }
 
         private static DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()

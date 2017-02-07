@@ -3,11 +3,6 @@
     "target": "es5",
     "module": "system",
     "sourceMap": false,
-    "typeRoots": [
-      "./typings/modules",
-      "./typings/globals",
-      "./custom_typings"
-    ],
     "alwaysStrict": true,
     "experimentalDecorators": true
   },
@@ -15,7 +10,6 @@
     "test-e2e",
     "wwwroot",
     "node_modules",
-    "src/jspm_packages",
-    "typings/index.d.ts"
+    "src/jspm_packages"
   ]
 }

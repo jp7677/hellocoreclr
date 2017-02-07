@@ -4,9 +4,6 @@ exports.config = {
   framework: 'mocha',
   plugins: [{
     package: 'aurelia-protractor-plugin'
-  }, {
-    package: 'protractor-console',
-    logLevels: ['debug', 'info', 'warning', 'severe']
   }],
 
   capabilities: {

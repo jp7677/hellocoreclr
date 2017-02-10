@@ -12,10 +12,10 @@ addons:
     - libicu52
 
 before_install:
-- sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
+- sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
 - sudo apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893
 - sudo apt-get update
-- sudo apt-get -y install dotnet-dev-1.0.0-preview2-1-003177
+- sudo apt-get -y install dotnet-dev-1.0.0-rc4-004771
 
 env:
   global:
@@ -25,13 +25,13 @@ env:
 
 script:
 - dotnet restore
-- dotnet publish --configuration Release --output artifacts/approot src/HelloCoreClrApp --version-suffix build$TRAVIS_BUILD_NUMBER
+- dotnet publish --configuration Release --output ../../artifacts/approot src/HelloCoreClrApp --version-suffix build$TRAVIS_BUILD_NUMBER
 
 - npm install --production --prefix ui
 - ui/node_modules/.bin/jspm install --production --cwd ui
 - ui/node_modules/.bin/typings install --production --cwd ui
 - ui/node_modules/.bin/gulp --production --cwd ui
-- dotnet publish --output artifacts ui
+- dotnet publish --output ../artifacts ui
 
 cache:
   directories:

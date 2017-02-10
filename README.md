@@ -13,7 +13,7 @@ P.S. I'm a terrible designer :)
 
 ## Instructions
 
-Obviously you should have Net Core 1.1 and Nodejs/npm 6.x already up and running for everything that follows.
+Obviously you should have Net Core SDK RC4 and Nodejs/npm 6.x already up and running for everything that follows.
 
 ### Production build and publish
 
@@ -28,12 +28,12 @@ to restore packages.
 Building, assembling and publishing goes like
 
 ```bash
-dotnet publish --configuration Release --output artifacts/approot src/HelloCoreClrApp
+dotnet publish --configuration Release --output ../../artifacts/approot src/HelloCoreClrApp
 npm install --production --prefix ui
 ui/node_modules/.bin/jspm install --production --cwd ui
 ui/node_modules/.bin/typings install --production --cwd ui
 ui/node_modules/.bin/gulp --production --cwd ui
-dotnet publish --output artifacts ui
+dotnet publish --output ../artifacts ui
 ```
 
 Find the result within the ```artifacts/``` folder. Please read <http://docs.asp.net/en/latest/publishing/linuxproduction.html> how to go ahead with installation and front-end servers.
@@ -44,7 +44,7 @@ Use
 
 ```bash
 dotnet restore
-dotnet build src/HelloCoreClrApp/project.json
+dotnet build
 npm install --prefix ui
 ui/node_modules/.bin/jspm install --cwd ui
 ui/node_modules/.bin/typings install --cwd ui
@@ -54,7 +54,7 @@ ui/node_modules/.bin/gulp --cwd ui
 to restore packages, bindings, building and for assembling the web application. Use
 
 ```bash
-dotnet test test/HelloCoreClrApp.Test
+dotnet test test/HelloCoreClrApp.Test/HelloCoreClrApp.Test.csproj
 ui/node_modules/.bin/gulp unit-tests --cwd ui --nobuild
 ui/node_modules/.bin/gulp e2e-tests --cwd ui --nobuild --nomiddlewareproxy
 ```

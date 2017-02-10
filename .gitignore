@@ -24,6 +24,8 @@ src/HelloCoreClrApp.Rules/obj/**
 test/HelloCoreClrApp.Test/project.lock.json
 test/HelloCoreClrApp.Test/bin/**
 test/HelloCoreClrApp.Test/obj/**
+ui/bin/**
+ui/obj/**
 .idea/**
 .vs/**
 **/*.xproj.user

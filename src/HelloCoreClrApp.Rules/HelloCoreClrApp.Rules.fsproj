@@ -1,6 +1,7 @@
 ﻿<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Copyright>2017 Jens Peters</Copyright>
     <Version>0.1.0</Version>
     <TargetFramework>netstandard1.6</TargetFramework>
   </PropertyGroup>

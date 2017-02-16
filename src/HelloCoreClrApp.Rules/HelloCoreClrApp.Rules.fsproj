@@ -15,8 +15,4 @@
     <PackageReference Include="FSharp.Net.Sdk" Version="1.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <DotNetCliToolReference Include="FSharp.Compiler.Tools" Version="4.1.0" />
-  </ItemGroup>
-
 </Project>

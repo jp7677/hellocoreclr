@@ -14,14 +14,10 @@ ui/test/**/*.js.map
 ui/test-e2e/**/*.js
 ui/test-e2e/**/*.js.map
 **/phantomjsdriver.log
-ui/project.lock.json
-src/HelloCoreClrApp/project.lock.json
 src/HelloCoreClrApp/bin/**
 src/HelloCoreClrApp/obj/**
-src/HelloCoreClrApp.Rules/project.lock.json
 src/HelloCoreClrApp.Rules/bin/**
 src/HelloCoreClrApp.Rules/obj/**
-test/HelloCoreClrApp.Test/project.lock.json
 test/HelloCoreClrApp.Test/bin/**
 test/HelloCoreClrApp.Test/obj/**
 ui/bin/**

@@ -8,7 +8,7 @@
 	  <Artifacts Include="wwwroot/**"/>
   </ItemGroup>
 
-  <Target Name="copy-artifacts">
+  <Target Name="publish-artifacts">
     <RemoveDir Directories="$(output)" /> 
     <Copy SourceFiles="@(Artifacts)"     
       DestinationFiles="@(Artifacts->'$(output)/%(RecursiveDir)%(Filename)%(Extension)')"/>

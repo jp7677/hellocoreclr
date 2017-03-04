@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <Sources Include="wwwroot/**"/>
+	  <Artifacts Include="wwwroot/**"/>
   </ItemGroup>
 
-  <Target Name="copy">
+  <Target Name="copy-artifacts">
     <RemoveDir Directories="$(output)" /> 
-    <Copy SourceFiles="@(Sources)"     
-      DestinationFiles="@(Sources->'$(output)/%(RecursiveDir)%(Filename)%(Extension)')"/>
+    <Copy SourceFiles="@(Artifacts)"     
+      DestinationFiles="@(Artifacts->'$(output)/%(RecursiveDir)%(Filename)%(Extension)')"/>
   </Target>
 
 </Project>

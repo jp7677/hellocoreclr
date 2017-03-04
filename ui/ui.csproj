@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <Target Name="copy">
+    <RemoveDir Directories="$(output)" /> 
     <Copy SourceFiles="@(Sources)"     
       DestinationFiles="@(Sources->'$(output)/%(RecursiveDir)%(Filename)%(Extension)')"/>
   </Target>

@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <Copyright>2017 Jens Peters</Copyright>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="**" />
-    <EmbeddedResource Remove="**" />
-    <Content Include="wwwroot/**">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
+	  <Sources Include="wwwroot/**"/>
   </ItemGroup>
+
+  <Target Name="copy">
+    <Copy SourceFiles="@(Sources)"     
+      DestinationFiles="@(Sources->'$(output)/%(RecursiveDir)%(Filename)%(Extension)')"/>
+  </Target>
 
 </Project>

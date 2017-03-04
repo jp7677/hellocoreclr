@@ -31,7 +31,7 @@ script:
 - ui/node_modules/.bin/jspm install --production --cwd ui
 - ui/node_modules/.bin/typings install --production --cwd ui
 - ui/node_modules/.bin/gulp --production --cwd ui
-- dotnet publish --output ../artifacts ui
+- dotnet msbuild /t:copy /p:output=../artifacts/wwwroot ui
 
 cache:
   directories:

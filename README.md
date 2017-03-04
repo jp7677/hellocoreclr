@@ -33,7 +33,7 @@ npm install --production --prefix ui
 ui/node_modules/.bin/jspm install --production --cwd ui
 ui/node_modules/.bin/typings install --production --cwd ui
 ui/node_modules/.bin/gulp --production --cwd ui
-dotnet publish --output ../artifacts ui
+dotnet msbuild /t:copy /p:output=../artifacts/wwwroot ui
 ```
 
 Find the result within the ```artifacts/``` folder. Please read <http://docs.asp.net/en/latest/publishing/linuxproduction.html> how to go ahead with installation and front-end servers.

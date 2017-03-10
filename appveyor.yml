@@ -1,4 +1,5 @@
 version: '0.1.{build}'
+image: Visual Studio 2017
 environment:
     nodejs_version: "6"
     JSPM_GITHUB_AUTH_TOKEN:
@@ -12,22 +13,24 @@ install:
 
 build_script:
 - dotnet restore
-- dotnet build src\HelloCoreClrApp\project.json
-- dotnet build test\HelloCoreClrApp.Test\project.json
+- dotnet build src\HelloCoreClrApp\HelloCoreClrApp.csproj
+- dotnet build test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj
+- dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp
 
 - cd %APPVEYOR_BUILD_FOLDER%\ui
 - npm install
 - node_modules\.bin\jspm install
 - node_modules\.bin\typings install
 - node_modules\.bin\gulp
+- cd %APPVEYOR_BUILD_FOLDER%
+- dotnet msbuild /t:publish-artifacts /p:output=..\artifacts\wwwroot ui
 
 before_test:
-- cd %APPVEYOR_BUILD_FOLDER%
 - nuget install OpenCover -Version 4.6.589 -o .\packages
 - npm install karma-appveyor-reporter --prefix ui
 
 test_script:
-- packages\OpenCover.4.6.589\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -returntargetcode -mergeoutput -output:reports\coverage-dotnet.xml
+- packages\OpenCover.4.6.589\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -returntargetcode -mergeoutput -output:reports\coverage-dotnet.xml
 - ui\node_modules\.bin\gulp unit-tests --cwd ui --nobuild --karmareporters progress,coverage,remap-coverage,appveyor
 - ui\node_modules\.bin\gulp e2e-tests --cwd ui --nobuild --nomiddlewareproxy
 

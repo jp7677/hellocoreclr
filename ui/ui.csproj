@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Copyright>2017 Jens Peters</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <Artifacts Include="wwwroot/**"/>
+  </ItemGroup>
+
+  <Target Name="publish-artifacts">
+    <RemoveDir Directories="$(output)" /> 
+    <Copy SourceFiles="@(Artifacts)"     
+      DestinationFiles="@(Artifacts->'$(output)/%(RecursiveDir)%(Filename)%(Extension)')"/>
+  </Target>
+
+</Project>

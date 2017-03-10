@@ -13,7 +13,7 @@ P.S. I'm a terrible designer :)
 
 ## Instructions
 
-Obviously you should have Net Core SDK RC4 and Nodejs/npm 6.x already up and running for everything that follows.
+Obviously you should have Net Core SDK 1.0 and Nodejs/npm 6.x already up and running for everything that follows.
 
 ### Production build and publish
 

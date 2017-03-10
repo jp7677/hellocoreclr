@@ -44,7 +44,7 @@ Use
 
 ```bash
 dotnet restore
-dotnet build
+dotnet build src/HelloCoreClrApp
 npm install --prefix ui
 ui/node_modules/.bin/jspm install --cwd ui
 ui/node_modules/.bin/typings install --cwd ui
@@ -65,7 +65,7 @@ Use
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Staging
-dotnet run --project src/HelloCoreClrApp
+dotnet run --project src/HelloCoreClrApp/HelloCoreClrApp.csproj
 ```
 
 to run the web server. Now open <http://localhost:5000/> in you favorite browser. Enjoy source maps in your browser when testing manually.

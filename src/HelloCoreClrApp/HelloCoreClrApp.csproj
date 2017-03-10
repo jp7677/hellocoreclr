@@ -17,7 +17,7 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
+  <ItemGroup>
     <ProjectReference Include="../HelloCoreClrApp.Rules/HelloCoreClrApp.Rules.fsproj" />
     <PackageReference Include="System.IO.FileSystem.DriveInfo" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.1" />

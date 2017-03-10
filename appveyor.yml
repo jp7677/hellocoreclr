@@ -15,12 +15,14 @@ build_script:
 - dotnet restore
 - dotnet build src\HelloCoreClrApp\HelloCoreClrApp.csproj
 - dotnet build test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj
+- dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp
 
 - cd %APPVEYOR_BUILD_FOLDER%\ui
 - npm install
 - node_modules\.bin\jspm install
 - node_modules\.bin\typings install
 - node_modules\.bin\gulp
+- dotnet msbuild /t:publish-artifacts /p:output=..\artifacts\wwwroot ui
 
 before_test:
 - cd %APPVEYOR_BUILD_FOLDER%

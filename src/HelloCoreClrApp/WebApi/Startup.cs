@@ -70,7 +70,7 @@ namespace HelloCoreClrApp.WebApi
             app.UseMvc();
 
             app.UseSwagger();
-            app.UseSwaggerUi(c => 
+            app.UseSwaggerUI(c => 
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", ApiVersion));
 
             app.UseSimpleInjectorAspNetRequestScoping(Container);

@@ -44,7 +44,7 @@ Use
 
 ```bash
 dotnet restore
-dotnet build src/HelloCoreClrApp
+dotnet build
 npm install --prefix ui
 ui/node_modules/.bin/jspm install --cwd ui
 ui/node_modules/.bin/typings install --cwd ui

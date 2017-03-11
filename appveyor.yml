@@ -23,7 +23,7 @@ build_script:
 - node_modules\.bin\typings install
 - node_modules\.bin\gulp
 - cd %APPVEYOR_BUILD_FOLDER%
-- dotnet msbuild /t:publish-artifacts /p:output=..\artifacts\wwwroot ui
+- dotnet msbuild /t:publish /p:output=..\artifacts\wwwroot ui
 
 before_test:
 - nuget install OpenCover -Version 4.6.589 -o .\packages

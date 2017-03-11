@@ -13,7 +13,9 @@ namespace HelloCoreClrApp.Health
         public void LogUsage()
         {
             var summary = DriveInfo.GetDrives()
-                .Where(drive => drive.DriveType == DriveType.Fixed)
+                .Where(drive => 
+                    (drive.DriveType == DriveType.Fixed || drive.DriveType == DriveType.Unknown) 
+                    && drive.TotalSize > 0)
                 .Aggregate(string.Empty, (current, drive) =>
                     current + $"{ByteSize.FromBytes(drive.AvailableFreeSpace).Gigabytes:0.00G} of " +
                     $"{ByteSize.FromBytes(drive.TotalSize).Gigabytes:0.00G} free for " +

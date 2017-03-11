@@ -13,8 +13,7 @@ install:
 
 build_script:
 - dotnet restore
-- dotnet build src\HelloCoreClrApp\HelloCoreClrApp.csproj
-- dotnet build test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj
+- dotnet build
 - dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp
 
 - cd %APPVEYOR_BUILD_FOLDER%\ui

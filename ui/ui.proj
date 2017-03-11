@@ -1,4 +1,4 @@
-﻿<Project>
+﻿<Project DefaultTargets="Build">
 
   <PropertyGroup>
     <Copyright>2017 Jens Peters</Copyright>
@@ -7,6 +7,10 @@
   <ItemGroup>
 	  <Artifacts Include="wwwroot/**"/>
   </ItemGroup>
+
+  <Target Name="Build">
+    <Message Text="ui -> Consult README.md for ui build instructions." Importance="high" />
+  </Target>
 
   <Target Name="Publish">
     <RemoveDir Directories="$(output)" /> 

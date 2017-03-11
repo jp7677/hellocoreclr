@@ -1,6 +1,7 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+		
 		{
 			"name": "Launch Chrome - ui",
 			"type": "chrome",
@@ -27,7 +28,7 @@
 			"name": "Attach .NET Core",
 			"type": "coreclr",
 			"request": "attach",
-			"processId": "${command.pickProcess}"
+			"processId": "${command:pickProcess}"
 		}
 	]
 }

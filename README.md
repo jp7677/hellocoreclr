@@ -17,17 +17,10 @@ Obviously you should have Net Core SDK 1.0 and Nodejs/npm 6.x already up and run
 
 ### Production build and publish
 
-Use
+Restore packages, building, assembling and publishing goes like
 
 ```bash
 dotnet restore
-```
-
-to restore packages.
-
-Building, assembling and publishing goes like
-
-```bash
 dotnet build --configuration Release
 dotnet publish --configuration Release --output ../../artifacts/approot src/HelloCoreClrApp
 dotnet msbuild /t:publish-artifacts /p:output=../artifacts/wwwroot ui

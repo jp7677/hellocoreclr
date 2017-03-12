@@ -87,5 +87,4 @@ Your favorite browser should fire up and should open <http://localhost:3000/>. H
 
 ## TODO
 
-- Remove our custom typings once Typescript 2.2 is available <https://github.com/Microsoft/TypeScript/issues/12517>.
 - Remove our local OpenCover package once OpenCover with portable pdb support is available on NuGet <https://github.com/OpenCover/opencover/issues/610>.

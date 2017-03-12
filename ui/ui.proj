@@ -4,13 +4,21 @@
     <Copyright>2017 Jens Peters</Copyright>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Production Condition="'$(Configuration)'=='Release'">--production</Production>
+  </PropertyGroup>
+
+  <Target Name="Build">
+    <Message Text="ui -> wwwroot $(Production)" Importance="high" />
+    <Exec Command="npm install $(Production)"/>
+    <Exec Command="node_modules/.bin/jspm install $(Production)"/>
+    <Exec Command="node_modules/.bin/typings install $(Production)"/>
+    <Exec Command="node_modules/.bin/gulp $(Production)"/>
+  </Target>
+
   <ItemGroup>
 	  <Artifacts Include="wwwroot/**"/>
   </ItemGroup>
-
-  <Target Name="Build">
-    <Message Text="ui -> Consult README.md for ui build instructions." Importance="high" />
-  </Target>
 
   <Target Name="Publish">
     <RemoveDir Directories="$(output)" /> 

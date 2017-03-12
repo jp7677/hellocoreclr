@@ -28,11 +28,8 @@ to restore packages.
 Building, assembling and publishing goes like
 
 ```bash
+dotnet build --configuration Release
 dotnet publish --configuration Release --output ../../artifacts/approot src/HelloCoreClrApp
-npm install --production --prefix ui
-ui/node_modules/.bin/jspm install --production --cwd ui
-ui/node_modules/.bin/typings install --production --cwd ui
-ui/node_modules/.bin/gulp --production --cwd ui
 dotnet msbuild /t:publish-artifacts /p:output=../artifacts/wwwroot ui
 ```
 
@@ -45,10 +42,6 @@ Use
 ```bash
 dotnet restore
 dotnet build
-npm install --prefix ui
-ui/node_modules/.bin/jspm install --cwd ui
-ui/node_modules/.bin/typings install --cwd ui
-ui/node_modules/.bin/gulp --cwd ui
 ```
 
 to restore packages, bindings, building and for assembling the web application. Use
@@ -86,10 +79,7 @@ Use again
 
 ```bash
 dotnet restore
-npm install --prefix ui
-ui/node_modules/.bin/jspm install --cwd ui
-ui/node_modules/.bin/typings install --cwd ui
-ui/node_modules/.bin/gulp --cwd ui
+dotnet build
 ```
 
 to restore packages and bindings. Finally run the following commands in separate terminals for building and testing on file save.

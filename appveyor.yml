@@ -15,13 +15,6 @@ build_script:
 - dotnet restore
 - dotnet build
 - dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp
-
-- cd %APPVEYOR_BUILD_FOLDER%\ui
-- npm install
-- node_modules\.bin\jspm install
-- node_modules\.bin\typings install
-- node_modules\.bin\gulp
-- cd %APPVEYOR_BUILD_FOLDER%
 - dotnet msbuild /t:publish /p:output=..\artifacts\wwwroot ui
 
 before_test:

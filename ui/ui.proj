@@ -8,6 +8,8 @@
     <Production Condition="'$(Configuration)'=='Release'">--production</Production>
   </PropertyGroup>
 
+  <Target Name="_GenerateRestoreGraphProjectEntry" />
+
   <Target Name="Build">
     <Message Text="ui -> wwwroot $(Production)" Importance="high" />
     <Exec Command="npm install $(Production)"/>

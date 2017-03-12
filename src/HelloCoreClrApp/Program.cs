@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloCoreClrApp.Data;
@@ -44,6 +45,10 @@ namespace HelloCoreClrApp
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
+
+            Log.Information("{0} {1}",
+                Assembly.GetEntryAssembly().GetName().Name,
+                Assembly.GetEntryAssembly().GetCustomAttribute<System.Reflection.AssemblyInformationalVersionAttribute>().InformationalVersion);
         }
 
         private static void SetupResources()

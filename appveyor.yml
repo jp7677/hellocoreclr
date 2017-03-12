@@ -13,7 +13,6 @@ install:
 
 build_script:
 - dotnet restore
-- dotnet build
 - dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp
 - dotnet msbuild /t:publish /p:output=..\artifacts\wwwroot ui
 

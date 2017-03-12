@@ -21,9 +21,8 @@ Restore packages, building, assembling and publishing goes like
 
 ```bash
 dotnet restore
-dotnet build --configuration Release
 dotnet publish --configuration Release --output ../../artifacts/approot src/HelloCoreClrApp
-dotnet msbuild /t:publish-artifacts /p:output=../artifacts/wwwroot ui
+dotnet msbuild /t:publish /p:configuration=Release /p:output=../artifacts/wwwroot ui
 ```
 
 Find the result within the ```artifacts/``` folder. Please read <http://docs.asp.net/en/latest/publishing/linuxproduction.html> how to go ahead with installation and front-end servers.

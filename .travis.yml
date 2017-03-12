@@ -25,9 +25,8 @@ env:
 
 script:
 - dotnet restore
-- dotnet build --configuration Release
 - dotnet publish --configuration Release --output ../../artifacts/approot src/HelloCoreClrApp --version-suffix build$TRAVIS_BUILD_NUMBER
-- dotnet msbuild /t:publish /p:output=../artifacts/wwwroot ui
+- dotnet msbuild /t:publish /p:configuration=Release /p:output=../artifacts/wwwroot ui
 
 cache:
   directories:

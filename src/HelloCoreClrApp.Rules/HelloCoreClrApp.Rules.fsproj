@@ -14,7 +14,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
     <PackageReference Include="FSharp.Core" Version="4.1.0" />
-    <PackageReference Include="FSharp.Net.Sdk" Version="1.0.1" />
+    <PackageReference Include="FSharp.Net.Sdk" Version="1.0.1" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

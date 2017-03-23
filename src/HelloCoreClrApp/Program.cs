@@ -56,7 +56,7 @@ namespace HelloCoreClrApp
             var componentRegistrar = new ComponentRegistrar(Container)
             {
                 DatabaseOptionsBuilder = new DbContextOptionsBuilder<GreetingDbContext>()
-                    .UseSqlite(SqliteConnectionString)
+                    .UseMySql("Server=localhost;database=helloworld;uid=hw;pwd=hw;")
             };
             componentRegistrar.RegisterApplicationComponents();
         }

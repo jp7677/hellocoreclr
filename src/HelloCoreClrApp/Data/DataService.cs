@@ -13,7 +13,6 @@ namespace HelloCoreClrApp.Data
 {
     public class DataService : IDataService
     {
-        private static readonly Serilog.ILogger Log = Serilog.Log.ForContext<DataService>();
         private readonly IGreetingDbContextFactory dbContextFactory;
 
         public DataService(IGreetingDbContextFactory dbContextFactory)
@@ -66,7 +65,6 @@ namespace HelloCoreClrApp.Data
                     .OrderByDescending(g => g.TimestampUtc)
                     .Take(numberOfResults);
 
-                Log.Information("We got totally {0} items in our db.", await db.Greetings.CountAsync());
                 return await items.ToListAsync();
             }
         }

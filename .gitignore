@@ -25,3 +25,4 @@ ui/obj/**
 .idea/**
 .vs/**
 **/*.xproj.user
+**/*.DotSettings.user

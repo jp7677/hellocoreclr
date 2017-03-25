@@ -63,7 +63,8 @@ namespace HelloCoreClrApp.Data
             {
                 var items = db.Greetings
                     .OrderByDescending(g => g.TimestampUtc)
-                    .Take(numberOfResults);
+                    .Take(numberOfResults)
+                    .AsNoTracking();
 
                 return await items.ToListAsync();
             }

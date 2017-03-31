@@ -11,7 +11,7 @@ using SimpleInjector;
 
 namespace HelloCoreClrApp
 {
-    public class Program
+    public static class Program
     {
         private static readonly CancellationTokenSource ShutdownCancellationTokenSource = new CancellationTokenSource();
         private static readonly Container Container = new Container();
@@ -48,7 +48,7 @@ namespace HelloCoreClrApp
 
             Log.Information("{0} {1}",
                 Assembly.GetEntryAssembly().GetName().Name,
-                Assembly.GetEntryAssembly().GetCustomAttribute<System.Reflection.AssemblyInformationalVersionAttribute>().InformationalVersion);
+                Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
         }
 
         private static void SetupResources()

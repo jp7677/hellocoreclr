@@ -48,7 +48,6 @@ namespace HelloCoreClrApp.Data
         {
             var somehugeFile = new byte[35* 1000 * 1000];
 
-
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 db.Greetings.Add(new Greeting

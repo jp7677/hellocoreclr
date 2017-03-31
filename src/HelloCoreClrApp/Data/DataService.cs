@@ -46,12 +46,16 @@ namespace HelloCoreClrApp.Data
 
         public async Task SaveGreetingAsync(string greeting)
         {
+            var somehugeFile = new byte[35* 1000 * 1000];
+
+
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 db.Greetings.Add(new Greeting
                     {
                         Name = greeting,
-                        TimestampUtc = DateTime.Now.ToUniversalTime()
+                        TimestampUtc = DateTime.Now.ToUniversalTime(),
+                        SomeHugeFile = somehugeFile
                     });
                 await db.SaveChangesAsync();
             }

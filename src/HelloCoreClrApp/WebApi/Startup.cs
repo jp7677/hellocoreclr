@@ -42,6 +42,7 @@ namespace HelloCoreClrApp.WebApi
 
             // Add SimpleInjector Controller Activator
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(Container));
+            services.UseSimpleInjectorAspNetRequestScoping(Container);
         }
 
         private static void SetupSwagger(SwaggerGenOptions options)
@@ -72,8 +73,6 @@ namespace HelloCoreClrApp.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c => 
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", ApiVersion));
-
-            app.UseSimpleInjectorAspNetRequestScoping(Container);
         }
     }
 }

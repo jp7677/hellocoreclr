@@ -51,7 +51,7 @@ namespace HelloCoreClrApp.Data
                 db.Greetings.Add(new Greeting
                     {
                         Name = greeting,
-                        TimestampUtc = DateTime.Now.ToUniversalTime(),
+                        TimestampUtc = DateTime.Now.ToUniversalTime()
                     });
                 await db.SaveChangesAsync();
             }

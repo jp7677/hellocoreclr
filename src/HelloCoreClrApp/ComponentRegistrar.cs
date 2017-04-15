@@ -6,7 +6,7 @@ using HelloCoreClrApp.WebApi.Actions;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using SimpleInjector;
-using SimpleInjector.Integration.AspNetCore;
+using SimpleInjector.Lifestyles;
 
 namespace HelloCoreClrApp
 {
@@ -27,7 +27,7 @@ namespace HelloCoreClrApp
             if (DatabaseOptionsBuilder == null)
                 throw new InvalidOperationException("DatabaseOptionsBuilder needs to be set.");
 
-            container.Options.DefaultScopedLifestyle = new AspNetRequestLifestyle();
+            container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
             container.RegisterSingleton<IResourceProvider, ResourceProvider>();
 

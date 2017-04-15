@@ -5,15 +5,15 @@ VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1717E471-BD5E-4429-A035-0FE9A91A231A}"
 EndProject
-Project("{13B669BE-BB05-4DDF-9536-439F39A36129}") = "HelloCoreClrApp", "src\HelloCoreClrApp\HelloCoreClrApp.csproj", "{2B87E680-F8BA-481B-BE5E-D479101330B0}"
+Project("{13B669BE-BB05-4DDF-9536-439F39A36129}") = "HelloCoreClrApp", "src/HelloCoreClrApp/HelloCoreClrApp.csproj", "{2B87E680-F8BA-481B-BE5E-D479101330B0}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HelloCoreClrApp.Rules", "src\HelloCoreClrApp.Rules\HelloCoreClrApp.Rules.fsproj", "{71476E1A-10A0-4123-8B91-64EA62F22C83}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HelloCoreClrApp.Rules", "src/HelloCoreClrApp.Rules/HelloCoreClrApp.Rules.fsproj", "{71476E1A-10A0-4123-8B91-64EA62F22C83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FC30712B-F7CA-40AE-8952-97601D83296E}"
 EndProject
-Project("{13B669BE-BB05-4DDF-9536-439F39A36129}") = "HelloCoreClrApp.Test", "test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj", "{22457D1A-A784-4E7F-90A8-16C1759D3896}"
+Project("{13B669BE-BB05-4DDF-9536-439F39A36129}") = "HelloCoreClrApp.Test", "test/HelloCoreClrApp.Test/HelloCoreClrApp.Test.csproj", "{22457D1A-A784-4E7F-90A8-16C1759D3896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ui", "ui\ui.proj", "{100C5056-C2E9-4930-9506-D427FB09D1C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ui", "ui/ui.proj", "{100C5056-C2E9-4930-9506-D427FB09D1C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,7 +6,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
     <TargetFramework>netstandard1.6</TargetFramework>
-    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>

@@ -7,7 +7,5 @@ namespace HelloCoreClrApp.Data.Entities
         public int GreetingId { get; set; }
         public string Name { get; set; }
         public DateTime TimestampUtc { get; set; }
-
-        public byte[] SomeHugeFile { get; set; }
     }
 }

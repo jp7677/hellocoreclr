@@ -15,7 +15,7 @@ namespace HelloCoreClrApp
     {
         private static readonly CancellationTokenSource ShutdownCancellationTokenSource = new CancellationTokenSource();
         private static readonly Container Container = new Container();
-        private const string SqliteConnectionString = "Filename=./helloworld.db";
+        private const string MariaDbConnectionString = "Server=localhost;database=helloworld;uid=helloworld;pwd=helloworld;";
 
         // Entry point for the application.
         public static void Main(string[] args)
@@ -56,7 +56,7 @@ namespace HelloCoreClrApp
             var componentRegistrar = new ComponentRegistrar(Container)
             {
                 DatabaseOptionsBuilder = new DbContextOptionsBuilder<GreetingDbContext>()
-                    .UseMySql("Server=localhost;database=helloworld;uid=hw;pwd=hw;")
+                    .UseMySql(MariaDbConnectionString)
             };
             componentRegistrar.RegisterApplicationComponents();
         }

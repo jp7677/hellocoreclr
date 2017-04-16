@@ -1,11 +1,8 @@
 ﻿<Project DefaultTargets="Build">
-
   <PropertyGroup>
     <Copyright>2017 Jens Peters</Copyright>
   </PropertyGroup>
-
   <Target Name="_GenerateRestoreGraphProjectEntry" />
-
   <Target Name="Build">
     <PropertyGroup>
       <Production Condition="'$(Configuration)'=='Release'">--production</Production>
@@ -16,7 +13,6 @@
     <Exec Command="node_modules/.bin/typings install $(Production)" />
     <Exec Command="node_modules/.bin/gulp $(Production)" />
   </Target>
-
   <Target Name="Publish" DependsOnTargets="Build">
     <ItemGroup>
       <Artifacts Include="wwwroot/**" />
@@ -25,5 +21,4 @@
     <Copy SourceFiles="@(Artifacts)"     
       DestinationFiles="@(Artifacts->'$(output)/%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
-
 </Project>

@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Copyright>2017 Jens Peters</Copyright>
     <VersionPrefix>0.1.0</VersionPrefix>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
     <ProjectReference Include="../../src/HelloCoreClrApp/HelloCoreClrApp.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="1.1.1" />
@@ -17,16 +16,13 @@
     <PackageReference Include="FakeItEasy" Version="3.2.0" />
     <PackageReference Include="FluentAssertions" Version="4.19.2" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0-beta1-build1309" />
   </ItemGroup>
-
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
   </ItemGroup>
-
 </Project>

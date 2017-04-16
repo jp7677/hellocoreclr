@@ -1,20 +1,17 @@
 ﻿<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Copyright>2017 Jens Peters</Copyright>
     <VersionPrefix>0.1.0</VersionPrefix>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
     <TargetFramework>netstandard1.6</TargetFramework>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="GetHelloworldRule.fs" />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
     <PackageReference Include="FSharp.Core" Version="4.1.2" />
     <PackageReference Include="FSharp.Net.Sdk" Version="1.0.1" PrivateAssets="All" />
   </ItemGroup>
-
 </Project>

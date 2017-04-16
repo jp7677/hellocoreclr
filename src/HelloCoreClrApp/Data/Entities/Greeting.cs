@@ -1,11 +1,18 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace HelloCoreClrApp.Data.Entities
 {
     public class Greeting
     {
-        public int GreetingId { get; set; }
+        [Key]
+        public Guid GreetingId { get; set; }
+
+        [Required]
+        [MaxLength(20)]
         public string Name { get; set; }
+
+        [Required]
         public DateTime TimestampUtc { get; set; }
     }
 }

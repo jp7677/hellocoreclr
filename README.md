@@ -18,7 +18,7 @@ Obviously you should have Net Core SDK 1.0 and Nodejs/npm 6.x already up and run
 This branch uses MariaDb. The easiest way to fire up a database is by using docker:
 
 ```bash
-docker run --name mariadb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=helloworld -e MYSQL_USER=helloworld -e MYSQL_PASSWORD=helloworld -d mariadb
+docker run --name mariadb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=helloworld -e MYSQL_USER=helloworld -e MYSQL_PASSWORD=helloworld -d mariadb --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 docker run --name myadmin -d --link mariadb:db -p 8080:80 phpmyadmin/phpmyadmin
 ```
 

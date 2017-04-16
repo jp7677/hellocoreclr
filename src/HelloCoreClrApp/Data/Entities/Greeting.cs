@@ -9,7 +9,7 @@ namespace HelloCoreClrApp.Data.Entities
         public Guid GreetingId { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(30)]
         public string Name { get; set; }
 
         [Required]

@@ -32,6 +32,7 @@
   content: "\f087";
 }
 
-body {
+.body-app {
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
 }

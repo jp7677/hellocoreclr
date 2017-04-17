@@ -17,7 +17,7 @@ build_script:
 - dotnet msbuild /t:publish /p:output=..\artifacts\wwwroot ui
 
 before_test:
-- nuget install OpenCover -Version 4.6.589 -o .\packages
+- nuget install OpenCover -Version 4.6.690 -o .\packages
 - npm install karma-appveyor-reporter --prefix ui
 
 test_script:

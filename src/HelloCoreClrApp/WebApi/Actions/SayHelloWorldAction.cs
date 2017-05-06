@@ -20,7 +20,7 @@ namespace HelloCoreClrApp.WebApi.Actions
             Log.Information("Calculating result.");
 
             // VS Code doesn't know yet about referenced F# project, that why intellisense complains :(, though it builds just fine. 
-            var res = GetHelloWorldRule.Process(name);
+            var res = Rules.SayHelloWorldRule.Process(name);
             
             if (res.Item2)
                 await SaveGreetingAsync(res.Item1);

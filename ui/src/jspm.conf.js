@@ -52,7 +52,7 @@ System.config({
       "buffer": "npm:buffer@5.0.6"
     },
     "github:jspm/nodelibs-process@0.1.2": {
-      "process": "npm:process@0.11.9"
+      "process": "npm:process@0.11.10"
     },
     "github:jspm/nodelibs-util@0.1.0": {
       "util": "npm:util@0.10.3"
@@ -110,7 +110,7 @@ System.config({
       "aurelia-pal": "npm:aurelia-pal@1.3.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.2.0",
-      "aurelia-templating": "npm:aurelia-templating@1.4.2"
+      "aurelia-templating": "npm:aurelia-templating@1.3.0"
     },
     "npm:aurelia-history-browser@1.0.0": {
       "aurelia-history": "npm:aurelia-history@1.0.0",
@@ -187,22 +187,12 @@ System.config({
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.2.0"
     },
-    "npm:aurelia-templating@1.4.2": {
-      "aurelia-binding": "npm:aurelia-binding@1.2.1",
-      "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.1",
-      "aurelia-loader": "npm:aurelia-loader@1.0.0",
-      "aurelia-logging": "npm:aurelia-logging@1.3.1",
-      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
-      "aurelia-pal": "npm:aurelia-pal@1.3.0",
-      "aurelia-path": "npm:aurelia-path@1.1.1",
-      "aurelia-task-queue": "npm:aurelia-task-queue@1.2.0"
-    },
     "npm:aurelia-testing@1.0.0-beta.3.0.1": {
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.1",
       "aurelia-framework": "npm:aurelia-framework@1.1.2",
       "aurelia-logging": "npm:aurelia-logging@1.3.1",
       "aurelia-pal": "npm:aurelia-pal@1.3.0",
-      "aurelia-templating": "npm:aurelia-templating@1.4.2"
+      "aurelia-templating": "npm:aurelia-templating@1.3.0"
     },
     "npm:aurelia-validation@1.0.0": {
       "aurelia-binding": "npm:aurelia-binding@1.2.1",
@@ -224,8 +214,8 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.2",
       "type-detect": "npm:type-detect@1.0.0"
     },
-    "npm:debug@2.6.3": {
-      "ms": "npm:ms@0.7.2"
+    "npm:debug@2.6.6": {
+      "ms": "npm:ms@0.7.3"
     },
     "npm:deep-eql@0.1.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.1",
@@ -257,11 +247,11 @@ System.config({
     },
     "npm:mocha@3.2.0": {
       "css": "github:systemjs/plugin-css@0.1.33",
-      "debug": "npm:debug@2.6.3",
+      "debug": "npm:debug@2.6.6",
       "json3": "npm:json3@3.3.2",
       "lodash.create": "npm:lodash.create@3.1.1"
     },
-    "npm:process@0.11.9": {
+    "npm:process@0.11.10": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"

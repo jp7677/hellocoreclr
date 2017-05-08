@@ -66,6 +66,7 @@ exports.fn = (gulp, paths, argv, done) => {
           'aurelia-templating-binding',
           'aurelia-templating-resources',
           'aurelia-templating-router',
+          'aurelia-validation',
           'toastr'
         ],
         options: {

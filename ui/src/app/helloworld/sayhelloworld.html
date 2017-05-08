@@ -13,15 +13,16 @@ Curabitur sed scelerisque mauris, nec euismod massa. Aenean egestas, tellus at e
             </div>
         </div>
         <hr />
-        <div class="form-group">
+        <div class="form-group ${!inputTextHadFocus ? '' : controller.errors.length === 0 ? 'has-success' : 'has-error'} has-feedback">
             <div class="col-xs-4">
-                <input type="text" class="form-control input-lg" placeholder="Give me some text" value.bind="inputText" maxlength="20" required />
+                <input type="text" class="form-control input-lg" placeholder="Give me some text" value.bind="inputText & validateOnChange"
+                    focus.trigger="inputTextOnfocus()" maxlength="20" />
+                <span class="glyphicon ${!inputTextHadFocus ? '' : controller.errors.length === 0 ? 'glyphicon-ok' : 'glyphicon-remove'} form-control-feedback"></span>
             </div>
 
-            <button type="submit" class="col-xs-4 btn btn-primary btn-lg">
+            <button type="submit" class="col-xs-4 btn btn-primary btn-lg ${inputTextHadFocus && controller.errors.length === 0 ? '' : 'disabled'}">
                 <i class="fa fa-play-circle-o fa-lg"></i> Say Hello!
             </button>
-
             <div class="col-xs-4">
                 <input class="form-control input-lg" type="text" placeholder="Something will happen over here" value.bind="greetingText" disabled />
             </div>

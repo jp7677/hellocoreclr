@@ -30,6 +30,8 @@ System.config({
     "aurelia-templating-binding": "npm:aurelia-templating-binding@1.3.0",
     "aurelia-templating-resources": "npm:aurelia-templating-resources@1.3.1",
     "aurelia-templating-router": "npm:aurelia-templating-router@1.1.0",
+    "aurelia-testing": "npm:aurelia-testing@1.0.0-beta.3.0.1",
+    "aurelia-validation": "npm:aurelia-validation@1.0.0",
     "aurelia/templating": "npm:aurelia-templating@1.3.0",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "chai": "npm:chai@3.5.0",
@@ -108,7 +110,7 @@ System.config({
       "aurelia-pal": "npm:aurelia-pal@1.3.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.2.0",
-      "aurelia-templating": "npm:aurelia-templating@1.3.0"
+      "aurelia-templating": "npm:aurelia-templating@1.4.2"
     },
     "npm:aurelia-history-browser@1.0.0": {
       "aurelia-history": "npm:aurelia-history@1.0.0",
@@ -184,6 +186,31 @@ System.config({
       "aurelia-pal": "npm:aurelia-pal@1.3.0",
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "aurelia-task-queue": "npm:aurelia-task-queue@1.2.0"
+    },
+    "npm:aurelia-templating@1.4.2": {
+      "aurelia-binding": "npm:aurelia-binding@1.2.1",
+      "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.1",
+      "aurelia-loader": "npm:aurelia-loader@1.0.0",
+      "aurelia-logging": "npm:aurelia-logging@1.3.1",
+      "aurelia-metadata": "npm:aurelia-metadata@1.0.3",
+      "aurelia-pal": "npm:aurelia-pal@1.3.0",
+      "aurelia-path": "npm:aurelia-path@1.1.1",
+      "aurelia-task-queue": "npm:aurelia-task-queue@1.2.0"
+    },
+    "npm:aurelia-testing@1.0.0-beta.3.0.1": {
+      "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.1",
+      "aurelia-framework": "npm:aurelia-framework@1.1.2",
+      "aurelia-logging": "npm:aurelia-logging@1.3.1",
+      "aurelia-pal": "npm:aurelia-pal@1.3.0",
+      "aurelia-templating": "npm:aurelia-templating@1.4.2"
+    },
+    "npm:aurelia-validation@1.0.0": {
+      "aurelia-binding": "npm:aurelia-binding@1.2.1",
+      "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.1",
+      "aurelia-logging": "npm:aurelia-logging@1.3.1",
+      "aurelia-pal": "npm:aurelia-pal@1.3.0",
+      "aurelia-task-queue": "npm:aurelia-task-queue@1.2.0",
+      "aurelia-templating": "npm:aurelia-templating@1.3.0"
     },
     "npm:buffer@5.0.6": {
       "base64-js": "npm:base64-js@1.2.0",

@@ -18,7 +18,8 @@ export async function configure(aurelia: Aurelia) {
     const env: Environment = new Environment(appsettings);
 
     aurelia.use
-        .standardConfiguration();
+        .standardConfiguration()
+        .plugin("aurelia-validation");
 
     configureLoggingAppender();
     logAplicationStart(env);

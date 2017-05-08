@@ -8,7 +8,7 @@ module.exports = (config) => {
     jspm: {
       config: 'src/jspm.conf.js',
       loadFiles: [
-        'node_modules/core-js/client/core.js',
+        'node_modules/core-js/client/shim.js',
         'test/**/!(e2e)*.spec.js'
       ],
       serveFiles: [

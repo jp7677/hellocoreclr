@@ -23,7 +23,7 @@ export class SayHelloWorld {
         this.notifier = new Notifier();
 
         ValidationRules
-            .ensure((m: SayHelloWorld) => m.inputText)
+            .ensure("inputText")
                 .displayName("Greeting name")
                 .required()
                 .minLength(3)

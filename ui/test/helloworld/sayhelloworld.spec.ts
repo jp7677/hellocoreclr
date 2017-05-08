@@ -23,6 +23,7 @@ describe("SayHelloWorld test suite", () => {
             .boundTo({});
         component.bootstrap((aurelia) =>
             aurelia.use
+            .standardConfiguration()
             .plugin("aurelia-validation"));
         await component.create(bootstrap);
     });

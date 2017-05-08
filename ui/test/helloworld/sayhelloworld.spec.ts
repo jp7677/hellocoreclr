@@ -8,7 +8,6 @@ import {bootstrap} from "aurelia-bootstrapper";
 import {ComponentTester, StageComponent} from "aurelia-testing";
 import {HttpClientStub, ValidationControllerStub} from "../stubs";
 
-
 function wait() {
     return new Promise((resolve, reject) => {
             setTimeout(resolve, 200);
@@ -20,11 +19,11 @@ describe("SayHelloWorld test suite", () => {
 
     before(async () => {
         component = StageComponent.withResources()
-            .inView('<div></div>')
+            .inView("<div></div>")
             .boundTo({});
         component.bootstrap((aurelia) =>
             aurelia.use
-            .plugin('aurelia-validation'));
+            .plugin("aurelia-validation"));
         await component.create(bootstrap);
     });
 

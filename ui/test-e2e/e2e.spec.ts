@@ -6,11 +6,12 @@ before(() => {
   chai.use(chaiAsPromised);
 });
 
-beforeEach(async () => {
-    await protractor.browser.loadAndWaitForAureliaPage("/");
-});
-
 describe("HelloWorld app", () => {
+  beforeEach(async () => {
+    await protractor.browser.loadAndWaitForAureliaPage("/");
+    await protractor.browser.sleep(1000);
+  });
+
   it("should load completely and have a title", async () => {
     return chai.expect(protractor.browser.getTitle()).to.eventually.be.equal("Say Hello World! | Hello World");
   });

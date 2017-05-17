@@ -37,10 +37,10 @@ System.config({
     "chai": "npm:chai@3.5.0",
     "fetch": "github:github/fetch@2.0.3",
     "font-awesome": "npm:font-awesome@4.7.0",
-    "jquery": "npm:jquery@3.1.1",
+    "jquery": "npm:jquery@3.2.1",
     "json": "github:systemjs/plugin-json@0.3.0",
     "mocha": "npm:mocha@3.2.0",
-    "moment": "npm:moment@2.17.1",
+    "moment": "npm:moment@2.18.1",
     "nprogress": "github:rstacruz/nprogress@0.2.0",
     "sinon": "npm:sinon@1.17.7",
     "text": "github:systemjs/plugin-text@0.0.9",
@@ -64,7 +64,7 @@ System.config({
       "css": "github:systemjs/plugin-css@0.1.33"
     },
     "github:twbs/bootstrap@3.3.7": {
-      "jquery": "npm:jquery@3.1.1"
+      "jquery": "npm:jquery@3.2.1"
     },
     "npm:assert@1.4.1": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
@@ -214,8 +214,8 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.2",
       "type-detect": "npm:type-detect@1.0.0"
     },
-    "npm:debug@2.6.6": {
-      "ms": "npm:ms@0.7.3"
+    "npm:debug@2.6.7": {
+      "ms": "npm:ms@2.0.0"
     },
     "npm:deep-eql@0.1.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.1",
@@ -247,7 +247,7 @@ System.config({
     },
     "npm:mocha@3.2.0": {
       "css": "github:systemjs/plugin-css@0.1.33",
-      "debug": "npm:debug@2.6.6",
+      "debug": "npm:debug@2.6.7",
       "json3": "npm:json3@3.3.2",
       "lodash.create": "npm:lodash.create@3.1.1"
     },

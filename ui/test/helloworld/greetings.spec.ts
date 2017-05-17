@@ -9,6 +9,8 @@ function wait() {
         });
 }
 
+// tslint:disable:no-unused-expression
+
 describe("Greetings test suite", () => {
 
     it("should handle a valid response", async () => {

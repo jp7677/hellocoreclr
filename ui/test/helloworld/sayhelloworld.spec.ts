@@ -14,6 +14,8 @@ function wait() {
         });
 }
 
+// tslint:disable:no-unused-expression
+
 describe("SayHelloWorld test suite", () => {
     let component: ComponentTester;
 

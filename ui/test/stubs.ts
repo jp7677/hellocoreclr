@@ -60,5 +60,5 @@ export class ValidationControllerStub {
 
     public validate() {
         return Promise.resolve({valid: this.valid});
-    };
+    }
 }

@@ -107,8 +107,8 @@
     "devDependencies": {
       "aurelia-testing": "npm:aurelia-testing@1.0.0-beta.3.0.1",
       "chai": "npm:chai@~3.5.0",
-      "mocha": "npm:mocha@~3.2.0",
-      "sinon": "npm:sinon@~1.17.7"
+      "mocha": "npm:mocha@~3.4.1",
+      "sinon": "npm:sinon@~2.2.0"
     }
   }
 }

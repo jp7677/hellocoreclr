@@ -39,10 +39,10 @@ System.config({
     "font-awesome": "npm:font-awesome@4.7.0",
     "jquery": "npm:jquery@3.2.1",
     "json": "github:systemjs/plugin-json@0.3.0",
-    "mocha": "npm:mocha@3.2.0",
+    "mocha": "npm:mocha@3.4.1",
     "moment": "npm:moment@2.18.1",
     "nprogress": "github:rstacruz/nprogress@0.2.0",
-    "sinon": "npm:sinon@1.17.7",
+    "sinon": "npm:sinon@2.2.0",
     "text": "github:systemjs/plugin-text@0.0.9",
     "toastr": "npm:toastr@2.1.2",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -50,6 +50,9 @@ System.config({
     },
     "github:jspm/nodelibs-buffer@0.1.1": {
       "buffer": "npm:buffer@5.0.6"
+    },
+    "github:jspm/nodelibs-path@0.1.0": {
+      "path-browserify": "npm:path-browserify@0.0.0"
     },
     "github:jspm/nodelibs-process@0.1.2": {
       "process": "npm:process@0.11.10"
@@ -221,12 +224,15 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.1",
       "type-detect": "npm:type-detect@0.1.1"
     },
+    "npm:diff@3.2.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:font-awesome@4.7.0": {
       "css": "github:systemjs/plugin-css@0.1.33"
     },
-    "npm:formatio@1.1.1": {
+    "npm:formatio@1.2.0": {
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "samsam": "npm:samsam@1.1.2"
+      "samsam": "npm:samsam@1.2.1"
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
@@ -245,23 +251,44 @@ System.config({
       "lodash.isarguments": "npm:lodash.isarguments@3.1.0",
       "lodash.isarray": "npm:lodash.isarray@3.0.4"
     },
-    "npm:mocha@3.2.0": {
+    "npm:mocha@3.4.1": {
       "css": "github:systemjs/plugin-css@0.1.33",
       "debug": "npm:debug@2.6.7",
       "json3": "npm:json3@3.3.2",
       "lodash.create": "npm:lodash.create@3.1.1"
+    },
+    "npm:native-promise-only@0.8.1": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:path-browserify@0.0.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:path-to-regexp@1.7.0": {
+      "isarray": "npm:isarray@0.0.1"
     },
     "npm:process@0.11.10": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
     },
-    "npm:sinon@1.17.7": {
-      "formatio": "npm:formatio@1.1.1",
-      "lolex": "npm:lolex@1.3.2",
+    "npm:sinon@2.2.0": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.1",
+      "diff": "npm:diff@3.2.0",
+      "formatio": "npm:formatio@1.2.0",
+      "lolex": "npm:lolex@1.6.0",
+      "native-promise-only": "npm:native-promise-only@0.8.1",
+      "path-to-regexp": "npm:path-to-regexp@1.7.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "samsam": "npm:samsam@1.1.2",
-      "util": "npm:util@0.10.3"
+      "samsam": "npm:samsam@1.2.1",
+      "text-encoding": "npm:text-encoding@0.6.4",
+      "type-detect": "npm:type-detect@4.0.3"
+    },
+    "npm:text-encoding@0.6.4": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:toastr@2.1.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"

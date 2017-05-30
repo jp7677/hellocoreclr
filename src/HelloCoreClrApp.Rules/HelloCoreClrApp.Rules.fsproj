@@ -10,8 +10,8 @@
   <ItemGroup>
     <Compile Include="SayHelloworldRule.fs" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+  <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="4.1.17" />
-    <PackageReference Include="FSharp.Net.Sdk" Version="1.0.4" PrivateAssets="All" />
+    <PackageReference Include="FSharp.Net.Sdk" Version="1.0.5" PrivateAssets="All" />
   </ItemGroup>
 </Project>

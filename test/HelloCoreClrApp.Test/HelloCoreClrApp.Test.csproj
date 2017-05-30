@@ -7,7 +7,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <OutputType>Library</OutputType>
   </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
+  <ItemGroup>
     <ProjectReference Include="../../src/HelloCoreClrApp/HelloCoreClrApp.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.2" />

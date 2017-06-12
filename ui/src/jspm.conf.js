@@ -34,16 +34,16 @@ System.config({
     "aurelia-validation": "npm:aurelia-validation@1.0.0",
     "aurelia/templating": "npm:aurelia-templating@1.4.2",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
-    "chai": "npm:chai@3.5.0",
+    "chai": "npm:chai@4.0.2",
     "fetch": "github:github/fetch@2.0.3",
     "font-awesome": "npm:font-awesome@4.7.0",
     "jquery": "npm:jquery@3.2.1",
     "json": "github:systemjs/plugin-json@0.3.0",
-    "mocha": "npm:mocha@3.4.1",
+    "mocha": "npm:mocha@3.4.2",
     "moment": "npm:moment@2.18.1",
     "nprogress": "github:rstacruz/nprogress@0.2.0",
-    "sinon": "npm:sinon@2.2.0",
-    "text": "github:systemjs/plugin-text@0.0.9",
+    "sinon": "npm:sinon@2.3.4",
+    "text": "github:systemjs/plugin-text@0.0.11",
     "toastr": "npm:toastr@2.1.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
@@ -64,7 +64,7 @@ System.config({
       "vm-browserify": "npm:vm-browserify@0.0.4"
     },
     "github:rstacruz/nprogress@0.2.0": {
-      "css": "github:systemjs/plugin-css@0.1.33"
+      "css": "github:systemjs/plugin-css@0.1.35"
     },
     "github:twbs/bootstrap@3.3.7": {
       "jquery": "npm:jquery@3.2.1"
@@ -209,26 +209,27 @@ System.config({
       "base64-js": "npm:base64-js@1.2.0",
       "ieee754": "npm:ieee754@1.1.8"
     },
-    "npm:chai@3.5.0": {
+    "npm:chai@4.0.2": {
       "assertion-error": "npm:assertion-error@1.0.2",
-      "buffer": "github:jspm/nodelibs-buffer@0.1.1",
-      "deep-eql": "npm:deep-eql@0.1.3",
+      "check-error": "npm:check-error@1.0.2",
+      "deep-eql": "npm:deep-eql@2.0.2",
+      "get-func-name": "npm:get-func-name@2.0.0",
+      "pathval": "npm:pathval@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.2",
-      "type-detect": "npm:type-detect@1.0.0"
+      "type-detect": "npm:type-detect@4.0.3"
     },
-    "npm:debug@2.6.7": {
+    "npm:debug@2.6.8": {
       "ms": "npm:ms@2.0.0"
     },
-    "npm:deep-eql@0.1.3": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.1",
-      "type-detect": "npm:type-detect@0.1.1"
+    "npm:deep-eql@2.0.2": {
+      "type-detect": "npm:type-detect@3.0.0"
     },
     "npm:diff@3.2.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:font-awesome@4.7.0": {
-      "css": "github:systemjs/plugin-css@0.1.33"
+      "css": "github:systemjs/plugin-css@0.1.35"
     },
     "npm:formatio@1.2.0": {
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -251,9 +252,9 @@ System.config({
       "lodash.isarguments": "npm:lodash.isarguments@3.1.0",
       "lodash.isarray": "npm:lodash.isarray@3.0.4"
     },
-    "npm:mocha@3.4.1": {
-      "css": "github:systemjs/plugin-css@0.1.33",
-      "debug": "npm:debug@2.6.7",
+    "npm:mocha@3.4.2": {
+      "css": "github:systemjs/plugin-css@0.1.35",
+      "debug": "npm:debug@2.6.8",
       "json3": "npm:json3@3.3.2",
       "lodash.create": "npm:lodash.create@3.1.1"
     },
@@ -274,7 +275,7 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
     },
-    "npm:sinon@2.2.0": {
+    "npm:sinon@2.3.4": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.1",
       "diff": "npm:diff@3.2.0",
       "formatio": "npm:formatio@1.2.0",

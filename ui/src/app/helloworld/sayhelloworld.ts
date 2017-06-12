@@ -8,9 +8,9 @@ import {Notifier} from "./notifier";
 
 @inject(HttpClient, NewInstance.of(ValidationController))
 export class SayHelloWorld {
-    public inputText: string;
+    public inputText: string = "";
     public inputTextHadFocus: boolean;
-    public greetingText: string;
+    public greetingText: string = "";
 
     private log: Logger = LogManager.getLogger("HelloWorld");
     private httpClient: HttpClient;

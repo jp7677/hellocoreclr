@@ -45,8 +45,6 @@ namespace HelloCoreClrApp
             container.RegisterCollection<IMonitor>(new [] {typeof(DiskMonitor), typeof(CpuMonitor)});
 
             container.Verify();
-
-            Startup.Container = container;
         }
     }
 }

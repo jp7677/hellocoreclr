@@ -34,8 +34,10 @@ namespace HelloCoreClrApp.Test
                 };
                 componentRegistrar.RegisterApplicationComponents();
 
-                Startup.Container = container;
-                server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
+                var startup = new Startup(container);
+                server = new TestServer(new WebHostBuilder()
+                        .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))
+                        .Configure(applicationBuilder => startup.Configure(applicationBuilder)));
             }
         }
 

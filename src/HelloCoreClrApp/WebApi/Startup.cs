@@ -15,16 +15,13 @@ namespace HelloCoreClrApp.WebApi
     public class Startup
     {
         private const string ApiVersion = "v1";
-
         private static readonly Serilog.ILogger Log = Serilog.Log.ForContext<Startup>();
-        public static Container Container { private get; set; }
 
-        public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
+        private readonly Container container;
+
+        public Startup(Container container)
         {
-            Log.Information("Starting up in {0} mode.", env.EnvironmentName);
-
-            //add SeriLog to ASP.NET Core
-            loggerFactory.AddSerilog();
+            this.container = container;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -41,8 +38,8 @@ namespace HelloCoreClrApp.WebApi
             services.AddSwaggerGen(SetupSwagger);
 
             // Add SimpleInjector Controller Activator
-            services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(Container));
-            services.UseSimpleInjectorAspNetRequestScoping(Container);
+            services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
+            services.UseSimpleInjectorAspNetRequestScoping(container);
         }
 
         private static void SetupSwagger(SwaggerGenOptions options)
@@ -60,8 +57,14 @@ namespace HelloCoreClrApp.WebApi
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app)
         {
+            //add SeriLog to ASP.NET Core
+            var loggerFactory = app.ApplicationServices.GetService<ILoggerFactory>();
+            loggerFactory.AddSerilog();
+            
+            var env = app.ApplicationServices.GetService<IHostingEnvironment>();
+            Log.Information("Starting up in {0} mode.", env.EnvironmentName);
+            
             Log.Information("Configuring request pipeline.");
-
             // Serve the default file, if present.
             app.UseDefaultFiles();
             // Add static files to the request pipeline.

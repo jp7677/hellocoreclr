@@ -1,5 +1,6 @@
 ﻿'use strict'
 
+const {argv, paths} = require('./settings')
 const gulp = require('gulp')
 const load = require('gulp-require-tasks')
 const run = require('run-sequence')

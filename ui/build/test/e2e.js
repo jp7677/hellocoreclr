@@ -1,10 +1,11 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const path = require('path')
 const childprocess = require('child_process')
 
-exports.dep = ['serve:wwwroot']
-exports.fn = (gulp, paths, argv, done) => {
+exports.deps = ['serve:wwwroot']
+exports.fn = (gulp, done) => {
   let winExt = /^win/.test(process.platform) ? '.cmd' : ''
   let nodeBinDir = path.join('node_modules', '.bin')
   let protractorBin = path.join(nodeBinDir, 'protractor' + winExt)

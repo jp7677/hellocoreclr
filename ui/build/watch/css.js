@@ -1,6 +1,8 @@
 'use strict'
 
-exports.fn = (gulp, paths, argv, done) => {
+const {argv, paths} = require('../../settings')
+
+exports.fn = (gulp, done) => {
   const browserSync = require('browser-sync').get('server')
 
   return gulp.src([paths.src + '**/*.css', '!' + paths.jspmPackages])

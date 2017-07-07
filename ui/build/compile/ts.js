@@ -1,5 +1,6 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const filter = require('gulp-filter')
 const ts = require('gulp-typescript')
 const sourcemaps = require('gulp-sourcemaps')
@@ -8,8 +9,8 @@ const util = require('gulp-util')
 
 const tsProject = ts.createProject('tsconfig.json')
 
-exports.dep = ['clean:js']
-exports.fn = (gulp, paths, argv, done) => {
+exports.deps = ['clean:js']
+exports.fn = (gulp, done) => {
   let tsResult = tsProject.src()
     .pipe(argv.production ? filter(['**/*', '!test/**']) : util.noop())
     .pipe(!argv.production ? sourcemaps.init() : util.noop())

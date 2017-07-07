@@ -1,11 +1,12 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const htmlreplace = require('gulp-html-replace')
 const filenames = require('gulp-filenames')
 const htmlmin = require('gulp-htmlmin')
 
-exports.dep = ['bundle:systemjs']
-exports.fn = (gulp, paths, argv, done) => {
+exports.deps = ['bundle:systemjs']
+exports.fn = (gulp, done) => {
   let bootstrapjs = filenames.get('bootstrapjs')
 
   return gulp.src(paths.src + 'index.html')

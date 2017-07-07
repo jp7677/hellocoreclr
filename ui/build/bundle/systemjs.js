@@ -1,5 +1,6 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const sourcemaps = require('gulp-sourcemaps')
 const concat = require('gulp-concat')
 const footer = require('gulp-footer')
@@ -9,8 +10,8 @@ const rev = require('gulp-rev')
 const util = require('gulp-util')
 const filenames = require('gulp-filenames')
 
-exports.dep = ['bundle:app']
-exports.fn = (gulp, paths, argv, done) => {
+exports.deps = ['bundle:app']
+exports.fn = (gulp, done) => {
   // Import the systemjs polyfill to keep compatibility with Safari 7 and IE
   let systemjsFiles = [
     paths.src + 'jspm_packages/system-polyfills.js',

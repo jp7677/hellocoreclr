@@ -1,11 +1,12 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const flatten = require('gulp-flatten')
 const filter = require('gulp-filter')
 const replace = require('gulp-replace')
 
-exports.dep = ['bundle:app']
-exports.fn = (gulp, paths, argv, done) => {
+exports.deps = ['bundle:app']
+exports.fn = (gulp, done) => {
   const filterSettingsJs = filter(['app-bundle-settings*.js'], {restore: true})
   const regex = /"?applicationMode"?:\s*"\w*"/
 

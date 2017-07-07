@@ -1,8 +1,9 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const util = require('gulp-util')
 
-exports.fn = (gulp, paths, argv, done) => {
+exports.fn = (gulp, done) => {
   const connect = require('gulp-connect')
   const proxy = require('proxy-middleware')
   const url = require('url')

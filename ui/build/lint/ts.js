@@ -1,8 +1,9 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const util = require('gulp-util')
 
-exports.fn = (gulp, paths, argv, done) => {
+exports.fn = (gulp, done) => {
   if (argv.production) {
     util.log('Skipping \'' + util.colors.cyan('lint:ts') + '\'')
     done()

@@ -1,26 +1,11 @@
 ﻿'use strict'
 
 const gulp = require('gulp')
-const argv = require('yargs')
-  .default('production', false)
-  .default('nobuild', false)
-  .default('nomiddlewareproxy', false)
-  .default('karmareporters', ['mocha', 'coverage', 'remap-coverage'])
-  .argv
 const load = require('gulp-require-tasks')
 const run = require('run-sequence')
 
-const paths = {
-  wwwroot: './wwwroot/',
-  src: './src/',
-  test: './test/',
-  testE2e: './test-e2e/',
-  jspmPackages: './src/jspm_packages/**/*'
-}
-
 load({
   path: process.cwd() + '/build',
-  arguments: [paths, argv]
 })
 
 gulp.task('lint', ['lint:ts', 'lint:css', 'lint:html'])

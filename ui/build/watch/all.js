@@ -1,8 +1,9 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const run = require('run-sequence')
 
-exports.fn = (gulp, paths, argv, done) => {
+exports.fn = (gulp, done) => {
   const browserSync = require('browser-sync').create('server')
   const proxy = require('proxy-middleware')
   const url = require('url')

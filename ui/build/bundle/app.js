@@ -1,9 +1,10 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const bundle = require('aurelia-bundler').bundle
 
-exports.dep = ['compile:ts', 'bundle:prepare']
-exports.fn = (gulp, paths, argv, done) => {
+exports.deps = ['compile:ts', 'bundle:prepare']
+exports.fn = (gulp, done) => {
   return bundle({
     force: true,
     baseURL: paths.src,

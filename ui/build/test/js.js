@@ -1,8 +1,9 @@
 'use strict'
 
+const {argv, paths} = require('../../settings')
 const path = require('path')
 
-exports.fn = (gulp, paths, argv, done) => {
+exports.fn = (gulp, done) => {
   const karma = require('karma').Server
 
   karma.start({

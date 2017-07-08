@@ -1,10 +1,10 @@
 // Import the fetch polyfill before the Aurelia fetch client to keep compatibility with Safari
-import "fetch";
+import "whatwg-fetch";
 
 import "bootstrap";
 import "jquery";
 
-import * as appsettings from "../appsettings.json!";
+import * as appsettings from "../appsettings.json";
 import {Environment} from "./environment";
 import {Statusbar} from "./statusbar";
 
@@ -12,6 +12,7 @@ import {HttpClient} from "aurelia-fetch-client";
 import {Aurelia, Container, LogManager} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
 import {ConsoleAppender} from "aurelia-logging-console";
+import {PLATFORM} from "aurelia-pal";
 
 export async function configure(aurelia: Aurelia) {
     Statusbar.Inc();
@@ -19,7 +20,7 @@ export async function configure(aurelia: Aurelia) {
 
     aurelia.use
         .standardConfiguration()
-        .plugin("aurelia-validation");
+        .plugin(PLATFORM.moduleName("aurelia-validation"));
 
     configureLoggingAppender();
     logAplicationStart(env);

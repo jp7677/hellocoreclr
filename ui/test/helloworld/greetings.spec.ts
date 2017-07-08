@@ -17,8 +17,8 @@ describe("Greetings test suite", () => {
         const responses = new Map<string, any>();
         responses.set("greetings/count", "5");
         responses.set("greetings", [
-            {greeting: "Hello", timestampUtc: new Date(Date.now)},
-            {greeting: "World", timestampUtc: new Date(Date.now)}
+            {greeting: "Hello", timestampUtc: new Date(Date.now())},
+            {greeting: "World", timestampUtc: new Date(Date.now())}
         ]);
         const httpStub = HttpClientStub.okWithResponseMap(responses);
 

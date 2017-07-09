@@ -12,17 +12,17 @@ module.exports = {
     app: [ 'aurelia-bootstrapper' ],
     splash: [ 'app/splash' ]
   },
- module: {
+  module: {
    rules: [
-     { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ },
-     { test: /\.html$/i, use: 'html-loader' },
-     { test: /\.css$/i, use: 'css-loader' },
-     { test: /\.(png|svg|jpg|gif)$/, use: 'file-loader' },
-     { test: /\.(woff|woff2|eot|ttf|otf)$/, use: 'file-loader' },
-     { test: /\.json$/i, use: 'json-loader' },
-   ]
- },
- resolve: {
+      { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ },
+      { test: /\.html$/i, use: 'html-loader' },
+      { test: /\.css$/i, use: 'css-loader' },
+      { test: /\.(png|svg|jpg|gif)$/, use: 'file-loader' },
+      { test: /\.(woff|woff2|eot|ttf|otf)$/, use: 'file-loader' },
+      { test: /\.json$/i, use: 'json-loader' },
+    ]
+  },
+  resolve: {
     extensions: ['.ts', '.js'],
     modules: [src, 'node_modules'],
   },
@@ -36,5 +36,6 @@ module.exports = {
     new CopyWebpackPlugin([{ from: 'src/favicon.ico', to: 'favicon.ico' }]),
     new AureliaPlugin({ aureliaApp: 'app/main' }),
     new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
-  ]
+  ],
+  devtool : 'source-map'
 };

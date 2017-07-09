@@ -64,7 +64,7 @@ Note that Wallabyjs is a commercial extension.
 Use the following command to set up required node packages for these extensions if you haven't installed them globally.
 
 ```bash
-npm install tslint typescript eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise stylelint stylelint-config-standard htmlhint
+npm install tslint typescript eslint eslint-config-standard eslint-plugin-node eslint-plugin-import eslint-plugin-standard eslint-plugin-promise stylelint stylelint-config-standard htmlhint
 ```
 
 Use again

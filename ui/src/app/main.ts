@@ -29,7 +29,7 @@ export async function configure(aurelia: Aurelia) {
 
     await aurelia.start();
 
-    aurelia.setRoot("app/config");
+    aurelia.setRoot(PLATFORM.moduleName("app/config"));
     Statusbar.Done();
 }
 

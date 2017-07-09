@@ -5,13 +5,7 @@ const { ProvidePlugin } = require('webpack');
 const src = path.resolve(__dirname, 'src');
 
 module.exports = {
-  entry: [
-      'aurelia-bootstrapper',
-      'app/main',
-      'app/config',
-      'app/helloworld/sayhelloworld',
-      'app/helloworld/greetings'
-    ],
+  entry: [ 'aurelia-bootstrapper' ],
  module: {
    rules: [
      { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ },

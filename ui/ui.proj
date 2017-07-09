@@ -8,10 +8,8 @@
       <Production Condition="'$(Configuration)'=='Release'">--production</Production>
     </PropertyGroup>
     <Message Text="ui -&gt; wwwroot $(Production)" Importance="high" />
-    <Exec Command="npm install $(Production)" />
-    <Exec Command="node_modules/.bin/jspm install $(Production)" />
-    <Exec Command="node_modules/.bin/typings install $(Production)" />
-    <Exec Command="node_modules/.bin/gulp $(Production)" />
+    <Exec Command="npm install" />
+    <Exec Command="npm run build" />
   </Target>
   <Target Name="Publish" DependsOnTargets="Build">
     <ItemGroup>

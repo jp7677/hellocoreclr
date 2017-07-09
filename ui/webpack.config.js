@@ -1,11 +1,13 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { AureliaPlugin } = require('aurelia-webpack-plugin');
 const { ProvidePlugin } = require('webpack');
 
 const src = path.resolve(__dirname, 'src');
 
 module.exports = {
-  entry: [ 'aurelia-bootstrapper' ],
+  entry: { app: [ 'aurelia-bootstrapper' ] },
  module: {
    rules: [
      { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ },
@@ -21,14 +23,13 @@ module.exports = {
     modules: [src, 'node_modules'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'wwwroot')
   },
   plugins: [
-    new AureliaPlugin({ aureliaApp: "app/main" }),
-    new ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery',
-    }),
+    new AureliaPlugin({ aureliaApp: 'app/main' }),
+    new HtmlWebpackPlugin({ template: 'src/index.ejs' }),
+    new CopyWebpackPlugin([{ from: 'src/favicon.ico', to: 'favicon.ico' }]),
+    new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
   ]
 };

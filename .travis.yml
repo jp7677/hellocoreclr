@@ -33,5 +33,3 @@ cache:
     - $HOME/.nuget/packages
     - node_modules
     - ui/node_modules
-    - ui/typings
-    - ui/src/jspm_packages

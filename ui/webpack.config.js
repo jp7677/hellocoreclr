@@ -1,4 +1,5 @@
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { AureliaPlugin } = require('aurelia-webpack-plugin');
@@ -30,9 +31,10 @@ module.exports = {
     path: path.resolve(__dirname, 'wwwroot')
   },
   plugins: [
-    new AureliaPlugin({ aureliaApp: 'app/main' }),
+    new CleanWebpackPlugin(['wwwroot']),
     new HtmlWebpackPlugin({ template: 'src/index.ejs' }),
     new CopyWebpackPlugin([{ from: 'src/favicon.ico', to: 'favicon.ico' }]),
+    new AureliaPlugin({ aureliaApp: 'app/main' }),
     new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
   ]
 };

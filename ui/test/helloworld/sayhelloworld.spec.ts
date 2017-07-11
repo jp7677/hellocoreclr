@@ -1,4 +1,5 @@
 import {NewInstance} from "aurelia-framework";
+import {PLATFORM} from "aurelia-pal";
 import {ValidationController} from "aurelia-validation";
 import * as chai from "chai";
 import {SayHelloWorld as SayHelloWorldMessage} from "../../src/app/helloworld/messages/sayhelloworld";
@@ -26,7 +27,7 @@ describe("SayHelloWorld test suite", () => {
         component.bootstrap((aurelia) =>
             aurelia.use
             .standardConfiguration()
-            .plugin("aurelia-validation"));
+            .plugin(PLATFORM.moduleName("aurelia-validation")));
         await component.create(bootstrap);
     });
 

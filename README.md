@@ -40,7 +40,7 @@ to restore packages, bindings, building and for assembling the web application. 
 
 ```bash
 dotnet test test/HelloCoreClrApp.Test/HelloCoreClrApp.Test.csproj
-ui/node_modules/.bin/gulp unit-tests --cwd ui --nobuild
+npm run unit-tests --prefix ui
 ui/node_modules/.bin/gulp e2e-tests --cwd ui --nobuild --nomiddlewareproxy
 ```
 

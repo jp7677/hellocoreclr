@@ -22,7 +22,7 @@ before_test:
 
 test_script:
 - packages\OpenCover.4.6.690\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -returntargetcode -mergeoutput -output:reports\coverage-dotnet.xml
-- ui\node_modules\.bin\gulp unit-tests --cwd ui --nobuild --karmareporters progress,coverage,remap-coverage,appveyor
+- npm run unit-tests --prefix ui -- --reporters progress,coverage,remap-coverage,appveyor
 - ui\node_modules\.bin\gulp e2e-tests --cwd ui --nobuild --nomiddlewareproxy
 
 after_test:

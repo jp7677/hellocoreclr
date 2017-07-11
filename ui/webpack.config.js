@@ -1,7 +1,6 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { AureliaPlugin } = require('aurelia-webpack-plugin')
 const { optimize: { CommonsChunkPlugin, UglifyJsPlugin }, ProvidePlugin } = require('webpack')
 
@@ -37,8 +36,7 @@ module.exports = {
     new AureliaPlugin({ aureliaApp: 'app/main' }),
     new CommonsChunkPlugin({ name: 'bootstrap' }),
     new UglifyJsPlugin({ comments: false, sourceMap: true }),
-    new HtmlWebpackPlugin({ template: 'src/index.ejs', chunks: ['bootstrap', 'splash', 'app'], chunksSortMode: (a, b) => 1 }),
-    new CopyWebpackPlugin([{ from: 'src/favicon.ico', to: 'favicon.ico' }])
+    new HtmlWebpackPlugin({ template: 'src/index.ejs', favicon: 'src/favicon.ico', chunks: ['bootstrap', 'splash', 'app'], chunksSortMode: (a, b) => 1 })
   ],
   devtool: 'source-map'
 }

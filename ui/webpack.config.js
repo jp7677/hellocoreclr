@@ -2,7 +2,7 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { AureliaPlugin } = require('aurelia-webpack-plugin')
-const { optimize: { CommonsChunkPlugin, UglifyJsPlugin }, ProvidePlugin } = require('webpack')
+const { DefinePlugin, optimize: { CommonsChunkPlugin, UglifyJsPlugin }, ProvidePlugin } = require('webpack')
 const noop = require('noop-webpack-plugin')
 
 const src = path.resolve(__dirname, 'src')
@@ -35,6 +35,7 @@ module.exports = (env) => {
       devtoolModuleFilenameTemplate: './[resource-path]'
     },
     plugins: [
+      new DefinePlugin({ APPLICATIONMODE: JSON.stringify(isProduction ? 'Production' : 'Development') }),
       new CleanWebpackPlugin(['wwwroot']),
       new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
       new AureliaPlugin({ aureliaApp: 'app/main' }),

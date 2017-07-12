@@ -1,3 +1,5 @@
+declare var APPLICATIONMODE: string;
+
 import * as chai from "chai";
 import {Environment} from "../src/app/environment";
 
@@ -6,7 +8,9 @@ import {Environment} from "../src/app/environment";
 describe("Environment test suite", () => {
 
     it("should initialize correctly", () => {
-        const appsettings = {applicationMode: "appMode", baseUrl: "api"};
+        // tslint:disable:no-eval
+        eval("APPLICATIONMODE = 'appMode';");
+        const appsettings = {baseUrl: "api"};
         const sut = new Environment(appsettings);
 
         chai.expect(sut.applicationMode).to.equals("appMode");
@@ -17,7 +21,9 @@ describe("Environment test suite", () => {
     });
 
     it("should detect development", () => {
-        const appsettings = {applicationMode: "Development", baseUrl: ""};
+        // tslint:disable:no-eval
+        eval("APPLICATIONMODE = 'Development';");
+        const appsettings = {baseUrl: ""};
         const sut = new Environment(appsettings);
 
         chai.expect(sut.IsDevelopment()).to.be.true;
@@ -26,7 +32,9 @@ describe("Environment test suite", () => {
     });
 
     it("should detect staging", () => {
-        const appsettings = {applicationMode: "Staging", baseUrl: ""};
+        // tslint:disable:no-eval
+        eval("APPLICATIONMODE = 'Staging';");
+        const appsettings = {baseUrl: ""};
         const sut = new Environment(appsettings);
 
         chai.expect(sut.IsDevelopment()).to.be.false;
@@ -35,7 +43,9 @@ describe("Environment test suite", () => {
     });
 
     it("should detect production", () => {
-        const appsettings = {applicationMode: "Production", baseUrl: ""};
+        // tslint:disable:no-eval
+        eval("APPLICATIONMODE = 'Production';");
+        const appsettings = {baseUrl: ""};
         const sut = new Environment(appsettings);
 
         chai.expect(sut.IsDevelopment()).to.be.false;

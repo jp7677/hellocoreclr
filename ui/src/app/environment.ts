@@ -1,9 +1,11 @@
+declare var APPLICATIONMODE: string;
+
 export class Environment {
     public applicationMode: string;
     public baseUrl: string;
 
     constructor(appsettings) {
-        this.applicationMode = appsettings.applicationMode;
+        this.applicationMode = APPLICATIONMODE;
         this.baseUrl = appsettings.baseUrl;
     }
 

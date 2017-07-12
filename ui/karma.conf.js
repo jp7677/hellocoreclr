@@ -18,8 +18,13 @@ module.exports = (config) => {
     },
 
     webpack: {
-      module: webpackConfig.module,
-      resolve: webpackConfig.resolve
+      module: {
+        rules: [
+          { test: /\.ts$/, use: { loader: 'ts-loader', options: { compilerOptions: { 'alwaysStrict': false, 'noImplicitUseStrict': true } } }, exclude: /node_modules/ },
+          { test: /\.css$/i, use: { loader: 'css-loader' } }
+        ]
+      },
+      resolve: webpackConfig().resolve
     },
 
     webpackMiddleware: {

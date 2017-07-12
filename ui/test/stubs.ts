@@ -45,6 +45,10 @@ export class RouterConfigurationStub {
     public map = sinon.stub();
 }
 
+export class ValidationRulesStub {
+    public setRules = sinon.stub();
+}
+
 export class ValidationControllerStub {
 
     public static valid() {

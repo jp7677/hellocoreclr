@@ -5,8 +5,9 @@ import {ControllerValidateResult, ValidationController, ValidationRules} from "a
 
 import {SayHelloWorld as SayHelloWorldMessage} from "./messages/sayhelloworld";
 import {Notifier} from "./notifier";
+import {SayHelloWorldValidationRules} from "./sayhelloworld-validationrules";
 
-@inject(HttpClient, NewInstance.of(ValidationController))
+@inject(HttpClient, NewInstance.of(ValidationController), NewInstance.of(SayHelloWorldValidationRules))
 export class SayHelloWorld {
     public inputText: string = "";
     public inputTextHadFocus: boolean;
@@ -15,21 +16,16 @@ export class SayHelloWorld {
     private log: Logger = LogManager.getLogger("HelloWorld");
     private httpClient: HttpClient;
     private controller: ValidationController;
+    private validation: SayHelloWorldValidationRules;
     private notifier: Notifier;
 
-    constructor(private $httpClient, private $controller) {
+    constructor(private $httpClient, private $controller, private $validation) {
         this.httpClient = $httpClient;
         this.controller = $controller;
+        this.validation = $validation;
         this.notifier = new Notifier();
 
-        ValidationRules
-            .ensure("inputText")
-                .displayName("Greeting name")
-                .required()
-                .minLength(3)
-                .maxLength(20)
-                .matches(/^[\w\u00C0-\u024f]+$/)
-            .on(this);
+        this.validation.setRules(this);
     }
 
     public async inputTextOnfocus() {

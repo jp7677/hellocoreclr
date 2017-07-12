@@ -1,13 +1,8 @@
-import {NewInstance} from "aurelia-framework";
-import {PLATFORM} from "aurelia-pal";
-import {ValidationController} from "aurelia-validation";
 import * as chai from "chai";
 import {SayHelloWorld as SayHelloWorldMessage} from "../../src/app/helloworld/messages/sayhelloworld";
 import {SayHelloWorld} from "../../src/app/helloworld/sayhelloworld";
 
-import {bootstrap} from "aurelia-bootstrapper";
-import {ComponentTester, StageComponent} from "aurelia-testing";
-import {HttpClientStub, ValidationControllerStub} from "../stubs";
+import {HttpClientStub, ValidationControllerStub, ValidationRulesStub} from "../stubs";
 
 function wait() {
     return new Promise((resolve, reject) => {
@@ -17,27 +12,12 @@ function wait() {
 
 // tslint:disable:no-unused-expression
 
-describe.skip("SayHelloWorld test suite", () => {
-    let component: ComponentTester;
-
-    before(async () => {
-        component = StageComponent.withResources()
-            .inView("<div></div>")
-            .boundTo({});
-        component.bootstrap((aurelia) =>
-            aurelia.use
-            .standardConfiguration()
-            .plugin(PLATFORM.moduleName("aurelia-validation")));
-        // The next line currently fails with "Unable to find module with ID: aurelia-pal-browser"
-        // await component.create(bootstrap);
-    });
-
-    after(() => {
-        component.dispose();
-    });
-
+describe("SayHelloWorld test suite", () => {
     it("should do nothing when there is no valid input", async () => {
-        const sut = new SayHelloWorld(HttpClientStub.ok(), ValidationControllerStub.notValid());
+        const sut = new SayHelloWorld(
+            HttpClientStub.ok(),
+            ValidationControllerStub.notValid(),
+            new ValidationRulesStub());
         sut.inputText = "//";
         sut.greetingText = "Hello";
 
@@ -47,7 +27,10 @@ describe.skip("SayHelloWorld test suite", () => {
     });
 
     it("focus on input should validate", async () => {
-        const sut = new SayHelloWorld(HttpClientStub.ok(), ValidationControllerStub.notValid());
+        const sut = new SayHelloWorld(
+            HttpClientStub.ok(),
+            ValidationControllerStub.notValid(),
+            new ValidationRulesStub());
         sut.inputText = "Hello";
 
         await sut.inputTextOnfocus();
@@ -56,8 +39,10 @@ describe.skip("SayHelloWorld test suite", () => {
     });
 
     it("should handle a valid response", async () => {
-        const sut = new SayHelloWorld(HttpClientStub.ok({greeting: "Hello World!"}),
-            ValidationControllerStub.valid());
+        const sut = new SayHelloWorld(
+            HttpClientStub.ok({greeting: "Hello World!"}),
+            ValidationControllerStub.valid(),
+            new ValidationRulesStub());
         sut.inputText = "Hello";
 
         await sut.submit();
@@ -67,7 +52,10 @@ describe.skip("SayHelloWorld test suite", () => {
     });
 
     it("should handle an error response", async () => {
-        const sut = new SayHelloWorld(HttpClientStub.error(), ValidationControllerStub.valid());
+        const sut = new SayHelloWorld(
+            HttpClientStub.error(),
+            ValidationControllerStub.valid(),
+            new ValidationRulesStub());
         sut.inputText = "Error";
         sut.greetingText = "Hello";
 

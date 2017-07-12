@@ -21,12 +21,12 @@ module.exports = (env) => {
       rules: [
         { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader', options: { configFile: 'tslint.json' } },
         { test: /\.html$/, enforce: 'pre', loader: 'htmlhint-loader', options: { configFile: '.htmlhintrc' } },
-        { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ },
-        { test: /\.html$/i, use: { loader: 'html-loader', options: { minimize: isProduction } } },
-        { test: /\.css$/i, use: { loader: 'css-loader', options: { minimize: isProduction } } },
-        { test: /\.(png|svg|jpg|gif)$/, use: 'file-loader' },
-        { test: /\.(woff|woff2|eot|ttf|otf)$/, use: 'file-loader' },
-        { test: /\.json$/i, use: 'json-loader' }
+        { test: /\.ts$/, loader: 'ts-loader', exclude: /node_modules/ },
+        { test: /\.html$/i, loader: 'html-loader', options: { minimize: isProduction } },
+        { test: /\.css$/i, loader: 'css-loader', options: { minimize: isProduction } },
+        { test: /\.(png|svg|jpg|gif)$/, loader: 'file-loader' },
+        { test: /\.(woff|woff2|eot|ttf|otf)$/, loader: 'file-loader' },
+        { test: /\.json$/i, loader: 'json-loader' }
       ]
     },
     resolve: {

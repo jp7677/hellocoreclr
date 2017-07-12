@@ -14,7 +14,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ },
-      { test: /\.html$/i, use: 'html-loader' },
+      { test: /\.html$/i, use: { loader: 'html-loader', options: { minimize: true } } },
       { test: /\.css$/i, use: { loader: 'css-loader', options: { minimize: true } } },
       { test: /\.(png|svg|jpg|gif)$/, use: 'file-loader' },
       { test: /\.(woff|woff2|eot|ttf|otf)$/, use: 'file-loader' },

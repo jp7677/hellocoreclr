@@ -56,7 +56,6 @@ module.exports = (env) => {
       })
     ],
     devtool: !isProduction ? 'source-map' : undefined,
-
     devServer: {
       contentBase: wwwroot,
       port: 3000,

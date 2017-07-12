@@ -10,16 +10,13 @@ module.exports = (config) => {
   config.set({
     logLevel: 'warn',
     frameworks: ['mocha', 'chai', 'sinon'],
-
     files: [
       'node_modules/core-js/client/shim.js',
       'test/**/*.spec.ts'
     ],
-
     preprocessors: {
       'test/**/*.spec.ts': ['webpack']
     },
-
     webpack: {
       module: {
         rules: [
@@ -33,25 +30,20 @@ module.exports = (config) => {
         modules: [src, nodeModules]
       }
     },
-
     webpackMiddleware: {
       stats: 'errors-only'
     },
-
     autoWatchBatchDelay: 10000,
     singleRun: true,
     browsers: ['PhantomJS'],
     mime: {
       'text/x-typescript': ['ts']
     },
-
     captureTimeout: 5000,
     browserDisconnectTimeout: 5000,
     browserDisconnectTolerance: 5,
     browserNoActivityTimeout: 10000,
-
     reporters: [ 'mocha', 'coverage-istanbul' ],
-
     coverageIstanbulReporter: {
       reports: [ 'text-summary', 'json' ],
       fixWebpackSourcePaths: true,

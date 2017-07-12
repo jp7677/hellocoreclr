@@ -1,4 +1,8 @@
-const webpackConfig = require('./webpack.config')
+const path = require('path')
+
+const src = path.resolve(__dirname, 'src')
+const test = path.resolve(__dirname, 'test')
+const nodeModules = path.resolve(__dirname, 'node_modules')
 
 module.exports = (config) => {
   'use strict'
@@ -13,13 +17,21 @@ module.exports = (config) => {
     ],
 
     preprocessors: {
-      'src/app/**/*.ts': ['webpack', 'coverage', 'sourcemap'],
       'test/**/*.spec.ts': ['webpack']
     },
 
     webpack: {
-      module: webpackConfig().module,
-      resolve: webpackConfig().resolve
+      module: {
+        rules: [
+          { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
+          { test: /\.css$/i, loader: 'css-loader' },
+          { test: /\.ts$/i, enforce: 'post', loader: 'istanbul-instrumenter-loader', exclude: test }
+        ]
+      },
+      resolve: {
+        extensions: ['.ts', '.js'],
+        modules: [src, nodeModules]
+      }
     },
 
     webpackMiddleware: {
@@ -38,17 +50,13 @@ module.exports = (config) => {
     browserDisconnectTolerance: 5,
     browserNoActivityTimeout: 10000,
 
-    reporters: ['mocha', 'coverage', 'remap-coverage'],
-    mochaReporter: {
-      output: 'autowatch'
-    },
-    coverageReporter: {
-      type: 'in-memory',
-      includeAllSources: true
-    },
-    remapCoverageReporter: {
-      'text-summary': null,
-      json: __dirname.replace('\\', '/') + '/../reports/coverage-ts.json'
+    reporters: [ 'mocha', 'coverage-istanbul' ],
+
+    coverageIstanbulReporter: {
+      reports: [ 'text-summary', 'json' ],
+      fixWebpackSourcePaths: true,
+      dir: __dirname.replace('\\', '/') + '/../reports/',
+      'report-config': { 'json': { file: 'coverage-ts.json' } }
     }
   })
 }

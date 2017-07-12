@@ -8,6 +8,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const src = path.resolve(__dirname, 'src')
 const wwwroot = path.resolve(__dirname, 'wwwroot')
+const nodeModules = path.resolve(__dirname, 'node_modules')
 
 module.exports = (env) => {
   const isProduction = env === 'production'
@@ -21,7 +22,7 @@ module.exports = (env) => {
       rules: [
         { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader', options: { configFile: 'tslint.json' } },
         { test: /\.html$/, enforce: 'pre', loader: 'htmlhint-loader', options: { configFile: '.htmlhintrc' } },
-        { test: /\.ts$/, loader: 'ts-loader', exclude: /node_modules/ },
+        { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
         { test: /\.html$/i, loader: 'html-loader', options: { minimize: isProduction } },
         { test: /\.css$/i, loader: 'css-loader', options: { minimize: isProduction } },
         { test: /\.(png|svg|jpg|gif)$/, loader: 'file-loader' },
@@ -31,7 +32,7 @@ module.exports = (env) => {
     },
     resolve: {
       extensions: ['.ts', '.js'],
-      modules: [src, 'node_modules']
+      modules: [src, nodeModules]
     },
     output: {
       filename: '[name].bundle.js',

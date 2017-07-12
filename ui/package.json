@@ -78,6 +78,7 @@
     "build": "webpack",
     "build:production": "webpack --env production",
     "unit-tests": "karma start",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server",
+    "watch": "webpack-dev-server --hot --inline"
   }
 }

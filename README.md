@@ -80,7 +80,7 @@ to restore packages and bindings. Finally run the following commands in separate
 export ASPNETCORE_ENVIRONMENT=Development
 (cd src/HelloCoreClrApp;dotnet watch run)
 (cd test/HelloCoreClrApp.Test;dotnet watch test)
-ui/node_modules/.bin/gulp watch --cwd ui
+npm run watch --prefix ui
 ```
 
 Your favorite browser should fire up and should open <http://localhost:3000/>. Happy coding!

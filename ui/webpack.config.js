@@ -6,6 +6,7 @@ const { DefinePlugin, optimize: { CommonsChunkPlugin, UglifyJsPlugin }, ProvideP
 const noop = require('noop-webpack-plugin')
 
 const src = path.resolve(__dirname, 'src')
+const wwwroot = path.resolve(__dirname, 'wwwroot')
 
 module.exports = (env) => {
   const isProduction = env === 'production'
@@ -31,24 +32,31 @@ module.exports = (env) => {
     },
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'wwwroot'),
+      path: wwwroot,
       devtoolModuleFilenameTemplate: './[resource-path]'
     },
     plugins: [
       new DefinePlugin({ APPLICATIONMODE: JSON.stringify(isProduction ? 'Production' : 'Development') }),
-      new CleanWebpackPlugin(['wwwroot']),
+      new CleanWebpackPlugin([wwwroot]),
       new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
       new AureliaPlugin({ aureliaApp: 'app/main' }),
       new CommonsChunkPlugin({ name: 'bootstrap' }),
       isProduction ? new UglifyJsPlugin({ comments: false }) : noop(),
       new HtmlWebpackPlugin({
-        template: 'src/index.ejs',
-        favicon: 'src/favicon.ico',
+        template: path.resolve(src, 'index.ejs'),
+        favicon: path.resolve(src, 'favicon.ico'),
         chunks: ['bootstrap', 'splash', 'app'],
         chunksSortMode: (a, b) => 1,
         minify: isProduction ? { collapseWhitespace: true, collapseInlineTagWhitespace: true } : false
       })
     ],
-    devtool: !isProduction ? 'source-map' : undefined
+    devtool: !isProduction ? 'source-map' : undefined,
+
+    devServer: {
+      contentBase: wwwroot,
+      port: 3000,
+      historyApiFallback: true,
+      proxy: { '/api': 'http://localhost:5000' }
+    }
   }
 }

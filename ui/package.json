@@ -32,7 +32,8 @@
     "style-loader": "^0.18.2",
     "ts-loader": "^2.2.2",
     "typescript": "^2.4.1",
-    "webpack": "^3.2.0"
+    "webpack": "^3.2.0",
+    "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
     "@types/chai": "~4.0.1",
@@ -76,6 +77,7 @@
   "scripts": {
     "build": "webpack",
     "build:production": "webpack --env production",
-    "unit-tests": "karma start"
+    "unit-tests": "karma start",
+    "serve": "webpack-dev-server"
   }
 }

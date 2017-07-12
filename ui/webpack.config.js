@@ -36,7 +36,16 @@ module.exports = {
     new AureliaPlugin({ aureliaApp: 'app/main' }),
     new CommonsChunkPlugin({ name: 'bootstrap' }),
     new UglifyJsPlugin({ comments: false, sourceMap: true }),
-    new HtmlWebpackPlugin({ template: 'src/index.ejs', favicon: 'src/favicon.ico', chunks: ['bootstrap', 'splash', 'app'], chunksSortMode: (a, b) => 1 })
+    new HtmlWebpackPlugin({
+      template: 'src/index.ejs',
+      favicon: 'src/favicon.ico',
+      chunks: ['bootstrap', 'splash', 'app'],
+      chunksSortMode: (a, b) => 1,
+      minify: {
+        collapseWhitespace: true,
+        collapseInlineTagWhitespace: true
+      }
+    })
   ],
   devtool: 'source-map'
 }

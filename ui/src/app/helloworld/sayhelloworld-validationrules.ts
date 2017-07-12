@@ -4,7 +4,7 @@ import { SayHelloWorld } from "./sayhelloworld";
 export class SayHelloWorldValidationRules {
     public setRules(instance: SayHelloWorld) {
         ValidationRules
-            .ensure("inputText")
+            .ensure((p: SayHelloWorld) => p.inputText)
                 .displayName("Greeting name")
                 .required()
                 .minLength(3)

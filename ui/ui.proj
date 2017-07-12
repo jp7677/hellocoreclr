@@ -5,11 +5,11 @@
   <Target Name="_GenerateRestoreGraphProjectEntry" />
   <Target Name="Build">
     <PropertyGroup>
-      <Production Condition="'$(Configuration)'=='Release'">--production</Production>
+      <Production Condition="'$(Configuration)'=='Release'">:production</Production>
     </PropertyGroup>
     <Message Text="ui -&gt; wwwroot $(Production)" Importance="high" />
     <Exec Command="npm install" />
-    <Exec Command="npm run build" />
+    <Exec Command="npm run build$(Production)" />
   </Target>
   <Target Name="Publish" DependsOnTargets="Build">
     <ItemGroup>

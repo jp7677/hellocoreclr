@@ -1,3 +1,5 @@
+declare var APPLICATIONMODE: string;
+
 // Import the fetch polyfill before the Aurelia fetch client to keep compatibility with Safari
 import "whatwg-fetch";
 
@@ -16,7 +18,7 @@ import {PLATFORM} from "aurelia-pal";
 
 export async function configure(aurelia: Aurelia) {
     Statusbar.Inc();
-    const env: Environment = new Environment(appsettings);
+    const env: Environment = new Environment(appsettings, APPLICATIONMODE);
 
     aurelia.use
         .standardConfiguration()

@@ -1,5 +1,3 @@
-declare var APPLICATIONMODE: string;
-
 import * as chai from "chai";
 import {Environment} from "../src/app/environment";
 
@@ -8,10 +6,7 @@ import {Environment} from "../src/app/environment";
 describe("Environment test suite", () => {
 
     it("should initialize correctly", () => {
-        // tslint:disable:no-eval
-        eval("APPLICATIONMODE = 'appMode';");
-        const appsettings = {baseUrl: "api"};
-        const sut = new Environment(appsettings);
+        const sut = new Environment({baseUrl: "api"}, "appMode");
 
         chai.expect(sut.applicationMode).to.equals("appMode");
         chai.expect(sut.baseUrl).to.equals("api");
@@ -21,10 +16,7 @@ describe("Environment test suite", () => {
     });
 
     it("should detect development", () => {
-        // tslint:disable:no-eval
-        eval("APPLICATIONMODE = 'Development';");
-        const appsettings = {baseUrl: ""};
-        const sut = new Environment(appsettings);
+        const sut = new Environment({baseUrl: ""}, "Development");
 
         chai.expect(sut.IsDevelopment()).to.be.true;
         chai.expect(sut.IsStaging()).to.be.false;
@@ -32,10 +24,7 @@ describe("Environment test suite", () => {
     });
 
     it("should detect staging", () => {
-        // tslint:disable:no-eval
-        eval("APPLICATIONMODE = 'Staging';");
-        const appsettings = {baseUrl: ""};
-        const sut = new Environment(appsettings);
+        const sut = new Environment({baseUrl: ""}, "Staging");
 
         chai.expect(sut.IsDevelopment()).to.be.false;
         chai.expect(sut.IsStaging()).to.be.true;
@@ -43,10 +32,7 @@ describe("Environment test suite", () => {
     });
 
     it("should detect production", () => {
-        // tslint:disable:no-eval
-        eval("APPLICATIONMODE = 'Production';");
-        const appsettings = {baseUrl: ""};
-        const sut = new Environment(appsettings);
+        const sut = new Environment({baseUrl: ""}, "Production");
 
         chai.expect(sut.IsDevelopment()).to.be.false;
         chai.expect(sut.IsStaging()).to.be.false;

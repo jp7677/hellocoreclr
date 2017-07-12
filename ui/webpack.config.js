@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { AureliaPlugin } = require('aurelia-webpack-plugin')
 const { DefinePlugin, optimize: { CommonsChunkPlugin, UglifyJsPlugin }, ProvidePlugin } = require('webpack')
 const noop = require('noop-webpack-plugin')
+const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const src = path.resolve(__dirname, 'src')
 const wwwroot = path.resolve(__dirname, 'wwwroot')
@@ -18,6 +19,8 @@ module.exports = (env) => {
     },
     module: {
       rules: [
+        { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader', options: { configFile: 'tslint.json' } },
+        { test: /\.html$/, enforce: 'pre', loader: 'htmlhint-loader', options: { configFile: '.htmlhintrc' } },
         { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ },
         { test: /\.html$/i, use: { loader: 'html-loader', options: { minimize: isProduction } } },
         { test: /\.css$/i, use: { loader: 'css-loader', options: { minimize: isProduction } } },
@@ -36,6 +39,7 @@ module.exports = (env) => {
       devtoolModuleFilenameTemplate: './[resource-path]'
     },
     plugins: [
+      new StyleLintPlugin({ configFile: 'stylelint.config.js', files: path.basename(src) + '/**/*.css' }),
       new DefinePlugin({ APPLICATIONMODE: JSON.stringify(isProduction ? 'Production' : 'Development') }),
       new CleanWebpackPlugin([wwwroot]),
       new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),

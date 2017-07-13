@@ -1,4 +1,3 @@
-import * as chai from "chai";
 import {Greetings} from "../../src/app/helloworld/greetings";
 import {SavedGreeting} from "../../src/app/helloworld/messages/savedgreeting";
 import {HttpClientStub} from "../stubs";
@@ -25,10 +24,10 @@ describe("Greetings test suite", () => {
         const sut = new Greetings(httpStub);
 
         await wait();
-        chai.expect(sut.numberOfSavedGreetings).not.to.be.undefined;
-        chai.expect(sut.numberOfSavedGreetings).to.equal("5");
-        chai.expect(sut.savedGreetings).not.to.be.undefined;
-        chai.expect(sut.savedGreetings.length).to.equal(2);
+        expect(sut.numberOfSavedGreetings).not.toBeUndefined();
+        expect(sut.numberOfSavedGreetings).toBe("5");
+        expect(sut.savedGreetings).not.toBeUndefined();
+        expect(sut.savedGreetings.length).toBe(2);
     });
 
     it("should handle an error response", async () => {
@@ -36,10 +35,10 @@ describe("Greetings test suite", () => {
         const sut = new Greetings(httpStub);
 
         await wait();
-        chai.expect(sut.numberOfSavedGreetings).not.to.be.undefined;
-        chai.expect(sut.numberOfSavedGreetings).to.equal("0");
-        chai.expect(sut.savedGreetings).not.to.be.undefined;
-        chai.expect(sut.savedGreetings.length).to.equal(0);
+        expect(sut.numberOfSavedGreetings).not.toBeUndefined();
+        expect(sut.numberOfSavedGreetings).toBe("0");
+        expect(sut.savedGreetings).not.toBeUndefined();
+        expect(sut.savedGreetings.length).toBe(0);
     });
 
 });

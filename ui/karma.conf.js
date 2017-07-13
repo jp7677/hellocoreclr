@@ -9,7 +9,7 @@ module.exports = (config) => {
 
   config.set({
     logLevel: 'warn',
-    frameworks: ['mocha', 'chai', 'sinon'],
+    frameworks: ['jasmine'],
     files: [
       'node_modules/core-js/client/shim.js',
       'test/**/*.spec.ts'
@@ -44,7 +44,7 @@ module.exports = (config) => {
     browserDisconnectTimeout: 5000,
     browserDisconnectTolerance: 5,
     browserNoActivityTimeout: 10000,
-    reporters: [ 'mocha', 'coverage-istanbul' ],
+    reporters: [ 'progress', 'coverage-istanbul' ],
     coverageIstanbulReporter: {
       reports: [ 'text-summary', 'json' ],
       fixWebpackSourcePaths: true,

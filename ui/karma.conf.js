@@ -31,7 +31,8 @@ module.exports = (config) => {
       }
     },
     webpackMiddleware: {
-      stats: 'errors-only'
+      stats: 'errors-only',
+      noInfo: true
     },
     autoWatchBatchDelay: 10000,
     singleRun: true,

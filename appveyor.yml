@@ -26,7 +26,7 @@ test_script:
 - npm run htmlhint --prefix ui
 - npm run stylelint --prefix ui
 - npm run unit-tests --prefix ui -- --reporters progress,coverage,remap-coverage,appveyor
-- ui\node_modules\.bin\gulp e2e-tests --cwd ui --nobuild --nomiddlewareproxy
+  ##- ui\node_modules\.bin\gulp e2e-tests --cwd ui --nobuild --nomiddlewareproxy
 
 after_test:
 - npm install codecov

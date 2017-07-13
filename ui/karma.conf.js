@@ -44,6 +44,7 @@ module.exports = (config) => {
     browserNoActivityTimeout: 10000,
     reporters: [ 'progress', 'coverage-istanbul' ],
     coverageIstanbulReporter: {
+      skipFilesWithNoCoverage: false,
       reports: [ 'text-summary', 'json' ],
       fixWebpackSourcePaths: true,
       dir: __dirname.replace('\\', '/') + '/../reports/',

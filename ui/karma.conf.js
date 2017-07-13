@@ -5,14 +5,12 @@ const test = path.resolve(__dirname, 'test')
 const nodeModules = path.resolve(__dirname, 'node_modules')
 
 module.exports = (config) => {
-  'use strict'
-
   config.set({
     logLevel: 'warn',
     frameworks: ['jasmine'],
     files: [
-      'node_modules/core-js/client/shim.js',
-      'test/**/*.spec.ts'
+      {pattern: 'node_modules/core-js/client/shim.min.js', instrument: false},
+      {pattern: 'test/**/*.spec.ts', load: false}
     ],
     preprocessors: {
       'test/**/*.spec.ts': ['webpack']

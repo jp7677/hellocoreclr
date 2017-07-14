@@ -1,4 +1,7 @@
 declare var require;
 
-const context = require.context("./", true, /\.spec\.ts$/);
-context.keys().map(context);
+const  srcContext = require.context("../src/app/", true, /\.ts$/);
+srcContext.keys().map(srcContext);
+
+const testContext = require.context("./", true, /spec\.ts$/);
+testContext.keys().map(testContext);

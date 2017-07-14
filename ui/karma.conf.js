@@ -1,4 +1,5 @@
 const path = require('path')
+const { ProvidePlugin } = require('webpack')
 
 const src = path.resolve(__dirname, 'src')
 const test = path.resolve(__dirname, 'test')
@@ -9,7 +10,7 @@ module.exports = (config) => {
     logLevel: 'warn',
     frameworks: ['jasmine'],
     files: [
-      {pattern: 'node_modules/core-js/client/shim.min.js', instrument: false},
+      {pattern: 'node_modules/core-js/client/shim.js', instrument: false},
       {pattern: 'src/**/*.ts', included: false, served: false, watched: false},
       {pattern: 'test/**/*.spec.ts', included: false, served: false, watched: false},
       {pattern: 'test/tests-index.ts', loaded: false}
@@ -28,7 +29,10 @@ module.exports = (config) => {
       resolve: {
         extensions: ['.ts', '.js'],
         modules: [src, nodeModules]
-      }
+      },
+      plugins: [
+        new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' })
+      ]
     },
     webpackMiddleware: {
       stats: 'errors-only',

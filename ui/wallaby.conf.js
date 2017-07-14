@@ -7,7 +7,7 @@ const nodeModules = path.resolve(__dirname, 'node_modules')
 module.exports = function (wallaby) {
   return {
     files: [
-      {pattern: 'node_modules/core-js/client/shim.min.js', instrument: false},
+      {pattern: 'node_modules/core-js/client/shim.js', instrument: false},
       {pattern: 'src/app/**/*.ts', load: false},
       {pattern: 'test/stubs.ts', load: false}
     ],

@@ -10,7 +10,6 @@
     ]
   },
   "exclude": [
-    "test-e2e",
     "wwwroot",
     "node_modules"
   ]

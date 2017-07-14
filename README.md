@@ -81,6 +81,7 @@ export ASPNETCORE_ENVIRONMENT=Development
 (cd src/HelloCoreClrApp;dotnet watch run)
 (cd test/HelloCoreClrApp.Test;dotnet watch test)
 npm run watch --prefix ui
+npm run unit-tests:watch --prefix ui
 ```
 
 Your favorite browser should fire up and should open <http://localhost:3000/>. Happy coding!

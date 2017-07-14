@@ -22,11 +22,13 @@ before_test:
 
 test_script:
 - packages\OpenCover.4.6.690\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -returntargetcode -mergeoutput -output:reports\coverage-dotnet.xml
-- npm run tslint --prefix ui
-- npm run htmlhint --prefix ui
-- npm run stylelint --prefix ui
+- npm run lint:ts --prefix ui
+- npm run lint:html --prefix ui
+- npm run lint:style --prefix ui
 - npm run unit-tests --prefix ui -- --browsers Chrome --reporters progress,coverage-istanbul,appveyor
-  ##- ui\node_modules\.bin\gulp e2e-tests --cwd ui --nobuild --nomiddlewareproxy
+- npm run compile --prefix ui
+- npm run e2e-tests:prepare --prefix ui
+- npm run e2e-tests --prefix ui
 
 after_test:
 - npm install codecov

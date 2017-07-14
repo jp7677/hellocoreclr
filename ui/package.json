@@ -1,6 +1,6 @@
 {
-  "name": "aspnet",
-  "version": "0.0.1",
+  "name": "hellocoreclr",
+  "version": "0.1.0",
   "description": "Just a playground",
   "license": "MIT",
   "repository": {
@@ -9,6 +9,7 @@
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "devDependencies": {
     "@types/jasmine": "^2.5.53",
+    "aurelia-protractor-plugin": "^1.0.3",
     "aurelia-webpack-plugin": "^2.0.0-rc.2",
     "clean-webpack-plugin": "^0.1.16",
     "corejs": "^1.0.0",
@@ -26,6 +27,7 @@
     "karma-jasmine": "^1.1.0",
     "karma-webpack": "^2.0.4",
     "noop-webpack-plugin": "^1.0.1",
+    "protractor": "^5.1.2",
     "style-loader": "^0.18.2",
     "stylelint": "^7.13.0",
     "stylelint-config-standard": "^16.0.0",
@@ -69,14 +71,17 @@
     "whatwg-fetch": "~2.0.3"
   },
   "scripts": {
+    "compile": "tsc",
     "build": "webpack",
     "build:production": "webpack --env production",
+    "lint:ts": "tslint '{src,test}/**/*.ts'",
+    "lint:html": "htmlhint src/**/*.html",
+    "lint:style": "stylelint src/**/*.css",
     "unit-tests": "karma start",
-    "watch-unit-tests": "karma start --browsers Chrome --reporters progress,coverage-istanbul --no-single-run",
-    "tslint": "tslint '{src,test}/**/*.ts'",
-    "htmlhint": "htmlhint src/**/*.html",
-    "stylelint": "stylelint src/**/*.css",
+    "unit-tests:watch": "karma start --browsers Chrome --reporters progress,coverage-istanbul --no-single-run",
+    "e2e-tests:prepare": "webdriver-manager update",
+    "e2e-tests": "protractor",
     "serve": "webpack-dev-server",
-    "watch": "webpack-dev-server --hot --inline"
+    "serve:watch": "webpack-dev-server --hot --inline"
   }
 }

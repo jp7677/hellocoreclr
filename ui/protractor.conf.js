@@ -1,25 +1,26 @@
-const phantomjs = require('phantomjs-prebuilt')
-
 exports.config = {
-  framework: 'mocha',
-  plugins: [{
-    package: 'aurelia-protractor-plugin'
-  }],
-
-  capabilities: {
-    'browserName': 'phantomjs',
-    'phantomjs.binary.path': phantomjs.path
-  },
-  seleniumServerJar: './node_modules/selenium-jar/bin/selenium-server-standalone-2.52.0.jar',
-  localSeleniumStandaloneOpts: {
-    args: ['-Djna.nosys=true']
-  },
-
   baseUrl: 'http://localhost:3000',
   specs: ['test-e2e/**/*.spec.js'],
-
-  mochaOpts: {
-    reporter: 'spec',
-    timeout: 6000
-  }
+  directConnect: true,
+  capabilities: {
+    'browserName': 'chrome',
+    'chromeOptions': {
+      'args': [
+        '--show-fps-counter',
+        '--no-default-browser-check',
+        '--no-first-run',
+        '--disable-default-apps',
+        '--disable-popup-blocking',
+        '--disable-translate',
+        '--disable-background-timer-throttling',
+        '--disable-renderer-backgrounding',
+        '--disable-device-discovery-notifications',
+        '--no-gpu',
+        '--headless'
+      ]
+    }
+  },
+  plugins: [{
+    package: 'aurelia-protractor-plugin'
+  }]
 }

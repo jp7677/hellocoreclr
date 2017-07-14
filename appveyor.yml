@@ -25,7 +25,7 @@ test_script:
 - npm run tslint --prefix ui
 - npm run htmlhint --prefix ui
 - npm run stylelint --prefix ui
-- npm run unit-tests --prefix ui -- --reporters progress,coverage-istanbul,appveyor
+- npm run unit-tests --prefix ui -- --browsers Chrome --reporters progress,coverage-istanbul,appveyor
   ##- ui\node_modules\.bin\gulp e2e-tests --cwd ui --nobuild --nomiddlewareproxy
 
 after_test:

@@ -10,10 +10,12 @@ module.exports = (config) => {
     frameworks: ['jasmine'],
     files: [
       {pattern: 'node_modules/core-js/client/shim.min.js', instrument: false},
-      {pattern: 'test/**/*.spec.ts', load: false}
+      {pattern: 'src/**/*.ts', included: false, served: false, watched: false},
+      {pattern: 'test/**/*.spec.ts', included: false, served: false, watched: false},
+      {pattern: 'test/tests-index.ts', loaded: false}
     ],
     preprocessors: {
-      'test/**/*.spec.ts': ['webpack']
+      'test/tests-index.ts': ['webpack']
     },
     webpack: {
       module: {
@@ -34,7 +36,7 @@ module.exports = (config) => {
     },
     autoWatchBatchDelay: 10000,
     singleRun: true,
-    browsers: ['PhantomJS'],
+    browsers: ['ChromeHeadless'],
     mime: {
       'text/x-typescript': ['ts']
     },

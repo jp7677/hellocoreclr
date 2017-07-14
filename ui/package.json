@@ -72,6 +72,7 @@
     "build": "webpack",
     "build:production": "webpack --env production",
     "unit-tests": "karma start",
+    "watch-unit-tests": "karma start --browsers Chrome --reporters progress,coverage-istanbul --no-single-run",
     "tslint": "tslint '{src,test}/**/*.ts'",
     "htmlhint": "htmlhint src/**/*.html",
     "stylelint": "stylelint src/**/*.css",

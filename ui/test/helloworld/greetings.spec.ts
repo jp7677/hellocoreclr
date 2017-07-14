@@ -12,7 +12,7 @@ function wait() {
 
 describe("Greetings test suite", () => {
 
-    it("should handle a valid response", async () => {
+    it("should handle a valid response", async (done) => {
         const responses = new Map<string, any>();
         responses.set("greetings/count", "5");
         responses.set("greetings", [
@@ -28,9 +28,10 @@ describe("Greetings test suite", () => {
         expect(sut.numberOfSavedGreetings).toBe("5");
         expect(sut.savedGreetings).not.toBeUndefined();
         expect(sut.savedGreetings.length).toBe(2);
+        done();
     });
 
-    it("should handle an error response", async () => {
+    it("should handle an error response", async (done) => {
         const httpStub = HttpClientStub.error();
         const sut = new Greetings(httpStub);
 
@@ -39,6 +40,7 @@ describe("Greetings test suite", () => {
         expect(sut.numberOfSavedGreetings).toBe("0");
         expect(sut.savedGreetings).not.toBeUndefined();
         expect(sut.savedGreetings.length).toBe(0);
+        done();
     });
 
 });

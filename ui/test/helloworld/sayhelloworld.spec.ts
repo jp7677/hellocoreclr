@@ -39,7 +39,7 @@ describe("SayHelloWorld test suite", () => {
         expect(sut.greetingText).toBe("");
     });
 
-    it("should handle a valid response", async () => {
+    it("should handle a valid response", async (done) => {
         const sut = new SayHelloWorld(
             HttpClientStub.ok({greeting: "Hello World!"}),
             ValidationControllerStub.valid(),
@@ -50,9 +50,10 @@ describe("SayHelloWorld test suite", () => {
 
         await wait();
         expect(sut.greetingText).toBe("Hello World!");
+        done();
     });
 
-    it("should handle an error response", async () => {
+    it("should handle an error response", async (done) => {
         const sut = new SayHelloWorld(
             HttpClientStub.error(),
             ValidationControllerStub.valid(),
@@ -64,5 +65,6 @@ describe("SayHelloWorld test suite", () => {
 
         await wait();
         expect(sut.greetingText).toBe("");
+        done();
     });
 });

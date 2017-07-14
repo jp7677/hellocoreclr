@@ -26,3 +26,4 @@ ui/obj/**
 .vs/**
 **/*.xproj.user
 **/*.DotSettings.user
+**/npm-debug.log

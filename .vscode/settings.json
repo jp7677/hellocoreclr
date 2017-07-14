@@ -34,7 +34,8 @@
     "**/*.sln*": true,
     "node_modules/**": true,
     "reports/**": true,
-    "artifacts/**": true
+    "artifacts/**": true,
+    "**/npm-debug.log": true
   },
   "tslint.exclude": "**/*.js",
   "stylelint.config": {

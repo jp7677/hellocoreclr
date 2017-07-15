@@ -23,7 +23,10 @@ exports.config = {
     }
   },
   onPrepare: () => {
-    ts.register()
+    ts.register({
+      compilerOptions: { module: 'commonjs' },
+      fast: true
+    })
   },
   plugins: [{
     package: 'aurelia-protractor-plugin'

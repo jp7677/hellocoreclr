@@ -23,7 +23,7 @@ module.exports = (config) => {
         rules: [
           { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
           { test: /\.css$/i, loader: 'css-loader' },
-          { test: /\.ts$/i, enforce: 'post', loader: 'istanbul-instrumenter-loader', exclude: test }
+          { test: /\.ts$/i, enforce: 'post', loader: 'istanbul-instrumenter-loader', options: { esModules: true }, exclude: test }
         ]
       },
       resolve: {

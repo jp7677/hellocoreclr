@@ -3,7 +3,6 @@ import * as protractor from "protractor";
 describe("HelloWorld app", () => {
   beforeEach(async () => {
     await protractor.browser.loadAndWaitForAureliaPage("/");
-    await protractor.browser.waitForRouterComplete();
   });
 
   it("should load completely and have a title", async () => {
@@ -11,8 +10,9 @@ describe("HelloWorld app", () => {
   });
 
   it("should navigate to greetings", async () => {
+    const waitPromise = protractor.browser.waitForRouterComplete();
     await protractor.element(protractor.by.css('a[href="#/greetings"]')).click();
-    await protractor.browser.waitForRouterComplete();
+    await waitPromise;
     await expect(await protractor.browser.getTitle()).toBe("Greetings | Hello World");
   });
 });

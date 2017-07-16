@@ -22,10 +22,6 @@ exports.config = {
       ]
     }
   },
-  seleniumServerJar: './node_modules/selenium-jar/bin/selenium-server-standalone-2.52.0.jar',
-  localSeleniumStandaloneOpts: {
-    args: ['-Djna.nosys=true']
-  },
   onPrepare: () => {
     ts.register({
       compilerOptions: { module: 'commonjs' },

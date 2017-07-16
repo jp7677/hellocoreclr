@@ -32,7 +32,7 @@ module.exports = (env) => {
       modules: [src, nodeModules]
     },
     output: {
-      filename: '[name].bundle.js',
+      filename: isProduction ? '[name]-[hash].js' : '[name]-bundle.js',
       path: wwwroot,
       devtoolModuleFilenameTemplate: './[resource-path]'
     },

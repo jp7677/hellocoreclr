@@ -13,24 +13,11 @@
     "test/HelloCoreClrApp.Test/obj/**": true,
     "ui/bin/**": true,
     "ui/obj/**": true,
-    "ui/src/jspm_packages/**": true,
-    "ui/src/**/*.js": { "when": "$(basename).ts"},
-    "ui/src/**/*.js.map": true,
-    "ui/src/app/appsettings.js": true,
-    "ui/test/**/*.js": { "when": "$(basename).ts"},
-    "ui/test/**/*.js.map": true,
-    "ui/test-e2e/**/*.js": { "when": "$(basename).ts"},
-    "ui/test-e2e/**/*.js.map": true,
     "ui/wwwroot/**": true,
     "ui/node_modules/**": true,
-    "ui/typings/**": true,
-    "ui/custom_typings/**": true,
-    "ui/test-e2e/custom_typings/**": true,
-    "ui/project.lock.json": true,
     ".vscode/**": true,
     ".idea/**": true,
     ".vs/**": true,
-    "**/*.xproj*": true,
     "**/*.sln*": true,
     "node_modules/**": true,
     "reports/**": true,
@@ -42,8 +29,7 @@
     "extends": "./ui/stylelint.config.js" 
   },
   "eslint.options": {
-    "configFile": "ui/eslint.json",
-    "ignorePattern": "ui/src/jspm.conf.js"
+    "configFile": "ui/eslint.json"
   }
 }
 

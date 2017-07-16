@@ -22,7 +22,7 @@ exports.config = {
       ]
     }
   },
-  onPrepare: () => {
+  beforeLaunch: () => {
     ts.register({
       compilerOptions: { module: 'commonjs' },
       fast: true

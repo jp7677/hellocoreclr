@@ -84,7 +84,7 @@
     "unit-tests:watch": "karma start --browsers Chrome --reporters progress,coverage-istanbul --no-single-run",
     "e2e-tests:prepare": "webdriver-manager update",
     "e2e-tests": "node protractor.server",
-    "serve": "webpack-dev-server",
+    "serve": "http-server wwwroot -p 3000 --proxy http://localhost:5000/",
     "serve:watch": "webpack-dev-server --hot --inline"
   }
 }

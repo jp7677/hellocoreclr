@@ -1,8 +1,11 @@
 const ts = require('ts-node')
+const path = require('path')
+
+const test = path.resolve(__dirname, 'test-e2e')
 
 exports.config = {
   baseUrl: 'http://localhost:3000',
-  specs: [ 'test-e2e/**/*.spec.ts' ],
+  specs: [ path.join(test, '**/*.spec.ts') ],
   directConnect: true,
   capabilities: {
     'browserName': 'chrome',

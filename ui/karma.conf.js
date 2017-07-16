@@ -10,10 +10,10 @@ module.exports = (config) => {
     logLevel: 'warn',
     frameworks: ['jasmine'],
     files: [
-      { pattern: 'node_modules/core-js/client/shim.js', instrument: false },
-      { pattern: 'src/**/*.ts', included: false, served: false, watched: false },
-      { pattern: 'test/**/*.spec.ts', included: false, served: false, watched: false },
-      { pattern: 'test/tests-index.ts', loaded: false }
+      { pattern: path.join(nodeModules, 'core-js/client/shim.js'), instrument: false },
+      { pattern: path.join(src, '**/*.ts'), included: false, served: false, watched: false },
+      { pattern: path.join(test, '**/*.spec.ts'), included: false, served: false, watched: false },
+      { pattern: path.join(test, 'tests-index.ts'), loaded: false }
     ],
     preprocessors: {
       'test/tests-index.ts': ['webpack']

@@ -5,6 +5,10 @@ const childprocess = require('child_process')
 const server = httpServer.createServer({root: path.join(__dirname, 'wwwroot')})
 
 server.listen(3000, 'localhost', () => {
+  runProtractor()
+})
+
+let runProtractor = () => {
   let winExt = /^win/.test(process.platform) ? '.cmd' : ''
   let nodeBinDir = path.join('node_modules', '.bin')
   let protractorBin = path.join(nodeBinDir, 'protractor' + winExt)
@@ -17,4 +21,4 @@ server.listen(3000, 'localhost', () => {
         process.exit(0)
       }
     })
-})
+}

@@ -2,7 +2,7 @@ const ts = require('ts-node')
 
 exports.config = {
   baseUrl: 'http://localhost:3000',
-  specs: ['test-e2e/**/*.spec.ts'],
+  specs: [ 'test-e2e/**/*.spec.ts' ],
   directConnect: true,
   capabilities: {
     'browserName': 'chrome',

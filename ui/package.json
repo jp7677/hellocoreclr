@@ -18,6 +18,7 @@
     "html-loader": "^0.4.5",
     "html-webpack-plugin": "^2.29.0",
     "htmlhint": "^0.9.13",
+    "http-server": "^0.10.0",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine-core": "^2.6.4",
     "json-loader": "^0.5.4",
@@ -82,7 +83,7 @@
     "unit-tests": "karma start",
     "unit-tests:watch": "karma start --browsers Chrome --reporters progress,coverage-istanbul --no-single-run",
     "e2e-tests:prepare": "webdriver-manager update",
-    "e2e-tests": "protractor",
+    "e2e-tests": "node protractor.server",
     "serve": "webpack-dev-server",
     "serve:watch": "webpack-dev-server --hot --inline"
   }

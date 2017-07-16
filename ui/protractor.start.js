@@ -3,8 +3,9 @@ const httpServer = require('http-server')
 const childprocess = require('child_process')
 
 const server = httpServer.createServer({root: path.join(__dirname, 'wwwroot')})
+const port = 3000
 
-server.listen(3000, 'localhost', () => {
+server.listen(port, () => {
   runProtractor()
 })
 

@@ -28,6 +28,7 @@
     "karma-webpack": "^2.0.4",
     "noop-webpack-plugin": "^1.0.1",
     "protractor": "^5.1.2",
+    "selenium-jar": "^2.52.1",
     "style-loader": "^0.18.2",
     "stylelint": "^7.13.0",
     "stylelint-config-standard": "^16.0.0",
@@ -81,7 +82,6 @@
     "lint:style": "stylelint src/**/*.css",
     "unit-tests": "karma start",
     "unit-tests:watch": "karma start --browsers Chrome --reporters progress,coverage-istanbul --no-single-run",
-    "e2e-tests:prepare": "webdriver-manager update",
     "e2e-tests": "protractor",
     "serve": "webpack-dev-server",
     "serve:watch": "webpack-dev-server --hot --inline"

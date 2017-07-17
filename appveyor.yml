@@ -23,8 +23,7 @@ before_test:
 test_script:
 - packages\OpenCover.4.6.690\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -returntargetcode -mergeoutput -output:reports\coverage-dotnet.xml
 - npm run lint --prefix ui
-- npm run unit-tests --prefix ui -- --browsers Chrome --reporters dots,coverage-istanbul,appveyor
-- npm run compile --prefix ui
+- npm run unit-tests --prefix ui -- --reporters dots,coverage-istanbul,appveyor
 - npm run e2e-tests:prepare --prefix ui
 - npm run e2e-tests --prefix ui
 

@@ -6,6 +6,8 @@ const test = path.resolve(__dirname, 'test')
 const nodeModules = path.resolve(__dirname, 'node_modules')
 
 module.exports = (config) => {
+  const noSingleRun = config.nosinglerun
+
   config.set({
     logLevel: 'warn',
     frameworks: ['jasmine'],
@@ -23,7 +25,9 @@ module.exports = (config) => {
         rules: [
           { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
           { test: /\.css$/i, loader: 'css-loader' },
-          { test: /\.ts$/i, enforce: 'post', loader: 'istanbul-instrumenter-loader', options: { esModules: true }, exclude: test }
+          !noSingleRun
+            ? { test: /\.ts$/i, enforce: 'post', loader: 'istanbul-instrumenter-loader', options: { esModules: true }, exclude: test }
+            : {}
         ]
       },
       resolve: {
@@ -32,7 +36,7 @@ module.exports = (config) => {
       },
       plugins: [
         new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
-        new SourceMapDevToolPlugin({ filename: null, test: /\.(ts|js)$/i, moduleFilenameTemplate: './[resource-path]' })
+        new SourceMapDevToolPlugin({ filename: null, test: /\.(js|ts)($|\?)/i, moduleFilenameTemplate: './[resource-path]' })
       ]
     },
     webpackMiddleware: {
@@ -40,8 +44,8 @@ module.exports = (config) => {
       noInfo: true
     },
     autoWatchBatchDelay: 10000,
-    singleRun: true,
-    browsers: ['ChromeHeadless'],
+    singleRun: !noSingleRun,
+    browsers: !noSingleRun ? [ 'ChromeHeadless' ] : [ 'Chrome' ],
     mime: {
       'text/x-typescript': ['ts']
     },
@@ -49,7 +53,7 @@ module.exports = (config) => {
     browserDisconnectTimeout: 5000,
     browserDisconnectTolerance: 5,
     browserNoActivityTimeout: 10000,
-    reporters: [ 'dots', 'coverage-istanbul' ],
+    reporters: !noSingleRun ? [ 'dots', 'coverage-istanbul' ] : [ 'dots' ],
     coverageIstanbulReporter: {
       skipFilesWithNoCoverage: false,
       reports: [ 'text-summary', 'json' ],

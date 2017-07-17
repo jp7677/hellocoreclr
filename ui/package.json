@@ -81,7 +81,7 @@
     "lint:html": "htmlhint src/**/*.html",
     "lint:style": "stylelint src/**/*.css",
     "unit-tests": "karma start",
-    "unit-tests:watch": "karma start --browsers Chrome --reporters dots --no-single-run",
+    "unit-tests:watch": "karma start --nosinglerun",
     "e2e-tests:prepare": "webdriver-manager update",
     "e2e-tests": "node protractor.start",
     "serve": "http-server wwwroot -p 3000 --proxy http://localhost:5000/",

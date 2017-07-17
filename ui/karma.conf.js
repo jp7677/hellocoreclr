@@ -1,5 +1,5 @@
 const path = require('path')
-const { ProvidePlugin } = require('webpack')
+const { ProvidePlugin, SourceMapDevToolPlugin } = require('webpack')
 
 const src = path.resolve(__dirname, 'src')
 const test = path.resolve(__dirname, 'test')
@@ -31,7 +31,8 @@ module.exports = (config) => {
         modules: [src, nodeModules]
       },
       plugins: [
-        new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' })
+        new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
+        new SourceMapDevToolPlugin({ filename: null, test: /\.(ts|js)$/i, moduleFilenameTemplate: './[resource-path]' })
       ]
     },
     webpackMiddleware: {

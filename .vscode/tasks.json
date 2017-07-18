@@ -8,16 +8,15 @@
 	"tasks": [
 		{
 			"taskName": "Build All",
-			"args": ["dotnet build ${workspaceRoot};${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
+			"args": ["dotnet build ${workspaceRoot};dotnet build ${workspaceRoot}/ui"],
 			"isBuildCommand": true
 		},
 		{
-			"taskName": "Compile Typescript/tsc",
-			"args": ["${workspaceRoot}/ui/node_modules/.bin/tsc -p ${workspaceRoot}/ui"],
-			"problemMatcher": "$tsc"
+			"taskName": "Build ui/webpack",
+			"args": ["dotnet build ${workspaceRoot}/ui"]
 		},
 		{
-			"taskName": "Build C#/dotnet",
+			"taskName": "Build app/dotnet",
 			"args": ["dotnet build ${workspaceRoot}"],
 			"problemMatcher": "$msCompile"
 		}

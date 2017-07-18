@@ -34,6 +34,7 @@ Use
 ```bash
 dotnet restore
 dotnet build
+dotnet build ui
 ```
 
 to restore packages, bindings, building and for assembling the web application. Use
@@ -54,6 +55,14 @@ dotnet run --project src/HelloCoreClrApp/HelloCoreClrApp.csproj
 
 to run the web server. Now open <http://localhost:5000/> in you favorite browser. Enjoy source maps in your browser when testing manually.
 
+If you want a dedicated front end server for testing you can additionally use
+
+```bash
+npm run serve --prefix ui
+```
+
+and open <http://localhost:3000/> in you browser.
+
 ### Development setup
 
 For a nice programming experience I'm using Visual Studio Code with the following extensions:
@@ -71,6 +80,7 @@ Use again
 ```bash
 dotnet restore
 dotnet build
+dotnet build ui
 ```
 
 to restore packages and bindings. Finally run the following commands in separate terminals for building and testing on file save.

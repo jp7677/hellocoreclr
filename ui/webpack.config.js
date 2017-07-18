@@ -14,7 +14,7 @@ module.exports = (env) => {
 
   return {
     entry: {
-      app: [ 'aurelia-bootstrapper' ],
+      app: [ 'es6-promise/auto', 'aurelia-bootstrapper' ],
       splash: [ 'app/splash' ]
     },
     module: {

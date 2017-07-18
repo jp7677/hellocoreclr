@@ -59,8 +59,8 @@ to run the web server. Now open <http://localhost:5000/> in you favorite browser
 For a nice programming experience I'm using Visual Studio Code with the following extensions:
 > C#, tslint, ESLint, stylelint, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint, Spelling and Grammar Checker, Debugger for Chrome
 
-Note that Wallabyjs is a commercial extension, for that you'll also run `npm install wallaby-webpack` within the ui folder.
-Use the following command to set up required node packages for these extensions if you haven't installed them globally.
+Note that Wallabyjs is a commercial extension, for that you'll also need to run `npm install wallaby-webpack` within the ui folder.
+Use the following command to set up required node packages for above extensions if you haven't installed them globally.
 
 ```bash
 npm install tslint typescript eslint eslint-config-standard eslint-plugin-node eslint-plugin-import eslint-plugin-standard eslint-plugin-promise stylelint stylelint-config-standard htmlhint

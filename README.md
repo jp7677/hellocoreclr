@@ -40,8 +40,7 @@ to restore packages, bindings, building and for assembling the web application. 
 
 ```bash
 dotnet test test/HelloCoreClrApp.Test/HelloCoreClrApp.Test.csproj
-ui/node_modules/.bin/gulp unit-tests --cwd ui --nobuild
-ui/node_modules/.bin/gulp e2e-tests --cwd ui --nobuild --nomiddlewareproxy
+npm run test --prefix ui
 ```
 
 to run C#, TypeScript/JavaScript unit tests and e2e tests.
@@ -60,11 +59,11 @@ to run the web server. Now open <http://localhost:5000/> in you favorite browser
 For a nice programming experience I'm using Visual Studio Code with the following extensions:
 > C#, tslint, ESLint, stylelint, HTMLHint, Wallabyjs for Visual Studio Code, markdownlint, Spelling and Grammar Checker, Debugger for Chrome
 
-Note that Wallabyjs is a commercial extension.
-Use the following command to set up required node packages for these extensions if you haven't installed them globally.
+Note that Wallabyjs is a commercial extension, for that you'll also need to run `npm install wallaby-webpack` within the ui folder.
+Use the following command to set up required node packages for above extensions if you haven't installed them globally.
 
 ```bash
-npm install tslint typescript eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise stylelint stylelint-config-standard htmlhint
+npm install tslint typescript eslint eslint-config-standard eslint-plugin-node eslint-plugin-import eslint-plugin-standard eslint-plugin-promise stylelint stylelint-config-standard htmlhint
 ```
 
 Use again
@@ -80,7 +79,8 @@ to restore packages and bindings. Finally run the following commands in separate
 export ASPNETCORE_ENVIRONMENT=Development
 (cd src/HelloCoreClrApp;dotnet watch run)
 (cd test/HelloCoreClrApp.Test;dotnet watch test)
-ui/node_modules/.bin/gulp watch --cwd ui
+npm run watch --prefix ui
+npm run unit-tests:watch --prefix ui
 ```
 
 Your favorite browser should fire up and should open <http://localhost:3000/>. Happy coding!

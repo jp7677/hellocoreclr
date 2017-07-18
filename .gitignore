@@ -3,17 +3,7 @@ artifacts/**
 packages/**
 reports/**
 ui/node_modules/**
-ui/src/jspm_packages/**
-ui/typings/**
 ui/wwwroot/**
-ui/src/**/*.js
-!ui/src/jspm.conf.js
-ui/src/**/*.js.map
-ui/test/**/*.js
-ui/test/**/*.js.map
-ui/test-e2e/**/*.js
-ui/test-e2e/**/*.js.map
-**/phantomjsdriver.log
 src/HelloCoreClrApp/bin/**
 src/HelloCoreClrApp/obj/**
 src/HelloCoreClrApp.Rules/bin/**
@@ -24,5 +14,5 @@ ui/bin/**
 ui/obj/**
 .idea/**
 .vs/**
-**/*.xproj.user
 **/*.DotSettings.user
+**/npm-debug.log

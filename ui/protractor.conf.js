@@ -1,25 +1,38 @@
-const phantomjs = require('phantomjs-prebuilt')
+const ts = require('ts-node')
+const path = require('path')
+
+const test = path.resolve(__dirname, 'test-e2e')
 
 exports.config = {
-  framework: 'mocha',
+  baseUrl: 'http://localhost:3000',
+  specs: [ path.join(test, '**/*.spec.ts') ],
+  directConnect: true,
+  capabilities: {
+    'browserName': 'chrome',
+    'chromeOptions': {
+      'args': [
+        '--show-fps-counter',
+        '--no-default-browser-check',
+        '--no-first-run',
+        '--disable-default-apps',
+        '--disable-popup-blocking',
+        '--disable-translate',
+        '--disable-background-timer-throttling',
+        '--disable-renderer-backgrounding',
+        '--disable-device-discovery-notifications',
+        '--no-gpu',
+        '--headless'
+      ]
+    }
+  },
+  beforeLaunch: () => {
+    ts.register({
+      compilerOptions: { module: 'commonjs' },
+      fast: true
+    })
+  },
   plugins: [{
     package: 'aurelia-protractor-plugin'
   }],
-
-  capabilities: {
-    'browserName': 'phantomjs',
-    'phantomjs.binary.path': phantomjs.path
-  },
-  seleniumServerJar: './node_modules/selenium-jar/bin/selenium-server-standalone-2.52.0.jar',
-  localSeleniumStandaloneOpts: {
-    args: ['-Djna.nosys=true']
-  },
-
-  baseUrl: 'http://localhost:3000',
-  specs: ['test-e2e/**/*.spec.js'],
-
-  mochaOpts: {
-    reporter: 'spec',
-    timeout: 6000
-  }
+  SELENIUM_PROMISE_MANAGER: 0
 }

@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "system",
-    "sourceMap": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
     "alwaysStrict": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "lib": [
+      "es2017", "dom"
+    ]
   },
   "exclude": [
-    "test-e2e",
     "wwwroot",
-    "node_modules",
-    "src/jspm_packages"
+    "node_modules"
   ]
 }

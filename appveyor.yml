@@ -3,8 +3,6 @@ image: Visual Studio 2017
 environment:
     nodejs_version: "6"
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
-hosts:
-  api.nuget.org: 93.184.221.200
 
 install:
 - ps: Install-Product node $env:nodejs_version

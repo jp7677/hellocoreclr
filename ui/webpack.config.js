@@ -19,11 +19,12 @@ module.exports = (env) => {
     },
     module: {
       rules: [
-        { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
+        { test: /\.ts$/i, loader: 'ts-loader', exclude: nodeModules },
         { test: /\.html$/i, loader: 'html-loader', options: { minimize: isProduction } },
         { test: /\.css$/i, loader: 'css-loader', options: { minimize: isProduction } },
-        { test: /\.(png|svg|jpg|gif)$/, loader: 'file-loader' },
-        { test: /\.(woff|woff2|eot|ttf|otf)$/, loader: 'file-loader' },
+        { test: /\.(svg)$/i, loader: 'file-loader' },
+        { test: /\.(gif|png|jpe?g)$/i, loaders: [ 'file-loader', { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } } ] },
+        { test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader' },
         { test: /\.json$/i, loader: 'json-loader' }
       ]
     },

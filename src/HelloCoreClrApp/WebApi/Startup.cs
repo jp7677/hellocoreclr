@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.IO;
+using System.Net;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json.Serialization;
 using Serilog;
 using SimpleInjector;
@@ -45,12 +50,12 @@ namespace HelloCoreClrApp.WebApi
         private static void SetupSwagger(SwaggerGenOptions options)
         {
             options.SwaggerDoc("v1", new Info
-                {
-                    Title = "Hello CoreCLR Service API",
-                    Description = "Just a playground...",
-                    TermsOfService = "None",
-                    Version = ApiVersion
-                });
+            {
+                Title = "Hello CoreCLR Service API",
+                Description = "Just a playground...",
+                TermsOfService = "None",
+                Version = ApiVersion
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,7 +73,10 @@ namespace HelloCoreClrApp.WebApi
             // Serve the default file, if present.
             app.UseDefaultFiles();
             // Add static files to the request pipeline.
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = OnPrepareResponse
+            });
 
             // Add MVC to the request pipeline.
             app.UseMvc();
@@ -76,6 +84,29 @@ namespace HelloCoreClrApp.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c => 
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", ApiVersion));
+        }
+
+        private static void OnPrepareResponse(StaticFileResponseContext context)
+        {
+            var file = context.File;
+            var request = context.Context.Request;
+            var response = context.Context.Response;
+
+            if (file.Name.EndsWith(".gz"))
+            {
+                response.Headers[HeaderNames.ContentEncoding] = "gzip";
+                return;
+            }
+
+            var acceptEncoding = (string)request.Headers[HeaderNames.AcceptEncoding];
+            if (acceptEncoding.IndexOf("gzip", StringComparison.OrdinalIgnoreCase) == -1)
+                return;
+
+            if (!File.Exists(file.PhysicalPath + ".gz"))
+                return;
+
+            response.StatusCode = (int)HttpStatusCode.MovedPermanently;
+            response.Headers[HeaderNames.Location] = request.Path.Value + ".gz";
         }
     }
 }

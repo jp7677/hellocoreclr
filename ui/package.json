@@ -12,6 +12,7 @@
     "aurelia-protractor-plugin": "^1.0.3",
     "aurelia-webpack-plugin": "^2.0.0-rc.2",
     "clean-webpack-plugin": "^0.1.16",
+    "compression-webpack-plugin": "^1.0.0",
     "corejs": "^1.0.0",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
@@ -86,7 +87,7 @@
     "unit-tests:watch": "karma start --nosinglerun",
     "e2e-tests:prepare": "webdriver-manager update --gecko false",
     "e2e-tests": "node protractor.start",
-    "serve": "http-server wwwroot -p 3000 --proxy http://localhost:5000/",
+    "serve": "http-server wwwroot -p 3000 --gzip --proxy http://localhost:5000/",
     "serve:watch": "webpack-dev-server --hot --inline"
   }
 }

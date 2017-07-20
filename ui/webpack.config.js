@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { AureliaPlugin } = require('aurelia-webpack-plugin')
 const { DefinePlugin, optimize: { CommonsChunkPlugin, UglifyJsPlugin }, ProvidePlugin } = require('webpack')
+const CompressionPlugin = require('compression-webpack-plugin')
 const noop = require('noop-webpack-plugin')
 
 const src = path.resolve(__dirname, 'src')
@@ -50,7 +51,8 @@ module.exports = (env) => {
         chunks: ['bootstrap', 'splash', 'app'],
         chunksSortMode: (a, b) => 1,
         minify: isProduction ? { collapseWhitespace: true, collapseInlineTagWhitespace: true } : false
-      })
+      }),
+      new CompressionPlugin({ asset: '[path].gz[query]', algorithm: 'gzip', test: /\.(js|html)$/, threshold: 1024, minRatio: 0.8 })
     ],
     devtool: !isProduction ? 'source-map' : undefined,
     devServer: {

@@ -49,7 +49,7 @@ module.exports = (env) => {
         template: path.resolve(src, 'index.ejs'),
         favicon: path.resolve(src, 'favicon.ico'),
         chunks: ['bootstrap', 'splash', 'app'],
-        chunksSortMode: (a, b) => 1,
+        chunksSortMode: 'manual',
         minify: isProduction ? { collapseWhitespace: true, collapseInlineTagWhitespace: true } : false
       }),
       new CompressionPlugin({ asset: '[path].gz[query]', algorithm: 'gzip', test: /\.(js|html)$/, threshold: 1024, minRatio: 0.8 })

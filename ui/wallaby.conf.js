@@ -27,7 +27,7 @@ module.exports = function (wallaby) {
       },
       resolve: {
         extensions: ['.js'],
-        modules: [src, nodeModules]
+        modules: [path.join(wallaby.projectCacheDir, src)]
       }
     }),
     setup: function () {

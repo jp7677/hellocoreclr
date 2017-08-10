@@ -1,12 +1,13 @@
 const path = require('path')
 var wallabyWebpack = require('wallaby-webpack')
 
-const src = path.resolve(__dirname, 'src')
-const test = path.resolve(__dirname, 'test')
-const nodeModules = path.resolve(__dirname, 'node_modules')
+const src = 'src'
+const test = 'test'
+const nodeModules = 'node_modules'
 
 module.exports = function (wallaby) {
   return {
+    reportConsoleErrorAsError: true,
     files: [
       { pattern: path.join(nodeModules, 'core-js/client/shim.js'), instrument: false },
       { pattern: path.join(src, 'app/**/*.ts'), load: false },

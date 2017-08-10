@@ -16,6 +16,9 @@ module.exports = function (wallaby) {
     tests: [
       {pattern: path.join(test, '**/*.spec.ts'), load: false}
     ],
+    env: {
+      kind: 'chrome'
+    },
     postprocessor: wallabyWebpack({
       module: {
         rules: [

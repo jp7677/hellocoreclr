@@ -16,9 +16,6 @@ module.exports = function (wallaby) {
     tests: [
       {pattern: path.join(test, '**/*.spec.ts'), load: false}
     ],
-    compilers: {
-      '**/*.ts': wallaby.compilers.typeScript()
-    },
     postprocessor: wallabyWebpack({
       module: {
         rules: [

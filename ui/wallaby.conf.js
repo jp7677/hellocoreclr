@@ -1,36 +1,29 @@
-const path = require('path')
-var wallabyWebpack = require('wallaby-webpack')
+const path = require('path');
+var wallabyWebpack = require('wallaby-webpack');
 
-const src = path.resolve(__dirname, 'src')
-const test = path.resolve(__dirname, 'test')
-const nodeModules = path.resolve(__dirname, 'node_modules')
-
-module.exports = function (wallaby) {
+module.exports = function(wallaby) {
   return {
     files: [
-      { pattern: path.join(nodeModules, 'core-js/client/shim.js'), instrument: false },
-      { pattern: path.join(src, 'app/**/*.ts'), load: false },
-      { pattern: path.join(test, 'stubs.ts'), load: false }
+      {
+        pattern: 'node_modules/core-js/client/shim.js',
+        instrument: false
+      },
+      { pattern: 'src/app/**/*.ts', load: false },
+      { pattern: 'test/stubs.ts', load: false }
     ],
-    tests: [
-      {pattern: path.join(test, '**/*.spec.ts'), load: false}
-    ],
-    compilers: {
-      '**/*.ts': wallaby.compilers.typeScript()
-    },
+    tests: [{ pattern: 'test/**/*.spec.ts', load: false }],
+
     postprocessor: wallabyWebpack({
       module: {
-        rules: [
-          { test: /\.css$/i, loader: 'css-loader' }
-        ]
+        rules: [{ test: /\.css$/i, loader: 'css-loader' }]
       },
       resolve: {
         extensions: ['.js'],
-        modules: [src, nodeModules]
+        modules: [path.join(wallaby.projectCacheDir, 'src')]
       }
     }),
-    setup: function () {
-      window.__moduleBundler.loadTests()
+    setup: function() {
+      window.__moduleBundler.loadTests();
     }
-  }
-}
+  };
+};

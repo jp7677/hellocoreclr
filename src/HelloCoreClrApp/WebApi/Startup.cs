@@ -35,10 +35,9 @@ namespace HelloCoreClrApp.WebApi
             Log.Information("Configuring services.");
 
             // Add framework services.
-            services.AddMvc();
-            services.AddMvcCore()
-                .AddJsonFormatters(options =>
-                    options.ContractResolver = new CamelCasePropertyNamesContractResolver());
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             services.AddSwaggerGen(SetupSwagger);
 

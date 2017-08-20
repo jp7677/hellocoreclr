@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using HelloCoreClrApp.Data;
 using HelloCoreClrApp.Health;
 using HelloCoreClrApp.WebApi;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using SimpleInjector;
@@ -15,14 +14,13 @@ namespace HelloCoreClrApp
     {
         private static readonly CancellationTokenSource ShutdownCancellationTokenSource = new CancellationTokenSource();
         private static readonly Container Container = new Container();
-        private const string MariaDbConnectionString = "Server=localhost;database=helloworld;uid=helloworld;pwd=helloworld;";
 
         // Entry point for the application.
         public static void Main(string[] args)
         {
             var configuration = BuildConfiguration();
             ConfigureLogging(configuration);
-            SetupResources();
+            SetupResources(configuration);
 
             Task.WaitAll(
                 ConfigureShutdownHandler(),
@@ -37,6 +35,7 @@ namespace HelloCoreClrApp
         {
             return new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
                 .Build();
         }
 
@@ -51,12 +50,12 @@ namespace HelloCoreClrApp
                 Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
         }
 
-        private static void SetupResources()
+        private static void SetupResources(IConfiguration configuration)
         {
             var componentRegistrar = new ComponentRegistrar(Container)
             {
-                DatabaseOptionsBuilder = new DbContextOptionsBuilder<GreetingDbContext>()
-                    .UseMySql(MariaDbConnectionString)
+                DatabaseOptionsBuilder = DatabaseOptionsBuilderFactory
+                    .CreateDatabaseOptionsBuilder(configuration["connectionString"])
             };
             componentRegistrar.RegisterApplicationComponents();
         }

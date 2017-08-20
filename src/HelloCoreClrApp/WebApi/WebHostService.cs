@@ -6,6 +6,7 @@ using Humanizer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using SimpleInjector;
 
 namespace HelloCoreClrApp.WebApi
 {
@@ -13,10 +14,10 @@ namespace HelloCoreClrApp.WebApi
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<WebHostService>();
 
-        public Task Run(IConfiguration configuration, CancellationToken token)
+        public Task Run(Container container, IConfiguration configuration, CancellationToken token)
         {
             Log.Information("Starting Web host.");
-            var host = BuildWebHost(configuration);
+            var host = BuildWebHost(container, configuration);
             return Task.Run(() =>
             {
                 host.Run(token);
@@ -25,13 +26,14 @@ namespace HelloCoreClrApp.WebApi
                 TaskContinuationOptions.None);
         }
 
-        private static IWebHost BuildWebHost(IConfiguration configuration)
+        private static IWebHost BuildWebHost(Container container, IConfiguration configuration)
         {
+            var startup = new Startup(container);
             var builder = new WebHostBuilder()
                 .UseConfiguration(configuration)
                 .UseKestrel()
-                .UseStartup<Startup>();
-
+                .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))
+                .Configure(applicationBuilder => startup.Configure(applicationBuilder));
 #if DEBUG
             var webroot = FindWebRoot();
             Log.Warning("Running in Debug mode, hosting static files from '{0}'.", webroot);

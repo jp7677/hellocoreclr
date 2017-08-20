@@ -1,4 +1,4 @@
-﻿module HelloCoreClrApp.GetHelloWorldRule
+﻿module HelloCoreClrApp.Rules.SayHelloWorldRule
 
 let NegativeResult = "Are you sure?", false
 

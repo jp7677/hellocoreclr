@@ -1,17 +1,15 @@
-import * as chai from "chai";
 import {Config} from "../src/app/config";
-import {RouterConfigurationStub} from "./stubs";
 
 describe("Config test suite", () => {
 
     it("should initialize correctly", () => {
-        const routerConfiguration = new RouterConfigurationStub();
+        const routerConfiguration = jasmine.createSpyObj("RouterConfiguration", ["title", "map"]);
         const sut = new Config();
 
         sut.configureRouter(routerConfiguration);
 
-        chai.expect(routerConfiguration.title).to.equals("Hello World");
-        chai.expect(routerConfiguration.map.calledOnce).to.equals(true);
+        expect(routerConfiguration.title).toBe("Hello World");
+        expect(routerConfiguration.map).toHaveBeenCalled();
     });
 
 });

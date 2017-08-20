@@ -1,5 +1,3 @@
-import * as sinon from "sinon";
-
 // tslint:disable:max-classes-per-file
 
 export class HttpClientStub {
@@ -36,11 +34,24 @@ export class HttpClientStub {
                 status: this.status
             });
         }
-        return Promise.reject("An error occured");
+        return Promise.reject("An error occurred");
     }
 }
 
-export class RouterConfigurationStub {
-    public title = sinon.stub();
-    public map = sinon.stub();
+export class ValidationControllerStub {
+
+    public static valid() {
+        return new ValidationControllerStub(true);
+    }
+
+    public static notValid() {
+        return new ValidationControllerStub(false);
+    }
+
+    constructor(private valid: boolean) {
+    }
+
+    public validate() {
+        return Promise.resolve({valid: this.valid});
+    }
 }

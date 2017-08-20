@@ -76,7 +76,7 @@ namespace HelloCoreClrApp
         private static Task RunWebHostService(IConfiguration configuration, CancellationToken token)
         {
             return Container.GetInstance<WebHostService>()
-                .Run(configuration, token);
+                .Run(Container, configuration, token);
         }
 
         private static Task RunSystemMonitorService(CancellationToken token)

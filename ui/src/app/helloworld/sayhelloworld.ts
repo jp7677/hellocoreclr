@@ -1,28 +1,42 @@
 import {HttpClient} from "aurelia-fetch-client";
-import {inject, LogManager} from "aurelia-framework";
+import {inject, LogManager, NewInstance} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
+import {ControllerValidateResult, ValidationController, ValidationRules} from "aurelia-validation";
 
 import {SayHelloWorld as SayHelloWorldMessage} from "./messages/sayhelloworld";
 import {Notifier} from "./notifier";
+import {SayHelloWorldValidationRules} from "./sayhelloworld-validationrules";
 
-@inject(HttpClient)
+@inject(HttpClient, NewInstance.of(ValidationController), NewInstance.of(SayHelloWorldValidationRules))
 export class SayHelloWorld {
-    public inputText: string;
-    public greetingText: string;
+    public inputText: string = "";
+    public inputTextHadFocus: boolean;
+    public greetingText: string = "";
 
     private log: Logger = LogManager.getLogger("HelloWorld");
     private httpClient: HttpClient;
+    private controller: ValidationController;
+    private validation: SayHelloWorldValidationRules;
     private notifier: Notifier;
 
-    constructor(private $httpClient) {
+    constructor(private $httpClient, private $controller, private $validation) {
         this.httpClient = $httpClient;
+        this.controller = $controller;
+        this.validation = $validation;
         this.notifier = new Notifier();
+
+        this.validation.setRules(this);
+    }
+
+    public async inputTextOnfocus() {
+        this.inputTextHadFocus = true;
+        await this.controller.validate();
     }
 
     public async submit() {
         const name: string = this.inputText;
 
-        if (!this.testPreConditionsAndResetIfNeeded(name)) {
+        if (!await this.testPreConditionsAndResetIfNeeded(name)) {
             return;
         }
 
@@ -39,9 +53,11 @@ export class SayHelloWorld {
         this.handleValidResponse(response);
     }
 
-    private testPreConditionsAndResetIfNeeded(name: string): boolean {
-        if (name === undefined || name.length === 0) {
-            this.log.warn("No name received. abort.. ");
+    private async testPreConditionsAndResetIfNeeded(name: string): Promise<boolean> {
+        const validateResult: ControllerValidateResult = await this.controller.validate();
+
+        if (!validateResult.valid) {
+            this.log.warn("Invalid name received. abort.. ");
             this.resetGreetingText();
             return false;
         }

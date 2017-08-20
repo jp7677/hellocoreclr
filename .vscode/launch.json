@@ -1,7 +1,6 @@
 {
 	"version": "0.2.0",
 	"configurations": [
-		
 		{
 			"name": "Launch Chrome - ui",
 			"type": "chrome",
@@ -12,7 +11,7 @@
 			"webRoot": "${workspaceRoot}/ui/src"
 		},
 		{
-			"name": "Launch .NET Core - src",
+			"name": "Launch .NET Core - app",
 			"type": "coreclr",
 			"request": "launch",
 			"preLaunchTask": "Build All",

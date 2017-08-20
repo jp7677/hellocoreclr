@@ -2,8 +2,8 @@ export class Environment {
     public applicationMode: string;
     public baseUrl: string;
 
-    constructor(appsettings) {
-        this.applicationMode = appsettings.applicationMode;
+    constructor(appsettings, applicationMode: string) {
+        this.applicationMode = applicationMode;
         this.baseUrl = appsettings.baseUrl;
     }
 

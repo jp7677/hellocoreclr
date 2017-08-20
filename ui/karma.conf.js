@@ -1,55 +1,65 @@
+const path = require('path')
+const { ProvidePlugin, SourceMapDevToolPlugin } = require('webpack')
+
+const src = path.resolve(__dirname, 'src')
+const test = path.resolve(__dirname, 'test')
+const nodeModules = path.resolve(__dirname, 'node_modules')
+
 module.exports = (config) => {
-  'use strict'
+  const noSingleRun = config.nosinglerun
 
   config.set({
     logLevel: 'warn',
-    frameworks: ['jspm', 'mocha', 'chai', 'sinon'],
-
-    jspm: {
-      config: 'src/jspm.conf.js',
-      loadFiles: [
-        'node_modules/core-js/client/core.js',
-        'test/**/!(e2e)*.spec.js'
-      ],
-      serveFiles: [
-        'src/jspm_packages/*.js',
-        'src/app/**/*.js',
-        'test/stubs.js'
-      ],
-      meta: {
-        'src/*': { format: 'register' }
-      }
+    frameworks: ['jasmine'],
+    files: [
+      { pattern: path.join(nodeModules, 'core-js/client/shim.js'), instrument: false },
+      { pattern: path.join(src, '**/*.ts'), included: false, served: false, watched: false },
+      { pattern: path.join(test, '**/*.spec.ts'), included: false, served: false, watched: false },
+      { pattern: path.join(test, 'tests-index.ts'), loaded: false }
+    ],
+    preprocessors: {
+      'test/tests-index.ts': ['webpack']
     },
-    proxies: {
-      '/node_modules/': '/base/node_modules/',
-      '/jspm_packages/': '/base/src/jspm_packages/',
-      '/src/': '/base/src/',
-      '/test/': '/base/test/'
+    webpack: {
+      module: {
+        rules: [
+          { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
+          { test: /\.css$/i, loader: 'css-loader' },
+          !noSingleRun
+            ? { test: /\.ts$/i, enforce: 'post', loader: 'istanbul-instrumenter-loader', options: { esModules: true }, exclude: test }
+            : {}
+        ]
+      },
+      resolve: {
+        extensions: ['.ts', '.js'],
+        modules: [src, nodeModules]
+      },
+      plugins: [
+        new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
+        new SourceMapDevToolPlugin({ filename: null, test: /\.(js|ts)($|\?)/i, moduleFilenameTemplate: './[resource-path]' })
+      ]
     },
-
+    webpackMiddleware: {
+      stats: 'errors-only',
+      noInfo: true
+    },
     autoWatchBatchDelay: 10000,
-    singleRun: true,
-    browsers: ['PhantomJS'],
+    singleRun: !noSingleRun,
+    browsers: !noSingleRun ? [ 'ChromeHeadless' ] : [ 'Chrome' ],
+    mime: {
+      'text/x-typescript': ['ts']
+    },
     captureTimeout: 5000,
     browserDisconnectTimeout: 5000,
     browserDisconnectTolerance: 5,
     browserNoActivityTimeout: 10000,
-
-    preprocessors: {
-      'src/!(jspm.conf).js': ['coverage', 'sourcemap'],
-      'src/app/**/*.js': ['coverage', 'sourcemap']
-    },
-    reporters: ['mocha', 'coverage', 'remap-coverage'],
-    mochaReporter: {
-      output: 'autowatch'
-    },
-    coverageReporter: {
-      type: 'in-memory',
-      includeAllSources: true
-    },
-    remapCoverageReporter: {
-      'text-summary': null,
-      json: __dirname.replace('\\', '/') + '/../reports/coverage-ts.json'
+    reporters: !noSingleRun ? [ 'dots', 'coverage-istanbul' ] : [ 'dots' ],
+    coverageIstanbulReporter: {
+      skipFilesWithNoCoverage: false,
+      reports: [ 'text-summary', 'json' ],
+      fixWebpackSourcePaths: true,
+      dir: __dirname.replace('\\', '/') + '/../reports/',
+      'report-config': { 'json': { file: 'coverage-ts.json' } }
     }
   })
 }

@@ -72,15 +72,15 @@ namespace HelloCoreClrApp
                 .RunAsync();
         }
 
-        private static Task RunWebHostService(IConfiguration configuration, CancellationToken token)
+        private static async Task RunWebHostService(IConfiguration configuration, CancellationToken token)
         {
-            return Container.GetInstance<WebHostService>()
+            await Container.GetInstance<WebHostService>()
                 .Run(Container, configuration, token);
         }
 
-        private static Task RunSystemMonitorService(CancellationToken token)
+        private static async Task RunSystemMonitorService(CancellationToken token)
         {
-            return Container.GetInstance<SystemMonitorService>()
+            await Container.GetInstance<SystemMonitorService>()
                 .Run(token);
         }
     }

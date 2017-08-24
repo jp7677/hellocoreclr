@@ -14,13 +14,13 @@ namespace HelloCoreClrApp.WebApi
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<WebHostService>();
 
-        public Task Run(Container container, IConfiguration configuration, CancellationToken token)
+        public async Task Run(Container container, IConfiguration configuration, CancellationToken token)
         {
             Log.Information("Starting Web host.");
             var host = BuildWebHost(container, configuration);
-            return Task.Run(() =>
+            await Task.Run(async () =>
             {
-                host.Run(token);
+                await host.RunAsync(token);
             }, token).ContinueWith(t =>
                 Log.Information("Web host {0}",t.Status.Humanize().Transform(To.LowerCase)),
                 TaskContinuationOptions.None);

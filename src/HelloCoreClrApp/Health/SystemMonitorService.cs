@@ -17,10 +17,10 @@ namespace HelloCoreClrApp.Health
             this.monitors = monitors;
         }
 
-        public Task Run(CancellationToken token)
+        public async Task Run(CancellationToken token)
         {
             Log.Information("Starting System monitor.");
-            return Task.Run(async () =>
+            await Task.Run(async () =>
             {
                 await Monitor(token);
             }, token)

@@ -21,6 +21,7 @@ export class Statusbar {
     }
 
     private static loadStylesheet() {
+        // tslint:disable:no-submodule-imports
         const css = require("nprogress/nprogress.css").toString();
         const style: HTMLStyleElement = document.createElement("style");
         style.type = "text/css";

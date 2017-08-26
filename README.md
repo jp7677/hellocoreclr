@@ -13,7 +13,7 @@ P.S. I'm a terrible designer :)
 
 ## Instructions
 
-Obviously you should have Net Core SDK 1.0 and Nodejs/npm 6.x already up and running for everything that follows.
+Obviously you should have Net Core SDK 2.0 and Nodejs/npm 6.x already up and running for everything that follows.
 
 If you prefer MariaDb you'll have to override the `connectionString` in `appsettings.json` with e.g.
 
@@ -33,7 +33,6 @@ docker run --name myadmin -d --link mariadb:db -p 8080:80 phpmyadmin/phpmyadmin
 Restore packages, building, assembling and publishing goes like
 
 ```bash
-dotnet restore
 dotnet publish --configuration Release --output ../../artifacts/approot src/HelloCoreClrApp
 dotnet msbuild /t:publish /p:configuration=Release /p:output=../artifacts/wwwroot ui
 ```
@@ -45,7 +44,6 @@ Find the result within the ```artifacts/``` folder. Please read <http://docs.asp
 Use
 
 ```bash
-dotnet restore
 dotnet build
 dotnet build ui
 ```
@@ -93,7 +91,6 @@ My choice for C# development is [JetBrains Rider](https://www.jetbrains.com/ride
 Use again
 
 ```bash
-dotnet restore
 dotnet build
 dotnet build ui
 ```

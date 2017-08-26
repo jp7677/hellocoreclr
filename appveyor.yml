@@ -7,7 +7,6 @@ install:
 - ps: Install-Product node $env:nodejs_version
 
 build_script:
-- dotnet restore
 - dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp
 - dotnet msbuild /t:publish /p:output=..\artifacts\wwwroot ui
 

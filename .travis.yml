@@ -22,7 +22,6 @@ env:
   - DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 script:
-- dotnet restore
 - dotnet publish --configuration Release --output ../../artifacts/approot src/HelloCoreClrApp --version-suffix build$TRAVIS_BUILD_NUMBER
 - dotnet msbuild /t:publish /p:configuration=Release /p:output=../artifacts/wwwroot ui
 

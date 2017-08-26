@@ -2,7 +2,7 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { AureliaPlugin } = require('aurelia-webpack-plugin')
-const { DefinePlugin, optimize: { CommonsChunkPlugin, UglifyJsPlugin }, ProvidePlugin } = require('webpack')
+const { DefinePlugin, optimize: { CommonsChunkPlugin, ModuleConcatenationPlugin, UglifyJsPlugin }, ProvidePlugin } = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
 const noop = require('noop-webpack-plugin')
 
@@ -45,6 +45,7 @@ module.exports = (env) => {
       new AureliaPlugin({ aureliaApp: 'app/main' }),
       new CommonsChunkPlugin({ name: 'bootstrap' }),
       isProduction ? new UglifyJsPlugin({ comments: false }) : noop(),
+      new ModuleConcatenationPlugin(),
       new HtmlWebpackPlugin({
         template: path.resolve(src, 'index.ejs'),
         favicon: path.resolve(src, 'favicon.ico'),

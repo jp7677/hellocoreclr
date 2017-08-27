@@ -1,3 +1,4 @@
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace HelloCoreClrApp
         {
             var configuration = BuildConfiguration();
             ConfigureLogging(configuration);
+            SetCurrentWorkingDirectory();
             SetupResources(configuration);
 
             Task.WaitAll(
@@ -48,6 +50,13 @@ namespace HelloCoreClrApp
             Log.Information("{0} {1}",
                 Assembly.GetEntryAssembly().GetName().Name,
                 Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
+        }
+
+        private static void SetCurrentWorkingDirectory()
+        {
+            var cwd = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
+            Log.Information("Set current working directory to {0}", cwd);
+            Directory.SetCurrentDirectory(cwd);
         }
 
         private static void SetupResources(IConfiguration configuration)

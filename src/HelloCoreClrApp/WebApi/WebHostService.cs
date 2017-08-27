@@ -45,10 +45,8 @@ namespace HelloCoreClrApp.WebApi
 
         private static string FindWebRoot()
         {
-            var location = Assembly.GetEntryAssembly().Location;
-            location = location.Substring(0, location.LastIndexOf(Path.DirectorySeparatorChar));
-
-            var webroot = Path.Combine(location, "..", "..", "..", "..", "..", "ui", "wwwroot");
+            var cwd = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
+            var webroot = Path.Combine(cwd, "..", "..", "..", "..", "..", "ui", "wwwroot");
             return Path.GetFullPath(webroot);
         }
     }

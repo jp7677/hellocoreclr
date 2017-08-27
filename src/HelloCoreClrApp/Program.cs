@@ -55,7 +55,7 @@ namespace HelloCoreClrApp
         private static void SetCurrentWorkingDirectory()
         {
             var cwd = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
-            Log.Information("Set current working directory to {0}", cwd);
+            Log.Warning("Set current working directory to {0}", cwd);
             Directory.SetCurrentDirectory(cwd);
         }
 

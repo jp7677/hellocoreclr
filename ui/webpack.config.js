@@ -12,6 +12,7 @@ const nodeModules = path.resolve(__dirname, 'node_modules')
 
 module.exports = (env) => {
   const isProduction = env === 'production'
+  const isWatch = env === 'watch'
 
   return {
     entry: {
@@ -45,7 +46,7 @@ module.exports = (env) => {
       new AureliaPlugin({ aureliaApp: 'app/main' }),
       new CommonsChunkPlugin({ name: 'bootstrap' }),
       isProduction ? new UglifyJsPlugin({ comments: false }) : noop(),
-      new ModuleConcatenationPlugin(),
+      !isWatch ? new ModuleConcatenationPlugin() : noop(),
       new HtmlWebpackPlugin({
         template: path.resolve(src, 'index.ejs'),
         favicon: path.resolve(src, 'favicon.ico'),

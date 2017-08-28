@@ -10,7 +10,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.5.53",
     "aurelia-protractor-plugin": "^1.0.5",
-    "aurelia-webpack-plugin": "^2.0.0-rc.3",
+    "aurelia-webpack-plugin": "^2.0.0-rc.5",
     "clean-webpack-plugin": "^0.1.16",
     "colors": "^1.1.2",
     "compression-webpack-plugin": "^1.0.0",

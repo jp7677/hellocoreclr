@@ -64,13 +64,9 @@ namespace HelloCoreClrApp.WebApi
             Log.Information("Starting up in {0} mode.", env.EnvironmentName);
             
             Log.Information("Configuring request pipeline.");
-            
-#if DEBUG
-            // Serve the default file, if present.
-            app.UseDefaultFiles();
-            // Add static files to the request pipeline.
-            app.UseStaticFiles();
-#endif
+
+            if (env.IsDevelopment())
+                UseStaticHosting(app);
 
             // Add MVC to the request pipeline.
             app.UseMvc();
@@ -78,6 +74,14 @@ namespace HelloCoreClrApp.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c => 
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", ApiVersion));
+        }
+
+        private static void UseStaticHosting(IApplicationBuilder app)
+        {
+            // Serve the default file, if present.
+            app.UseDefaultFiles();
+            // Add static files to the request pipeline.
+            app.UseStaticFiles();
         }
     }
 }

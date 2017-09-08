@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,13 +35,21 @@ namespace HelloCoreClrApp.WebApi
                 .UseKestrel()
                 .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))
                 .Configure(applicationBuilder => startup.Configure(applicationBuilder));
-#if DEBUG
-            var webroot = FindWebRoot();
-            Log.Warning("Running in Debug mode, hosting static files from '{0}'.", webroot);
-            builder.UseWebRoot(webroot);
-#endif
 
+            if (IsDevelopment())
+                ConfigureWebRoot(builder); 
+            
             return builder.Build();
+        }
+
+        private static bool IsDevelopment() =>
+            Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
+    
+        private static void ConfigureWebRoot(IWebHostBuilder builder)
+        {
+            var webroot = FindWebRoot();
+            Log.Warning("Running in Development environment, hosting static files from '{0}'.", webroot);
+            builder.UseWebRoot(webroot);
         }
 
         private static string FindWebRoot()

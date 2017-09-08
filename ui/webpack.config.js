@@ -16,7 +16,7 @@ module.exports = (env) => {
 
   return {
     entry: {
-      app: [ 'es6-promise/auto', 'aurelia-bootstrapper' ],
+      app: [ 'aurelia-bootstrapper' ],
       splash: [ 'app/splash' ]
     },
     module: {
@@ -42,7 +42,11 @@ module.exports = (env) => {
     plugins: [
       new DefinePlugin({ APPLICATIONMODE: JSON.stringify(isProduction ? 'Production' : 'Development') }),
       new CleanWebpackPlugin([wwwroot]),
-      new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
+      new ProvidePlugin({
+        '$': 'jquery',
+        'jQuery': 'jquery',
+        'Promise': 'bluebird'
+      }),
       new AureliaPlugin({ aureliaApp: 'app/main' }),
       new CommonsChunkPlugin({ name: 'bootstrap' }),
       isProduction ? new UglifyJsPlugin({ comments: false }) : noop(),

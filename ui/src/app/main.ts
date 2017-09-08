@@ -1,5 +1,7 @@
 declare var APPLICATIONMODE: string;
 
+// Import promise polyfill for IE
+import {Promise as Bluebird} from "bluebird";
 // Import the fetch polyfill before the Aurelia fetch client to keep compatibility with Safari
 import "whatwg-fetch";
 
@@ -24,6 +26,7 @@ export async function configure(aurelia: Aurelia) {
         .standardConfiguration()
         .plugin(PLATFORM.moduleName("aurelia-validation"));
 
+    configureBluebird();
     configureLoggingAppender();
     logAplicationStart(env);
     configureLoggingLevels(env);
@@ -33,6 +36,13 @@ export async function configure(aurelia: Aurelia) {
 
     aurelia.setRoot(PLATFORM.moduleName("app/config"));
     Statusbar.Done();
+}
+
+function configureBluebird() {
+    Bluebird.config({
+        longStackTraces: false,
+        warnings: false
+    });
 }
 
 function configureLoggingAppender() {

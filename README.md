@@ -64,15 +64,13 @@ export ASPNETCORE_ENVIRONMENT=Staging
 dotnet run --project src/HelloCoreClrApp/HelloCoreClrApp.csproj
 ```
 
-to run the web server. Now open <http://localhost:5000/> in you favorite browser. Enjoy source maps in your browser when testing manually.
-
-If you want a dedicated front end server for testing you can additionally use
+to run the web server. Use
 
 ```bash
 npm run serve --prefix ui
 ```
 
-and open <http://localhost:3000/> in you browser.
+in a separate console to run the dedicated front end server. Open <http://localhost:3000/> in you browser. Enjoy!
 
 ### Development setup
 

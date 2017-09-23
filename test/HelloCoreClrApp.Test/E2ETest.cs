@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using FakeItEasy;
 using FluentAssertions;
 using HelloCoreClrApp.Data;
 using HelloCoreClrApp.Data.Entities;
@@ -9,6 +10,7 @@ using HelloCoreClrApp.WebApi.Messages;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using SimpleInjector;
 using Xunit;
@@ -19,6 +21,7 @@ namespace HelloCoreClrApp.Test
     {
         private static TestServer server;
         private static readonly object LockObject = new object();
+        private readonly IConfiguration configuration = A.Fake<IConfiguration>();
 
         public E2ETest()
         {
@@ -32,7 +35,7 @@ namespace HelloCoreClrApp.Test
                 {
                     DatabaseOptionsBuilder = CreateDatabaseOptions()
                 };
-                componentRegistrar.RegisterApplicationComponents();
+                componentRegistrar.RegisterApplicationComponents(configuration);
 
                 var startup = new Startup(container);
                 server = new TestServer(

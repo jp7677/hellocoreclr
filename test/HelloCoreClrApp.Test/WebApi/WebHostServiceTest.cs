@@ -16,10 +16,10 @@ namespace HelloCoreClrApp.Test.WebApi
         public async Task ShouldStartAndStopTestAsync()
         {
             var container = new Container();
-            var conf = A.Fake<IConfiguration>();
+            var configuration = A.Fake<IConfiguration>();
             var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
-            var sut = new WebHostService();
-            await sut.Run(container, conf, cts.Token);
+            var sut = new WebHostService(configuration, container);
+            await sut.Run(cts.Token);
 
             cts.IsCancellationRequested.Should().BeTrue();
         }

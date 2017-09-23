@@ -19,14 +19,14 @@ namespace HelloCoreClrApp.Health
 
         public async Task Run(CancellationToken token)
         {
-            Log.Information("Starting System monitor.");
             await Task.Run(async () =>
             {
+                Log.Information("Starting System monitor.");
                 await Monitor(token);
             }, token)
             .ContinueWith(t =>
                 Log.Information("System monitor {0}",t.Status.Humanize().Transform(To.LowerCase)),
-                TaskContinuationOptions.None);
+                    TaskContinuationOptions.None);
         }
 
         private async Task Monitor(CancellationToken token)

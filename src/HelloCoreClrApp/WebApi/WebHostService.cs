@@ -13,21 +13,28 @@ namespace HelloCoreClrApp.WebApi
 {
     public class WebHostService
     {
+        private readonly IConfiguration configuration;
+        private readonly Container container;
         private static readonly ILogger Log = Serilog.Log.ForContext<WebHostService>();
 
-        public async Task Run(Container container, IConfiguration configuration, CancellationToken token)
+        public WebHostService(IConfiguration configuration, Container container)
         {
-            Log.Information("Starting Web host.");
-            var host = BuildWebHost(container, configuration);
-            await Task.Run(async () =>
-            {
-                await host.RunAsync(token);
-            }, token).ContinueWith(t =>
-                Log.Information("Web host {0}",t.Status.Humanize().Transform(To.LowerCase)),
-                TaskContinuationOptions.None);
+            this.configuration = configuration;
+            this.container = container;
         }
 
-        private static IWebHost BuildWebHost(Container container, IConfiguration configuration)
+        public async Task Run(CancellationToken token)
+        {
+            await Task.Run(async () =>
+            {
+                Log.Information("Starting Web host.");
+                await BuildWebHost().RunAsync(token);
+            }, token).ContinueWith(t =>
+                Log.Information("Web host {0}",t.Status.Humanize().Transform(To.LowerCase)),
+                    TaskContinuationOptions.None);
+        }
+
+        private IWebHost BuildWebHost()
         {
             var startup = new Startup(container);
             var builder = new WebHostBuilder()

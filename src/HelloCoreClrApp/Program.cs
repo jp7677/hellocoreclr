@@ -29,7 +29,7 @@ namespace HelloCoreClrApp
                 SetupDatabase());
 
             Task.WaitAll(
-                RunWebHostService(configuration, ShutdownCancellationTokenSource.Token),
+                RunWebHostService(ShutdownCancellationTokenSource.Token),
                 RunSystemMonitorService(ShutdownCancellationTokenSource.Token));
         }
 
@@ -66,7 +66,7 @@ namespace HelloCoreClrApp
                 DatabaseOptionsBuilder = DatabaseOptionsBuilderFactory
                     .CreateDatabaseOptionsBuilder(configuration["connectionString"])
             };
-            componentRegistrar.RegisterApplicationComponents();
+            componentRegistrar.RegisterApplicationComponents(configuration);
         }
 
         private static Task ConfigureShutdownHandler()
@@ -81,10 +81,10 @@ namespace HelloCoreClrApp
                 .RunAsync();
         }
 
-        private static async Task RunWebHostService(IConfiguration configuration, CancellationToken token)
+        private static async Task RunWebHostService(CancellationToken token)
         {
             await Container.GetInstance<WebHostService>()
-                .Run(Container, configuration, token);
+                .Run(token);
         }
 
         private static async Task RunSystemMonitorService(CancellationToken token)

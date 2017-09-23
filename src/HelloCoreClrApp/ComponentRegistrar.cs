@@ -4,6 +4,7 @@ using HelloCoreClrApp.Health;
 using HelloCoreClrApp.WebApi;
 using HelloCoreClrApp.WebApi.Actions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
@@ -21,7 +22,7 @@ namespace HelloCoreClrApp
 
         public DbContextOptionsBuilder<GreetingDbContext> DatabaseOptionsBuilder { private get; set; }
 
-        public void RegisterApplicationComponents()
+        public void RegisterApplicationComponents(IConfiguration configuration)
         {
             Log.Information("Setup application components.");
             if (DatabaseOptionsBuilder == null)
@@ -29,6 +30,7 @@ namespace HelloCoreClrApp
 
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
+            container.RegisterSingleton(configuration);
             container.RegisterSingleton<IResourceProvider, ResourceProvider>();
 
             container.RegisterSingleton<IGreetingDbContextFactory>(() =>

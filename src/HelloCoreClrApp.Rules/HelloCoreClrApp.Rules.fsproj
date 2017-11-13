@@ -5,12 +5,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <NetStandardImplicitPackageVersion>2.0.1</NetStandardImplicitPackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="SayHelloworldRule.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Core" Version="4.2.3" />
-    <PackageReference Include="NETStandard.Library" Version="2.0.1" />
   </ItemGroup>
 </Project>

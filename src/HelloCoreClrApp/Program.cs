@@ -47,9 +47,10 @@ namespace HelloCoreClrApp
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
-            Log.Information("{0} {1}",
+            Log.Information("{0} {1} on .NET Core Runtime {2}",
                 Assembly.GetEntryAssembly().GetName().Name,
-                Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
+                Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion,
+                NetCoreHelper.GetNetCoreVersion());
         }
 
         private static void SetCurrentWorkingDirectory()

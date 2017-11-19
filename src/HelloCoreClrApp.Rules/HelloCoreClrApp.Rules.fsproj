@@ -10,7 +10,4 @@
   <ItemGroup>
     <Compile Include="SayHelloworldRule.fs" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="FSharp.Core" Version="4.2.3" />
-  </ItemGroup>
 </Project>

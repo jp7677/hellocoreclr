@@ -6,10 +6,8 @@ environment:
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
 install:
 - ps: Install-Product node $env:nodejs_version
-- ps: mkdir -Force "$pwd\.scripts\" | Out-Null
-- ps: Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "$pwd\.scripts\install.ps1"
-- ps: '& $pwd\.scripts\install.ps1 -version "$env:dotnet_version" -InstallDir "$pwd\.dotnet" -NoPath'
-- ps: $env:Path = "$pwd\.dotnet;$env:Path"
+- ps: Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "$pwd\install.ps1"
+- ps: '& $pwd\install.ps1 -version "$env:dotnet_version" -InstallDir "$pwd\.dotnet"'
 
 build_script:
 - dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp

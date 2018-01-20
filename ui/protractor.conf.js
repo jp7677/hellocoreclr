@@ -5,7 +5,7 @@ const test = path.resolve(__dirname, 'test-e2e')
 
 exports.config = {
   baseUrl: 'http://localhost:3000',
-  specs: [ path.join(test, '**/*.spec.ts') ],
+  specs: [ path.join(test, '**/*.feature') ],
   directConnect: true,
   capabilities: {
     'browserName': 'chrome',
@@ -24,6 +24,12 @@ exports.config = {
         '--headless'
       ]
     }
+  },
+  framework: 'custom',
+  frameworkPath: require.resolve('protractor-cucumber-framework'),
+  cucumberOpts: {
+    require: [path.join(test, '**/*.ts')],
+    strict: true
   },
   beforeLaunch: () => {
     ts.register({

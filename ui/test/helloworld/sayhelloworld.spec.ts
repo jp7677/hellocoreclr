@@ -1,7 +1,7 @@
+import {expect} from "chai";
 import {SayHelloWorld as SayHelloWorldMessage} from "../../src/app/helloworld/messages/sayhelloworld";
 import {SayHelloWorld} from "../../src/app/helloworld/sayhelloworld";
-
-import {HttpClientStub, ValidationControllerStub} from "../stubs";
+import {HttpClientStub, ValidationControllerStub, ValidationRulesStub} from "../stubs";
 
 function wait() {
     return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ function wait() {
 // tslint:disable:no-unused-expression
 
 describe("SayHelloWorld test suite", () => {
-    const validationRules = jasmine.createSpyObj("ValidationRulesStub", ["setRules"]);
+    const validationRules = new ValidationRulesStub();
 
     it("should do nothing when there is no valid input", async () => {
         const sut = new SayHelloWorld(
@@ -24,7 +24,7 @@ describe("SayHelloWorld test suite", () => {
 
         await sut.submit();
 
-        expect(sut.greetingText).toBe("");
+        expect(sut.greetingText).to.equal("");
     });
 
     it("focus on input should validate", async () => {
@@ -36,10 +36,10 @@ describe("SayHelloWorld test suite", () => {
 
         await sut.inputTextOnfocus();
 
-        expect(sut.greetingText).toBe("");
+        expect(sut.greetingText).to.equal("");
     });
 
-    it("should handle a valid response", async (done) => {
+    it("should handle a valid response", async () => {
         const sut = new SayHelloWorld(
             HttpClientStub.ok({greeting: "Hello World!"}),
             ValidationControllerStub.valid(),
@@ -49,11 +49,10 @@ describe("SayHelloWorld test suite", () => {
         await sut.submit();
 
         await wait();
-        expect(sut.greetingText).toBe("Hello World!");
-        done();
+        expect(sut.greetingText).to.equal("Hello World!");
     });
 
-    it("should handle an error response", async (done) => {
+    it("should handle an error response", async () => {
         const sut = new SayHelloWorld(
             HttpClientStub.error(),
             ValidationControllerStub.valid(),
@@ -64,7 +63,6 @@ describe("SayHelloWorld test suite", () => {
         await sut.submit();
 
         await wait();
-        expect(sut.greetingText).toBe("");
-        done();
+        expect(sut.greetingText).to.equal("");
     });
 });

@@ -1,3 +1,5 @@
+import * as sinon from "sinon";
+
 // tslint:disable:max-classes-per-file
 
 export class HttpClientStub {
@@ -36,6 +38,15 @@ export class HttpClientStub {
         }
         return Promise.reject("An error occurred");
     }
+}
+
+export class RouterConfigurationStub {
+    public title = sinon.stub();
+    public map = sinon.stub();
+}
+
+export class ValidationRulesStub {
+    public setRules = sinon.stub();
 }
 
 export class ValidationControllerStub {

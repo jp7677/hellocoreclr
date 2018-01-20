@@ -1,3 +1,4 @@
+import {expect} from "chai";
 import {Greetings} from "../../src/app/helloworld/greetings";
 import {SavedGreeting} from "../../src/app/helloworld/messages/savedgreeting";
 import {HttpClientStub} from "../stubs";
@@ -12,7 +13,7 @@ function wait() {
 
 describe("Greetings test suite", () => {
 
-    it("should handle a valid response", async (done) => {
+    it("should handle a valid response", async () => {
         const responses = new Map<string, any>();
         responses.set("greetings/count", "5");
         responses.set("greetings", [
@@ -24,23 +25,21 @@ describe("Greetings test suite", () => {
         const sut = new Greetings(httpStub);
 
         await wait();
-        expect(sut.numberOfSavedGreetings).not.toBeUndefined();
-        expect(sut.numberOfSavedGreetings).toBe("5");
-        expect(sut.savedGreetings).not.toBeUndefined();
-        expect(sut.savedGreetings.length).toBe(2);
-        done();
+        expect(sut.numberOfSavedGreetings).not.to.be.undefined;
+        expect(sut.numberOfSavedGreetings).to.equal("5");
+        expect(sut.savedGreetings).not.to.be.undefined;
+        expect(sut.savedGreetings.length).to.equal(2);
     });
 
-    it("should handle an error response", async (done) => {
+    it("should handle an error response", async () => {
         const httpStub = HttpClientStub.error();
         const sut = new Greetings(httpStub);
 
         await wait();
-        expect(sut.numberOfSavedGreetings).not.toBeUndefined();
-        expect(sut.numberOfSavedGreetings).toBe("0");
-        expect(sut.savedGreetings).not.toBeUndefined();
-        expect(sut.savedGreetings.length).toBe(0);
-        done();
+        expect(sut.numberOfSavedGreetings).not.to.be.undefined;
+        expect(sut.numberOfSavedGreetings).to.equal("0");
+        expect(sut.savedGreetings).not.to.be.undefined;
+        expect(sut.savedGreetings.length).equal(0);
     });
 
 });

@@ -10,7 +10,7 @@ module.exports = (config) => {
 
   config.set({
     logLevel: 'warn',
-    frameworks: ['jasmine'],
+    frameworks: ['mocha'],
     files: [
       { pattern: path.join(nodeModules, 'core-js/client/shim.js'), instrument: false },
       { pattern: path.join(src, '**/*.ts'), included: false, served: false, watched: false },

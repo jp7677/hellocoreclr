@@ -45,7 +45,13 @@ module.exports = (config) => {
     },
     autoWatchBatchDelay: 10000,
     singleRun: !noSingleRun,
-    browsers: !noSingleRun ? [ 'ChromeHeadless' ] : [ 'Chrome' ],
+    browsers: !noSingleRun ? [ 'ChromeHeadless' ] : [ 'ChromeWithRemoteDebugging' ],
+    customLaunchers: {
+      ChromeWithRemoteDebugging: {
+        base: 'Chrome',
+        flags: [ '--remote-debugging-port=9333', 'http://localhost:9876/debug.html' ]
+      }
+    },
     mime: {
       'text/x-typescript': ['ts']
     },

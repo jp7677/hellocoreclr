@@ -8,7 +8,7 @@
 			"preLaunchTask": "Build All",
 			"url": "http://localhost:3000",
 			"sourceMaps": true,
-			"webRoot": "${workspaceRoot}/ui/src"
+			"webRoot": "${workspaceRoot}/ui/"
 		},
 		{
 			"name": "Launch .NET Core - app",

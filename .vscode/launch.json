@@ -3,7 +3,7 @@
 	"configurations": [
 		{
 			// Run 'npm run serve' within 'ui' prior to launch
-			// and attch to the 'Karma DEBUG RUNNER' window.
+			// and attach to the 'Karma DEBUG RUNNER' window.
 			// Refresh the browser windows when attached.
 			"type": "chrome",
 			"request": "launch",
@@ -25,6 +25,16 @@
 			"pathMapping": {
 			  "/base/test/": "${workspaceRoot}/ui/"
 			}
+		},
+		{
+			// Run 'npm run serve' within 'ui' prior to launch
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Node - Protractor E2E-Tests",
+			"program": "${workspaceFolder}/ui/./node_modules/.bin/protractor",
+			"args": [ "${workspaceFolder}/ui/protractor.conf" ],
+			"cwd": "${workspaceRoot}/ui/",
+			"console": "integratedTerminal"
 		},
 		{
 			"type": "coreclr",

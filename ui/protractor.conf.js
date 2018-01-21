@@ -40,5 +40,5 @@ exports.config = {
   plugins: [{
     package: 'aurelia-protractor-plugin'
   }],
-  SELENIUM_PROMISE_MANAGER: 0
+  SELENIUM_PROMISE_MANAGER: false
 }

@@ -34,7 +34,7 @@
 			"program": "${workspaceFolder}/ui/./node_modules/.bin/protractor",
 			"args": [ "${workspaceFolder}/ui/protractor.conf" ],
 			"cwd": "${workspaceRoot}/ui/",
-			"console": "integratedTerminal"
+			"outputCapture": "std"
 		},
 		{
 			"type": "coreclr",

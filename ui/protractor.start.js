@@ -14,8 +14,7 @@ app.listen(port, () => {
 
 let runProtractor = () => {
   let winExt = /^win/.test(process.platform) ? '.cmd' : ''
-  let nodeBinDir = path.join('node_modules', '.bin')
-  let protractorBin = path.join(nodeBinDir, 'protractor' + winExt)
+  let protractorBin = 'protractor' + winExt
 
   childprocess.spawn(protractorBin, [ 'protractor.conf.js' ], {stdio: 'inherit'})
     .on('close', (code) => {

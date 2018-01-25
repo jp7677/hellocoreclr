@@ -12,9 +12,7 @@ build_script:
 
 before_test:
 - nuget install OpenCover -Version 4.6.796 -o .\packages
-- pushd ui
-- npm install karma-appveyor-reporter
-- popd
+- npm install karma-appveyor-reporter --cwd ui --prefix ui
 
 test_script:
 - packages\OpenCover.4.6.796\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -returntargetcode -mergeoutput -output:reports\coverage-dotnet.xml

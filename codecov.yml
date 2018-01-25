@@ -1,11 +1,11 @@
 coverage:
-  range: 50...75
+  range: 50..70
   status:
     project:
       default:
-        target: 75
+        target: 70
     patch:
       default:
-        target: 75
+        target: 70
 comment:
   layout: "header, diff"

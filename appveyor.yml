@@ -7,24 +7,24 @@ install:
 - ps: Install-Product node $env:nodejs_version
 
 build_script:
-#- dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp
+- dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp
 - dotnet msbuild /t:publish /p:output=..\artifacts\wwwroot ui
 
 before_test:
-#- nuget install OpenCover -Version 4.6.796 -o .\packages
-#- npm install karma-appveyor-reporter --prefix ui
+- nuget install OpenCover -Version 4.6.796 -o .\packages
+- npm install karma-appveyor-reporter --prefix ui
 
 test_script:
-#- packages\OpenCover.4.6.796\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -returntargetcode -mergeoutput -output:reports\coverage-dotnet.xml
-#- npm run lint --prefix ui
-#- npm run unit-tests --prefix ui -- --reporters dots,coverage-istanbul,appveyor
+- packages\OpenCover.4.6.796\tools\OpenCover.Console.exe -target:dotnet.exe -targetargs:"test test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj" -register:user -oldstyle -filter:"+[HelloCoreClrApp*]* -[HelloCoreClrApp*.Test*]*" -hideskipped:Filter -returntargetcode -mergeoutput -output:reports\coverage-dotnet.xml
+- npm run lint --prefix ui
+- npm run unit-tests --prefix ui -- --reporters dots,coverage-istanbul,appveyor
 - npm run e2e-tests:prepare --prefix ui
 - npm run e2e-tests --prefix ui
 
 after_test:
-#- npm install codecov
-#- node_modules\.bin\codecov --disable=gcov -f reports\coverage-dotnet.xml
-#- node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
+- npm install codecov
+- node_modules\.bin\codecov --disable=gcov -f reports\coverage-dotnet.xml
+- node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 
 cache:
 - '%USERPROFILE%\.nuget\packages -> appveyor.yml'

@@ -12,9 +12,9 @@ app.listen(port, () => {
   runProtractor()
 })
 
-let runProtractor = () => {
-  let winExt = /^win/.test(process.platform) ? '.cmd' : ''
-  let protractorBin = 'protractor' + winExt
+const runProtractor = () => {
+  const winExt = /^win/.test(process.platform) ? '.cmd' : ''
+  const protractorBin = 'protractor' + winExt
 
   childprocess.spawn(protractorBin, [ 'protractor.conf.js' ], {stdio: 'inherit'})
     .on('close', (code) => {

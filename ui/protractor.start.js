@@ -16,6 +16,7 @@ let runProtractor = () => {
   let winExt = /^win/.test(process.platform) ? '.cmd' : ''
   let protractorBin = 'protractor' + winExt
 
+  console.log(protractorBin)
   childprocess.spawn(protractorBin, [ 'protractor.conf.js' ], {stdio: 'inherit'})
     .on('close', (code) => {
       if (code !== 0) {

@@ -20,8 +20,7 @@ Curabitur sed scelerisque mauris, nec euismod massa. Aenean egestas, tellus at e
                         class="form-control input ${!inputTextHadFocus ? '' : controller.errors.length === 0 ? 'is-valid' : 'is-invalid'}"
                         placeholder="Give me some text" value.bind="inputText & validateOnChange"
                         focus.trigger="inputTextOnfocus()" maxlength="20" />
-                    <div class="valid-feedback">Looks good</div>
-                    <div class="invalid-feedback">Between 3 and 20, no strange characters please</div>
+                    <div class="invalid-tooltip">Between 3 and 20, no strange characters please</div>
                 </div>
                 <div class="col">
                     <button type="submit" class="col btn btn-primary btn ${inputTextHadFocus && controller.errors.length === 0 ? '' : 'disabled'}">

@@ -7,6 +7,7 @@ import "whatwg-fetch";
 
 import "bootstrap";
 import "jquery";
+import "popper.js";
 
 import * as appsettings from "../appsettings.json";
 import {Environment} from "./environment";

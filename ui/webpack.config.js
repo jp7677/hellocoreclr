@@ -43,9 +43,10 @@ module.exports = (env) => {
       new DefinePlugin({ APPLICATIONMODE: JSON.stringify(isProduction ? 'Production' : 'Development') }),
       new CleanWebpackPlugin([wwwroot]),
       new ProvidePlugin({
-        '$': 'jquery',
-        'jQuery': 'jquery',
-        'Promise': 'bluebird'
+        $: 'jquery',
+        jQuery: 'jquery',
+        Popper: 'popper.js',
+        Promise: 'bluebird'
       }),
       new AureliaPlugin({ aureliaApp: 'app/main' }),
       new CommonsChunkPlugin({ name: 'bootstrap' }),

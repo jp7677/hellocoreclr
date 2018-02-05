@@ -12,7 +12,7 @@ namespace HelloCoreClrApp.Test
             var cts = new CancellationTokenSource();
             ShutdownHandler.Configure(cts);
 
-            cts.IsCancellationRequested.Should().Be(false);
+            cts.IsCancellationRequested.Should().BeFalse();
         }
     }
 }

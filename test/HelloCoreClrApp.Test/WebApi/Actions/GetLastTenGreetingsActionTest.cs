@@ -21,8 +21,8 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
             
             var result = await sut.ExecuteAsync();
             
-            result.Should().NotBeNull();
-            result.GetLength(0).Should().Be(0);
+            result.Should().NotBeNull()
+                .And.HaveCount(0);
         }
 
         [Fact]
@@ -39,8 +39,8 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
             
             var result = await sut.ExecuteAsync();
             
-            result.Should().NotBeNull();
-            result.GetLength(0).Should().Be(10);
+            result.Should().NotBeNull()
+                .And.HaveCount(10);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using HelloCoreClrApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
@@ -13,8 +14,8 @@ namespace HelloCoreClrApp.Test.Data
             var builder = DatabaseOptionsBuilderFactory
                 .CreateDatabaseOptionsBuilder("Filename=somefile.db");
 
-            Assert.IsType<DbContextOptionsBuilder<GreetingDbContext>>(builder);
-            Assert.True(builder.IsConfigured);
+            builder.Should().BeOfType<DbContextOptionsBuilder<GreetingDbContext>>();
+            builder.IsConfigured.Should().BeTrue();
         }
         
         [Fact]
@@ -23,8 +24,8 @@ namespace HelloCoreClrApp.Test.Data
             var builder = DatabaseOptionsBuilderFactory
                 .CreateDatabaseOptionsBuilder("Server=someserver;database=helloworld");
 
-            Assert.IsType<DbContextOptionsBuilder<GreetingDbContext>>(builder);
-            Assert.True(builder.IsConfigured);
+            builder.Should().BeOfType<DbContextOptionsBuilder<GreetingDbContext>>();
+            builder.IsConfigured.Should().BeTrue();
         }
         
         [Fact]

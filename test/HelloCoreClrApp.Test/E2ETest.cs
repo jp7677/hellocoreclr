@@ -86,6 +86,7 @@ namespace HelloCoreClrApp.Test
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var content = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<SayHelloWorldResponse>(content);
+
                 data.Should().NotBeNull();
                 data.Greeting.Should().Be("Hello World!");
             }
@@ -101,8 +102,9 @@ namespace HelloCoreClrApp.Test
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var content = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<SavedGreeting[]>(content);
-                data.Should().NotBeNull();
-                data.GetLength(0).Should().BeGreaterThan(0);
+
+                data.Should().NotBeNull()
+                    .And.HaveCountGreaterThan(0);
             }
         }
 
@@ -116,6 +118,7 @@ namespace HelloCoreClrApp.Test
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var content = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<int>(content);
+
                 data.Should().BeGreaterThan(0);
             }
         }

@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using FluentAssertions;
+using Xunit;
 
 namespace HelloCoreClrApp.Test
 {
@@ -7,7 +8,8 @@ namespace HelloCoreClrApp.Test
         [Fact] public void GetNetCoreVersionShouldReturnVersionTest()
         {
             var version = NetCoreHelper.GetNetCoreVersion();
-            Assert.NotNull(version);
+
+            version.Should().NotBeNullOrEmpty();
         }
     }
 }

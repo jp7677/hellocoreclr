@@ -18,7 +18,8 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
             var result = await sut.ExecuteAsync("World");
             
             result.Greeting.Should().Be("Hello World!");
-            A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
         }
         
         [Fact]
@@ -30,7 +31,8 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
             var result = await sut.ExecuteAsync(null);
             
             result.Greeting.Should().Be("Are you sure?");
-            A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored)).MustNotHaveHappened();
+            A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored))
+                .MustNotHaveHappened();
         }
         
         [Fact]
@@ -42,7 +44,8 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
             var result = await sut.ExecuteAsync("");
             
             result.Greeting.Should().Be("Are you sure?");
-            A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored)).MustNotHaveHappened();
+            A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored))
+                .MustNotHaveHappened();
         }
     }
 }

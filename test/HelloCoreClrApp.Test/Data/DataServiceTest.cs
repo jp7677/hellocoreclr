@@ -20,6 +20,7 @@ namespace HelloCoreClrApp.Test.Data
             await sut.SaveGreetingAsync("mygreeting");
 
             var result = await sut.GetNumberOfGreetingsAsync();
+
             result.Should().Be(1);
         }
 
@@ -36,8 +37,10 @@ namespace HelloCoreClrApp.Test.Data
                 await sut.SaveGreetingAsync(string.Format("mygreeting {0}", 1));
 
             var result = await sut.GetLastTenGreetingsAsync(10);
+
+            result.Should().NotBeNull()
+                .And.HaveCount(10);
             result[0].Name.Should().Be("mygreeting 1");
-            result.Count.Should().Be(10);
         }
     }
 }

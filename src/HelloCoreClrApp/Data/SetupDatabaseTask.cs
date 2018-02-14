@@ -13,7 +13,7 @@ namespace HelloCoreClrApp.Data
             this.dataService = dataService;
         }
 
-        public async Task RunAsync()
+        public async Task Run()
         {
             Log.Information("Setup database.");
             await dataService.EnsureCreatedAsync();

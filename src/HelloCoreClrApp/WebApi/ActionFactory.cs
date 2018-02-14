@@ -11,19 +11,13 @@ namespace HelloCoreClrApp.WebApi
             this.resourceProvider = resourceProvider;
         }
         
-        public ISayHelloWorldAction CreateSayHelloWorldAction()
-        {
-            return resourceProvider.CreateResource<ISayHelloWorldAction>();            
-        }
+        public ISayHelloWorldAction CreateSayHelloWorldAction() =>
+            resourceProvider.CreateResource<ISayHelloWorldAction>();
 
-        public IGetLastTenGreetingsAction CreateGetLastTenGreetingsAction()
-        {
-            return resourceProvider.CreateResource<IGetLastTenGreetingsAction>();
-        }
+        public IGetLastTenGreetingsAction CreateGetLastTenGreetingsAction() =>
+            resourceProvider.CreateResource<IGetLastTenGreetingsAction>();
 
-        public IGetTotalNumberOfGreetingsAction CreateGetTotalNumberOfGreetingsAction()
-        {
-            return resourceProvider.CreateResource<IGetTotalNumberOfGreetingsAction>();
-        }
+        public IGetTotalNumberOfGreetingsAction CreateGetTotalNumberOfGreetingsAction() =>
+            resourceProvider.CreateResource<IGetTotalNumberOfGreetingsAction>();
     }
 }

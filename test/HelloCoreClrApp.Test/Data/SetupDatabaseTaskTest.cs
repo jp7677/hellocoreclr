@@ -13,7 +13,7 @@ namespace HelloCoreClrApp.Test.Data
             var dataservice = A.Fake<IDataService>();
             var sut = new SetupDatabaseTask(dataservice);
 
-            await sut.RunAsync();
+            await sut.Run();
         }
     }
 }

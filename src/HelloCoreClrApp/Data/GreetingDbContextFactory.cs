@@ -11,9 +11,6 @@ namespace HelloCoreClrApp.Data
             this.options = options;
         }
 
-        public GreetingDbContext CreateHelloWorldDbContext()
-        {
-            return new GreetingDbContext(options);
-        }
+        public GreetingDbContext CreateHelloWorldDbContext() => new GreetingDbContext(options);
     }
 }

@@ -70,28 +70,20 @@ namespace HelloCoreClrApp
             componentRegistrar.RegisterApplicationComponents(configuration);
         }
 
-        private static Task ConfigureShutdownHandler()
-        {
-            return Task.Run(() =>
+        private static async Task ConfigureShutdownHandler() =>
+            await Task.Run(() =>
                 ShutdownHandler.Configure(ShutdownCancellationTokenSource));
-        }
 
-        private static Task SetupDatabase()
-        {
-            return Container.GetInstance<SetupDatabaseTask>()
-                .RunAsync();
-        }
+        private static async Task SetupDatabase() => 
+            await Container.GetInstance<SetupDatabaseTask>()
+                .Run();
 
-        private static async Task RunWebHostService(CancellationToken token)
-        {
+        private static async Task RunWebHostService(CancellationToken token) =>
             await Container.GetInstance<WebHostService>()
                 .Run(token);
-        }
 
-        private static async Task RunSystemMonitorService(CancellationToken token)
-        {
+        private static async Task RunSystemMonitorService(CancellationToken token) =>
             await Container.GetInstance<SystemMonitorService>()
                 .Run(token);
-        }
     }
 }

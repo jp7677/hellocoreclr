@@ -19,7 +19,7 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
             
             result.Greeting.Should().Be("Hello World!");
             A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
         
         [Fact]

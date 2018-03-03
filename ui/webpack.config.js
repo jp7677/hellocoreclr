@@ -37,18 +37,6 @@ module.exports = (env) => {
       path: wwwroot,
       devtoolModuleFilenameTemplate: './[resource-path]'
     },
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          bootstrap: {
-            name: 'bootstrap',
-            chunks: 'initial',
-            minChunks: 2,
-            minSize: 0
-          }
-        }
-      }
-    },
     performance: { hints: false },
     plugins: [
       new DefinePlugin({ APPLICATIONMODE: JSON.stringify(isProduction ? 'Production' : 'Development') }),
@@ -63,7 +51,7 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({
         template: path.resolve(src, 'index.ejs'),
         favicon: path.resolve(src, 'favicon.ico'),
-        chunks: ['bootstrap', 'splash', 'app'],
+        chunks: [ 'splash', 'app' ],
         chunksSortMode: 'manual',
         minify: isProduction ? { collapseWhitespace: true, collapseInlineTagWhitespace: true } : false
       }),

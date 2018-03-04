@@ -1,3 +1,3 @@
-import {Statusbar} from "./statusbar";
+import {Loadingbar} from "./loadingbar";
 
-Statusbar.Start();
+Loadingbar.Start();

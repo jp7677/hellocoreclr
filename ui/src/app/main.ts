@@ -11,7 +11,7 @@ import "popper.js";
 
 import * as appsettings from "../appsettings.json";
 import {Environment} from "./environment";
-import {Statusbar} from "./statusbar";
+import {Loadingbar} from "./loadingbar";
 
 import {HttpClient} from "aurelia-fetch-client";
 import {Aurelia, Container, LogManager} from "aurelia-framework";
@@ -20,7 +20,7 @@ import {ConsoleAppender} from "aurelia-logging-console";
 import {PLATFORM} from "aurelia-pal";
 
 export async function configure(aurelia: Aurelia) {
-    Statusbar.Inc();
+    Loadingbar.Inc();
     const env: Environment = new Environment(appsettings, APPLICATIONMODE);
 
     aurelia.use
@@ -36,7 +36,7 @@ export async function configure(aurelia: Aurelia) {
     await aurelia.start();
 
     aurelia.setRoot(PLATFORM.moduleName("app/config"));
-    Statusbar.Done();
+    Loadingbar.Done();
 }
 
 function configureBluebird() {

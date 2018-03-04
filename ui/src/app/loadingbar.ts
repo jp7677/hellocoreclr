@@ -2,26 +2,26 @@ declare function require(name: string): string;
 import * as nprogress from "nprogress";
 
 interface IWindow extends Window {
-    Statusbar: Statusbar;
+    Loadingbar: Loadingbar;
 }
 
-export class Statusbar {
+export class Loadingbar {
     public static Start(): void {
-        Statusbar.Instance.Start();
+        Loadingbar.Instance.Start();
     }
 
     public static Inc(): void {
-        Statusbar.Instance.Inc();
+        Loadingbar.Instance.Inc();
     }
 
     public static Done(): void {
-        Statusbar.Instance.Done();
+        Loadingbar.Instance.Done();
     }
 
     private static get Instance() {
         // attach this to the window object to make sure that there is really only one.
         const w = window as IWindow;
-        return w.Statusbar || (w.Statusbar = new this());
+        return w.Loadingbar || (w.Loadingbar = new Loadingbar());
     }
 
     private Start(): void {

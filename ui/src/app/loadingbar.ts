@@ -1,4 +1,3 @@
-declare function require(name: string): string;
 import * as nprogress from "nprogress";
 
 interface IWindow extends Window {

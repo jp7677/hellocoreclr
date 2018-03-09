@@ -26,7 +26,8 @@
   },
   "tslint.exclude": "**/*.js",
   "stylelint.config": {
-    "extends": "./ui/stylelint.config.js" 
+    "extends": "./ui/stylelint.config.js",
+    "ignoreFiles": "**/*.(c|f)sproj"
   },
   "eslint.options": {
     "configFile": "ui/eslint.json"

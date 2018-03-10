@@ -21,6 +21,7 @@ module.exports = (config) => {
       'test/tests-index.ts': ['webpack']
     },
     webpack: {
+      mode: 'development',
       module: {
         rules: [
           { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
@@ -37,7 +38,8 @@ module.exports = (config) => {
       plugins: [
         new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
         new SourceMapDevToolPlugin({ filename: null, test: /\.(js|ts)($|\?)/i, moduleFilenameTemplate: './[resource-path]' })
-      ]
+      ],
+      devtool: 'source-map'
     },
     webpackMiddleware: {
       stats: 'errors-only',

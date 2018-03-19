@@ -101,7 +101,7 @@
     "lint:style": "stylelint src/**/*.css",
     "unit-tests": "karma start",
     "unit-tests:watch": "karma start --nosinglerun",
-    "e2e-tests:prepare": "webdriver-manager update --gecko false",
+    "e2e-tests:prepare": "webdriver-manager update --gecko false --standalone false --versions.chrome 2.36",
     "e2e-tests": "node protractor.start",
     "serve": "node server",
     "watch": "webpack-dev-server --hot --inline --env watch"

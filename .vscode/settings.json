@@ -27,7 +27,7 @@
   "tslint.exclude": "**/*.js",
   "stylelint.config": {
     "extends": "./ui/stylelint.config.js",
-    "ignoreFiles": "**/*.?(cs|fs)proj"
+    "ignoreFiles": ["**/*.?(cs|fs)proj", "**/*.md"]
   },
   "eslint.options": {
     "configFile": "ui/eslint.json"

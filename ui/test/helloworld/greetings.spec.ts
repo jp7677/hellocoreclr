@@ -3,12 +3,6 @@ import {Greetings} from "../../src/app/helloworld/greetings";
 import {SavedGreeting} from "../../src/app/helloworld/messages/savedgreeting";
 import {HttpClientStub} from "../stubs";
 
-function wait() {
-    return new Promise((resolve, reject) => {
-            setTimeout(resolve, 200);
-        });
-}
-
 // tslint:disable:no-unused-expression
 
 describe("Greetings test suite", () => {
@@ -21,10 +15,10 @@ describe("Greetings test suite", () => {
             {greeting: "World", timestampUtc: new Date(Date.now())}
         ]);
         const httpStub = HttpClientStub.okWithResponseMap(responses);
-
         const sut = new Greetings(httpStub);
 
-        await wait();
+        await sut.activate();
+
         expect(sut.numberOfSavedGreetings).not.to.be.undefined;
         expect(sut.numberOfSavedGreetings).to.equal("5");
         expect(sut.savedGreetings).not.to.be.undefined;
@@ -35,7 +29,8 @@ describe("Greetings test suite", () => {
         const httpStub = HttpClientStub.error();
         const sut = new Greetings(httpStub);
 
-        await wait();
+        await sut.activate();
+
         expect(sut.numberOfSavedGreetings).not.to.be.undefined;
         expect(sut.numberOfSavedGreetings).to.equal("0");
         expect(sut.savedGreetings).not.to.be.undefined;

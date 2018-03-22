@@ -28,9 +28,9 @@ export class SayHelloWorld {
         this.validation.setRules(this);
     }
 
-    public async inputTextOnfocus() {
+    public inputTextOnfocus() {
         this.inputTextHadFocus = true;
-        await this.controller.validate();
+        return this.controller.validate();
     }
 
     public async submit() {
@@ -64,22 +64,22 @@ export class SayHelloWorld {
         return true;
     }
 
-    private prepareRequest(name: string): void {
+    private prepareRequest(name: string) {
         this.log.info(`We got the following name: ${name}`);
         this.notifier.Info("Working...");
     }
 
-    private handleErrorResponse(response: Response): void {
+    private handleErrorResponse(response: Response) {
         this.log.warn(`Oops... something went wrong. Received http code was: ${response.status}`);
         this.notifier.Warn(`Oops... HTTP/${response.status}`);
         this.resetGreetingText();
     }
 
-    private resetGreetingText(): void {
+    private resetGreetingText() {
         this.greetingText = "";
     }
 
-    private async handleValidResponse(response: Response): Promise<any> {
+    private async handleValidResponse(response: Response) {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 

@@ -5,25 +5,25 @@ interface IWindow extends Window {
 }
 
 export class Loadingbar {
-    public static Start(): void {
+    public static Start() {
         Loadingbar.Instance.Start();
     }
 
-    public static Inc(): void {
+    public static Inc() {
         Loadingbar.Instance.Inc();
     }
 
-    public static Done(): void {
+    public static Done() {
         Loadingbar.Instance.Done();
     }
 
-    private static get Instance() {
+    private static get Instance(): Loadingbar {
         // attach this to the window object to make sure that there is really only one.
         const w = window as IWindow;
         return w.Loadingbar || (w.Loadingbar = new Loadingbar());
     }
 
-    private Start(): void {
+    private Start() {
         this.loadStylesheet();
         nprogress.configure({
             minimum: 0.3,
@@ -42,11 +42,11 @@ export class Loadingbar {
         document.head.appendChild(style);
     }
 
-    private Inc(): void {
+    private Inc() {
         nprogress.inc(0.6);
     }
 
-    private Done(): void {
+    private Done() {
         nprogress.done();
     }
 }

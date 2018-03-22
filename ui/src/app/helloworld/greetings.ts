@@ -19,17 +19,21 @@ export class Greetings {
     constructor(private $httpClient) {
         this.httpClient = $httpClient;
         this.notifier = new Notifier();
-
-        this.prepareRequests();
-        this.fetchNumberOfSavedGreetings();
-        this.fetchLastGreetings();
     }
 
-    private prepareRequests(): void {
+    public activate() {
+        this.prepareRequests();
+        return Promise.all([
+            this.fetchNumberOfSavedGreetings(),
+            this.fetchLastGreetings()
+        ]);
+    }
+
+    private prepareRequests() {
         this.notifier.Info("Working...");
     }
 
-    private async fetchNumberOfSavedGreetings(): Promise<any> {
+    private async fetchNumberOfSavedGreetings() {
         let response: Response;
         try {
             response = await this.httpClient.fetch("greetings/count");
@@ -41,7 +45,7 @@ export class Greetings {
         this.handleFetchNumberOfSavedGreetingsValidResponse(response);
     }
 
-    private async handleFetchNumberOfSavedGreetingsValidResponse(response: Response): Promise<any> {
+    private async handleFetchNumberOfSavedGreetingsValidResponse(response: Response) {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
@@ -50,7 +54,7 @@ export class Greetings {
         this.numberOfSavedGreetings = data;
     }
 
-    private async fetchLastGreetings(): Promise<any> {
+    private async fetchLastGreetings() {
         let response: Response;
         try {
             response = await this.httpClient.fetch("greetings");
@@ -62,12 +66,12 @@ export class Greetings {
         this.handleFetchLastGreetingsValidResponse(response);
     }
 
-    private handleErrorResponse(response: Response): void {
+    private handleErrorResponse(response: Response) {
         this.log.warn(`Oops... something went wrong. Received http code was: ${response.status}`);
         this.notifier.Warn(`Oops... HTTP/${response.status}`);
     }
 
-    private async handleFetchLastGreetingsValidResponse(response: Response): Promise<any> {
+    private async handleFetchLastGreetingsValidResponse(response: Response) {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 

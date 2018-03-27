@@ -5,17 +5,17 @@ export class Notifier {
         this.SetToastrOptions();
     }
 
-    public Info(message: string): void {
+    public Info(message: string) {
         toastr.clear();
         toastr.success(message);
     }
 
-    public Warn(message: string): void {
+    public Warn(message: string) {
         toastr.clear();
         toastr.warning(message);
     }
 
-    private SetToastrOptions(): void {
+    private SetToastrOptions() {
         toastr.options.positionClass = "toast-bottom-right";
         toastr.options.timeOut = 1500;
         toastr.options.showDuration = 100;

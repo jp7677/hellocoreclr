@@ -28,7 +28,7 @@ export class SayHelloWorld {
         this.validation.setRules(this);
     }
 
-    public inputTextOnfocus() {
+    public inputTextOnfocus(): Promise<ControllerValidateResult> {
         this.inputTextHadFocus = true;
         return this.controller.validate();
     }
@@ -46,11 +46,10 @@ export class SayHelloWorld {
         try {
             response = await this.httpClient.fetch("sayhelloworld/" + name);
         } catch (err) {
-            this.handleErrorResponse(err);
-            return;
+            return this.handleErrorResponse(err);
         }
 
-        this.handleValidResponse(response);
+        await this.handleValidResponse(response);
     }
 
     private async testPreConditionsAndResetIfNeeded(name: string): Promise<boolean> {

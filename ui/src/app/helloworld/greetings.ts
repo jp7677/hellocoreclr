@@ -38,11 +38,10 @@ export class Greetings {
         try {
             response = await this.httpClient.fetch("greetings/count");
         } catch (err) {
-            this.handleErrorResponse(err);
-            return;
+            return this.handleErrorResponse(err);
         }
 
-        this.handleFetchNumberOfSavedGreetingsValidResponse(response);
+        await this.handleFetchNumberOfSavedGreetingsValidResponse(response);
     }
 
     private async handleFetchNumberOfSavedGreetingsValidResponse(response: Response) {
@@ -59,11 +58,10 @@ export class Greetings {
         try {
             response = await this.httpClient.fetch("greetings");
         } catch (err) {
-            this.handleErrorResponse(err);
-            return;
+            return this.handleErrorResponse(err);
         }
 
-        this.handleFetchLastGreetingsValidResponse(response);
+        await this.handleFetchLastGreetingsValidResponse(response);
     }
 
     private handleErrorResponse(response: Response) {

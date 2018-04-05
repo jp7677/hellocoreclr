@@ -107,5 +107,4 @@ Your favorite browser should fire up and should open <http://localhost:3000/>. H
 
 ## TODO
 
-- Remove our local OpenCover package once OpenCover with portable pdb support is available on NuGet <https://github.com/OpenCover/opencover/issues/610>.
 - Remove temporary `"skipLibCheck": true` tsconfig.json option once <https://github.com/angular/protractor/issues/4361> is fixed.

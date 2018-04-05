@@ -30,4 +30,3 @@ cache:
 - '%USERPROFILE%\.nuget\packages -> appveyor.yml'
 - 'ui\node_modules -> appveyor.yml'
 - 'node_modules -> appveyor.yml'
-- 'packages -> appveyor.yml'

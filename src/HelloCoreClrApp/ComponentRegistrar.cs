@@ -30,7 +30,7 @@ namespace HelloCoreClrApp
 
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
-            container.RegisterSingleton(configuration);
+            container.RegisterInstance(configuration);
             container.RegisterSingleton<IResourceProvider, ResourceProvider>();
 
             container.RegisterSingleton<IGreetingDbContextFactory>(() =>

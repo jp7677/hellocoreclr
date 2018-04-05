@@ -5,6 +5,6 @@ namespace HelloCoreClrApp.WebApi.Actions
 {
     public interface IGetLastTenGreetingsAction
     {
-        Task<SavedGreeting[]> ExecuteAsync();
+        Task<SavedGreeting[]> Execute();
     }
 }

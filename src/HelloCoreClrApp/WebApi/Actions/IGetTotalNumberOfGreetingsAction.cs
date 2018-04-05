@@ -4,6 +4,6 @@ namespace HelloCoreClrApp.WebApi.Actions
 {
     public interface IGetTotalNumberOfGreetingsAction
     {
-        Task<int> ExecuteAsync();
+        Task<int> Execute();
     }
 }

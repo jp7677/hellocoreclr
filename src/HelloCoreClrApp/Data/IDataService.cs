@@ -6,9 +6,9 @@ namespace HelloCoreClrApp.Data
 {
     public interface IDataService
     {
-        Task EnsureCreatedAsync();
-        Task<int> GetNumberOfGreetingsAsync();
-        Task SaveGreetingAsync(string greeting);
-        Task<IList<Greeting>> GetLastTenGreetingsAsync(int numberOfResults);
+        Task EnsureCreated();
+        Task<int> GetNumberOfGreetings();
+        Task SaveGreeting(string greeting);
+        Task<IList<Greeting>> GetLastTenGreetings(int numberOfResults);
     }
 }

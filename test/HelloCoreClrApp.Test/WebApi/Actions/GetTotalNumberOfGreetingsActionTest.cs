@@ -10,13 +10,13 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
     public class GetTotalNumberOfGreetingsActionTest
     {
         [Fact]
-        public async Task ExecuteAsyncTest()
+        public async Task ExecuteTest()
         {
             var dataService = A.Fake<IDataService>();
-            A.CallTo(() => dataService.GetNumberOfGreetingsAsync()).Returns(6);
+            A.CallTo(() => dataService.GetNumberOfGreetings()).Returns(6);
             var sut = new GetTotalNumberOfGreetingsAction(dataService);
             
-            var result = await sut.ExecuteAsync();
+            var result = await sut.Execute();
             
             result.Should().Be(6);
         }

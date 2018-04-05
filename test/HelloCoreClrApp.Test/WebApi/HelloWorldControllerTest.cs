@@ -13,15 +13,15 @@ namespace HelloCoreClrApp.Test.WebApi
     public class HelloWorldControllerTest
     {
         [Fact]
-        public async Task SayHelloWorldAsyncTest()
+        public async Task SayHelloWorldTest()
         { 
             var action = A.Fake<ISayHelloWorldAction>();
-            A.CallTo(() => action.ExecuteAsync("You")).Returns(new SayHelloWorldResponse{ Greeting = "Hello You!" });
+            A.CallTo(() => action.Execute("You")).Returns(new SayHelloWorldResponse{ Greeting = "Hello You!" });
             var actionFactory = A.Fake<IActionFactory>();
             A.CallTo(() => actionFactory.CreateSayHelloWorldAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
 
-            var response = await sut.SayHelloWorldAsync("You");
+            var response = await sut.SayHelloWorld("You");
 
             response.Should().NotBeNull();
             var okResponse = response.As<OkObjectResult>();
@@ -33,15 +33,15 @@ namespace HelloCoreClrApp.Test.WebApi
         }
 
         [Fact]
-        public async Task NoGreetingsShouldReturnNoContentAsyncTest()
+        public async Task NoGreetingsShouldReturnNoContentTest()
         { 
             var action = A.Fake<IGetLastTenGreetingsAction>();
-            A.CallTo(() => action.ExecuteAsync()).Returns(new SavedGreeting[0]);
+            A.CallTo(() => action.Execute()).Returns(new SavedGreeting[0]);
             var actionFactory = A.Fake<IActionFactory>();
             A.CallTo(() => actionFactory.CreateGetLastTenGreetingsAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
 
-            var response = await sut.GetLastTenGreetingsAsync();
+            var response = await sut.GetLastTenGreetings();
 
             response.Should().NotBeNull();
             var okResponse = response.As<NoContentResult>();
@@ -49,15 +49,15 @@ namespace HelloCoreClrApp.Test.WebApi
         }
 
         [Fact]
-        public async Task SomeGreetingsShouldReturnGreetingsAsyncTest()
+        public async Task SomeGreetingsShouldReturnGreetingsTest()
         { 
             var action = A.Fake<IGetLastTenGreetingsAction>();
-            A.CallTo(() => action.ExecuteAsync()).Returns(new []{new SavedGreeting{Greeting = "mygreeting"}});
+            A.CallTo(() => action.Execute()).Returns(new []{new SavedGreeting{Greeting = "mygreeting"}});
             var actionFactory = A.Fake<IActionFactory>();
             A.CallTo(() => actionFactory.CreateGetLastTenGreetingsAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
 
-            var response = await sut.GetLastTenGreetingsAsync();
+            var response = await sut.GetLastTenGreetings();
 
             var okResponse = response.As<OkObjectResult>();
             okResponse.Should().NotBeNull();
@@ -68,15 +68,15 @@ namespace HelloCoreClrApp.Test.WebApi
         }
 
         [Fact]
-        public async Task GetNumberOfGreetingsShouldReturnSomeNumberAsyncTest()
+        public async Task GetNumberOfGreetingsShouldReturnSomeNumberTest()
         { 
             var action = A.Fake<IGetTotalNumberOfGreetingsAction>();
-            A.CallTo(() => action.ExecuteAsync()).Returns(6);
+            A.CallTo(() => action.Execute()).Returns(6);
             var actionFactory = A.Fake<IActionFactory>();
             A.CallTo(() => actionFactory.CreateGetTotalNumberOfGreetingsAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
 
-            var response = await sut.GetTotalNumberOfGreetingsAsync();
+            var response = await sut.GetTotalNumberOfGreetings();
 
             var okResponse = response.As<OkObjectResult>();
             okResponse.Should().NotBeNull();

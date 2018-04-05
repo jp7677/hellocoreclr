@@ -14,10 +14,10 @@ namespace HelloCoreClrApp.WebApi.Actions
             this.dataService = dataService;
         }
 
-        public async Task<int> ExecuteAsync()
+        public async Task<int> Execute()
         {
             Log.Information("Looking for the total count of greetings.");
-            var result = await dataService.GetNumberOfGreetingsAsync();
+            var result = await dataService.GetNumberOfGreetings();
 
             Log.Information("We have {0} greetings totally.", result);
             return result;

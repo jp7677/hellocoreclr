@@ -11,7 +11,7 @@ namespace HelloCoreClrApp.Test.Health
     public class SytemMonitorServiceTest
     {
         [Fact]
-        public async Task ShouldStartAndStopTestAsync()
+        public async Task ShouldStartAndStopTest()
         {
             var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
             var monitor = A.Fake<IMonitor>();

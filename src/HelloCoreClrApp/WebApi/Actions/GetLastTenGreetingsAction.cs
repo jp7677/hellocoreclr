@@ -16,11 +16,11 @@ namespace HelloCoreClrApp.WebApi.Actions
             this.dataService = dataService;
         }
 
-        public async Task<SavedGreeting[]> ExecuteAsync()
+        public async Task<SavedGreeting[]> Execute()
         {
             Log.Information("Looking for the last ten greetings.");
             const int numberOfResults = 10;
-            var items = await dataService.GetLastTenGreetingsAsync(numberOfResults);
+            var items = await dataService.GetLastTenGreetings(numberOfResults);
 
             Log.Information("We are returning {0} greetings.", items.Count);
             return items.Select(i => new SavedGreeting {Greeting = i.Name, TimestampUtc = i.TimestampUtc}).ToArray();

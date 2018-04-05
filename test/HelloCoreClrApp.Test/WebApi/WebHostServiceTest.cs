@@ -13,7 +13,7 @@ namespace HelloCoreClrApp.Test.WebApi
     public class WebHostServiceTest
     {
         [Fact]
-        public async Task ShouldStartAndStopTestAsync()
+        public async Task ShouldStartAndStopTest()
         {
             var container = new Container();
             var configuration = A.Fake<IConfiguration>();

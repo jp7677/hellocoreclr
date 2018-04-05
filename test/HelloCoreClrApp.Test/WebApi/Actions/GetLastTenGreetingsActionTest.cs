@@ -13,20 +13,20 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
     public class GetLastTenGreetingsActionTest
     {
         [Fact]
-        public async Task ExecuteAsyncTest()
+        public async Task ExecuteTest()
         {
             var dataService = A.Fake<IDataService>();
-            A.CallTo(() => dataService.GetLastTenGreetingsAsync(A<int>.Ignored)).Returns((new List<Greeting>()));
+            A.CallTo(() => dataService.GetLastTenGreetings(A<int>.Ignored)).Returns((new List<Greeting>()));
             var sut = new GetLastTenHelloWorldsAction(dataService);
             
-            var result = await sut.ExecuteAsync();
+            var result = await sut.Execute();
             
             result.Should().NotBeNull()
                 .And.HaveCount(0);
         }
 
         [Fact]
-        public async Task ExecuteWithTenGreetingsAsyncTest()
+        public async Task ExecuteWithTenGreetingsTest()
         {
             var greetingList = new List<Greeting>(10);
             for(var i = 1; i <= 10; i++)
@@ -34,10 +34,10 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
                     new Greeting{Name = string.Format("mygreeting {0}", i), TimestampUtc = DateTime.Now.ToUniversalTime()});
 
             var dataService = A.Fake<IDataService>();
-            A.CallTo(() => dataService.GetLastTenGreetingsAsync(10)).Returns(greetingList);
+            A.CallTo(() => dataService.GetLastTenGreetings(10)).Returns(greetingList);
             var sut = new GetLastTenHelloWorldsAction(dataService);
             
-            var result = await sut.ExecuteAsync();
+            var result = await sut.Execute();
             
             result.Should().NotBeNull()
                 .And.HaveCount(10);

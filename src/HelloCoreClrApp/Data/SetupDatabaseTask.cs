@@ -16,9 +16,9 @@ namespace HelloCoreClrApp.Data
         public async Task Run()
         {
             Log.Information("Setup database.");
-            await dataService.EnsureCreatedAsync();
+            await dataService.EnsureCreated();
 
-            Log.Information("Currently we have {0} saved Greetings.", await dataService.GetNumberOfGreetingsAsync());
+            Log.Information("Currently we have {0} saved Greetings.", await dataService.GetNumberOfGreetings());
         }
     }
 }

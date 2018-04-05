@@ -20,12 +20,12 @@ namespace HelloCoreClrApp.Data
             this.dbContextFactory = dbContextFactory;
         }
 
-        public async Task EnsureCreatedAsync()
+        public async Task EnsureCreated()
         {
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 RegisterSeriLog(db);
-                await db.EnsureCreatedAsync();
+                await db.EnsureCreated();
             }
         }
 
@@ -36,7 +36,7 @@ namespace HelloCoreClrApp.Data
                 loggerFactory.AddProvider(new SerilogLoggerProvider());
         }
 
-        public async Task<int> GetNumberOfGreetingsAsync()
+        public async Task<int> GetNumberOfGreetings()
         {
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
@@ -44,11 +44,11 @@ namespace HelloCoreClrApp.Data
             }
         }
 
-        public async Task SaveGreetingAsync(string greeting)
+        public async Task SaveGreeting(string greeting)
         {
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {
-                db.Greetings.Add(new Greeting
+                await db.Greetings.AddAsync(new Greeting
                     {
                         Name = greeting,
                         TimestampUtc = DateTime.Now.ToUniversalTime()
@@ -57,7 +57,7 @@ namespace HelloCoreClrApp.Data
             }
         }
 
-        public async Task<IList<Greeting>> GetLastTenGreetingsAsync(int numberOfResults)
+        public async Task<IList<Greeting>> GetLastTenGreetings(int numberOfResults)
         {
             using(var db = dbContextFactory.CreateHelloWorldDbContext())
             {

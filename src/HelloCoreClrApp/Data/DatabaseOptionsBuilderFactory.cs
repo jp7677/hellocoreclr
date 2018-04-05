@@ -10,6 +10,7 @@ namespace HelloCoreClrApp.Data
             if (connectionString.StartsWith("Filename", StringComparison.OrdinalIgnoreCase))
                 return new DbContextOptionsBuilder<GreetingDbContext>()
                     .UseSqlite(connectionString);
+
             if (connectionString.StartsWith("Server", StringComparison.OrdinalIgnoreCase))
                 return new DbContextOptionsBuilder<GreetingDbContext>()
                     .UseMySql(connectionString);

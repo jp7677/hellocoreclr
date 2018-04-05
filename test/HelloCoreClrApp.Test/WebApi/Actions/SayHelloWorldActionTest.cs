@@ -10,41 +10,41 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
     public class SayHelloWorldActionTest
     {
         [Fact]
-        public async Task ExecuteAsyncTest()
+        public async Task ExecuteTest()
         {
             var dataService = A.Fake<IDataService>();
             var sut = new SayHelloWorldAction(dataService);
             
-            var result = await sut.ExecuteAsync("World");
+            var result = await sut.Execute("World");
             
             result.Greeting.Should().Be("Hello World!");
-            A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored))
+            A.CallTo(() => dataService.SaveGreeting(A<string>.Ignored))
                 .MustHaveHappenedOnceExactly();
         }
         
         [Fact]
-        public async Task ExecuteWithNullAsyncTest()
+        public async Task ExecuteWithNullTest()
         {
             var dataService = A.Fake<IDataService>();
             var sut = new SayHelloWorldAction(dataService);
             
-            var result = await sut.ExecuteAsync(null);
+            var result = await sut.Execute(null);
             
             result.Greeting.Should().Be("Are you sure?");
-            A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored))
+            A.CallTo(() => dataService.SaveGreeting(A<string>.Ignored))
                 .MustNotHaveHappened();
         }
         
         [Fact]
-        public async Task ExecuteTestWithEmptyStringAsyncTest()
+        public async Task ExecuteTestWithEmptyStringTest()
         {
             var dataService = A.Fake<IDataService>();
             var sut = new SayHelloWorldAction(dataService);
             
-            var result = await sut.ExecuteAsync("");
+            var result = await sut.Execute("");
             
             result.Greeting.Should().Be("Are you sure?");
-            A.CallTo(() => dataService.SaveGreetingAsync(A<string>.Ignored))
+            A.CallTo(() => dataService.SaveGreeting(A<string>.Ignored))
                 .MustNotHaveHappened();
         }
     }

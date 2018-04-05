@@ -17,56 +17,50 @@ using Xunit;
 
 namespace HelloCoreClrApp.Test
 {
-    public class E2ETest
+    public class E2ETest: IAsyncLifetime
     {
         private static TestServer server;
-        private static readonly object LockObject = new object();
-        private readonly IConfiguration configuration = A.Fake<IConfiguration>();
-
-        public E2ETest()
+        
+        public async Task InitializeAsync()
         {
-            lock (LockObject)
+            var container = new Container();
+            var componentRegistrar = new ComponentRegistrar(container)
             {
-                if (server != null)
-                    return;
+                DatabaseOptionsBuilder = await CreateDatabaseOptions()
+            };
+            componentRegistrar.RegisterApplicationComponents(A.Fake<IConfiguration>());
 
-                var container = new Container();
-                var componentRegistrar = new ComponentRegistrar(container)
-                {
-                    DatabaseOptionsBuilder = CreateDatabaseOptions()
-                };
-                componentRegistrar.RegisterApplicationComponents(configuration);
-
-                var startup = new Startup(container);
-                server = new TestServer(
-                    new WebHostBuilder()
-                        .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))
-                        .Configure(applicationBuilder => startup.Configure(applicationBuilder)));
-            }
+            var startup = new Startup(container);
+            server = new TestServer(
+                new WebHostBuilder()
+                    .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))
+                    .Configure(applicationBuilder => startup.Configure(applicationBuilder)));
         }
 
-        private static DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptions()
+        private static async Task<DbContextOptionsBuilder<GreetingDbContext>> CreateDatabaseOptions()
         {
             var builder = new DbContextOptionsBuilder<GreetingDbContext>()
                 .UseInMemoryDatabase("E2ETest");
 
-            SeedDatabase(builder.Options);
+            await SeedDatabase(builder.Options);
 
             return builder;
         }
 
-        private static void SeedDatabase(DbContextOptions options)
+        private static async Task SeedDatabase(DbContextOptions options)
         {
             using (var db = new GreetingDbContext(options))
             {
-                db.Greetings.Add(new Greeting{Name = "First Greeting", TimestampUtc = DateTime.Now.ToUniversalTime()});
-                db.Greetings.Add(new Greeting{Name = "Second Greeting", TimestampUtc = DateTime.Now.ToUniversalTime()});
-                db.SaveChanges();
+                await db.Greetings.AddAsync(new Greeting{Name = "First Greeting", TimestampUtc = DateTime.Now.ToUniversalTime()});
+                await db.Greetings.AddAsync(new Greeting{Name = "Second Greeting", TimestampUtc = DateTime.Now.ToUniversalTime()});
+                await db.SaveChangesAsync();
             }
         }
 
+        public Task DisposeAsync() => Task.CompletedTask;
+
         [Fact]
-        public async Task InvalidRequestReturnsNotFoundAsyncTest()
+        public async Task InvalidRequestReturnsNotFoundTest()
         {
             using (var client = server.CreateClient())
             {
@@ -77,7 +71,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task ValidSayHelloWorldRequestReturnsOkAsyncTest()
+        public async Task ValidSayHelloWorldRequestReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
@@ -93,7 +87,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task ValidGetTenGreetingsRequestReturnsOkAsyncTest()
+        public async Task ValidGetTenGreetingsRequestReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
@@ -109,7 +103,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task ValidGetNumberOfGreetingsRequestReturnsOkAsyncTest()
+        public async Task ValidGetNumberOfGreetingsRequestReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
@@ -124,7 +118,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task SwaggerReturnsOkAsyncTest()
+        public async Task SwaggerReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {
@@ -135,7 +129,7 @@ namespace HelloCoreClrApp.Test
         }
 
         [Fact]
-        public async Task SwaggerUiReturnsOkAsyncTest()
+        public async Task SwaggerUiReturnsOkTest()
         {
             using (var client = server.CreateClient())
             {

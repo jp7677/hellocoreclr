@@ -9,34 +9,34 @@ namespace HelloCoreClrApp.Test.Data
     public class DataServiceTest
     {
         [Fact]
-        public async Task SaveOneGreetingShouldResultInOneSavedGreetingAsyncTest()
+        public async Task SaveOneGreetingShouldResultInOneSavedGreetingTest()
         {
             var options = new DbContextOptionsBuilder<GreetingDbContext>()
-                .UseInMemoryDatabase("SaveOneGreetingShouldResultInOneSavedGreetingAsyncTest");
+                .UseInMemoryDatabase(nameof(SaveOneGreetingShouldResultInOneSavedGreetingTest));
             var factory = new GreetingDbContextFactory(options.Options);
             var sut = new DataService(factory);
 
-            await sut.EnsureCreatedAsync();
-            await sut.SaveGreetingAsync("mygreeting");
+            await sut.EnsureCreated();
+            await sut.SaveGreeting("mygreeting");
 
-            var result = await sut.GetNumberOfGreetingsAsync();
+            var result = await sut.GetNumberOfGreetings();
 
             result.Should().Be(1);
         }
 
         [Fact]
-        public async Task SaveTenGreetingShouldResultInTenSavedGreetingAsyncTest()
+        public async Task SaveTenGreetingShouldResultInTenSavedGreetingTest()
         {
             var options = new DbContextOptionsBuilder<GreetingDbContext>()
-                .UseInMemoryDatabase("SaveTenGreetingShouldResultInTenSavedGreetingAsyncTest");
+                .UseInMemoryDatabase(nameof(SaveTenGreetingShouldResultInTenSavedGreetingTest));
             var factory = new GreetingDbContextFactory(options.Options);
             var sut = new DataService(factory);
 
-            await sut.EnsureCreatedAsync();
+            await sut.EnsureCreated();
             for(var i = 1; i <= 20; i++)
-                await sut.SaveGreetingAsync(string.Format("mygreeting {0}", 1));
+                await sut.SaveGreeting(string.Format("mygreeting {0}", 1));
 
-            var result = await sut.GetLastTenGreetingsAsync(10);
+            var result = await sut.GetLastTenGreetings(10);
 
             result.Should().NotBeNull()
                 .And.HaveCount(10);

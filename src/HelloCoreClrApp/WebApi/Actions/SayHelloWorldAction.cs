@@ -16,21 +16,21 @@ namespace HelloCoreClrApp.WebApi.Actions
             this.dataService = dataService;
         }
 
-        public async Task<SayHelloWorldResponse> ExecuteAsync(string name)
+        public async Task<SayHelloWorldResponse> Execute(string name)
         {
             Log.Information("Calculating result.");
 
             Tuple<string, bool> res = Rules.SayHelloWorldRule.Process(name);
             if (res.Item2)
-                await SaveGreetingAsync(res.Item1);
+                await SaveGreeting(res.Item1);
 
             return new SayHelloWorldResponse{Greeting = res.Item1};
         }
 
-        private async Task SaveGreetingAsync(string greeting)
+        private async Task SaveGreeting(string greeting)
         {
             Log.Information("Save greeting.");
-            await dataService.SaveGreetingAsync(greeting);
+            await dataService.SaveGreeting(greeting);
         }
     }
 }

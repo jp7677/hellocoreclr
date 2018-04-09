@@ -5,7 +5,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RuntimeFrameworkVersion>2.0.5</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.0.6</RuntimeFrameworkVersion>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
@@ -26,7 +26,7 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
     <PackageReference Include="Humanizer.Core" Version="2.2.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
   </ItemGroup>

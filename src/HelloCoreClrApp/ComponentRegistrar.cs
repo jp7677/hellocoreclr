@@ -35,7 +35,7 @@ namespace HelloCoreClrApp
 
             container.RegisterSingleton<IGreetingDbContextFactory>(() =>
                 new GreetingDbContextFactory(DatabaseOptionsBuilder.Options));
-            container.Register<IDataService,DataService>();
+            container.Register<IDataService, DataService>();
 
             container.RegisterSingleton<WebHostService>();
             container.RegisterSingleton<IActionFactory, ActionFactory>();
@@ -44,7 +44,7 @@ namespace HelloCoreClrApp
             container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();
 
             container.RegisterSingleton<SystemMonitorService>();
-            container.RegisterCollection<IMonitor>(new [] {typeof(DiskMonitor), typeof(CpuMonitor)});
+            container.RegisterCollection<IMonitor>(new[] { typeof(DiskMonitor), typeof(CpuMonitor) });
 
             container.Verify();
         }

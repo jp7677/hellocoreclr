@@ -5,12 +5,12 @@ namespace HelloCoreClrApp.WebApi
     public class ActionFactory : IActionFactory
     {
         private readonly IResourceProvider resourceProvider;
-        
+
         public ActionFactory(IResourceProvider resourceProvider)
         {
             this.resourceProvider = resourceProvider;
         }
-        
+
         public ISayHelloWorldAction CreateSayHelloWorldAction() =>
             resourceProvider.CreateResource<ISayHelloWorldAction>();
 

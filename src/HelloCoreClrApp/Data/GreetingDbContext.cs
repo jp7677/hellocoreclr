@@ -8,7 +8,8 @@ namespace HelloCoreClrApp.Data
     {
         public GreetingDbContext(DbContextOptions options)
             : base(options)
-        { }
+        {
+        }
 
         public DbSet<Greeting> Greetings { get; set; }
 

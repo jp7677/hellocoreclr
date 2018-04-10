@@ -33,7 +33,7 @@ namespace HelloCoreClrApp.Test.Data
             var sut = new DataService(factory);
 
             await sut.EnsureCreated();
-            for(var i = 1; i <= 20; i++)
+            for (var i = 1; i <= 20; i++)
                 await sut.SaveGreeting(string.Format("mygreeting {0}", 1));
 
             var result = await sut.GetLastTenGreetings(10);

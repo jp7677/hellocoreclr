@@ -31,7 +31,13 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.1" />
   </ItemGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>../../stylecop.rules</CodeAnalysisRuleSet>
+</PropertyGroup>
 </Project>

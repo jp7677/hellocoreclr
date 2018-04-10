@@ -17,10 +17,10 @@ using Xunit;
 
 namespace HelloCoreClrApp.Test
 {
-    public class E2ETest: IAsyncLifetime
+    public class E2ETest : IAsyncLifetime
     {
         private static TestServer server;
-        
+
         public async Task InitializeAsync()
         {
             var container = new Container();
@@ -35,26 +35,6 @@ namespace HelloCoreClrApp.Test
                 new WebHostBuilder()
                     .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))
                     .Configure(applicationBuilder => startup.Configure(applicationBuilder)));
-        }
-
-        private static async Task<DbContextOptionsBuilder<GreetingDbContext>> CreateDatabaseOptions()
-        {
-            var builder = new DbContextOptionsBuilder<GreetingDbContext>()
-                .UseInMemoryDatabase("E2ETest");
-
-            await SeedDatabase(builder.Options);
-
-            return builder;
-        }
-
-        private static async Task SeedDatabase(DbContextOptions options)
-        {
-            using (var db = new GreetingDbContext(options))
-            {
-                await db.Greetings.AddAsync(new Greeting{Name = "First Greeting", TimestampUtc = DateTime.Now.ToUniversalTime()});
-                await db.Greetings.AddAsync(new Greeting{Name = "Second Greeting", TimestampUtc = DateTime.Now.ToUniversalTime()});
-                await db.SaveChangesAsync();
-            }
         }
 
         public Task DisposeAsync() => Task.CompletedTask;
@@ -136,6 +116,26 @@ namespace HelloCoreClrApp.Test
                 var response = await client.GetAsync("/swagger/");
 
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
+            }
+        }
+
+        private static async Task<DbContextOptionsBuilder<GreetingDbContext>> CreateDatabaseOptions()
+        {
+            var builder = new DbContextOptionsBuilder<GreetingDbContext>()
+                .UseInMemoryDatabase("E2ETest");
+
+            await SeedDatabase(builder.Options);
+
+            return builder;
+        }
+
+        private static async Task SeedDatabase(DbContextOptions options)
+        {
+            using (var db = new GreetingDbContext(options))
+            {
+                await db.Greetings.AddAsync(new Greeting { Name = "First Greeting", TimestampUtc = DateTime.Now.ToUniversalTime() });
+                await db.Greetings.AddAsync(new Greeting { Name = "Second Greeting", TimestampUtc = DateTime.Now.ToUniversalTime() });
+                await db.SaveChangesAsync();
             }
         }
     }

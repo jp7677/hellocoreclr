@@ -24,7 +24,7 @@ namespace HelloCoreClrApp.WebApi.Actions
             if (res.Item2)
                 await SaveGreeting(res.Item1);
 
-            return new SayHelloWorldResponse{Greeting = res.Item1};
+            return new SayHelloWorldResponse { Greeting = res.Item1 };
         }
 
         private async Task SaveGreeting(string greeting)

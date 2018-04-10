@@ -4,7 +4,7 @@ using Serilog;
 
 namespace HelloCoreClrApp.Health
 {
-    public class CpuMonitor: IMonitor
+    public class CpuMonitor : IMonitor
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<CpuMonitor>();
 
@@ -15,7 +15,8 @@ namespace HelloCoreClrApp.Health
                         / Environment.ProcessorCount;
             usage = Math.Round(usage * 100, 2);
 
-            Log.Information("CPU time since application start:{0}",
+            Log.Information(
+                "CPU time since application start:{0}",
                 $"{Environment.NewLine}{usage}% for {Process.GetCurrentProcess().ProcessName}");
         }
     }

@@ -23,7 +23,7 @@ namespace HelloCoreClrApp.WebApi.Actions
             var items = await dataService.GetLastTenGreetings(numberOfResults);
 
             Log.Information("We are returning {0} greetings.", items.Count);
-            return items.Select(i => new SavedGreeting {Greeting = i.Name, TimestampUtc = i.TimestampUtc}).ToArray();
+            return items.Select(i => new SavedGreeting { Greeting = i.Name, TimestampUtc = i.TimestampUtc }).ToArray();
         }
     }
 }

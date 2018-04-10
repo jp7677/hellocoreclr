@@ -15,7 +15,7 @@ namespace HelloCoreClrApp.Test.Health
         {
             var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
             var monitor = A.Fake<IMonitor>();
-            var sut = new SystemMonitorService(new []{monitor});
+            var sut = new SystemMonitorService(new[] { monitor });
 
             await sut.Run(cts.Token);
 

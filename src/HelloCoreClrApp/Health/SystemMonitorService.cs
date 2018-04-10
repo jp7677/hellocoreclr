@@ -9,8 +9,8 @@ namespace HelloCoreClrApp.Health
 {
     public class SystemMonitorService
     {
-        private readonly IEnumerable<IMonitor> monitors;
         private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitorService>();
+        private readonly IEnumerable<IMonitor> monitors;
 
         public SystemMonitorService(IEnumerable<IMonitor> monitors)
         {
@@ -19,13 +19,15 @@ namespace HelloCoreClrApp.Health
 
         public async Task Run(CancellationToken token)
         {
-            await Task.Run(async () =>
-            {
-                Log.Information("Starting System monitor.");
-                await Monitor(token);
-            }, token)
-            .ContinueWith(t =>
-                Log.Information("System monitor {0}",t.Status.Humanize().Transform(To.LowerCase)),
+            await Task
+                .Run(
+                    async () =>
+                    {
+                        Log.Information("Starting System monitor.");
+                        await Monitor(token);
+                    }, token)
+                .ContinueWith(
+                    t => Log.Information("System monitor {0}", t.Status.Humanize().Transform(To.LowerCase)),
                     TaskContinuationOptions.None);
         }
 
@@ -38,6 +40,7 @@ namespace HelloCoreClrApp.Health
 
                 await Delay(token);
             }
+
             Log.Information("System monitor shutdown");
         }
 

@@ -1,7 +1,7 @@
+using FakeItEasy;
 using FluentAssertions;
 using HelloCoreClrApp.WebApi;
 using HelloCoreClrApp.WebApi.Actions;
-using FakeItEasy;
 using Xunit;
 
 namespace HelloCoreClrApp.Test.WebApi
@@ -13,7 +13,7 @@ namespace HelloCoreClrApp.Test.WebApi
         {
             var action = A.Fake<ISayHelloWorldAction>();
             var resourceProvider = A.Fake<IResourceProvider>();
-            A.CallTo(()  => resourceProvider.CreateResource<ISayHelloWorldAction>()).Returns(action);
+            A.CallTo(() => resourceProvider.CreateResource<ISayHelloWorldAction>()).Returns(action);
             var sut = new ActionFactory(resourceProvider);
 
             var result = sut.CreateSayHelloWorldAction();
@@ -26,7 +26,7 @@ namespace HelloCoreClrApp.Test.WebApi
         {
             var action = A.Fake<IGetLastTenGreetingsAction>();
             var resourceProvider = A.Fake<IResourceProvider>();
-            A.CallTo(()  => resourceProvider.CreateResource<IGetLastTenGreetingsAction>()).Returns(action);
+            A.CallTo(() => resourceProvider.CreateResource<IGetLastTenGreetingsAction>()).Returns(action);
             var sut = new ActionFactory(resourceProvider);
 
             var result = sut.CreateGetLastTenGreetingsAction();
@@ -39,7 +39,7 @@ namespace HelloCoreClrApp.Test.WebApi
         {
             var action = A.Fake<IGetTotalNumberOfGreetingsAction>();
             var resourceProvider = A.Fake<IResourceProvider>();
-            A.CallTo(()  => resourceProvider.CreateResource<IGetTotalNumberOfGreetingsAction>()).Returns(action);
+            A.CallTo(() => resourceProvider.CreateResource<IGetTotalNumberOfGreetingsAction>()).Returns(action);
             var sut = new ActionFactory(resourceProvider);
 
             var result = sut.CreateGetTotalNumberOfGreetingsAction();

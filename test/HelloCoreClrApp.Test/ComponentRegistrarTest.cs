@@ -11,7 +11,7 @@ namespace HelloCoreClrApp.Test
     public class ComponentRegistrarTest
     {
         private readonly IConfiguration configuration = A.Fake<IConfiguration>();
-        
+
         [Fact]
         public void RegisterApplicationComponentsShouldSucceedTest()
         {

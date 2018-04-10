@@ -17,7 +17,7 @@ namespace HelloCoreClrApp.Test.Data
             builder.Should().BeOfType<DbContextOptionsBuilder<GreetingDbContext>>();
             builder.IsConfigured.Should().BeTrue();
         }
-        
+
         [Fact]
         public void MariaDbConnectionstringShouldReturnConfguredBuilderTest()
         {
@@ -27,7 +27,7 @@ namespace HelloCoreClrApp.Test.Data
             builder.Should().BeOfType<DbContextOptionsBuilder<GreetingDbContext>>();
             builder.IsConfigured.Should().BeTrue();
         }
-        
+
         [Fact]
         public void InvalidConnectionstringShouldThrowTest()
         {

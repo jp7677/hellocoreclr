@@ -11,6 +11,7 @@ namespace HelloCoreClrApp
             this.container = container;
         }
 
-        public T CreateResource<T>() where T : class => container.GetInstance<T>();
+        public T CreateResource<T>()
+            where T : class => container.GetInstance<T>();
     }
 }

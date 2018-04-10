@@ -5,8 +5,8 @@ namespace HelloCoreClrApp.Data
 {
     public class SetupDatabaseTask
     {
-        private readonly IDataService dataService;
         private static readonly ILogger Log = Serilog.Log.ForContext<SetupDatabaseTask>();
+        private readonly IDataService dataService;
 
         public SetupDatabaseTask(IDataService dataService)
         {

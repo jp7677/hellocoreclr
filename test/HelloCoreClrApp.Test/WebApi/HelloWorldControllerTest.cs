@@ -1,11 +1,11 @@
 using System.Net;
 using System.Threading.Tasks;
+using FakeItEasy;
 using FluentAssertions;
 using HelloCoreClrApp.WebApi;
 using HelloCoreClrApp.WebApi.Actions;
 using HelloCoreClrApp.WebApi.Messages;
 using Microsoft.AspNetCore.Mvc;
-using FakeItEasy;
 using Xunit;
 
 namespace HelloCoreClrApp.Test.WebApi
@@ -14,9 +14,9 @@ namespace HelloCoreClrApp.Test.WebApi
     {
         [Fact]
         public async Task SayHelloWorldTest()
-        { 
+        {
             var action = A.Fake<ISayHelloWorldAction>();
-            A.CallTo(() => action.Execute("You")).Returns(new SayHelloWorldResponse{ Greeting = "Hello You!" });
+            A.CallTo(() => action.Execute("You")).Returns(new SayHelloWorldResponse { Greeting = "Hello You!" });
             var actionFactory = A.Fake<IActionFactory>();
             A.CallTo(() => actionFactory.CreateSayHelloWorldAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
@@ -34,7 +34,7 @@ namespace HelloCoreClrApp.Test.WebApi
 
         [Fact]
         public async Task NoGreetingsShouldReturnNoContentTest()
-        { 
+        {
             var action = A.Fake<IGetLastTenGreetingsAction>();
             A.CallTo(() => action.Execute()).Returns(new SavedGreeting[0]);
             var actionFactory = A.Fake<IActionFactory>();
@@ -50,9 +50,9 @@ namespace HelloCoreClrApp.Test.WebApi
 
         [Fact]
         public async Task SomeGreetingsShouldReturnGreetingsTest()
-        { 
+        {
             var action = A.Fake<IGetLastTenGreetingsAction>();
-            A.CallTo(() => action.Execute()).Returns(new []{new SavedGreeting{Greeting = "mygreeting"}});
+            A.CallTo(() => action.Execute()).Returns(new[] { new SavedGreeting { Greeting = "mygreeting" } });
             var actionFactory = A.Fake<IActionFactory>();
             A.CallTo(() => actionFactory.CreateGetLastTenGreetingsAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);
@@ -69,7 +69,7 @@ namespace HelloCoreClrApp.Test.WebApi
 
         [Fact]
         public async Task GetNumberOfGreetingsShouldReturnSomeNumberTest()
-        { 
+        {
             var action = A.Fake<IGetTotalNumberOfGreetingsAction>();
             A.CallTo(() => action.Execute()).Returns(6);
             var actionFactory = A.Fake<IActionFactory>();

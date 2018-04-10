@@ -5,6 +5,7 @@ namespace HelloCoreClrApp
     /// </summary>
     public interface IResourceProvider
     {
-        T CreateResource<T>() where T : class;
+        T CreateResource<T>()
+            where T : class;
     }
 }

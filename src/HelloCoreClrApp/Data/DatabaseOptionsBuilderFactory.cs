@@ -14,7 +14,7 @@ namespace HelloCoreClrApp.Data
             if (connectionString.StartsWith("Server", StringComparison.OrdinalIgnoreCase))
                 return new DbContextOptionsBuilder<GreetingDbContext>()
                     .UseMySql(connectionString);
-            
+
             throw new NotSupportedException($"The connection string '{connectionString}' is not supported.{Environment.NewLine}" +
                                              "Use \"Filename=[options]\" for Sqlite or \"Server=[options];\" for MariaDb. " +
                                             $"Examples {Environment.NewLine}" +

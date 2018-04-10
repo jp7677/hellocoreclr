@@ -22,23 +22,16 @@ namespace HelloCoreClrApp.Data
 
         public async Task EnsureCreated()
         {
-            using(var db = dbContextFactory.CreateHelloWorldDbContext())
+            using (var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 RegisterSeriLog(db);
                 await db.EnsureCreated();
             }
         }
 
-        private static void RegisterSeriLog(GreetingDbContext db)
-        {
-                var serviceProvider = db.GetInfrastructure();
-                var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-                loggerFactory.AddProvider(new SerilogLoggerProvider());
-        }
-
         public async Task<int> GetNumberOfGreetings()
         {
-            using(var db = dbContextFactory.CreateHelloWorldDbContext())
+            using (var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 return await db.Greetings.CountAsync();
             }
@@ -46,7 +39,7 @@ namespace HelloCoreClrApp.Data
 
         public async Task SaveGreeting(string greeting)
         {
-            using(var db = dbContextFactory.CreateHelloWorldDbContext())
+            using (var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 await db.Greetings.AddAsync(new Greeting
                     {
@@ -59,7 +52,7 @@ namespace HelloCoreClrApp.Data
 
         public async Task<IList<Greeting>> GetLastTenGreetings(int numberOfResults)
         {
-            using(var db = dbContextFactory.CreateHelloWorldDbContext())
+            using (var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 var items = db.Greetings
                     .OrderByDescending(g => g.TimestampUtc)
@@ -68,6 +61,13 @@ namespace HelloCoreClrApp.Data
 
                 return await items.ToListAsync();
             }
+        }
+
+        private static void RegisterSeriLog(GreetingDbContext db)
+        {
+            var serviceProvider = db.GetInfrastructure();
+            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            loggerFactory.AddProvider(new SerilogLoggerProvider());
         }
     }
 }

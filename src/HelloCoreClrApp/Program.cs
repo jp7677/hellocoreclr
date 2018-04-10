@@ -47,7 +47,8 @@ namespace HelloCoreClrApp
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
-            Log.Information("{0} {1} on .NET Core Runtime {2}",
+            Log.Information(
+                "{0} {1} on .NET Core Runtime {2}",
                 Assembly.GetEntryAssembly().GetName().Name,
                 Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion,
                 NetCoreHelper.GetNetCoreVersion());
@@ -74,7 +75,7 @@ namespace HelloCoreClrApp
             await Task.Run(() =>
                 ShutdownHandler.Configure(ShutdownCancellationTokenSource));
 
-        private static async Task SetupDatabase() => 
+        private static async Task SetupDatabase() =>
             await Container.GetInstance<SetupDatabaseTask>()
                 .Run();
 

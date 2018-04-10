@@ -13,9 +13,9 @@ namespace HelloCoreClrApp.WebApi
 {
     public class WebHostService
     {
+        private static readonly ILogger Log = Serilog.Log.ForContext<WebHostService>();
         private readonly IConfiguration configuration;
         private readonly Container container;
-        private static readonly ILogger Log = Serilog.Log.ForContext<WebHostService>();
 
         public WebHostService(IConfiguration configuration, Container container)
         {
@@ -25,12 +25,15 @@ namespace HelloCoreClrApp.WebApi
 
         public async Task Run(CancellationToken token)
         {
-            await Task.Run(async () =>
-            {
-                Log.Information("Starting Web host.");
-                await BuildWebHost().RunAsync(token);
-            }, token).ContinueWith(t =>
-                Log.Information("Web host {0}",t.Status.Humanize().Transform(To.LowerCase)),
+            await Task
+                .Run(
+                    async () =>
+                    {
+                        Log.Information("Starting Web host.");
+                        await BuildWebHost().RunAsync(token);
+                    }, token)
+                .ContinueWith(
+                    t => Log.Information("Web host {0}", t.Status.Humanize().Transform(To.LowerCase)),
                     TaskContinuationOptions.None);
         }
 
@@ -44,14 +47,14 @@ namespace HelloCoreClrApp.WebApi
                 .Configure(applicationBuilder => startup.Configure(applicationBuilder));
 
             if (IsDevelopment())
-                ConfigureWebRoot(builder); 
-            
+                ConfigureWebRoot(builder);
+
             return builder.Build();
         }
 
         private static bool IsDevelopment() =>
             Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
-    
+
         private static void ConfigureWebRoot(IWebHostBuilder builder)
         {
             var webroot = FindWebRoot();

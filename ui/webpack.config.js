@@ -9,11 +9,10 @@ const src = path.resolve(__dirname, 'src')
 const wwwroot = path.resolve(__dirname, 'wwwroot')
 const nodeModules = path.resolve(__dirname, 'node_modules')
 
-module.exports = (env) => {
-  const isProduction = env === 'production'
+module.exports = (env, argv) => {
+  const isProduction = argv.mode === 'production'
 
   return {
-    mode: isProduction ? 'production' : 'development',
     entry: {
       app: [ 'aurelia-bootstrapper' ],
       splash: [ 'app/splash' ]
@@ -22,6 +21,7 @@ module.exports = (env) => {
       rules: [
         { test: /\.ts$/i, loader: 'ts-loader', exclude: nodeModules },
         { test: /\.html$/i, loader: 'html-loader', options: { minimize: isProduction } },
+        { test: /\.css$/i, loader: 'style-loader', issuer: { test: /\.[tj]s$/i } },
         { test: /\.css$/i, loader: 'css-loader', options: { minimize: isProduction } },
         { test: /\.(svg)$/i, loader: 'file-loader' },
         { test: /\.(gif|png|jpe?g)$/i, loaders: [ 'file-loader', { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } } ] },

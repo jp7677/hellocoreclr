@@ -1,4 +1,6 @@
 import * as nprogress from "nprogress";
+// tslint:disable:no-submodule-imports
+import "nprogress/nprogress.css";
 
 interface IWindow extends Window {
     Loadingbar: Loadingbar;
@@ -24,22 +26,12 @@ export class Loadingbar {
     }
 
     private Start() {
-        this.loadStylesheet();
         nprogress.configure({
             minimum: 0.3,
             showSpinner: false,
             trickleSpeed: 200
         });
         nprogress.start();
-    }
-
-    private loadStylesheet() {
-        // tslint:disable:no-submodule-imports
-        const css = require("nprogress/nprogress.css").toString();
-        const style: HTMLStyleElement = document.createElement("style");
-        style.type = "text/css";
-        style.innerHTML = css;
-        document.head.appendChild(style);
     }
 
     private Inc() {

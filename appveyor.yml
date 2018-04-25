@@ -1,10 +1,13 @@
 version: '0.1.{build}'
 image: Visual Studio 2017
 environment:
-    nodejs_version: "8"
+    dotnet_version: "2.1.4"
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+    nodejs_version: "8"
 install:
+- ps: Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile ".\install.ps1"
+- ps: '& .\install.ps1 -version "$env:dotnet_version" -InstallDir ".\.dotnet"'
 - ps: Install-Product node $env:nodejs_version
 
 build_script:

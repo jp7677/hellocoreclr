@@ -96,7 +96,7 @@
     "build:production": "webpack --mode production",
     "test": "npm run lint && npm run unit-tests && npm run e2e-tests:prepare && npm run e2e-tests",
     "lint": "npm run lint:ts && npm run lint:html && npm run lint:style",
-    "lint:ts": "tslint '{src,test,test-e2e}/**/*.ts'",
+    "lint:ts": "tslint --project tsconfig.json '{src,test,test-e2e}/**/*.ts'",
     "lint:html": "htmlhint -f compact src/**/*.{html,ejs}",
     "lint:style": "stylelint src/**/*.css",
     "unit-tests": "karma start",

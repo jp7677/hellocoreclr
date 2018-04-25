@@ -35,7 +35,7 @@ export async function configure(aurelia: Aurelia) {
 
     await aurelia.start();
 
-    aurelia.setRoot(PLATFORM.moduleName("app/config"));
+    await aurelia.setRoot(PLATFORM.moduleName("app/config"));
     Loadingbar.Done();
 }
 

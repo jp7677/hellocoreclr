@@ -9,6 +9,7 @@ install:
 - ps: Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile ".\install.ps1"
 - ps: '& .\install.ps1 -version "$env:dotnet_version" -InstallDir ".\.dotnet"'
 - ps: $env:Path = "$pwd\.dotnet;$env:Path"
+- ps: dotnet --info
 - ps: Install-Product node $env:nodejs_version
 
 build_script:

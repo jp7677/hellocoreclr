@@ -8,7 +8,7 @@
     <PropertyGroup>
       <Production Condition="'$(Configuration)'=='Release'">:production</Production>
     </PropertyGroup>
-    <Message Text="ui -&gt; wwwroot $(Production)" Importance="high" />
+    <Message Text="ui -&gt; ui/wwwroot $(Production)" Importance="high" />
     <Exec Command="npm install" />
     <Exec Command="npm run build$(Production)" />
   </Target>

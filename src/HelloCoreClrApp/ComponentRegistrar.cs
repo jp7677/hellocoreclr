@@ -44,7 +44,7 @@ namespace HelloCoreClrApp
             container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();
 
             container.RegisterSingleton<SystemMonitorService>();
-            container.RegisterCollection<IMonitor>(new[] { typeof(DiskMonitor), typeof(CpuMonitor) });
+            container.Collection.Register<IMonitor>(new[] { typeof(DiskMonitor), typeof(CpuMonitor) });
 
             container.Verify();
         }

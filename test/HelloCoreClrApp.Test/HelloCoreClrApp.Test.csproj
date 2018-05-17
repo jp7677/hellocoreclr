@@ -24,7 +24,7 @@
     <PackageReference Include="xunit.analyzers" Version="0.9.0" PrivateAssets="All" />
     <PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="4.6.0" PrivateAssets="All" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
-    <PackageReference Include="coverlet.msbuild" Version="1.2.0" PrivateAssets="All" />
+    <PackageReference Include="coverlet.msbuild" Version="2.0.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.2" />

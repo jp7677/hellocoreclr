@@ -1,6 +1,10 @@
-import { expect } from "chai";
 import { Given, Then, When } from "cucumber";
-import { browser, by, element } from "protractor";
+
+// tslint:disable:no-submodule-imports
+import { browser } from "aurelia-protractor-plugin/protractor";
+import { by, element } from "protractor";
+
+import { expect } from "chai";
 
 Given(/^I've navigated to the home page$/, async () => {
     await browser.loadAndWaitForAureliaPage("/");
@@ -11,11 +15,16 @@ Then(/^I should see the say hello page$/, async () => {
 });
 
 When(/^I click on last greetings$/, async () => {
-    const waitPromise = browser.waitForRouterComplete();
+    const navigationReady = waitForBrowserTitleChange();
     await element(by.css('a[href="#/greetings"]')).click();
-    await waitPromise;
+    await navigationReady;
 });
 
 Then(/^I should see the last greetings page$/, async () => {
     expect(await browser.getTitle()).to.equal("Greetings | Hello World");
 });
+
+async function waitForBrowserTitleChange() {
+    const currentTitle = await browser.getTitle();
+    return browser.wait(async () => (await browser.getTitle()) !== currentTitle);
+}

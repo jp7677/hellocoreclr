@@ -7,8 +7,8 @@ exports.config = {
   baseUrl: 'http://localhost:3000',
   specs: [ path.join(test, '**/*.feature') ],
   directConnect: true,
-  capabilities: {
-    'browserName': 'chrome',
+  multiCapabilities: [{
+    browserName: 'chrome',
     'chromeOptions': {
       'args': [
         '--show-fps-counter',
@@ -24,17 +24,21 @@ exports.config = {
         '--headless'
       ]
     }
-  },
+  }, {
+    browserName: 'firefox',
+    'moz:firefoxOptions': {
+      args: [ '--headless' ]
+    }
+  }],
   framework: 'custom',
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   cucumberOpts: {
     require: [path.join(test, '**/*.ts')],
     strict: true
   },
-  beforeLaunch: () => {
+  onPrepare: () => {
     ts.register({
-      compilerOptions: { module: 'commonjs' },
-      fast: true
+      compilerOptions: { module: 'commonjs' }
     })
   },
   plugins: [{

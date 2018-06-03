@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using FakeItEasy;
 using FluentAssertions;
@@ -55,7 +56,9 @@ namespace HelloCoreClrApp.Test
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/api/sayhelloworld/World");
+                var response = await client.PostAsJsonAsync(
+                    "/api/sayhelloworld/",
+                    "World");
 
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var content = await response.Content.ReadAsStringAsync();

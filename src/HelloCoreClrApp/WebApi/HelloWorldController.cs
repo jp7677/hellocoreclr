@@ -16,9 +16,9 @@ namespace HelloCoreClrApp.WebApi
             this.actionFactory = actionFactory;
         }
 
-        [Route("sayhelloworld/{name}")]
-        [HttpGet]
-        public async Task<IActionResult> SayHelloWorld(string name)
+        [Route("sayhelloworld")]
+        [HttpPost]
+        public async Task<IActionResult> SayHelloWorld([FromBody] string name)
         {
             Log.Information("'sayhelloworld' Request received with '{0}'.", name);
 

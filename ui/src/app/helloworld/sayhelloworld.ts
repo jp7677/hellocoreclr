@@ -1,4 +1,4 @@
-import {HttpClient} from "aurelia-fetch-client";
+import {HttpClient, json} from "aurelia-fetch-client";
 import {inject, LogManager, NewInstance} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
 import {ControllerValidateResult, ValidationController, ValidationRules} from "aurelia-validation";
@@ -44,7 +44,9 @@ export class SayHelloWorld {
 
         let response: Response;
         try {
-            response = await this.httpClient.fetch("sayhelloworld/" + name);
+            response = await this.httpClient.fetch("sayhelloworld/", {
+                body: json(name),
+                method: "post" });
         } catch (err) {
             return this.handleErrorResponse(err);
         }

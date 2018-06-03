@@ -11,7 +11,7 @@ install:
 - ps: Install-Product node $env:nodejs_version
 
 build_script:
-- dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp --version-suffix build$APPVEYOR_BUILD_NUMBER
+- dotnet publish --output ..\..\artifacts\approot src\HelloCoreClrApp --version-suffix build%APPVEYOR_BUILD_NUMBER%
 - dotnet msbuild /t:publish /p:output=..\artifacts\wwwroot ui
 
 before_test:

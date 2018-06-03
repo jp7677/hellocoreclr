@@ -41,6 +41,7 @@ namespace HelloCoreClrApp.WebApi
         {
             var startup = new Startup(container);
             var builder = new WebHostBuilder()
+                .UseSerilog()
                 .UseConfiguration(configuration)
                 .UseKestrel()
                 .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))

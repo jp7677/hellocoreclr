@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Serilog;
 using SimpleInjector;
@@ -15,7 +14,7 @@ namespace HelloCoreClrApp.WebApi
     public class Startup
     {
         private const string ApiVersion = "v1";
-        private static readonly Serilog.ILogger Log = Serilog.Log.ForContext<Startup>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<Startup>();
 
         private readonly Container container;
 
@@ -45,10 +44,6 @@ namespace HelloCoreClrApp.WebApi
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app)
         {
-            // Add SeriLog to ASP.NET Core
-            var loggerFactory = app.ApplicationServices.GetService<ILoggerFactory>();
-            loggerFactory.AddSerilog();
-
             var env = app.ApplicationServices.GetService<IHostingEnvironment>();
             Log.Information("Starting up in {0} mode.", env.EnvironmentName);
 

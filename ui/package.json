@@ -101,7 +101,7 @@
     "lint:style": "stylelint src/**/*.css",
     "unit-tests": "karma start",
     "unit-tests:watch": "karma start --nosinglerun",
-    "e2e-tests:prepare": "webdriver-manager update --standalone false",
+    "e2e-tests:prepare": "webdriver-manager update --standalone false -versions.chrome 2.38",
     "e2e-tests": "node protractor.start",
     "serve": "node server",
     "watch": "webpack-dev-server --mode development --hot --inline"

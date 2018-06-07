@@ -8,6 +8,7 @@ using HelloCoreClrApp.Data;
 using HelloCoreClrApp.Data.Entities;
 using HelloCoreClrApp.WebApi;
 using HelloCoreClrApp.WebApi.Messages;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +34,7 @@ namespace HelloCoreClrApp.Test
 
             var startup = new Startup(container);
             server = new TestServer(
-                new WebHostBuilder()
+                WebHost.CreateDefaultBuilder()
                     .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))
                     .Configure(applicationBuilder => startup.Configure(applicationBuilder)));
         }

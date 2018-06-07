@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Humanizer;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
@@ -40,7 +41,8 @@ namespace HelloCoreClrApp.WebApi
         private IWebHost BuildWebHost()
         {
             var startup = new Startup(container);
-            var builder = new WebHostBuilder()
+            var builder = WebHost
+                .CreateDefaultBuilder()
                 .UseSerilog()
                 .UseConfiguration(configuration)
                 .UseKestrel()

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
 using Serilog;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore.Mvc;
@@ -29,7 +29,8 @@ namespace HelloCoreClrApp.WebApi
             Log.Information("Configuring services.");
 
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSwaggerGen(SetupSwagger);
 

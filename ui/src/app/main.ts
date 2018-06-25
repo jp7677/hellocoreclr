@@ -21,7 +21,7 @@ import {PLATFORM} from "aurelia-pal";
 
 export async function configure(aurelia: Aurelia) {
     Loadingbar.Inc();
-    const env: Environment = new Environment(appsettings, APPLICATIONMODE);
+    const env: Environment = new Environment((appsettings as any).default, APPLICATIONMODE);
 
     aurelia.use
         .standardConfiguration()
@@ -54,6 +54,7 @@ function configureLoggingAppender() {
 function logAplicationStart(env: Environment) {
     const log: Logger = LogManager.getLogger("Main");
     log.info(`Starting application in ${env.applicationMode} mode.`);
+    log.info(`Use base URL '${env.baseUrl}'.`);
 }
 
 function configureLoggingLevels(env: Environment) {

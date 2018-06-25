@@ -1,7 +1,7 @@
 import {HttpClient, json} from "aurelia-fetch-client";
 import {inject, LogManager, NewInstance} from "aurelia-framework";
 import {Logger} from "aurelia-logging";
-import {ControllerValidateResult, ValidationController, ValidationRules} from "aurelia-validation";
+import {ControllerValidateResult, ValidationController} from "aurelia-validation";
 
 import {SayHelloWorld as SayHelloWorldMessage} from "./messages/sayhelloworld";
 import {Notifier} from "./notifier";

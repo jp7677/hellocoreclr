@@ -6,7 +6,7 @@ environment:
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
     nodejs_version: "8"
 install:
-- choco install googlechrome
+- choco install googlechrome --ignore-checksums
 - choco install firefox
 - ps: Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile ".\install.ps1"
 - ps: '& .\install.ps1 -version "$env:dotnet_version" -InstallDir ".\.dotnet"'

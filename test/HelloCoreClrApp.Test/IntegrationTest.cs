@@ -20,7 +20,7 @@ using Xunit;
 
 namespace HelloCoreClrApp.Test
 {
-    public class E2ETest : IAsyncLifetime
+    public class IntegrationTest : IAsyncLifetime
     {
         private static TestServer server;
 

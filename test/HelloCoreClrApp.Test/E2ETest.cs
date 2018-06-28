@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SimpleInjector;
 using Xunit;
@@ -35,6 +36,7 @@ namespace HelloCoreClrApp.Test
             var startup = new Startup(container);
             server = new TestServer(
                 WebHost.CreateDefaultBuilder()
+                    .ConfigureLogging(loggingBuilder => loggingBuilder.ClearProviders())
                     .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))
                     .Configure(applicationBuilder => startup.Configure(applicationBuilder)));
         }

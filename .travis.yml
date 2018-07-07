@@ -22,7 +22,7 @@ env:
 script:
 - dotnet publish --configuration Release --output ../../artifacts/approot src/HelloCoreClrApp --version-suffix build$TRAVIS_BUILD_NUMBER
 - dotnet msbuild /t:publish /p:configuration=Release /p:output=../artifacts/wwwroot ui
-- dotnet test /p:configuration=Release test/HelloCoreClrApp.Test/HelloCoreClrApp.Test.csproj /p:CollectCoverage=true /p:CoverletOutputDirectory=../../reports
+- dotnet test /p:configuration=Release test/HelloCoreClrApp.Test/HelloCoreClrApp.Test.csproj /p:CollectCoverage=true /p:CoverletOutput=../../reports/
 - npm run test --prefix ui
 
 cache:

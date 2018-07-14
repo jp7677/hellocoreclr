@@ -31,5 +31,10 @@
   },
   "eslint.options": {
     "configFile": "ui/eslint.json"
-  }
+  },
+  "cucumberautocomplete.steps": [
+      "ui/test-e2e/*.ts"
+  ],
+  "cucumberautocomplete.syncfeatures": "ui/test-e2e/*.feature",
+  "cucumberautocomplete.strictGherkinCompletion": true
 }

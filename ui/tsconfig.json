@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "lib": [
-      "es2017", "dom"
+      "es2015", "dom"
     ]
   },
   "exclude": [

@@ -104,7 +104,3 @@ npm run unit-tests:watch --prefix ui
 ```
 
 Your favorite browser should fire up and should open <http://localhost:3000/>. Happy coding!
-
-## TODO
-
-- Remove temporary `"skipLibCheck": true` tsconfig.json option once <https://github.com/angular/protractor/issues/4361> is fixed.

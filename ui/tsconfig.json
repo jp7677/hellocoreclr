@@ -6,7 +6,6 @@
     "alwaysStrict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
     "lib": [
       "es2015", "dom"
     ]

@@ -21,7 +21,7 @@ import {PLATFORM} from "aurelia-pal";
 
 export async function configure(aurelia: Aurelia) {
     Loadingbar.Inc();
-    const env: Environment = new Environment((appsettings as any).default, APPLICATIONMODE);
+    const env: Environment = new Environment(appsettings, APPLICATIONMODE);
 
     aurelia.use
         .standardConfiguration()

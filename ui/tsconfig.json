@@ -10,8 +10,9 @@
       "es2015", "dom"
     ]
   },
-  "exclude": [
-    "wwwroot",
-    "node_modules"
+  "include": [
+    "src",
+    "test",
+    "test-e2e",
   ]
 }

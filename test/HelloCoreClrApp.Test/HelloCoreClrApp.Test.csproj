@@ -23,7 +23,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" PrivateAssets="All" />
     <PackageReference Include="xunit.analyzers" Version="0.10.0" PrivateAssets="All" />
     <PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="4.8.0" PrivateAssets="All" />
-    <PackageReference Include="FluentAssertions.Analyzers" Version="0.11.3" PrivateAssets="All" />
+    <PackageReference Include="FluentAssertions.Analyzers" Version="0.11.4" PrivateAssets="All" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
     <PackageReference Include="coverlet.msbuild" Version="2.2.1" PrivateAssets="All" />
   </ItemGroup>

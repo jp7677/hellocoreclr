@@ -55,7 +55,7 @@ module.exports = (env, argv) => {
         chunksSortMode: 'manual',
         minify: isProduction ? { collapseWhitespace: true, collapseInlineTagWhitespace: true } : false
       }),
-      new CompressionPlugin({ asset: '[path].gz[query]', algorithm: 'gzip', test: /\.(js|html)$/, threshold: 1024, minRatio: 0.8 })
+      new CompressionPlugin({ test: /\.(js|html)$/, threshold: 1024 })
     ],
     devtool: !isProduction ? 'source-map' : undefined,
     devServer: {

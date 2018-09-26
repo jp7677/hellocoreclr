@@ -39,7 +39,7 @@ module.exports = (config) => {
         new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
         new SourceMapDevToolPlugin({ filename: null, test: /\.(js|ts)($|\?)/i, moduleFilenameTemplate: './[resource-path]' })
       ],
-      devtool: 'none'
+      devtool: 'source-map'
     },
     webpackMiddleware: {
       stats: 'errors-only',

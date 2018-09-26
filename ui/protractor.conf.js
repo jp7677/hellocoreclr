@@ -9,8 +9,8 @@ exports.config = {
   directConnect: true,
   multiCapabilities: [{
     browserName: 'chrome',
-    'chromeOptions': {
-      'args': [
+    chromeOptions: {
+      args: [
         '--show-fps-counter',
         '--no-default-browser-check',
         '--no-first-run',
@@ -26,8 +26,8 @@ exports.config = {
     }
   }, {
     browserName: 'firefox',
-    'moz:firefoxOptions': {
-      args: [ '--headless' ]
+    firefoxOptions: {
+      args: ['--headless']
     }
   }],
   framework: 'custom',

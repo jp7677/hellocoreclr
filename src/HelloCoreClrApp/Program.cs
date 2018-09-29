@@ -17,18 +17,18 @@ namespace HelloCoreClrApp
         private static readonly Container Container = new Container();
 
         // Entry point for the application.
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var configuration = BuildConfiguration();
             ConfigureLogging(configuration);
             SetCurrentWorkingDirectory();
             SetupResources(configuration);
 
-            Task.WaitAll(
+            await Task.WhenAll(
                 ConfigureShutdownHandler(),
                 SetupDatabase());
 
-            Task.WaitAll(
+            await Task.WhenAll(
                 RunWebHostService(ShutdownCancellationTokenSource.Token),
                 RunSystemMonitorService(ShutdownCancellationTokenSource.Token));
         }

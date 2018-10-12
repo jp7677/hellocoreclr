@@ -41,11 +41,8 @@ namespace HelloCoreClrApp.Test.Data
             A.CallTo(() => dataService.EnsureCreated(A<CancellationToken>._)).Throws<InvalidOperationException>();
             var sut = new SetupDatabaseTask(container, applicationLifetime);
 
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StartAsync(CancellationToken.None);
 
-            // Assert that sut stopped gracefully
-            cts.IsCancellationRequested.Should().BeFalse();
             A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
         }
     }

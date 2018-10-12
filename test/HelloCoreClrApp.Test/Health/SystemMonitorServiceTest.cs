@@ -42,11 +42,8 @@ namespace HelloCoreClrApp.Test.Health
             A.CallTo(() => monitor.LogUsage()).Throws<InvalidOperationException>();
             var sut = new SystemMonitorService(container, applicationLifetime);
 
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StartAsync(CancellationToken.None);
 
-            // Assert that sut stopped gracefully
-            cts.IsCancellationRequested.Should().BeFalse();
             A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
         }
     }

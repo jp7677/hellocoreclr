@@ -42,11 +42,8 @@ namespace HelloCoreClrApp.Test.WebApi
             A.CallTo(() => configuration.GetChildren()).Throws<InvalidOperationException>();
             var sut = new WebHostService(container, applicationLifetime);
 
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StartAsync(CancellationToken.None);
 
-            // Assert that sut stopped gracefully
-            cts.IsCancellationRequested.Should().BeFalse();
             A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
         }
     }

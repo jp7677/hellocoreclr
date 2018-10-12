@@ -13,12 +13,19 @@ namespace HelloCoreClrApp.Test.WebApi
 {
     public class WebHostServiceTest
     {
+        private readonly Container container = new Container();
+        private readonly IConfiguration configuration = A.Fake<IConfiguration>();
+        private readonly IApplicationLifetime applicationLifetime = A.Fake<IApplicationLifetime>();
+
+        public WebHostServiceTest()
+        {
+            container.RegisterInstance(configuration);
+        }
+
         [Fact]
         public async Task ShouldStartAndStopTest()
         {
-            var container = new Container();
-            container.RegisterInstance(A.Fake<IConfiguration>());
-            var sut = new WebHostService(container, A.Fake<IApplicationLifetime>());
+            var sut = new WebHostService(container, applicationLifetime);
 
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StartAsync(CancellationToken.None);
@@ -26,6 +33,21 @@ namespace HelloCoreClrApp.Test.WebApi
 
             // Assert that sut stopped gracefully
             cts.IsCancellationRequested.Should().BeFalse();
+            A.CallTo(() => applicationLifetime.StopApplication()).MustNotHaveHappened();
+        }
+
+        [Fact]
+        public async Task ShouldStopApplicationWhenFailsTest()
+        {
+            A.CallTo(() => configuration.GetChildren()).Throws<InvalidOperationException>();
+            var sut = new WebHostService(container, applicationLifetime);
+
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
+            await sut.StartAsync(CancellationToken.None);
+
+            // Assert that sut stopped gracefully
+            cts.IsCancellationRequested.Should().BeFalse();
+            A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace HelloCoreClrApp.Health
             }
             catch (Exception exception)
             {
-                Log.Fatal(exception, "Web host failed with {exception}", exception.Message);
+                Log.Fatal(exception, "System monitor failed with {exception}", exception.Message);
                 applicationLifetime.StopApplication();
             }
         }

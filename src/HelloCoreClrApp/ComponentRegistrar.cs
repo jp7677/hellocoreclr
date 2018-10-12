@@ -37,14 +37,12 @@ namespace HelloCoreClrApp
                 new GreetingDbContextFactory(DatabaseOptionsBuilder.Options));
             container.Register<IDataService, DataService>();
 
-            container.RegisterSingleton<WebHostService>();
             container.RegisterSingleton<IActionFactory, ActionFactory>();
             container.Register<ISayHelloWorldAction, SayHelloWorldAction>();
             container.Register<IGetLastTenGreetingsAction, GetLastTenHelloWorldsAction>();
             container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();
 
-            container.RegisterSingleton<SystemMonitorService>();
-            container.Collection.Register<IMonitor>(new[] { typeof(DiskMonitor), typeof(CpuMonitor) });
+            container.Collection.Register<IMonitor>(typeof(DiskMonitor), typeof(CpuMonitor));
 
             container.Verify();
         }

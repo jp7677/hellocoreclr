@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using HelloCoreClrApp.Data;
@@ -16,7 +17,7 @@ namespace HelloCoreClrApp.Test.Data
             var factory = new GreetingDbContextFactory(options.Options);
             var sut = new DataService(factory);
 
-            await sut.EnsureCreated();
+            await sut.EnsureCreated(CancellationToken.None);
             await sut.SaveGreeting("mygreeting");
 
             var result = await sut.GetNumberOfGreetings();
@@ -32,7 +33,7 @@ namespace HelloCoreClrApp.Test.Data
             var factory = new GreetingDbContextFactory(options.Options);
             var sut = new DataService(factory);
 
-            await sut.EnsureCreated();
+            await sut.EnsureCreated(CancellationToken.None);
             for (var i = 1; i <= 20; i++)
                 await sut.SaveGreeting(string.Format("mygreeting {0}", 1));
 

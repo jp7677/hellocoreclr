@@ -5,6 +5,7 @@ using FakeItEasy;
 using FluentAssertions;
 using HelloCoreClrApp.WebApi;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using SimpleInjector;
 using Xunit;
 
@@ -16,12 +17,15 @@ namespace HelloCoreClrApp.Test.WebApi
         public async Task ShouldStartAndStopTest()
         {
             var container = new Container();
-            var configuration = A.Fake<IConfiguration>();
-            var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
-            var sut = new WebHostService(configuration, container);
-            await sut.Run(cts.Token);
+            container.RegisterInstance(A.Fake<IConfiguration>());
+            var sut = new WebHostService(container, A.Fake<IApplicationLifetime>());
 
-            cts.IsCancellationRequested.Should().BeTrue();
+            var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
+            await sut.StartAsync(CancellationToken.None);
+            await sut.StopAsync(cts.Token);
+
+            // Assert that sut stopped gracefully
+            cts.IsCancellationRequested.Should().BeFalse();
         }
     }
 }

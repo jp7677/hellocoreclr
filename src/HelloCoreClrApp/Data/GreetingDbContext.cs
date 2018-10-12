@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using HelloCoreClrApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,6 @@ namespace HelloCoreClrApp.Data
 
         public DbSet<Greeting> Greetings { get; set; }
 
-        public async Task EnsureCreated() => await Database.EnsureCreatedAsync();
+        public async Task EnsureCreated(CancellationToken token) => await Database.EnsureCreatedAsync(token);
     }
 }

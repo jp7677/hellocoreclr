@@ -2,33 +2,37 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Humanizer;
+using Microsoft.Extensions.Hosting;
 using Serilog;
+using SimpleInjector;
 
 namespace HelloCoreClrApp.Health
 {
-    public class SystemMonitorService
+    public class SystemMonitorService : BackgroundService
     {
+        private readonly IApplicationLifetime applicationLifetime;
         private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitorService>();
         private readonly IEnumerable<IMonitor> monitors;
 
-        public SystemMonitorService(IEnumerable<IMonitor> monitors)
+        public SystemMonitorService(Container container, IApplicationLifetime applicationLifetime)
         {
-            this.monitors = monitors;
+            this.applicationLifetime = applicationLifetime;
+            monitors = container.GetAllInstances<IMonitor>();
         }
 
-        public async Task Run(CancellationToken token)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await Task
-                .Run(
-                    async () =>
-                    {
-                        Log.Information("Starting System monitor.");
-                        await Monitor(token);
-                    }, token)
-                .ContinueWith(
-                    t => Log.Information("System monitor {0}", t.Status.Humanize().Transform(To.LowerCase)),
-                    TaskContinuationOptions.None);
+            Log.Information("Starting System monitor");
+            try
+            {
+                await Monitor(stoppingToken);
+                Log.Information("System monitor stopped");
+            }
+            catch (Exception exception)
+            {
+                Log.Fatal(exception, "Web host failed with {exception}", exception.Message);
+                applicationLifetime.StopApplication();
+            }
         }
 
         private async Task Monitor(CancellationToken token)

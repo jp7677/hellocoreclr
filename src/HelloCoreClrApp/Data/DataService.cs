@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using HelloCoreClrApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +21,12 @@ namespace HelloCoreClrApp.Data
             this.dbContextFactory = dbContextFactory;
         }
 
-        public async Task EnsureCreated()
+        public async Task EnsureCreated(CancellationToken token)
         {
             using (var db = dbContextFactory.CreateHelloWorldDbContext())
             {
                 RegisterSeriLog(db);
-                await db.EnsureCreated();
+                await db.EnsureCreated(token);
             }
         }
 

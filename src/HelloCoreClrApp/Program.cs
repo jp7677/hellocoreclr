@@ -1,11 +1,13 @@
+using System;
 using System.IO;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using HelloCoreClrApp.Data;
 using HelloCoreClrApp.Health;
 using HelloCoreClrApp.WebApi;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using SimpleInjector;
 
@@ -13,24 +15,47 @@ namespace HelloCoreClrApp
 {
     public static class Program
     {
-        private static readonly CancellationTokenSource ShutdownCancellationTokenSource = new CancellationTokenSource();
         private static readonly Container Container = new Container();
+        private static string currentWorkingDirectory;
 
         // Entry point for the application.
         public static async Task Main(string[] args)
         {
             var configuration = BuildConfiguration();
             ConfigureLogging(configuration);
-            SetCurrentWorkingDirectory();
             SetupResources(configuration);
 
-            await Task.WhenAll(
-                ConfigureShutdownHandler(),
-                SetupDatabase());
+            var hostBuilder = new HostBuilder()
+                .ConfigureHostConfiguration(host =>
+                {
+                    host.SetBasePath(currentWorkingDirectory);
+                })
+                .ConfigureAppConfiguration((context, app) =>
+                {
+                    app.SetBasePath(currentWorkingDirectory);
+                    context.HostingEnvironment.EnvironmentName = GetEnvironmentName();
+                })
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddSingleton(Container);
+                    services.AddHostedService<SetupDatabaseTask>();
+                    services.AddHostedService<WebHostService>();
+                    services.AddHostedService<SystemMonitorService>();
+                });
 
-            await Task.WhenAll(
-                RunWebHostService(ShutdownCancellationTokenSource.Token),
-                RunSystemMonitorService(ShutdownCancellationTokenSource.Token));
+            await hostBuilder.RunConsoleAsync();
+            Log.CloseAndFlush();
+        }
+
+        public static string GetEnvironmentName() =>
+            Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+
+        public static string GetCurrentWorkingDirectory()
+        {
+            if (string.IsNullOrEmpty(currentWorkingDirectory))
+                SetCurrentWorkingDirectory();
+
+            return currentWorkingDirectory;
         }
 
         private static IConfigurationRoot BuildConfiguration()
@@ -56,9 +81,9 @@ namespace HelloCoreClrApp
 
         private static void SetCurrentWorkingDirectory()
         {
-            var cwd = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
-            Log.Warning("Set current working directory to {0}", cwd);
-            Directory.SetCurrentDirectory(cwd);
+            currentWorkingDirectory = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
+            Log.Warning("Set current working directory to {0}", currentWorkingDirectory);
+            Directory.SetCurrentDirectory(currentWorkingDirectory);
         }
 
         private static void SetupResources(IConfiguration configuration)
@@ -70,21 +95,5 @@ namespace HelloCoreClrApp
             };
             componentRegistrar.RegisterApplicationComponents(configuration);
         }
-
-        private static async Task ConfigureShutdownHandler() =>
-            await Task.Run(() =>
-                ShutdownHandler.Configure(ShutdownCancellationTokenSource));
-
-        private static async Task SetupDatabase() =>
-            await Container.GetInstance<SetupDatabaseTask>()
-                .Run();
-
-        private static async Task RunWebHostService(CancellationToken token) =>
-            await Container.GetInstance<WebHostService>()
-                .Run(token);
-
-        private static async Task RunSystemMonitorService(CancellationToken token) =>
-            await Container.GetInstance<SystemMonitorService>()
-                .Run(token);
     }
 }

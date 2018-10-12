@@ -1,24 +1,37 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 using Serilog;
+using SimpleInjector;
 
 namespace HelloCoreClrApp.Data
 {
-    public class SetupDatabaseTask
+    public class SetupDatabaseTask : BackgroundService
     {
+        private readonly IApplicationLifetime applicationLifetime;
         private static readonly ILogger Log = Serilog.Log.ForContext<SetupDatabaseTask>();
         private readonly IDataService dataService;
 
-        public SetupDatabaseTask(IDataService dataService)
+        public SetupDatabaseTask(Container container, IApplicationLifetime applicationLifetime)
         {
-            this.dataService = dataService;
+            this.applicationLifetime = applicationLifetime;
+            dataService = container.GetInstance<IDataService>();
         }
 
-        public async Task Run()
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            Log.Information("Setup database.");
-            await dataService.EnsureCreated();
-
-            Log.Information("Currently we have {0} saved Greetings.", await dataService.GetNumberOfGreetings());
+            Log.Information("Setup database");
+            try
+            {
+                await dataService.EnsureCreated(stoppingToken);
+                Log.Information("Currently we have {0} saved Greetings", await dataService.GetNumberOfGreetings());
+            }
+            catch (Exception exception)
+            {
+                Log.Fatal(exception, "Setup database failed with {exception}", exception.Message);
+                applicationLifetime.StopApplication();
+            }
         }
     }
 }

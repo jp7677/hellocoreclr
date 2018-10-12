@@ -1,41 +1,44 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Humanizer;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using SimpleInjector;
+using IApplicationLifetime = Microsoft.Extensions.Hosting.IApplicationLifetime;
 
 namespace HelloCoreClrApp.WebApi
 {
-    public class WebHostService
+    public class WebHostService : BackgroundService
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<WebHostService>();
         private readonly IConfiguration configuration;
         private readonly Container container;
+        private readonly IApplicationLifetime applicationLifetime;
 
-        public WebHostService(IConfiguration configuration, Container container)
+        public WebHostService(Container container, IApplicationLifetime applicationLifetime)
         {
-            this.configuration = configuration;
             this.container = container;
+            this.applicationLifetime = applicationLifetime;
+            configuration = container.GetInstance<IConfiguration>();
         }
 
-        public async Task Run(CancellationToken token)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await Task
-                .Run(
-                    async () =>
-                    {
-                        Log.Information("Starting Web host.");
-                        await BuildWebHost().RunAsync(token);
-                    }, token)
-                .ContinueWith(
-                    t => Log.Information("Web host {0}", t.Status.Humanize().Transform(To.LowerCase)),
-                    TaskContinuationOptions.None);
+            try
+            {
+                Log.Information("Starting Web host");
+                await BuildWebHost().RunAsync(stoppingToken);
+                Log.Information("Web host stopped");
+            }
+            catch (Exception exception)
+            {
+                Log.Fatal(exception, "Web host failed with {exception}", exception.Message);
+                applicationLifetime.StopApplication();
+            }
         }
 
         private IWebHost BuildWebHost()
@@ -55,8 +58,7 @@ namespace HelloCoreClrApp.WebApi
             return builder.Build();
         }
 
-        private static bool IsDevelopment() =>
-            Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
+        private static bool IsDevelopment() => Program.GetEnvironmentName() == "Development";
 
         private static void ConfigureWebRoot(IWebHostBuilder builder)
         {
@@ -67,8 +69,7 @@ namespace HelloCoreClrApp.WebApi
 
         private static string FindWebRoot()
         {
-            var cwd = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
-            var webroot = Path.Combine(cwd, "..", "..", "..", "..", "..", "ui", "wwwroot");
+            var webroot = Path.Combine(Program.GetCurrentWorkingDirectory(), "..", "..", "..", "..", "..", "ui", "wwwroot");
             return Path.GetFullPath(webroot);
         }
     }

@@ -20,7 +20,7 @@ namespace HelloCoreClrApp.Test.WebApi
             container.RegisterInstance(A.Fake<IConfiguration>());
             var sut = new WebHostService(container, A.Fake<IApplicationLifetime>());
 
-            var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StartAsync(CancellationToken.None);
             await sut.StopAsync(cts.Token);
 

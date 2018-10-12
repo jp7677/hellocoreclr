@@ -20,7 +20,7 @@ namespace HelloCoreClrApp.Test.Health
             container.RegisterInstance((IEnumerable<IMonitor>)new[] { A.Fake<IMonitor>() });
             var sut = new SystemMonitorService(container, A.Fake<IApplicationLifetime>());
 
-            var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StartAsync(CancellationToken.None);
             await sut.StopAsync(cts.Token);
 

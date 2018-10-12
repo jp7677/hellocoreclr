@@ -19,7 +19,7 @@ namespace HelloCoreClrApp.Test.Data
             container.RegisterInstance(A.Fake<IDataService>());
             var sut = new SetupDatabaseTask(container, A.Fake<IApplicationLifetime>());
 
-            var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StartAsync(CancellationToken.None);
             await sut.StopAsync(cts.Token);
 

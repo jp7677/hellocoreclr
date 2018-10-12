@@ -26,8 +26,9 @@ namespace HelloCoreClrApp.Test.Data
         {
             var sut = new SetupDatabaseTask(container, applicationLifetime);
 
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StartAsync(CancellationToken.None);
+            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StopAsync(cts.Token);
 
             // Assert that sut stopped gracefully
@@ -42,6 +43,7 @@ namespace HelloCoreClrApp.Test.Data
             var sut = new SetupDatabaseTask(container, applicationLifetime);
 
             await sut.StartAsync(CancellationToken.None);
+            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
 
             A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
         }

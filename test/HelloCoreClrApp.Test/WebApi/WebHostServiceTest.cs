@@ -27,8 +27,9 @@ namespace HelloCoreClrApp.Test.WebApi
         {
             var sut = new WebHostService(container, applicationLifetime);
 
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
             await sut.StartAsync(CancellationToken.None);
+            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1));
             await sut.StopAsync(cts.Token);
 
             // Assert that sut stopped gracefully
@@ -43,6 +44,7 @@ namespace HelloCoreClrApp.Test.WebApi
             var sut = new WebHostService(container, applicationLifetime);
 
             await sut.StartAsync(CancellationToken.None);
+            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
 
             A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
         }

@@ -6,7 +6,7 @@
     <DebugType>portable</DebugType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <RuntimeFrameworkVersion>2.1.4</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.1.5</RuntimeFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/HelloCoreClrApp/HelloCoreClrApp.csproj" />
@@ -20,7 +20,7 @@
     <PackageReference Include="FluentAssertions" Version="5.4.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" PrivateAssets="All" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" PrivateAssets="All" />
     <PackageReference Include="xunit.analyzers" Version="0.10.0" PrivateAssets="All" />
     <PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="4.9.1" PrivateAssets="All" />

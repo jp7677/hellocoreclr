@@ -28,11 +28,11 @@ namespace HelloCoreClrApp
             var hostBuilder = new HostBuilder()
                 .ConfigureHostConfiguration(host =>
                 {
-                    host.SetBasePath(currentWorkingDirectory);
+                    host.SetBasePath(GetCurrentWorkingDirectory());
                 })
                 .ConfigureAppConfiguration((context, app) =>
                 {
-                    app.SetBasePath(currentWorkingDirectory);
+                    app.SetBasePath(GetCurrentWorkingDirectory());
                     context.HostingEnvironment.EnvironmentName = GetEnvironmentName();
                 })
                 .ConfigureServices((context, services) =>

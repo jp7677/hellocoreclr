@@ -13,6 +13,10 @@ export class HttpClientStub {
         return new HttpClientStub(responseData, 200);
     }
 
+    public static okNoContent() {
+        return new HttpClientStub(undefined, 203);
+    }
+
     public static error() {
         return new HttpClientStub(undefined, 500);
     }

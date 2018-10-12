@@ -48,6 +48,10 @@ export class Greetings {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
+        if (response.status !== 200) {
+            return;
+        }
+
         const data: string = await response.json();
         this.log.info(`Received data was: ${data}`);
         this.numberOfSavedGreetings = data;
@@ -72,6 +76,10 @@ export class Greetings {
     private async handleFetchLastGreetingsValidResponse(response: Response) {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
+
+        if (response.status !== 200) {
+            return;
+        }
 
         const data: SavedGreeting[] = await response.json();
         this.log.info(`Received data was: ${data.length} elements`);

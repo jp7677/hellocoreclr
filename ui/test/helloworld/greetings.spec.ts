@@ -25,6 +25,18 @@ describe("Greetings test suite", () => {
         expect(sut.savedGreetings.length).to.equal(2);
     });
 
+    it("should handle a valid response without content", async () => {
+        const httpStub = HttpClientStub.okNoContent();
+        const sut = new Greetings(httpStub);
+
+        await sut.activate();
+
+        expect(sut.numberOfSavedGreetings).not.to.be.undefined;
+        expect(sut.numberOfSavedGreetings).to.equal("0");
+        expect(sut.savedGreetings).not.to.be.undefined;
+        expect(sut.savedGreetings.length).to.equal(0);
+    });
+
     it("should handle an error response", async () => {
         const httpStub = HttpClientStub.error();
         const sut = new Greetings(httpStub);

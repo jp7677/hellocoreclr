@@ -6,13 +6,11 @@ export class Notifier {
     }
 
     public Info(message: string) {
-        toastr.clear();
         toastr.success(message);
     }
 
     public Warn(message: string) {
-        toastr.clear();
-        toastr.warning(message);
+        toastr.warning(message, null, { timeOut : 0 });
     }
 
     private SetToastrOptions() {

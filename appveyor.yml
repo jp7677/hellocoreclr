@@ -17,7 +17,7 @@ build_script:
 
 before_test:
 - pushd ui && npm install karma-appveyor-reporter && popd
-- mkdir ui\node_modules\protractor\node_modules\webdriver-manager\selenium
+- if not exist ui\node_modules\protractor\node_modules\webdriver-manager\selenium mkdir ui\node_modules\protractor\node_modules\webdriver-manager\selenium
 - curl -o ui\node_modules\protractor\node_modules\webdriver-manager\selenium\chrome-response.xml https://chromedriver.storage.googleapis.com/
 
 test_script:

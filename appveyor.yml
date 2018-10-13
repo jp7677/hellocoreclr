@@ -23,7 +23,7 @@ test_script:
 - dotnet test test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=..\..\reports\coverage-cs.xml
 - npm run lint --prefix ui
 - npm run unit-tests --prefix ui -- --reporters dots,coverage-istanbul,appveyor
-- npm run e2e-tests:prepare --prefix ui -- --ignore-ssl  --proxy %HTTP_PROXY%
+- npm run e2e-tests:prepare --prefix ui -- --gecko false
 - npm run e2e-tests --prefix ui
 
 after_test:

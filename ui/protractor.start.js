@@ -16,7 +16,12 @@ const runProtractor = () => {
   const winExt = /^win/.test(process.platform) ? '.cmd' : ''
   const protractorBin = 'protractor' + winExt
 
-  childprocess.spawn(protractorBin, [ 'protractor.conf.js' ], {stdio: 'inherit'})
+  const protractorArgs = [ 'protractor.conf.js' ]
+  if (process.argv.slice(2).length > 0) {
+    protractorArgs.push(process.argv.slice(2))
+  }
+
+  childprocess.spawn(protractorBin, protractorArgs, {stdio: 'inherit'})
     .on('close', (code) => {
       if (code !== 0) {
         process.exit(code)

@@ -7,7 +7,7 @@ exports.config = {
   baseUrl: 'http://localhost:3000',
   specs: [ path.join(test, '**/*.feature') ],
   directConnect: true,
-  multiCapabilities: [{
+  capabilities: {
     browserName: 'chrome',
     chromeOptions: {
       args: [
@@ -23,13 +23,11 @@ exports.config = {
         '--no-gpu',
         '--headless'
       ]
-    }
-  }, {
-    browserName: 'firefox',
+    },
     'moz:firefoxOptions': {
       args: ['--headless']
     }
-  }],
+  },
   framework: 'custom',
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   cucumberOpts: {

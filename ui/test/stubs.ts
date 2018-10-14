@@ -4,40 +4,35 @@ import * as sinon from "sinon";
 
 export class HttpClientStub {
     public static ok(responseData: any = {}) {
-        const map: Map<string, any> = new Map<string, any>();
-        map.set("*", responseData);
-        return new HttpClientStub(map, 200);
-    }
-
-    public static okWithResponseMap(responseData: Map<string, any>) {
-        return new HttpClientStub(responseData, 200);
-    }
-
-    public static okNoContent() {
-        return new HttpClientStub(undefined, 203);
+        const map: Map<string, [number, any]> = new Map<string, [number, any]>();
+        map.set("*", [200, responseData]);
+        return new HttpClientStub(map);
     }
 
     public static error() {
-        return new HttpClientStub(undefined, 500);
+        const map: Map<string, [number, any]> = new Map<string, [number, any]>();
+        map.set("*", [500, undefined]);
+        return new HttpClientStub(map);
     }
 
-    private success: boolean;
-
-    constructor(private responseData: Map<string, any>, private status: number = 200) {
-        this.success = this.status >= 200 && this.status < 400;
+    public static withResponseMap(responseMap: Map<string, [number, any]>) {
+        return new HttpClientStub(responseMap);
     }
+
+    constructor(private responseMap: Map<string, [number, any]>) { }
 
     public fetch(url) {
-        if (this.success) {
+        const response = this.responseMap.has("*")
+            ? this.responseMap.get("*")
+            : this.responseMap.get(url);
+
+        const statusCode = response[0];
+        if (statusCode >= 200 && statusCode < 300) {
             return Promise.resolve({
                 json: () => {
-                    if (this.responseData.has("*")) {
-                        return Promise.resolve(this.responseData.get("*"));
-                    } else {
-                        return Promise.resolve(this.responseData.get(url));
-                    }
+                    return Promise.resolve(response[1]);
                 },
-                status: this.status
+                status: statusCode
             });
         }
         return Promise.reject("An error occurred");

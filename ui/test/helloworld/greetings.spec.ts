@@ -8,13 +8,13 @@ import {HttpClientStub} from "../stubs";
 describe("Greetings test suite", () => {
 
     it("should handle a valid response", async () => {
-        const responses = new Map<string, any>();
-        responses.set("greetings/count", "5");
-        responses.set("greetings", [
+        const responses = new Map<string, [number, any]>();
+        responses.set("greetings/count", [ 200, "5"]);
+        responses.set("greetings", [ 200, [
             {greeting: "Hello", timestampUtc: new Date(Date.now())},
             {greeting: "World", timestampUtc: new Date(Date.now())}
-        ]);
-        const httpStub = HttpClientStub.okWithResponseMap(responses);
+        ]]);
+        const httpStub = HttpClientStub.withResponseMap(responses);
         const sut = new Greetings(httpStub);
 
         await sut.activate();
@@ -26,7 +26,10 @@ describe("Greetings test suite", () => {
     });
 
     it("should handle a valid response without content", async () => {
-        const httpStub = HttpClientStub.okNoContent();
+        const responses = new Map<string, [number, any]>();
+        responses.set("greetings/count", [ 200, "0"]);
+        responses.set("greetings", [ 203, undefined]);
+        const httpStub = HttpClientStub.withResponseMap(responses);
         const sut = new Greetings(httpStub);
 
         await sut.activate();

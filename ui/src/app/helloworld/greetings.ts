@@ -48,10 +48,6 @@ export class Greetings {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
-        if (response.status !== 200) {
-            return;
-        }
-
         const data: string = await response.json();
         this.log.info(`Received data was: ${data}`);
         this.numberOfSavedGreetings = data;
@@ -77,7 +73,7 @@ export class Greetings {
         this.log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
-        if (response.status !== 200) {
+        if (response.status === 203) {
             return;
         }
 

@@ -75,6 +75,7 @@ in a separate console to run the dedicated front end server. Open <http://localh
 ### Development setup
 
 For a nice web programming experience I'm using [Visual Studio Code](https://code.visualstudio.com/) with the following extensions:
+
 > tslint, ESLint, stylelint, HTMLHint, markdownlint, Spelling and Grammar Checker, Cucumber (Gherkin) Full Support, Debugger for Chrome, Wallabyjs for Visual Studio Code
 
 Note that Wallabyjs is a commercial extension, for that you'll also need to run `npm install wallaby-webpack --no-save` within the ui folder.

@@ -1,38 +1,38 @@
 #toast-container > .toast {
-  background-image: none !important;
+    background-image: none !important;
 }
 
 #toast-container > .toast::before {
-  position: relative;
-  font-family: FontAwesome, serif;
-  font-size: 24px;
-  line-height: 18px;
-  float: left;
-  margin-left: -1em;
-  color: #fff;
-  padding-right: 0.5em;
-  margin-right: 0.5em;
+    position: relative;
+    font-family: FontAwesome, serif;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    margin-left: -1em;
+    color: #fff;
+    padding-right: 0.5em;
+    margin-right: 0.5em;
 }
 
 /* See http://fontawesome.io/cheatsheet/ for icon codes */
 
 #toast-container > .toast-warning::before {
-  content: "\f071";
+    content: "\f071";
 }
 
 #toast-container > .toast-error::before {
-  content: "\f001";
+    content: "\f001";
 }
 
 #toast-container > .toast-info::before {
-  content: "\f05a";
+    content: "\f05a";
 }
 
 #toast-container > .toast-success::before {
-  content: "\f087";
+    content: "\f087";
 }
 
 .body-app {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0;
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
 }

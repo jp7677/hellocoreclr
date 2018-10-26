@@ -1,18 +1,12 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "alwaysStrict": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "lib": [
-      "es2015", "dom"
-    ]
-  },
-  "include": [
-    "src",
-    "test",
-    "test-e2e",
-  ]
+    "compilerOptions": {
+        "target": "es5",
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "alwaysStrict": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "lib": ["es2015", "dom"]
+    },
+    "include": ["src", "test", "test-e2e"]
 }

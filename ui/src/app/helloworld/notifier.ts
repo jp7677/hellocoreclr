@@ -10,7 +10,7 @@ export class Notifier {
     }
 
     public Warn(message: string) {
-        toastr.warning(message, null, { timeOut : 0 });
+        toastr.warning(message, null, { timeOut: 0 });
     }
 
     private SetToastrOptions() {

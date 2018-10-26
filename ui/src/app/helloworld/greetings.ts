@@ -1,11 +1,11 @@
-import {HttpClient} from "aurelia-fetch-client";
-import {inject, LogManager} from "aurelia-framework";
-import {Logger} from "aurelia-logging";
+import { HttpClient } from "aurelia-fetch-client";
+import { inject, LogManager } from "aurelia-framework";
+import { Logger } from "aurelia-logging";
 import * as moment from "moment";
 
-import {FormattedSavedGreeting} from "./formattedsavedgreeting";
-import {SavedGreeting} from "./messages/savedgreeting";
-import {Notifier} from "./notifier";
+import { FormattedSavedGreeting } from "./formattedsavedgreeting";
+import { SavedGreeting } from "./messages/savedgreeting";
+import { Notifier } from "./notifier";
 
 @inject(HttpClient)
 export class Greetings {
@@ -23,10 +23,7 @@ export class Greetings {
 
     public activate() {
         this.prepareRequests();
-        return Promise.all([
-            this.fetchNumberOfSavedGreetings(),
-            this.fetchLastGreetings()
-        ]);
+        return Promise.all([this.fetchNumberOfSavedGreetings(), this.fetchLastGreetings()]);
     }
 
     private prepareRequests() {
@@ -80,7 +77,7 @@ export class Greetings {
         const data: SavedGreeting[] = await response.json();
         this.log.info(`Received data was: ${data.length} elements`);
 
-        data.forEach((element) => {
+        data.forEach(element => {
             const formatedSavedGreeting = new FormattedSavedGreeting();
             formatedSavedGreeting.greeting = element.greeting;
             formatedSavedGreeting.timestamp = moment.utc(element.timestampUtc).fromNow();

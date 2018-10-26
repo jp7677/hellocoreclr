@@ -3,6 +3,7 @@
   "rules": {
     "trailing-comma": [ true, { "multiline": "never", "singleline": "never" } ],
     "no-implicit-dependencies": [ true, "dev" ],
-    "no-floating-promises": true
+    "no-floating-promises": true,
+    "arrow-parens": false
   }
 }

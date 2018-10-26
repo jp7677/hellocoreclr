@@ -1,7 +1,7 @@
 declare var APPLICATIONMODE: string;
 
 // Import promise polyfill for IE
-import {Promise as Bluebird} from "bluebird";
+import { Promise as Bluebird } from "bluebird";
 // Import the fetch polyfill before the Aurelia fetch client to keep compatibility with Safari
 import "whatwg-fetch";
 
@@ -10,19 +10,20 @@ import "jquery";
 import "popper.js";
 
 import * as appsettings from "../appsettings.json";
-import {Environment} from "./environment";
-import {Loadingbar} from "./loadingbar";
+import { Environment } from "./environment";
+import { Loadingbar } from "./loadingbar";
 
-import {HttpClient} from "aurelia-fetch-client";
-import {Aurelia, Container, LogManager} from "aurelia-framework";
-import {Logger} from "aurelia-logging";
-import {ConsoleAppender} from "aurelia-logging-console";
-import {PLATFORM} from "aurelia-pal";
+import { HttpClient } from "aurelia-fetch-client";
+import { Aurelia, Container, LogManager } from "aurelia-framework";
+import { Logger } from "aurelia-logging";
+import { ConsoleAppender } from "aurelia-logging-console";
+import { PLATFORM } from "aurelia-pal";
 
 export async function configure(aurelia: Aurelia) {
     Loadingbar.Inc();
     const env: Environment = new Environment(appsettings, APPLICATIONMODE);
 
+    // prettier-ignore
     aurelia.use
         .standardConfiguration()
         .plugin(PLATFORM.moduleName("aurelia-validation"));
@@ -78,10 +79,8 @@ function registerEnvironment(container: Container, env: Environment) {
 
 function registerHttClient(container: Container, env: Environment) {
     const http = new HttpClient();
-    http.configure((config) => {
-        config
-            .useStandardConfiguration()
-            .withBaseUrl(env.baseUrl);
+    http.configure(config => {
+        config.useStandardConfiguration().withBaseUrl(env.baseUrl);
     });
 
     container.registerInstance(HttpClient, http);

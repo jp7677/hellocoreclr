@@ -1,11 +1,11 @@
-import {HttpClient, json} from "aurelia-fetch-client";
-import {inject, LogManager, NewInstance} from "aurelia-framework";
-import {Logger} from "aurelia-logging";
-import {ControllerValidateResult, ValidationController} from "aurelia-validation";
+import { HttpClient, json } from "aurelia-fetch-client";
+import { inject, LogManager, NewInstance } from "aurelia-framework";
+import { Logger } from "aurelia-logging";
+import { ControllerValidateResult, ValidationController } from "aurelia-validation";
 
-import {SayHelloWorld as SayHelloWorldMessage} from "./messages/sayhelloworld";
-import {Notifier} from "./notifier";
-import {SayHelloWorldValidationRules} from "./sayhelloworld-validationrules";
+import { SayHelloWorld as SayHelloWorldMessage } from "./messages/sayhelloworld";
+import { Notifier } from "./notifier";
+import { SayHelloWorldValidationRules } from "./sayhelloworld-validationrules";
 
 @inject(HttpClient, NewInstance.of(ValidationController), NewInstance.of(SayHelloWorldValidationRules))
 export class SayHelloWorld {
@@ -36,7 +36,7 @@ export class SayHelloWorld {
     public async submit() {
         const name: string = this.inputText;
 
-        if (!await this.testPreConditionsAndResetIfNeeded(name)) {
+        if (!(await this.testPreConditionsAndResetIfNeeded(name))) {
             return;
         }
 
@@ -46,7 +46,8 @@ export class SayHelloWorld {
         try {
             response = await this.httpClient.fetch("sayhelloworld/", {
                 body: json(name),
-                method: "post" });
+                method: "post"
+            });
         } catch (err) {
             return this.handleErrorResponse(err);
         }

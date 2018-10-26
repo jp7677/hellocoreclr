@@ -1,7 +1,7 @@
-import {expect} from "chai";
-import {SayHelloWorld as SayHelloWorldMessage} from "../../src/app/helloworld/messages/sayhelloworld";
-import {SayHelloWorld} from "../../src/app/helloworld/sayhelloworld";
-import {HttpClientStub, ValidationControllerStub, ValidationRulesStub} from "../stubs";
+import { expect } from "chai";
+import { SayHelloWorld as SayHelloWorldMessage } from "../../src/app/helloworld/messages/sayhelloworld";
+import { SayHelloWorld } from "../../src/app/helloworld/sayhelloworld";
+import { HttpClientStub, ValidationControllerStub, ValidationRulesStub } from "../stubs";
 
 // tslint:disable:no-unused-expression
 
@@ -9,10 +9,7 @@ describe("SayHelloWorld test suite", () => {
     const validationRules = new ValidationRulesStub();
 
     it("should do nothing when there is no valid input", async () => {
-        const sut = new SayHelloWorld(
-            HttpClientStub.ok(),
-            ValidationControllerStub.notValid(),
-            validationRules);
+        const sut = new SayHelloWorld(HttpClientStub.ok(), ValidationControllerStub.notValid(), validationRules);
         sut.inputText = "//";
         sut.greetingText = "Hello";
 
@@ -22,10 +19,7 @@ describe("SayHelloWorld test suite", () => {
     });
 
     it("focus on input should validate", async () => {
-        const sut = new SayHelloWorld(
-            HttpClientStub.ok(),
-            ValidationControllerStub.notValid(),
-            validationRules);
+        const sut = new SayHelloWorld(HttpClientStub.ok(), ValidationControllerStub.notValid(), validationRules);
         sut.inputText = "Hello";
 
         await sut.inputTextOnfocus();
@@ -35,9 +29,10 @@ describe("SayHelloWorld test suite", () => {
 
     it("should handle a valid response", async () => {
         const sut = new SayHelloWorld(
-            HttpClientStub.ok({greeting: "Hello World!"}),
+            HttpClientStub.ok({ greeting: "Hello World!" }),
             ValidationControllerStub.valid(),
-            validationRules);
+            validationRules
+        );
         sut.inputText = "Hello";
 
         await sut.submit();
@@ -46,10 +41,7 @@ describe("SayHelloWorld test suite", () => {
     });
 
     it("should handle an error response", async () => {
-        const sut = new SayHelloWorld(
-            HttpClientStub.error(),
-            ValidationControllerStub.valid(),
-            validationRules);
+        const sut = new SayHelloWorld(HttpClientStub.error(), ValidationControllerStub.valid(), validationRules);
         sut.inputText = "Error";
         sut.greetingText = "Hello";
 

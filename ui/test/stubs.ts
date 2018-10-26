@@ -19,12 +19,10 @@ export class HttpClientStub {
         return new HttpClientStub(responseMap);
     }
 
-    constructor(private responseMap: Map<string, [number, any]>) { }
+    constructor(private responseMap: Map<string, [number, any]>) {}
 
     public fetch(url) {
-        const response = this.responseMap.has("*")
-            ? this.responseMap.get("*")
-            : this.responseMap.get(url);
+        const response = this.responseMap.has("*") ? this.responseMap.get("*") : this.responseMap.get(url);
 
         const statusCode = response[0];
         if (statusCode >= 200 && statusCode < 300) {
@@ -49,7 +47,6 @@ export class ValidationRulesStub {
 }
 
 export class ValidationControllerStub {
-
     public static valid() {
         return new ValidationControllerStub(true);
     }
@@ -58,10 +55,9 @@ export class ValidationControllerStub {
         return new ValidationControllerStub(false);
     }
 
-    constructor(private valid: boolean) {
-    }
+    constructor(private valid: boolean) {}
 
     public validate() {
-        return Promise.resolve({valid: this.valid});
+        return Promise.resolve({ valid: this.valid });
     }
 }

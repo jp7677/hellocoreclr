@@ -1,3 +1,3 @@
-import {Loadingbar} from "./loadingbar";
+import { Loadingbar } from "./loadingbar";
 
 Loadingbar.Start();

@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using HelloCoreClrApp.Data;
 using HelloCoreClrApp.Health;
+using HelloCoreClrApp.Hosting;
 using HelloCoreClrApp.WebApi;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,10 +42,14 @@ namespace HelloCoreClrApp
                     services.AddHostedService<SetupDatabaseTask>();
                     services.AddHostedService<WebHostService>();
                     services.AddHostedService<SystemMonitorService>();
+                })
+                .UseGracefulShutdown(options =>
+                {
+                    options.OnStopping = OnStopping;
+                    options.OnStopped = OnStopped;
                 });
 
             await hostBuilder.RunConsoleAsync();
-            Log.CloseAndFlush();
         }
 
         public static string GetEnvironmentName() =>
@@ -94,6 +99,18 @@ namespace HelloCoreClrApp
                     .CreateDatabaseOptionsBuilder(configuration["connectionString"])
             };
             componentRegistrar.RegisterApplicationComponents(configuration);
+        }
+
+        private static void OnStopping()
+        {
+            Log.Information("Shutting signal received (Crtl+C/SIGTERM). Stopping application.");
+        }
+
+        private static void OnStopped()
+        {
+            Container.Dispose();
+            Log.Information("Application stopped");
+            Log.CloseAndFlush();
         }
     }
 }

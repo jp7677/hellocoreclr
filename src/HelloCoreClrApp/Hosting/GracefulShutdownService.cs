@@ -38,7 +38,7 @@ namespace HelloCoreClrApp.Hosting
             }
             catch (Exception exception)
             {
-                Console.WriteLine("OnStopping threw and exception, exit anyway. Exception was: {0}", exception);
+                Console.WriteLine("OnStopping failed, exit anyway. Exception was: {0}", exception);
             }
        }
 
@@ -50,7 +50,7 @@ namespace HelloCoreClrApp.Hosting
             }
             catch (Exception exception)
             {
-                Console.WriteLine("OnStopped threw and exception, exit anyway. Exception was: {0}", exception);
+                Console.WriteLine("OnStopped failed, exit anyway. Exception was: {0}", exception);
             }
         }
     }

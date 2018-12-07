@@ -103,7 +103,7 @@ namespace HelloCoreClrApp
 
         private static void OnStopping()
         {
-            Log.Information("Shutting signal received (Crtl+C/SIGTERM). Stopping application.");
+            Log.Information("Shutting down signal received (Crtl+C/SIGTERM). Stopping application.");
         }
 
         private static void OnStopped()

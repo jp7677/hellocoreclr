@@ -4,29 +4,29 @@
     <VersionPrefix>0.1.0</VersionPrefix>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <RuntimeFrameworkVersion>2.1.5</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.2.0</RuntimeFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/HelloCoreClrApp/HelloCoreClrApp.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="FakeItEasy" Version="4.9.1" />
-    <PackageReference Include="FluentAssertions" Version="5.4.2" />
+    <PackageReference Include="FluentAssertions" Version="5.5.3" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" PrivateAssets="All" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" PrivateAssets="All" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" PrivateAssets="All" />
     <PackageReference Include="xunit.analyzers" Version="0.10.0" PrivateAssets="All" />
     <PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="4.9.1" PrivateAssets="All" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.11.4" PrivateAssets="All" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="All" />
-    <PackageReference Include="coverlet.msbuild" Version="2.3.0" PrivateAssets="All" />
+    <PackageReference Include="coverlet.msbuild" Version="2.4.0" PrivateAssets="All" />
   </ItemGroup>
   <PropertyGroup>
     <CodeAnalysisRuleSet>../../stylecop.rules</CodeAnalysisRuleSet>

@@ -37,6 +37,7 @@ namespace HelloCoreClrApp
                 new GreetingDbContextFactory(DatabaseOptionsBuilder.Options));
             container.Register<IDataService, DataService>();
 
+            container.Register<HelloWorldController>();
             container.RegisterSingleton<IActionFactory, ActionFactory>();
             container.Register<ISayHelloWorldAction, SayHelloWorldAction>();
             container.Register<IGetLastTenGreetingsAction, GetLastTenHelloWorldsAction>();

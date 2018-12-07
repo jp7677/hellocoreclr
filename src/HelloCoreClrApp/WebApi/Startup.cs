@@ -30,13 +30,12 @@ namespace HelloCoreClrApp.WebApi
 
             // Add framework services.
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             services.AddSwaggerGen(SetupSwagger);
 
             // Add SimpleInjector Controller Activator
             services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(container));
-            services.UseSimpleInjectorAspNetRequestScoping(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -21,10 +21,10 @@ module.exports = (env, argv) => {
       rules: [
         { test: /\.ts$/i, loader: 'ts-loader', exclude: nodeModules },
         { test: /\.html$/i, loader: 'html-loader', options: { minimize: isProduction } },
-        { test: /\.css$/i, loader: 'style-loader', issuer: { test: /\.[tj]s$/i } },
-        { test: /\.css$/i, loader: 'css-loader' },
+        { test: /\.css$/i, use: [ 'style-loader', 'css-loader' ] },
+        { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
         { test: /\.(svg)$/i, loader: 'file-loader' },
-        { test: /\.(gif|png|jpe?g)$/i, loaders: [ 'file-loader', { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } } ] },
+        { test: /\.(gif|png|jpe?g)$/i, use: [ { loader: 'file-loader' }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } } ] },
         { test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader' }
       ]
     },
@@ -57,7 +57,7 @@ module.exports = (env, argv) => {
       }),
       new CompressionPlugin({ test: /\.(js|html)$/, threshold: 1024 })
     ],
-    devtool: !isProduction ? 'source-map' : undefined,
+    devtool: !isProduction ? 'inline-source-map' : undefined,
     devServer: {
       contentBase: wwwroot,
       port: 3000,

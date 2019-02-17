@@ -14,7 +14,7 @@ module.exports = function (wallaby) {
       { pattern: path.join(test, 'stubs.ts'), load: false }
     ],
     tests: [
-      {pattern: path.join(test, '**/*.spec.ts'), load: false}
+      { pattern: path.join(test, '**/*.spec.ts'), load: false }
     ],
     env: {
       kind: 'chrome'

@@ -1,5 +1,12 @@
 declare var APPLICATIONMODE: string;
 
+// tslint:disable:no-submodule-imports
+import "bootstrap/dist/css/bootstrap.css";
+import "font-awesome/scss/font-awesome.scss";
+import "../styles/toastr.scss";
+
+import "../styles/styles.scss";
+
 // Import promise polyfill for IE
 import { Promise as Bluebird } from "bluebird";
 // Import the fetch polyfill before the Aurelia fetch client to keep compatibility with Safari

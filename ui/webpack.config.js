@@ -57,7 +57,7 @@ module.exports = (env, argv) => {
       }),
       new CompressionPlugin({ test: /\.(js|html)$/, threshold: 1024 })
     ],
-    devtool: !isProduction ? 'inline-source-map' : undefined,
+    devtool: !isProduction ? 'source-map' : undefined,
     devServer: {
       contentBase: wwwroot,
       port: 3000,

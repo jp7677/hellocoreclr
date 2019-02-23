@@ -1,11 +1,10 @@
 declare var APPLICATIONMODE: string;
 
 // tslint:disable:no-submodule-imports
-import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/scss/font-awesome.scss";
 import "../styles/toastr.scss";
 
-import "../styles/styles.scss";
+import "../styles/main.scss";
 
 // Import promise polyfill for IE
 import { Promise as Bluebird } from "bluebird";

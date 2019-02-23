@@ -11,6 +11,7 @@ module.exports = function (wallaby) {
     files: [
       { pattern: path.join(nodeModules, 'core-js/client/shim.js'), instrument: false },
       { pattern: path.join(src, 'app/**/*.ts'), load: false },
+      { pattern: path.join(src, 'styles/**/*.scss'), load: false },
       { pattern: path.join(test, 'stubs.ts'), load: false }
     ],
     tests: [
@@ -22,7 +23,7 @@ module.exports = function (wallaby) {
     postprocessor: wallabyWebpack({
       module: {
         rules: [
-          { test: /\.css$/i, loader: 'css-loader' }
+          { test: /\.scss$/i, use: [ 'css-loader', 'sass-loader' ] }
         ]
       },
       resolve: {

@@ -1,0 +1,38 @@
+.body-app {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+}
+
+#toast-container > {
+    .toast {
+        background-image: none !important;
+    }
+
+    .toast::before {
+        position: relative;
+        font-family: FontAwesome, serif;
+        font-size: 24px;
+        line-height: 18px;
+        float: left;
+        margin-left: -1em;
+        color: #fff;
+        padding-right: 0.5em;
+        margin-right: 0.5em;
+    }
+
+    .toast-warning::before {
+        content: "\f071";
+    }
+
+    .toast-error::before {
+        content: "\f001";
+    }
+
+    .toast-info::before {
+        content: "\f05a";
+    }
+
+    .toast-success::before {
+        content: "\f087";
+    }
+}

@@ -25,7 +25,9 @@ module.exports = (config) => {
       module: {
         rules: [
           { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
-          { test: /\.css$/i, loader: 'css-loader' },
+          { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
+          { test: /\.(svg)$/i, loader: 'file-loader' },
+          { test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader' },
           !noSingleRun
             ? { test: /\.ts$/i, enforce: 'post', loader: 'istanbul-instrumenter-loader', options: { esModules: true }, exclude: test }
             : {}

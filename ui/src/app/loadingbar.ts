@@ -1,6 +1,6 @@
 import * as nprogress from "nprogress";
 // tslint:disable:no-submodule-imports
-import "nprogress/nprogress.css";
+import "../styles/nprogress.scss";
 
 interface IWindow extends Window {
     Loadingbar: Loadingbar;

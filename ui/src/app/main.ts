@@ -2,6 +2,7 @@ declare var APPLICATIONMODE: string;
 
 // tslint:disable:no-submodule-imports
 import "font-awesome/scss/font-awesome.scss";
+import "../styles/bootstrap.scss";
 import "../styles/toastr.scss";
 
 import "../styles/main.scss";

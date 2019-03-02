@@ -1,8 +1,10 @@
+@import "_base.scss";
+
 #nprogress {
     pointer-events: none;
 
     .bar {
-        background: #29d;
+        background: $helloworld-color;
         position: fixed;
         z-index: 1031;
         top: 0;

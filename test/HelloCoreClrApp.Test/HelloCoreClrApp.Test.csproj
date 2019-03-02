@@ -20,7 +20,7 @@
     <PackageReference Include="FluentAssertions" Version="5.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" PrivateAssets="All" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" PrivateAssets="All" />
     <PackageReference Include="xunit.analyzers" Version="0.10.0" PrivateAssets="All" />
     <PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="5.1.0" PrivateAssets="All" />

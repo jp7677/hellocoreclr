@@ -39,7 +39,7 @@ module.exports = (env, argv) => {
     performance: { hints: false },
     plugins: [
       new DefinePlugin({ APPLICATIONMODE: JSON.stringify(isProduction ? 'Production' : 'Development') }),
-      new CleanWebpackPlugin([wwwroot]),
+      new CleanWebpackPlugin(),
       new ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',

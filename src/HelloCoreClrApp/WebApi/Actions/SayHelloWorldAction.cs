@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using HelloCoreClrApp.Data;
 using HelloCoreClrApp.WebApi.Messages;
@@ -19,11 +20,11 @@ namespace HelloCoreClrApp.WebApi.Actions
         {
             Log.Information("Calculating result.");
 
-            var res = Rules.SayHelloWorldRule.Process(name);
-            if (res.Item2)
-                await SaveGreeting(res.Item1);
+            var(greeting, success) = Rules.SayHelloWorldRule.Process(name);
+            if (success)
+                await SaveGreeting(greeting);
 
-            return new SayHelloWorldResponse { Greeting = res.Item1 };
+            return new SayHelloWorldResponse { Greeting = greeting };
         }
 
         private async Task SaveGreeting(string greeting)

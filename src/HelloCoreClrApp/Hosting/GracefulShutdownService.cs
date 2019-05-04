@@ -40,7 +40,7 @@ namespace HelloCoreClrApp.Hosting
             {
                 Console.WriteLine("OnStopping failed, exit anyway. Exception was: {0}", exception);
             }
-       }
+        }
 
         private void OnStopped()
         {

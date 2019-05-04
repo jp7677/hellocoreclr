@@ -105,7 +105,7 @@
     "lint": "npm run lint:ts && npm run lint:html && npm run lint:style",
     "lint:ts": "tslint --project tsconfig.json '{src,test,test-e2e}/**/*.ts'",
     "lint:html": "htmlhint -f compact src/**/*.{html,ejs}",
-    "lint:style": "stylelint src/**/*.css",
+    "lint:style": "stylelint src/**/*.scss",
     "format": "prettier --write '{src,test,test-e2e}/**/*.{ts,css}'",
     "format:verify": "prettier --list-different '{src,test,test-e2e}/**/*.{ts,css}'",
     "unit-tests": "karma start",

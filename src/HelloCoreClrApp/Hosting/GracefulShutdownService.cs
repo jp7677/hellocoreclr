@@ -3,11 +3,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace HelloCoreClrApp.Hosting
 {
     public class GracefulShutdownService : IHostedService
     {
+        private static readonly ILogger Log = Serilog.Log.ForContext<GracefulShutdownService>();
         private readonly IApplicationLifetime applicationLifetime;
         private readonly GracefulShutdownServiceOptions options;
 
@@ -38,7 +40,7 @@ namespace HelloCoreClrApp.Hosting
             }
             catch (Exception exception)
             {
-                Console.WriteLine("OnStopping failed, exit anyway. Exception was: {0}", exception);
+                Log.Error(exception, "OnStopping failed, exit anyway. Exception was: {0}", exception.Message);
             }
         }
 
@@ -50,7 +52,7 @@ namespace HelloCoreClrApp.Hosting
             }
             catch (Exception exception)
             {
-                Console.WriteLine("OnStopped failed, exit anyway. Exception was: {0}", exception);
+                Log.Error(exception, "OnStopped failed, exit anyway. Exception was: {0}", exception.Message);
             }
         }
     }

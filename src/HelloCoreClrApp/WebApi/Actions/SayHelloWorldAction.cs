@@ -20,7 +20,7 @@ namespace HelloCoreClrApp.WebApi.Actions
         {
             Log.Information("Calculating result.");
 
-            var(greeting, success) = Rules.SayHelloWorldRule.Process(name);
+            var (greeting, success) = Rules.SayHelloWorldRule.Process(name);
             if (success)
                 await SaveGreeting(greeting);
 

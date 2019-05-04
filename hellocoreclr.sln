@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1717E471-BD5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloCoreClrApp", "src\HelloCoreClrApp\HelloCoreClrApp.csproj", "{2B87E680-F8BA-481B-BE5E-D479101330B0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloCoreClrApp.Rules", "src\HelloCoreClrApp.Rules\HelloCoreClrApp.Rules.fsproj", "{71476E1A-10A0-4123-8B91-64EA62F22C83}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HelloCoreClrApp.Rules", "src\HelloCoreClrApp.Rules\HelloCoreClrApp.Rules.fsproj", "{71476E1A-10A0-4123-8B91-64EA62F22C83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FC30712B-F7CA-40AE-8952-97601D83296E}"
 EndProject

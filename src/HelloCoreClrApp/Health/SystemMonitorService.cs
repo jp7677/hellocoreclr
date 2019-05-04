@@ -10,8 +10,8 @@ namespace HelloCoreClrApp.Health
 {
     public class SystemMonitorService : BackgroundService
     {
-        private readonly IApplicationLifetime applicationLifetime;
         private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitorService>();
+        private readonly IApplicationLifetime applicationLifetime;
         private readonly IEnumerable<IMonitor> monitors;
 
         public SystemMonitorService(Container container, IApplicationLifetime applicationLifetime)
@@ -35,6 +35,18 @@ namespace HelloCoreClrApp.Health
             }
         }
 
+        private static async Task Delay(CancellationToken token)
+        {
+            try
+            {
+                await Task.Delay(TimeSpan.FromSeconds(60), token);
+            }
+            catch (TaskCanceledException)
+            {
+                // ignore
+            }
+        }
+
         private async Task Monitor(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
@@ -46,18 +58,6 @@ namespace HelloCoreClrApp.Health
             }
 
             Log.Information("System monitor shutdown");
-        }
-
-        private static async Task Delay(CancellationToken token)
-        {
-            try
-            {
-                await Task.Delay(TimeSpan.FromSeconds(60), token);
-            }
-            catch (TaskCanceledException)
-            {
-                // ignore
-            }
         }
     }
 }

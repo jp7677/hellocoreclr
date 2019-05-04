@@ -41,6 +41,21 @@ namespace HelloCoreClrApp.WebApi
             }
         }
 
+        private static bool IsDevelopment() => Program.GetEnvironmentName() == "Development";
+
+        private static void ConfigureWebRoot(IWebHostBuilder builder)
+        {
+            var webRoot = FindWebRoot();
+            Log.Warning("Running in Development environment, hosting static files from '{0}'.", webRoot);
+            builder.UseWebRoot(webRoot);
+        }
+
+        private static string FindWebRoot()
+        {
+            var webRootPath = Path.Combine(Program.GetCurrentWorkingDirectory(), "..", "..", "..", "..", "..", "ui", "wwwroot");
+            return Path.GetFullPath(webRootPath);
+        }
+
         private IWebHost BuildWebHost()
         {
             var startup = new Startup(container);
@@ -56,21 +71,6 @@ namespace HelloCoreClrApp.WebApi
                 ConfigureWebRoot(builder);
 
             return builder.Build();
-        }
-
-        private static bool IsDevelopment() => Program.GetEnvironmentName() == "Development";
-
-        private static void ConfigureWebRoot(IWebHostBuilder builder)
-        {
-            var webroot = FindWebRoot();
-            Log.Warning("Running in Development environment, hosting static files from '{0}'.", webroot);
-            builder.UseWebRoot(webroot);
-        }
-
-        private static string FindWebRoot()
-        {
-            var webroot = Path.Combine(Program.GetCurrentWorkingDirectory(), "..", "..", "..", "..", "..", "ui", "wwwroot");
-            return Path.GetFullPath(webroot);
         }
     }
 }

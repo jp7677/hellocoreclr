@@ -9,8 +9,8 @@ namespace HelloCoreClrApp.Data
 {
     public class SetupDatabaseTask : BackgroundService
     {
-        private readonly IApplicationLifetime applicationLifetime;
         private static readonly ILogger Log = Serilog.Log.ForContext<SetupDatabaseTask>();
+        private readonly IApplicationLifetime applicationLifetime;
         private readonly IDataService dataService;
 
         public SetupDatabaseTask(Container container, IApplicationLifetime applicationLifetime)

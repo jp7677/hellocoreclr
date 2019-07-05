@@ -1,5 +1,5 @@
 const path = require('path')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { AureliaPlugin } = require('aurelia-webpack-plugin')
 const { DefinePlugin, ProvidePlugin } = require('webpack')

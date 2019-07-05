@@ -13,7 +13,7 @@ P.S. I'm a terrible designer :)
 
 ## Instructions
 
-Obviously you should have Net Core SDK 2.2.203 or higher and Nodejs/npm 8.x already up and running for everything that follows.
+Obviously you should have Net Core SDK 2.2.300 or higher and Nodejs/npm 8.x already up and running for everything that follows.
 
 If you prefer MariaDb you'll have to override the `connectionString` in `appsettings.json` with e.g.
 

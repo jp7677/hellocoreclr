@@ -16,16 +16,16 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="FakeItEasy" Version="5.1.1" />
-    <PackageReference Include="FluentAssertions" Version="5.6.0" />
+    <PackageReference Include="FluentAssertions" Version="5.7.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" PrivateAssets="All" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" PrivateAssets="All" />
     <PackageReference Include="xunit.analyzers" Version="0.10.0" PrivateAssets="All" />
     <PackageReference Include="FakeItEasy.Analyzer.CSharp" Version="5.1.1" PrivateAssets="All" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.11.4" PrivateAssets="All" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="All" />
-    <PackageReference Include="coverlet.msbuild" Version="2.6.0" PrivateAssets="All" />
+    <PackageReference Include="coverlet.msbuild" Version="2.6.3" PrivateAssets="All" />
   </ItemGroup>
   <PropertyGroup>
     <CodeAnalysisRuleSet>../../stylecop.rules</CodeAnalysisRuleSet>

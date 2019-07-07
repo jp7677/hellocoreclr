@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import Greetings from "./helloworld/greetings.vue";
-import SayHelloWorld from "./helloworld/sayhelloworld.vue";
+import Greetings from "./helloworld/greetings";
+import SayHelloWorld from "./helloworld/sayhelloworld";
 
 Vue.use(Router);
 

@@ -19,9 +19,9 @@ module.exports = (env, argv) => {
     },
     module: {
       rules: [
-        { test: /\.vue$/i, loader: 'vue-loader', exclude: nodeModules },
         { test: /\.ts$/i, loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/] }, exclude: nodeModules },
-        { test: /\.html$/i, loader: 'html-loader', options: { minimize: isProduction } },
+        { test: /\.vue$/i, loader: 'vue-loader', exclude: nodeModules },
+        { test: /\.html$/i, loader: 'vue-template-loader', options: { transformAssetUrls: { img: 'src' } } },
         { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader' ] },
         { test: /\.(svg)$/i, loader: 'file-loader' },
         { test: /\.(gif|png|jpe?g)$/i, use: [ { loader: 'file-loader' }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } } ] },

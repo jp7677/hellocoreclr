@@ -27,8 +27,8 @@ const router = new Router({
 
 router.afterEach((to, from) => {
     Vue.nextTick(() => {
-      document.title = to.meta.title(to);
+        document.title = to.meta.title(to);
     });
-  });
+});
 
 export default router;

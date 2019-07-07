@@ -11,6 +11,7 @@ import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
 import Vue from "vue";
 import VueAxios from "vue-axios";
+import Router from "vue-router";
 import VueLogger from "vuejs-logger";
 
 import router from "./router";
@@ -33,6 +34,7 @@ function configureAndMountVue() {
 
     Vue.use(BootstrapVue);
     Vue.use(VueAxios, axios);
+    Vue.use(Router);
     Vue.use(VueLogger, {
         logLevel : getLoggingLevel(environment),
         separator: "|",

@@ -42,8 +42,6 @@ module.exports = (env, argv) => {
       new DefinePlugin({ APPLICATIONMODE: JSON.stringify(isProduction ? 'Production' : 'Development') }),
       new CleanWebpackPlugin(),
       new ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
         Popper: 'popper.js',
         Promise: 'bluebird'
       }),

@@ -1,5 +1,5 @@
 const path = require('path')
-const { ProvidePlugin, SourceMapDevToolPlugin } = require('webpack')
+const { DefinePlugin, SourceMapDevToolPlugin } = require('webpack')
 
 const src = path.resolve(__dirname, 'src')
 const test = path.resolve(__dirname, 'test')
@@ -25,6 +25,7 @@ module.exports = (config) => {
       module: {
         rules: [
           { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
+          { test: /\.html$/i, loader: 'vue-template-loader' },
           { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
           { test: /\.(svg)$/i, loader: 'file-loader' },
           { test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader' },
@@ -38,7 +39,7 @@ module.exports = (config) => {
         modules: [src, nodeModules]
       },
       plugins: [
-        new ProvidePlugin({ '$': 'jquery', 'jQuery': 'jquery' }),
+        new DefinePlugin({ APPLICATIONMODE: JSON.stringify('Development') }),
         new SourceMapDevToolPlugin({ filename: null, test: /\.(js|ts)($|\?)/i, moduleFilenameTemplate: './[resource-path]' })
       ],
       devtool: 'source-map'

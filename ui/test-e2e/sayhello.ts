@@ -3,9 +3,14 @@ import { browser, by, element } from "protractor";
 
 import { expect } from "chai";
 
+browser.ignoreSynchronization = true;
+
 Given(/^I've navigated to the home page$/, async () => {
-    // TODO: Detect page load
-    // await browser.loadAndWaitForAureliaPage("/");
+    await browser.get("/");
+    await browser.wait(async () => {
+        const title = await browser.getTitle();
+        return !title.startsWith("Loading");
+    });
 });
 
 Then(/^I should see the say hello page$/, async () => {

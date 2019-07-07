@@ -21,7 +21,7 @@ const runProtractor = () => {
     protractorArgs.push(process.argv.slice(2))
   }
 
-  childprocess.spawn(protractorBin, protractorArgs, {stdio: 'inherit'})
+  childprocess.spawn(protractorBin, protractorArgs, { stdio: 'inherit' })
     .on('close', (code) => {
       if (code !== 0) {
         process.exit(code)

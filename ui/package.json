@@ -77,7 +77,6 @@
     "vue-class-component": "~7.1.0",
     "vue-property-decorator": "~8.2.1",
     "vue-router": "~3.0.7",
-    "vue-typescript-import-dts": "~4.0.0",
     "vuejs-logger": "~1.5.3"
   },
   "scripts": {

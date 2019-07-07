@@ -16,8 +16,7 @@ import VueLogger from "vuejs-logger";
 
 import router from "./router";
 
-import "vue-typescript-import-dts";
-import App from "./app.vue";
+import App from "./app";
 
 configureAndMountVue();
 

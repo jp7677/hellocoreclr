@@ -1,10 +1,14 @@
-import { ValidationRules } from "aurelia-validation";
-import { SayHelloWorld } from "./sayhelloworld";
+// import { ValidationRules } from "aurelia-validation";
+// import { SayHelloWorld } from "./sayhelloworld";
 
 export class SayHelloWorldValidationRules {
-    public setRules(instance: SayHelloWorld) {
+
+  // TODO: Setup validation using Vue
+
+  /*
+  public setRules(instance: SayHelloWorld) {
         // prettier-ignore
-        ValidationRules
+    ValidationRules
       .ensure((p: SayHelloWorld) => p.inputText)
         .displayName("Greeting name")
         .required()
@@ -12,5 +16,6 @@ export class SayHelloWorldValidationRules {
         .maxLength(20)
         .matches(/^[\w\u00C0-\u024f]+$/)
       .on(instance);
-    }
+  }
+  */
 }

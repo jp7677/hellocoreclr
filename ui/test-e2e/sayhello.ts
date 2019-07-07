@@ -1,13 +1,11 @@
 import { Given, Then, When } from "cucumber";
-
-// tslint:disable:no-submodule-imports
-import { browser } from "aurelia-protractor-plugin/protractor";
-import { by, element } from "protractor";
+import { browser, by, element } from "protractor";
 
 import { expect } from "chai";
 
 Given(/^I've navigated to the home page$/, async () => {
-    await browser.loadAndWaitForAureliaPage("/");
+    // TODO: Detect page load
+    // await browser.loadAndWaitForAureliaPage("/");
 });
 
 Then(/^I should see the say hello page$/, async () => {

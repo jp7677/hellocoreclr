@@ -1,5 +1,25 @@
 declare var APPLICATIONMODE: string;
 
+// Import promise polyfill for IE
+import { Promise as Bluebird } from "bluebird";
+
+import * as appsettings from "../appsettings.json";
+import { Environment } from "./environment";
+import { Loadingbar } from "./loadingbar";
+
+import axios from "axios";
+import BootstrapVue from "bootstrap-vue";
+import Vue from "vue";
+import VueAxios from "vue-axios";
+import VueLogger from "vuejs-logger";
+
+import router from "./router";
+
+import "vue-typescript-import-dts";
+import App from "./app.vue";
+
+configureAndMountVue();
+
 // tslint:disable:no-submodule-imports
 import "font-awesome/scss/font-awesome.scss";
 import "../styles/bootstrap.scss";
@@ -7,44 +27,40 @@ import "../styles/toastr.scss";
 
 import "../styles/main.scss";
 
-// Import promise polyfill for IE
-import { Promise as Bluebird } from "bluebird";
-// Import the fetch polyfill before the Aurelia fetch client to keep compatibility with Safari
-import "whatwg-fetch";
-
-import "bootstrap";
-import "jquery";
-import "popper.js";
-
-import * as appsettings from "../appsettings.json";
-import { Environment } from "./environment";
-import { Loadingbar } from "./loadingbar";
-
-import { HttpClient } from "aurelia-fetch-client";
-import { Aurelia, Container, LogManager } from "aurelia-framework";
-import { Logger } from "aurelia-logging";
-import { ConsoleAppender } from "aurelia-logging-console";
-import { PLATFORM } from "aurelia-pal";
-
-export async function configure(aurelia: Aurelia) {
+function configureAndMountVue() {
     Loadingbar.Inc();
-    const env: Environment = new Environment(appsettings, APPLICATIONMODE);
+    const environment: Environment = new Environment(appsettings, APPLICATIONMODE);
 
-    // prettier-ignore
-    aurelia.use
-        .standardConfiguration()
-        .plugin(PLATFORM.moduleName("aurelia-validation"));
+    Vue.use(BootstrapVue);
+    Vue.use(VueAxios, axios);
+    Vue.use(VueLogger, {
+        logLevel : getLoggingLevel(environment),
+        separator: "|",
+        showConsoleColors: true,
+        showLogLevel : true,
+        showMethodName: false
+     });
 
     configureBluebird();
-    configureLoggingAppender();
-    logAplicationStart(env);
-    configureLoggingLevels(env);
-    configureContainer(aurelia.container, env);
+    configureHttp(environment);
+    logAplicationStart(environment);
 
-    await aurelia.start();
+    const vue = new Vue({
+        render: h => h(App),
+        router
+    });
 
-    await aurelia.setRoot(PLATFORM.moduleName("app/config"));
+    vue.$mount("#app");
     Loadingbar.Done();
+}
+
+function getLoggingLevel(env: Environment) {
+    if (env.IsDevelopment()) {
+        return "debug";
+    } else if (env.IsProduction()) {
+        return "error";
+    }
+    return "info";
 }
 
 function configureBluebird() {
@@ -54,41 +70,12 @@ function configureBluebird() {
     });
 }
 
-function configureLoggingAppender() {
-    LogManager.addAppender(new ConsoleAppender());
-    LogManager.setLevel(LogManager.logLevel.info);
+function configureHttp(env: Environment) {
+    Vue.axios.defaults.baseURL = env.baseUrl;
+    Vue.axios.defaults.headers = { "Content-Type": "application/json" };
 }
 
 function logAplicationStart(env: Environment) {
-    const log: Logger = LogManager.getLogger("Main");
-    log.info(`Starting application in ${env.applicationMode} mode.`);
-    log.info(`Use base URL '${env.baseUrl}'.`);
-}
-
-function configureLoggingLevels(env: Environment) {
-    if (env.IsDevelopment()) {
-        LogManager.setLevel(LogManager.logLevel.debug);
-    } else if (env.IsStaging()) {
-        LogManager.setLevel(LogManager.logLevel.info);
-    } else if (env.IsProduction()) {
-        LogManager.setLevel(LogManager.logLevel.error);
-    }
-}
-
-function configureContainer(container: Container, env: Environment) {
-    registerEnvironment(container, env);
-    registerHttClient(container, env);
-}
-
-function registerEnvironment(container: Container, env: Environment) {
-    container.registerInstance(Environment, env);
-}
-
-function registerHttClient(container: Container, env: Environment) {
-    const http = new HttpClient();
-    http.configure(config => {
-        config.useStandardConfiguration().withBaseUrl(env.baseUrl);
-    });
-
-    container.registerInstance(HttpClient, http);
+    Vue.$log.info(`Starting application in ${env.applicationMode} mode.`);
+    Vue.$log.info(`Use base URL '${env.baseUrl}'.`);
 }

@@ -15,7 +15,7 @@ import Router from "vue-router";
 import VueLogger from "vuejs-logger";
 
 import App from "./app";
-import { RouterConfiguration } from "./router";
+import { RouterConfiguration } from "./router-configuration";
 
 configureAndMountVue();
 

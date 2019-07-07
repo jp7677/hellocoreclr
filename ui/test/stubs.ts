@@ -37,11 +37,6 @@ export class HttpClientStub {
     }
 }
 
-export class RouterConfigurationStub {
-    public title = sinon.stub();
-    public map = sinon.stub();
-}
-
 export class ValidationRulesStub {
     public setRules = sinon.stub();
 }

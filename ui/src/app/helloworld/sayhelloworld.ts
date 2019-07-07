@@ -40,7 +40,7 @@ export default class SayHelloWorld extends Vue {
         const name: string = this.inputText;
 
         if (!(await this.testPreConditionsAndResetIfNeeded(name))) {
-             return;
+            return;
         }
 
         this.prepareRequest(name);

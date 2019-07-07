@@ -77,6 +77,7 @@ function configureHttp(env: Environment) {
 }
 
 function logAplicationStart(env: Environment) {
-    Vue.$log.info(`Starting application in ${env.applicationMode} mode.`);
+    // tslint:disable-next-line:no-console
+    console.info(`Starting application in ${env.applicationMode} mode.`);
     Vue.$log.info(`Use base URL '${env.baseUrl}'.`);
 }

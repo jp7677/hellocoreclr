@@ -67,7 +67,7 @@ export default class Greetings extends Vue {
         this.notifier.Warn(`Oops... HTTP/${response.status}`);
     }
 
-    private async handleFetchLastGreetingsValidResponse(response: AxiosResponse) {
+    private handleFetchLastGreetingsValidResponse(response: AxiosResponse) {
         this.$log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 

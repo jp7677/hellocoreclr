@@ -14,9 +14,8 @@ import VueAxios from "vue-axios";
 import Router from "vue-router";
 import VueLogger from "vuejs-logger";
 
-import router from "./router";
-
 import App from "./app";
+import { RouterConfiguration } from "./router";
 
 configureAndMountVue();
 
@@ -46,6 +45,7 @@ function configureAndMountVue() {
     configureHttp(environment);
     logAplicationStart(environment);
 
+    const router = RouterConfiguration.build();
     const vue = new Vue({
         render: h => h(App),
         router

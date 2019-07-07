@@ -35,12 +35,12 @@ function configureAndMountVue() {
     Vue.use(VueAxios, axios);
     Vue.use(Router);
     Vue.use(VueLogger, {
-        logLevel : getLoggingLevel(environment),
+        logLevel: getLoggingLevel(environment),
         separator: "|",
         showConsoleColors: true,
-        showLogLevel : true,
+        showLogLevel: true,
         showMethodName: false
-     });
+    });
 
     configureBluebird();
     configureHttp(environment);

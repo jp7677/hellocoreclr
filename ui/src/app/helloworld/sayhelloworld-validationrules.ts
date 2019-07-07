@@ -2,9 +2,7 @@
 // import { SayHelloWorld } from "./sayhelloworld";
 
 export class SayHelloWorldValidationRules {
-
     // TODO: Setup validation using Vue
-
     /*
     public setRules(instance: SayHelloWorld) {
         // prettier-ignore

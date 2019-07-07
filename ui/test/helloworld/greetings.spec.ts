@@ -7,9 +7,7 @@ import { SavedGreeting } from "../../src/app/helloworld/messages/savedgreeting";
 // tslint:disable:no-unused-expression
 
 describe("Greetings test suite", () => {
-
     // TODO: Unit tests for our Greetings class
-
     /*
     it("should handle a valid response", async () => {
         const responses = new Map<string, [number, any]>();

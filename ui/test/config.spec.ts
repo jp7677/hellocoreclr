@@ -6,9 +6,7 @@ import { RouterConfigurationStub } from "./stubs";
 // tslint:disable:no-unused-expression
 
 describe("Config test suite", () => {
-
     // TODO: Unit tests for our Router class
-
     /*
     it("should initialize correctly", () => {
         const routerConfiguration = new RouterConfigurationStub();

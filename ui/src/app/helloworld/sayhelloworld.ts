@@ -30,7 +30,7 @@ export default class SayHelloWorld extends Vue {
         */
     }
 
-/*
+    /*
     public inputTextOnfocus(): Promise<ControllerValidateResult> {
         this.inputTextHadFocus = true;
         return this.controller.validate();

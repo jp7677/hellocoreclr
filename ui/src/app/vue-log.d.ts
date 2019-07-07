@@ -10,7 +10,7 @@ declare module "vue/types/vue" {
             error(...args: any[]): void;
             fatal(...args: any[]): void;
         };
-      }
+    }
 
     // tslint:disable-next-line:interface-name
     export interface Vue {

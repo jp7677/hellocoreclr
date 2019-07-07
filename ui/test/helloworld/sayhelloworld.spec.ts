@@ -7,9 +7,7 @@ import { SayHelloWorld as SayHelloWorldMessage } from "../../src/app/helloworld/
 // tslint:disable:no-unused-expression
 
 describe("SayHelloWorld test suite", () => {
-
     // TODO: Unit tests for our SayHelloWorld class
-
     /*
     const validationRules = new ValidationRulesStub();
 

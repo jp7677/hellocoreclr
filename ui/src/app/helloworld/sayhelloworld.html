@@ -27,23 +27,28 @@
         <div class="col">
             <input
                 type="text"
-                name="Greeter text"
+                name="greeter"
                 v-model="inputText"
-                v-validate.immediate="{ required: true, min: 3, max: 20, regex: /^[\w\u00C0-\u024f]+$/ }"
-                v-bind:class="(!vueErrors.any() ? 'is-valid ' : 'is-invalid ') + 'form-control input'"
+                v-validate="{ required: true, min: 3, max: 20, regex: /^[\w\u00C0-\u024f]+$/ }"
+                v-bind:class="(vueFields.greeter && !vueFields.greeter.validated ? '' : (!vueErrors.any() ? 'is-valid' : 'is-invalid')) + ' form-control input'"
                 placeholder="Give me some text"
                 maxlength="20"
             />
             <div class="invalid-tooltip">Between 3 and 20, no strange characters please</div>
         </div>
         <div class="col">
-            <button v-on:click="submit()" v-bind:disabled="vueErrors.any() " class="col btn btn-primary btn">
+            <button
+                v-on:click="submit()"
+                v-bind:disabled="(vueFields.greeter && !vueFields.greeter.validated) || vueErrors.any()"
+                class="col btn btn-primary btn"
+            >
                 <i class="fa fa-play-circle-o"></i> Say Hello!
             </button>
         </div>
         <div class="col">
             <input
                 type="text"
+                name="greeting"
                 v-model="greetingText"
                 class="form-control input"
                 placeholder="Something will happen over here"

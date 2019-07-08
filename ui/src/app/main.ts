@@ -43,6 +43,7 @@ function configureAndMountVue() {
     });
     Vue.use(VeeValidate, {
         errorBagName: "vueErrors",
+        events: "input|focus",
         fieldsBagName: "vueFields"
     });
 

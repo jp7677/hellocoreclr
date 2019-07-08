@@ -12,7 +12,6 @@ module.exports = (config) => {
     logLevel: 'warn',
     frameworks: ['mocha'],
     files: [
-      { pattern: path.join(nodeModules, 'core-js/client/shim.js'), instrument: false },
       { pattern: path.join(src, '**/*.ts'), included: false, served: false, watched: false },
       { pattern: path.join(test, '**/*.spec.ts'), included: false, served: false, watched: false },
       { pattern: path.join(test, 'tests-index.ts'), loaded: false }
@@ -24,7 +23,7 @@ module.exports = (config) => {
       mode: 'development',
       module: {
         rules: [
-          { test: /\.ts$/, loader: 'ts-loader', exclude: nodeModules },
+          { test: /\.ts$/, loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/] } },
           { test: /\.html$/i, loader: 'vue-template-loader' },
           { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
           { test: /\.(svg)$/i, loader: 'file-loader' },

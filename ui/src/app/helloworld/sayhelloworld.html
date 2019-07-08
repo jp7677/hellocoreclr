@@ -1,38 +1,56 @@
 ﻿<!DOCTYPE html>
-<form  class="form-horizontal" v-on:submit.prevent>
+<form class="form-horizontal" v-on:submit.prevent>
     <div class="row">
         <div class="col-3">
-            <img src="./goodnewseveryone.png" class="img-responsive mx-auto rounded d-block"
-                alt="Good News!" width="200" height="150"/>
-        </div>    
+            <img
+                src="./goodnewseveryone.png"
+                class="img-responsive mx-auto rounded d-block"
+                alt="Good News!"
+                width="200"
+                height="150"
+            />
+        </div>
         <div class="col-9">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend consequat magna nec feugiat. Integer lacinia nisl nulla, sit amet ornare urna euismod eu. Vestibulum imperdiet justo ut nisi mattis porta. Duis a mattis leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris massa metus, fringilla sed massa eget, condimentum iaculis lectus. Ut vel dictum turpis.
-
-Curabitur sed scelerisque mauris, nec euismod massa. Aenean egestas, tellus at eleifend tincidunt, nibh nunc imperdiet ante, vel facilisis mi lacus a nunc. Mauris scelerisque ultricies aliquam. Cras porttitor augue ac mollis pretium. In sed nulla tellus. Nulla aliquet, sapien placerat molestie lacinia, arcu velit auctor augue, at condimentum ante libero at turpis. Integer enim eros, ultricies eu vestibulum nec, vestibulum sit amet massa. Proin non ligula lorem. Curabitur malesuada vel libero eu pulvinar. Morbi et efficitur dolor, nec scelerisque justo. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend consequat magna nec feugiat. Integer
+            lacinia nisl nulla, sit amet ornare urna euismod eu. Vestibulum imperdiet justo ut nisi mattis porta. Duis a
+            mattis leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris massa metus, fringilla sed massa
+            eget, condimentum iaculis lectus. Ut vel dictum turpis. Curabitur sed scelerisque mauris, nec euismod massa.
+            Aenean egestas, tellus at eleifend tincidunt, nibh nunc imperdiet ante, vel facilisis mi lacus a nunc.
+            Mauris scelerisque ultricies aliquam. Cras porttitor augue ac mollis pretium. In sed nulla tellus. Nulla
+            aliquet, sapien placerat molestie lacinia, arcu velit auctor augue, at condimentum ante libero at turpis.
+            Integer enim eros, ultricies eu vestibulum nec, vestibulum sit amet massa. Proin non ligula lorem. Curabitur
+            malesuada vel libero eu pulvinar. Morbi et efficitur dolor, nec scelerisque justo.
         </div>
     </div>
     <hr />
-        <div class="row form-group">
-            <div class="col">
-                <input name="Greeter text" type="text"
-                    v-model="inputText"
-                    v-validate.immediate="{ required: true, min: 3, max: 20, regex: /^[\w\u00C0-\u024f]+$/ }"
-                    v-bind:class="(!vueErrors.any() ? 'is-valid ' : 'is-invalid ') + 'form-control input'"
-                    placeholder="Give me some text"
-                    maxlength="20" />
-                <div class="invalid-tooltip">Between 3 and 20, no strange characters please</div>
-            </div>
-            <div class="col">
-                <button v-on:click="submit()" v-bind:disabled="vueErrors.any() " class="col btn btn-primary btn">
-                    <i class="fa fa-play-circle-o"></i> Say Hello!
-                </button>
-            </div>
-            <div class="col">
-                <input type="text" class="form-control input"
-                    placeholder="Something will happen over here" v-model="greetingText" disabled />
-            </div>
+    <div class="row form-group">
+        <div class="col">
+            <input
+                type="text"
+                name="Greeter text"
+                v-model="inputText"
+                v-validate.immediate="{ required: true, min: 3, max: 20, regex: /^[\w\u00C0-\u024f]+$/ }"
+                v-bind:class="(!vueErrors.any() ? 'is-valid ' : 'is-invalid ') + 'form-control input'"
+                placeholder="Give me some text"
+                maxlength="20"
+            />
+            <div class="invalid-tooltip">Between 3 and 20, no strange characters please</div>
         </div>
-    <hr/>
+        <div class="col">
+            <button v-on:click="submit()" v-bind:disabled="vueErrors.any() " class="col btn btn-primary btn">
+                <i class="fa fa-play-circle-o"></i> Say Hello!
+            </button>
+        </div>
+        <div class="col">
+            <input
+                type="text"
+                v-model="greetingText"
+                class="form-control input"
+                placeholder="Something will happen over here"
+                disabled
+            />
+        </div>
+    </div>
+    <hr />
     <router-link to="greetings">See older greetings</router-link>
 </form>
-

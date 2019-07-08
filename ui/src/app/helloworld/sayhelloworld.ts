@@ -10,39 +10,16 @@ import { SayHelloWorld as SayHelloWorldMessage } from "./messages/sayhelloworld"
 @Component
 export default class SayHelloWorld extends Vue {
     public inputText: string = "";
-    public inputTextHadFocus: boolean;
     public greetingText: string = "";
-
-    // TODO: Setup validation using Vue
-
-    // private controller: ValidationController;
-    // private validation: SayHelloWorldValidationRules;
     private notifier: Notifier;
 
     constructor() {
         super();
         this.notifier = new Notifier();
-
-        /*
-        this.controller = $controller;
-        this.validation = $validation;
-        this.validation.setRules(this);
-        */
     }
 
-    /*
-    public inputTextOnfocus(): Promise<ControllerValidateResult> {
-        this.inputTextHadFocus = true;
-        return this.controller.validate();
-    }
-*/
     public async submit() {
         const name: string = this.inputText;
-
-        if (!(await this.testPreConditionsAndResetIfNeeded(name))) {
-            return;
-        }
-
         this.prepareRequest(name);
 
         let response: AxiosResponse;
@@ -54,18 +31,6 @@ export default class SayHelloWorld extends Vue {
         }
 
         this.handleValidResponse(response);
-    }
-
-    private async testPreConditionsAndResetIfNeeded(name: string): Promise<boolean> {
-        /*
-        const validateResult: ControllerValidateResult = await this.controller.validate();
-        if (!validateResult.valid) {
-            Vue.$log.warn("Invalid name received. abort.. ");
-            this.resetGreetingText();
-            return false;
-        }
-        */
-        return true;
     }
 
     private prepareRequest(name: string) {

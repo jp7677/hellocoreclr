@@ -14,15 +14,16 @@ Curabitur sed scelerisque mauris, nec euismod massa. Aenean egestas, tellus at e
     <hr />
         <div class="row form-group">
             <div class="col">
-                <input type="text"
+                <input name="Greeter text" type="text"
                     v-model="inputText"
-                    class="form-control input ${!inputTextHadFocus ? '' : controller.errors.length === 0 ? 'is-valid' : 'is-invalid'}"
-                    placeholder="Give me some text" value.bind="inputText & validateOnChange"
-                    focus.trigger="inputTextOnfocus()" maxlength="20" />
+                    v-validate.immediate="{ required: true, min: 3, max: 20, regex: /^[\w\u00C0-\u024f]+$/ }"
+                    v-bind:class="(!vueErrors.any() ? 'is-valid ' : 'is-invalid ') + 'form-control input'"
+                    placeholder="Give me some text"
+                    maxlength="20" />
                 <div class="invalid-tooltip">Between 3 and 20, no strange characters please</div>
             </div>
             <div class="col">
-                <button @click="submit()" class="col btn btn-primary btn">
+                <button v-on:click="submit()" v-bind:disabled="vueErrors.any() " class="col btn btn-primary btn">
                     <i class="fa fa-play-circle-o"></i> Say Hello!
                 </button>
             </div>

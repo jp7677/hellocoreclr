@@ -9,6 +9,7 @@ import { Loadingbar } from "./loadingbar";
 
 import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
+import VeeValidate from "vee-validate";
 import Vue from "vue";
 import VueAxios from "vue-axios";
 import Router from "vue-router";
@@ -39,6 +40,10 @@ function configureAndMountVue() {
         showConsoleColors: true,
         showLogLevel: true,
         showMethodName: false
+    });
+    Vue.use(VeeValidate, {
+        errorBagName: "vueErrors",
+        fieldsBagName: "vueFields"
     });
 
     configureBluebird();

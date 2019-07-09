@@ -12,7 +12,7 @@ import { SavedGreeting } from "./messages/savedgreeting";
 @WithRender
 @Component
 export default class Greetings extends Vue {
-    public numberOfSavedGreetings: string = "0";
+    public numberOfSavedGreetings: number = 0;
     public savedGreetings: FormattedSavedGreeting[] = [];
 
     private notifier: Notifier;
@@ -48,7 +48,7 @@ export default class Greetings extends Vue {
 
         const data: string = response.data;
         this.$log.info(`Received data was: ${data}`);
-        this.numberOfSavedGreetings = data;
+        this.numberOfSavedGreetings = +data;
     }
 
     private async fetchLastGreetings() {

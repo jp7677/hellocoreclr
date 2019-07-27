@@ -1,10 +1,13 @@
 import { expect } from "chai";
 
-import { config, shallowMount } from "@vue/test-utils";
+import { config, RouterLinkStub, shallowMount } from "@vue/test-utils";
 import axios from "axios";
 import moxios from "moxios";
+import { LoggerStub } from "../stubs";
 
 import Greetings from "../../src/app/helloworld/greetings";
+
+import sinon from "sinon";
 
 // tslint:disable:no-unused-expression
 
@@ -12,23 +15,8 @@ describe("Greetings test suite", () => {
     beforeEach(() => {
         moxios.install();
         config.mocks.$http = axios;
-        config.mocks.$log = {
-            debug: () => {
-                // ignore
-            },
-            error: () => {
-                // ignore
-            },
-            fatal: () => {
-                // ignore
-            },
-            info: () => {
-                // ignore
-            },
-            warn: () => {
-                // ignore
-            }
-        };
+        config.mocks.$log = LoggerStub.create();
+        config.stubs.routerLink = RouterLinkStub;
     });
 
     afterEach(() => {
@@ -45,7 +33,7 @@ describe("Greetings test suite", () => {
             status: 200
         });
 
-        const sut = shallowMount(Greetings, { stubs: ["router-link"] }).vm;
+        const sut = shallowMount(Greetings).vm;
 
         moxios.wait(() => {
             expect(sut.numberOfSavedGreetings).not.to.be.undefined;
@@ -60,7 +48,7 @@ describe("Greetings test suite", () => {
         moxios.stubRequest("greetings/count", { status: 200, response: 0 });
         moxios.stubRequest("greetings", { status: 203 });
 
-        const sut = shallowMount(Greetings, { stubs: ["router-link"] }).vm;
+        const sut = shallowMount(Greetings).vm;
 
         moxios.wait(() => {
             expect(sut.numberOfSavedGreetings).not.to.be.undefined;
@@ -75,7 +63,7 @@ describe("Greetings test suite", () => {
         moxios.stubRequest("greetings/count", { status: 500 });
         moxios.stubRequest("greetings", { status: 500 });
 
-        const sut = shallowMount(Greetings, { stubs: ["router-link"] }).vm;
+        const sut = shallowMount(Greetings).vm;
 
         moxios.wait(() => {
             expect(sut.numberOfSavedGreetings).not.to.be.undefined;

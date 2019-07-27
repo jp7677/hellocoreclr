@@ -18,4 +18,8 @@ export class Environment {
     public IsProduction(): boolean {
         return this.applicationMode === "Production";
     }
+
+    public IsKarma(): boolean {
+        return this.applicationMode === "Karma";
+    }
 }

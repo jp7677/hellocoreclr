@@ -28,9 +28,12 @@ import "../styles/toastr.scss";
 import "../styles/main.scss";
 
 function configureAndMountVue() {
-    Loadingbar.Inc();
     const environment: Environment = new Environment(appsettings, APPLICATIONMODE);
+    if (environment.IsKarma()) {
+        return;
+    }
 
+    Loadingbar.Inc();
     Vue.use(BootstrapVue);
     Vue.use(VueAxios, axios);
     Vue.use(Router);

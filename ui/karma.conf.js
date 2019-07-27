@@ -38,7 +38,7 @@ module.exports = (config) => {
         modules: [src, nodeModules]
       },
       plugins: [
-        new DefinePlugin({ APPLICATIONMODE: JSON.stringify('Development') }),
+        new DefinePlugin({ APPLICATIONMODE: JSON.stringify('Karma') }),
         new SourceMapDevToolPlugin({ filename: null, test: /\.(js|ts)($|\?)/i, moduleFilenameTemplate: './[resource-path]' })
       ],
       devtool: 'source-map'

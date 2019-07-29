@@ -1,7 +1,7 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { AureliaPlugin } = require('aurelia-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 const { DefinePlugin, ProvidePlugin } = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
 
@@ -14,13 +14,14 @@ module.exports = (env, argv) => {
 
   return {
     entry: {
-      app: [ 'aurelia-bootstrapper' ],
+      app: [ 'app/main' ],
       splash: [ 'app/splash' ]
     },
     module: {
       rules: [
-        { test: /\.ts$/i, loader: 'ts-loader', exclude: nodeModules },
-        { test: /\.html$/i, loader: 'html-loader', options: { minimize: isProduction } },
+        { test: /\.ts$/i, loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/] }, exclude: nodeModules },
+        { test: /\.vue$/i, loader: 'vue-loader', exclude: nodeModules },
+        { test: /\.html$/i, loader: 'vue-template-loader', options: { transformAssetUrls: { img: 'src' } } },
         { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader' ] },
         { test: /\.(svg)$/i, loader: 'file-loader' },
         { test: /\.(gif|png|jpe?g)$/i, use: [ { loader: 'file-loader' }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } } ] },
@@ -41,12 +42,10 @@ module.exports = (env, argv) => {
       new DefinePlugin({ APPLICATIONMODE: JSON.stringify(isProduction ? 'Production' : 'Development') }),
       new CleanWebpackPlugin(),
       new ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
         Popper: 'popper.js',
         Promise: 'bluebird'
       }),
-      new AureliaPlugin({ aureliaApp: 'app/main' }),
+      new VueLoaderPlugin(),
       new HtmlWebpackPlugin({
         template: path.resolve(src, 'index.ejs'),
         favicon: path.resolve(src, 'favicon.ico'),

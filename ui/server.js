@@ -28,7 +28,7 @@ const backendProxy = proxy({
 app.use(morgan('dev'))
 app.use('/api', backendProxy)
 app.use('/', staticGzip(wwwroot))
-app.use(fallback('index.html', {root: wwwroot}))
+app.use(fallback('index.html', { root: wwwroot }))
 
 console.log(colors.yellow('Starting express web server.'))
 console.log('Listening on port ' + colors.magenta(port) + ', serving ' + colors.cyan(wwwroot))

@@ -39,8 +39,5 @@ exports.config = {
       compilerOptions: { module: 'commonjs' }
     })
   },
-  plugins: [{
-    package: 'aurelia-protractor-plugin'
-  }],
   SELENIUM_PROMISE_MANAGER: false
 }

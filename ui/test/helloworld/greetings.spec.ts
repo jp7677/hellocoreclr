@@ -1,55 +1,69 @@
 import { expect } from "chai";
-import { Greetings } from "../../src/app/helloworld/greetings";
-import { SavedGreeting } from "../../src/app/helloworld/messages/savedgreeting";
-import { HttpClientStub } from "../stubs";
+import flushPromises from "flush-promises";
+
+import { config, createLocalVue, RouterLinkStub, shallowMount } from "@vue/test-utils";
+import axios from "axios";
+import moxios from "moxios";
+import { LoggerStub } from "../stubs";
+
+import Greetings from "../../src/app/helloworld/greetings";
 
 // tslint:disable:no-unused-expression
-
 describe("Greetings test suite", () => {
+    const Vue = createLocalVue();
+
+    beforeEach(() => {
+        moxios.install();
+        config.mocks.$http = axios;
+        config.mocks.$log = LoggerStub.create();
+        config.stubs.routerLink = RouterLinkStub;
+    });
+
+    afterEach(() => {
+        moxios.uninstall();
+    });
+
     it("should handle a valid response", async () => {
-        const responses = new Map<string, [number, any]>();
-        responses.set("greetings/count", [200, "5"]);
-        responses.set("greetings", [
-            200,
-            [
+        moxios.stubRequest("greetings/count", { status: 200, response: 5 });
+        moxios.stubRequest("greetings", {
+            response: [
                 { greeting: "Hello", timestampUtc: new Date(Date.now()) },
                 { greeting: "World", timestampUtc: new Date(Date.now()) }
-            ]
-        ]);
-        const httpStub = HttpClientStub.withResponseMap(responses);
-        const sut = new Greetings(httpStub);
+            ],
+            status: 200
+        });
 
-        await sut.activate();
+        const sut = shallowMount(Greetings, { localVue: Vue, sync: false }).vm;
 
+        await flushPromises();
         expect(sut.numberOfSavedGreetings).not.to.be.undefined;
-        expect(sut.numberOfSavedGreetings).to.equal("5");
+        expect(sut.numberOfSavedGreetings).to.equal(5);
         expect(sut.savedGreetings).not.to.be.undefined;
         expect(sut.savedGreetings.length).to.equal(2);
     });
 
     it("should handle a valid response without content", async () => {
-        const responses = new Map<string, [number, any]>();
-        responses.set("greetings/count", [200, "0"]);
-        responses.set("greetings", [203, undefined]);
-        const httpStub = HttpClientStub.withResponseMap(responses);
-        const sut = new Greetings(httpStub);
+        moxios.stubRequest("greetings/count", { status: 200, response: 0 });
+        moxios.stubRequest("greetings", { status: 203 });
 
-        await sut.activate();
+        const sut = shallowMount(Greetings, { localVue: Vue, sync: false }).vm;
 
+        await flushPromises();
         expect(sut.numberOfSavedGreetings).not.to.be.undefined;
-        expect(sut.numberOfSavedGreetings).to.equal("0");
+        expect(sut.numberOfSavedGreetings).to.equal(0);
         expect(sut.savedGreetings).not.to.be.undefined;
         expect(sut.savedGreetings.length).to.equal(0);
     });
 
     it("should handle an error response", async () => {
-        const httpStub = HttpClientStub.error();
-        const sut = new Greetings(httpStub);
+        moxios.stubRequest("greetings/count", { status: 500 });
+        moxios.stubRequest("greetings", { status: 500 });
 
-        await sut.activate();
+        const sut = shallowMount(Greetings, { localVue: Vue, sync: false }).vm;
 
+        await flushPromises();
         expect(sut.numberOfSavedGreetings).not.to.be.undefined;
-        expect(sut.numberOfSavedGreetings).to.equal("0");
+        expect(sut.numberOfSavedGreetings).to.equal(0);
         expect(sut.savedGreetings).not.to.be.undefined;
         expect(sut.savedGreetings.length).equal(0);
     });

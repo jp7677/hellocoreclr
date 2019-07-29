@@ -1,52 +1,56 @@
 import { expect } from "chai";
-import { SayHelloWorld as SayHelloWorldMessage } from "../../src/app/helloworld/messages/sayhelloworld";
-import { SayHelloWorld } from "../../src/app/helloworld/sayhelloworld";
-import { HttpClientStub, ValidationControllerStub, ValidationRulesStub } from "../stubs";
+import flushPromises from "flush-promises";
+
+import { config, createLocalVue, RouterLinkStub, shallowMount } from "@vue/test-utils";
+import axios from "axios";
+import moxios from "moxios";
+import VeeValidate from "vee-validate";
+import { LoggerStub } from "../stubs";
+
+import SayHelloWorld from "../../src/app/helloworld/sayhelloworld";
 
 // tslint:disable:no-unused-expression
 
 describe("SayHelloWorld test suite", () => {
-    const validationRules = new ValidationRulesStub();
-
-    it("should do nothing when there is no valid input", async () => {
-        const sut = new SayHelloWorld(HttpClientStub.ok(), ValidationControllerStub.notValid(), validationRules);
-        sut.inputText = "//";
-        sut.greetingText = "Hello";
-
-        await sut.submit();
-
-        expect(sut.greetingText).to.equal("");
+    const Vue = createLocalVue();
+    Vue.use(VeeValidate, {
+        errorBagName: "vueErrors",
+        fieldsBagName: "vueFields"
     });
 
-    it("focus on input should validate", async () => {
-        const sut = new SayHelloWorld(HttpClientStub.ok(), ValidationControllerStub.notValid(), validationRules);
-        sut.inputText = "Hello";
+    beforeEach(() => {
+        moxios.install();
+        config.mocks.$http = axios;
+        config.mocks.$log = LoggerStub.create();
+        config.stubs.routerLink = RouterLinkStub;
+    });
 
-        await sut.inputTextOnfocus();
-
-        expect(sut.greetingText).to.equal("");
+    afterEach(() => {
+        moxios.uninstall();
     });
 
     it("should handle a valid response", async () => {
-        const sut = new SayHelloWorld(
-            HttpClientStub.ok({ greeting: "Hello World!" }),
-            ValidationControllerStub.valid(),
-            validationRules
-        );
+        moxios.stubRequest("sayhelloworld/", { status: 200, response: { greeting: "Hello World!" } });
+
+        const sut = shallowMount(SayHelloWorld, { localVue: Vue, sync: false }).vm;
         sut.inputText = "Hello";
 
         await sut.submit();
 
+        await flushPromises();
         expect(sut.greetingText).to.equal("Hello World!");
     });
 
     it("should handle an error response", async () => {
-        const sut = new SayHelloWorld(HttpClientStub.error(), ValidationControllerStub.valid(), validationRules);
+        moxios.stubRequest("sayhelloworld/", { status: 500 });
+
+        const sut = shallowMount(SayHelloWorld, { localVue: Vue, sync: false }).vm;
         sut.inputText = "Error";
         sut.greetingText = "Hello";
 
         await sut.submit();
 
+        await flushPromises();
         expect(sut.greetingText).to.equal("");
     });
 });

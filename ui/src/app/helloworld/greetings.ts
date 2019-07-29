@@ -1,27 +1,28 @@
-import { HttpClient } from "aurelia-fetch-client";
-import { inject, LogManager } from "aurelia-framework";
-import { Logger } from "aurelia-logging";
 import * as moment from "moment";
 
+import { AxiosResponse } from "axios";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import { FormattedSavedGreeting } from "./formattedsavedgreeting";
-import { SavedGreeting } from "./messages/savedgreeting";
 import { Notifier } from "./notifier";
 
-@inject(HttpClient)
-export class Greetings {
-    public numberOfSavedGreetings: string = "0";
+import WithRender from "./greetings.html";
+
+import { SavedGreeting } from "./messages/savedgreeting";
+
+@WithRender
+@Component
+export default class Greetings extends Vue {
+    public numberOfSavedGreetings: number = 0;
     public savedGreetings: FormattedSavedGreeting[] = [];
 
-    private log: Logger = LogManager.getLogger("greetings");
-    private httpClient: HttpClient;
     private notifier: Notifier;
 
-    constructor(private $httpClient) {
-        this.httpClient = $httpClient;
+    constructor() {
+        super();
         this.notifier = new Notifier();
     }
 
-    public activate() {
+    public created() {
         this.prepareRequests();
         return Promise.all([this.fetchNumberOfSavedGreetings(), this.fetchLastGreetings()]);
     }
@@ -31,51 +32,51 @@ export class Greetings {
     }
 
     private async fetchNumberOfSavedGreetings() {
-        let response: Response;
+        let response: AxiosResponse;
         try {
-            response = await this.httpClient.fetch("greetings/count");
+            response = await this.$http.get("greetings/count");
         } catch (err) {
             return this.handleErrorResponse(err);
         }
 
-        await this.handleFetchNumberOfSavedGreetingsValidResponse(response);
+        this.handleFetchNumberOfSavedGreetingsValidResponse(response);
     }
 
-    private async handleFetchNumberOfSavedGreetingsValidResponse(response: Response) {
-        this.log.info(`Received http code was: ${response.status}`);
+    private handleFetchNumberOfSavedGreetingsValidResponse(response: AxiosResponse) {
+        this.$log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
-        const data: string = await response.json();
-        this.log.info(`Received data was: ${data}`);
-        this.numberOfSavedGreetings = data;
+        const data: string = response.data;
+        this.$log.info(`Received data was: ${data}`);
+        this.numberOfSavedGreetings = +data;
     }
 
     private async fetchLastGreetings() {
-        let response: Response;
+        let response: AxiosResponse;
         try {
-            response = await this.httpClient.fetch("greetings");
+            response = await this.$http.get("greetings");
         } catch (err) {
             return this.handleErrorResponse(err);
         }
 
-        await this.handleFetchLastGreetingsValidResponse(response);
+        this.handleFetchLastGreetingsValidResponse(response);
     }
 
-    private handleErrorResponse(response: Response) {
-        this.log.warn(`Oops... something went wrong. Received http code was: ${response.status}`);
+    private handleErrorResponse(response: AxiosResponse) {
+        this.$log.warn(`Oops... something went wrong. Received http code was: ${response.status}`);
         this.notifier.Warn(`Oops... HTTP/${response.status}`);
     }
 
-    private async handleFetchLastGreetingsValidResponse(response: Response) {
-        this.log.info(`Received http code was: ${response.status}`);
+    private handleFetchLastGreetingsValidResponse(response: AxiosResponse) {
+        this.$log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
         if (response.status === 203) {
             return;
         }
 
-        const data: SavedGreeting[] = await response.json();
-        this.log.info(`Received data was: ${data.length} elements`);
+        const data: SavedGreeting[] = response.data;
+        this.$log.info(`Received data was: ${data.length} elements`);
 
         data.forEach(element => {
             const formatedSavedGreeting = new FormattedSavedGreeting();

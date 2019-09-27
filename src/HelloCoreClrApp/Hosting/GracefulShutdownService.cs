@@ -10,19 +10,19 @@ namespace HelloCoreClrApp.Hosting
     public class GracefulShutdownService : IHostedService
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<GracefulShutdownService>();
-        private readonly IApplicationLifetime applicationLifetime;
+        private readonly IHostApplicationLifetime hostApplicationLifetime;
         private readonly GracefulShutdownServiceOptions options;
 
-        public GracefulShutdownService(IApplicationLifetime applicationLifetime, IOptions<GracefulShutdownServiceOptions> options)
+        public GracefulShutdownService(IHostApplicationLifetime hostApplicationLifetime, IOptions<GracefulShutdownServiceOptions> options)
         {
-            this.applicationLifetime = applicationLifetime;
+            this.hostApplicationLifetime = hostApplicationLifetime;
             this.options = options?.Value;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            applicationLifetime.ApplicationStopping.Register(OnStopping);
-            applicationLifetime.ApplicationStopped.Register(OnStopped);
+            hostApplicationLifetime.ApplicationStopping.Register(OnStopping);
+            hostApplicationLifetime.ApplicationStopped.Register(OnStopped);
 
             return Task.CompletedTask;
         }

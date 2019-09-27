@@ -15,10 +15,10 @@ namespace HelloCoreClrApp.Test.Hosting
         [Fact]
         public async Task ServiceShouldStartAndStopTest()
         {
-            var applicationLifetime = A.Fake<IApplicationLifetime>();
+            var hostApplicationLifetime = A.Fake<IHostApplicationLifetime>();
             var options = A.Fake<IOptions<GracefulShutdownServiceOptions>>();
 
-            var sut = new GracefulShutdownService(applicationLifetime, options);
+            var sut = new GracefulShutdownService(hostApplicationLifetime, options);
 
             await sut.StartAsync(CancellationToken.None);
             await sut.StopAsync(CancellationToken.None);
@@ -30,9 +30,9 @@ namespace HelloCoreClrApp.Test.Hosting
             var stoppingCancellationTokenSource = new CancellationTokenSource();
             var stoppedCancellationTokenSource = new CancellationTokenSource();
 
-            var applicationLifetime = A.Fake<IApplicationLifetime>();
-            A.CallTo(() => applicationLifetime.ApplicationStopping).Returns(stoppingCancellationTokenSource.Token);
-            A.CallTo(() => applicationLifetime.ApplicationStopped).Returns(stoppedCancellationTokenSource.Token);
+            var hostApplicationLifetime = A.Fake<IHostApplicationLifetime>();
+            A.CallTo(() => hostApplicationLifetime.ApplicationStopping).Returns(stoppingCancellationTokenSource.Token);
+            A.CallTo(() => hostApplicationLifetime.ApplicationStopped).Returns(stoppedCancellationTokenSource.Token);
 
             var onStoppingCalled = false;
             var onStoppedCalled = false;
@@ -45,7 +45,7 @@ namespace HelloCoreClrApp.Test.Hosting
             var options = A.Fake<IOptions<GracefulShutdownServiceOptions>>();
             A.CallTo(() => options.Value).Returns(gracefulShutdownServiceOptions);
 
-            var sut = new GracefulShutdownService(applicationLifetime, options);
+            var sut = new GracefulShutdownService(hostApplicationLifetime, options);
 
             await sut.StartAsync(CancellationToken.None);
 
@@ -61,9 +61,9 @@ namespace HelloCoreClrApp.Test.Hosting
             var stoppingCancellationTokenSource = new CancellationTokenSource();
             var stoppedCancellationTokenSource = new CancellationTokenSource();
 
-            var applicationLifetime = A.Fake<IApplicationLifetime>();
-            A.CallTo(() => applicationLifetime.ApplicationStopping).Returns(stoppingCancellationTokenSource.Token);
-            A.CallTo(() => applicationLifetime.ApplicationStopped).Returns(stoppedCancellationTokenSource.Token);
+            var hostApplicationLifetime = A.Fake<IHostApplicationLifetime>();
+            A.CallTo(() => hostApplicationLifetime.ApplicationStopping).Returns(stoppingCancellationTokenSource.Token);
+            A.CallTo(() => hostApplicationLifetime.ApplicationStopped).Returns(stoppedCancellationTokenSource.Token);
 
             var gracefulShutdownServiceOptions = new GracefulShutdownServiceOptions
             {
@@ -74,7 +74,7 @@ namespace HelloCoreClrApp.Test.Hosting
             var options = A.Fake<IOptions<GracefulShutdownServiceOptions>>();
             A.CallTo(() => options.Value).Returns(gracefulShutdownServiceOptions);
 
-            var sut = new GracefulShutdownService(applicationLifetime, options);
+            var sut = new GracefulShutdownService(hostApplicationLifetime, options);
 
             await sut.StartAsync(CancellationToken.None);
 

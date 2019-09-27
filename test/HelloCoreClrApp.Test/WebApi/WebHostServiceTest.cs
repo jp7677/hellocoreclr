@@ -15,7 +15,7 @@ namespace HelloCoreClrApp.Test.WebApi
     {
         private readonly Container container = new Container();
         private readonly IConfiguration configuration = A.Fake<IConfiguration>();
-        private readonly IApplicationLifetime applicationLifetime = A.Fake<IApplicationLifetime>();
+        private readonly IHostApplicationLifetime applicationLifetime = A.Fake<IHostApplicationLifetime>();
 
         public WebHostServiceTest()
         {

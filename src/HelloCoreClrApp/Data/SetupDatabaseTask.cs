@@ -10,12 +10,12 @@ namespace HelloCoreClrApp.Data
     public class SetupDatabaseTask : BackgroundService
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<SetupDatabaseTask>();
-        private readonly IApplicationLifetime applicationLifetime;
+        private readonly IHostApplicationLifetime hostApplicationLifetime;
         private readonly IDataService dataService;
 
-        public SetupDatabaseTask(Container container, IApplicationLifetime applicationLifetime)
+        public SetupDatabaseTask(Container container, IHostApplicationLifetime hostApplicationLifetime)
         {
-            this.applicationLifetime = applicationLifetime;
+            this.hostApplicationLifetime = hostApplicationLifetime;
             dataService = container.GetInstance<IDataService>();
         }
 
@@ -30,7 +30,7 @@ namespace HelloCoreClrApp.Data
             catch (Exception exception)
             {
                 Log.Fatal(exception, "Setup database failed with {exception}", exception.Message);
-                applicationLifetime.StopApplication();
+                hostApplicationLifetime.StopApplication();
             }
         }
     }

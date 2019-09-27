@@ -21,7 +21,7 @@ export class Loadingbar {
 
     private static get Instance(): Loadingbar {
         // attach this to the window object to make sure that there is really only one.
-        const w = window as IWindow;
+        const w = (window as unknown) as IWindow;
         return w.Loadingbar || (w.Loadingbar = new Loadingbar());
     }
 

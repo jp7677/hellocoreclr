@@ -18,7 +18,7 @@ namespace HelloCoreClrApp.Test.Data
             builder.IsConfigured.Should().BeTrue();
         }
 
-        [Fact(Skip = "Our MariaDb provider does not yet has support for Net Core 3.")]
+        [Fact]
         public void MariaDbConnectionstringShouldReturnConfguredBuilderTest()
         {
             var builder = DatabaseOptionsBuilderFactory

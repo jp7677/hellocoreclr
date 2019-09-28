@@ -5,6 +5,7 @@ environment:
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
     nodejs_version: "10"
+
 install:
 - choco install googlechrome --ignore-checksums
 - ps: Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile ".\install.ps1"

@@ -23,39 +23,41 @@
         </div>
     </div>
     <hr />
-    <div class="row form-group">
-        <div class="col">
-            <input
-                type="text"
-                name="greeter"
-                v-model="inputText"
-                v-validate="{ required: true, min: 3, max: 20, regex: /^[\w\u00C0-\u024f]+$/ }"
-                v-bind:class="(vueFields.greeter && !vueFields.greeter.validated ? '' : (!vueErrors.any() ? 'is-valid' : 'is-invalid')) + ' form-control input'"
-                placeholder="Give me some text"
-                maxlength="20"
-            />
-            <div class="invalid-tooltip">Between 3 and 20, no strange characters please</div>
+    <validation-observer v-slot="{ valid }">
+        <div class="row form-group">
+            <div class="col">
+                <validation-provider
+                    v-bind:rules="{ required: true, min:3, max:20, regex:/^[\w\u00C0-\u024f]+$/ }"
+                    v-slot="{ validated, valid }"
+                >
+                    <input
+                        type="text"
+                        name="greeter"
+                        v-model="inputText"
+                        v-bind:class="(valid || !validated ? 'is-valid' : 'is-invalid') + ' form-control input'"
+                        placeholder="Give me some text"
+                        maxlength="20"
+                    />
+                    <div class="invalid-tooltip">Between 3 and 20, no strange characters please</div>
+                </validation-provider>
+            </div>
+            <div class="col">
+                <button v-on:click="submit()" v-bind:disabled="!valid" class="col btn btn-primary btn">
+                    <i class="fa fa-play-circle-o"></i> Say Hello!
+                </button>
+            </div>
+            <div class="col">
+                <input
+                    type="text"
+                    name="greeting"
+                    v-model="greetingText"
+                    class="form-control input"
+                    placeholder="Something will happen over here"
+                    disabled
+                />
+            </div>
         </div>
-        <div class="col">
-            <button
-                v-on:click="submit()"
-                v-bind:disabled="(vueFields.greeter && !vueFields.greeter.validated) || vueErrors.any()"
-                class="col btn btn-primary btn"
-            >
-                <i class="fa fa-play-circle-o"></i> Say Hello!
-            </button>
-        </div>
-        <div class="col">
-            <input
-                type="text"
-                name="greeting"
-                v-model="greetingText"
-                class="form-control input"
-                placeholder="Something will happen over here"
-                disabled
-            />
-        </div>
-    </div>
+    </validation-observer>
     <hr />
     <router-link to="greetings">See older greetings</router-link>
 </form>

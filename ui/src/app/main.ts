@@ -9,7 +9,9 @@ import { Loadingbar } from "./loadingbar";
 
 import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
-import VeeValidate from "vee-validate";
+import { extend, setInteractionMode, ValidationObserver, ValidationProvider } from "vee-validate";
+// tslint:disable:no-submodule-imports
+import { max, min, regex, required } from "vee-validate/dist/rules";
 import Vue from "vue";
 import VueAxios from "vue-axios";
 import Router from "vue-router";
@@ -44,12 +46,8 @@ function configureAndMountVue() {
         showLogLevel: true,
         showMethodName: false
     });
-    Vue.use(VeeValidate, {
-        errorBagName: "vueErrors",
-        events: "input|focus",
-        fieldsBagName: "vueFields"
-    });
 
+    configureValidation();
     configureBluebird();
     configureHttp(environment);
     logAplicationStart(environment);
@@ -71,6 +69,18 @@ function getLoggingLevel(env: Environment) {
         return "error";
     }
     return "info";
+}
+
+function configureValidation() {
+    Vue.component("ValidationProvider", ValidationProvider);
+    Vue.component("ValidationObserver", ValidationObserver);
+    extend("required", required);
+    extend("min", min);
+    extend("max", max);
+    extend("regex", regex);
+    setInteractionMode("fast", () => {
+        return { on: ["input", "blur", "focus"] };
+    });
 }
 
 function configureBluebird() {

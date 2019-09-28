@@ -4,7 +4,7 @@ import flushPromises from "flush-promises";
 import { config, createLocalVue, RouterLinkStub, shallowMount } from "@vue/test-utils";
 import axios from "axios";
 import moxios from "moxios";
-import VeeValidate from "vee-validate";
+import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { LoggerStub } from "../stubs";
 
 import SayHelloWorld from "../../src/app/helloworld/sayhelloworld";
@@ -13,10 +13,8 @@ import SayHelloWorld from "../../src/app/helloworld/sayhelloworld";
 
 describe("SayHelloWorld test suite", () => {
     const Vue = createLocalVue();
-    Vue.use(VeeValidate, {
-        errorBagName: "vueErrors",
-        fieldsBagName: "vueFields"
-    });
+    Vue.component("ValidationProvider", ValidationProvider);
+    Vue.component("ValidationObserver", ValidationObserver);
 
     beforeEach(() => {
         moxios.install();

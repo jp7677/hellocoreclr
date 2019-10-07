@@ -11,12 +11,12 @@ namespace HelloCoreClrApp.Health
     public class SystemMonitorService : BackgroundService
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<SystemMonitorService>();
-        private readonly IApplicationLifetime applicationLifetime;
+        private readonly IHostApplicationLifetime hostApplicationLifetime;
         private readonly IEnumerable<IMonitor> monitors;
 
-        public SystemMonitorService(Container container, IApplicationLifetime applicationLifetime)
+        public SystemMonitorService(Container container, IHostApplicationLifetime hostApplicationLifetime)
         {
-            this.applicationLifetime = applicationLifetime;
+            this.hostApplicationLifetime = hostApplicationLifetime;
             monitors = container.GetAllInstances<IMonitor>();
         }
 
@@ -31,7 +31,7 @@ namespace HelloCoreClrApp.Health
             catch (Exception exception)
             {
                 Log.Fatal(exception, "System monitor failed with {exception}", exception.Message);
-                applicationLifetime.StopApplication();
+                hostApplicationLifetime.StopApplication();
             }
         }
 

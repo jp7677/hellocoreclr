@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace HelloCoreClrApp.WebApi
@@ -29,7 +30,7 @@ namespace HelloCoreClrApp.WebApi
             Log.Information("Configuring services.");
 
             // Add framework services.
-            services.AddMvc()
+            services.AddControllers()
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             services.AddSwaggerGen(SetupSwagger);
@@ -42,7 +43,7 @@ namespace HelloCoreClrApp.WebApi
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app)
         {
-            var env = app.ApplicationServices.GetService<IHostingEnvironment>();
+            var env = app.ApplicationServices.GetService<IWebHostEnvironment>();
             Log.Information("Starting up in {0} mode.", env.EnvironmentName);
 
             Log.Information("Configuring request pipeline.");
@@ -50,8 +51,9 @@ namespace HelloCoreClrApp.WebApi
             if (env.IsDevelopment())
                 UseStaticHosting(app);
 
-            // Add MVC to the request pipeline.
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+                endpoints.MapControllers());
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -62,7 +64,7 @@ namespace HelloCoreClrApp.WebApi
         {
             options.SwaggerDoc(
                 "v1",
-                new Info { Title = "Hello CoreCLR Service API", Description = "Just a playground...", TermsOfService = "None", Version = ApiVersion });
+                new OpenApiInfo { Title = "Hello CoreCLR Service API", Description = "Just a playground...", Version = ApiVersion });
         }
 
         private static void UseStaticHosting(IApplicationBuilder app)

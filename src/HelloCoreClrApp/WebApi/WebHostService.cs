@@ -2,13 +2,11 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using SimpleInjector;
-using IApplicationLifetime = Microsoft.Extensions.Hosting.IApplicationLifetime;
 
 namespace HelloCoreClrApp.WebApi
 {
@@ -17,12 +15,12 @@ namespace HelloCoreClrApp.WebApi
         private static readonly ILogger Log = Serilog.Log.ForContext<WebHostService>();
         private readonly IConfiguration configuration;
         private readonly Container container;
-        private readonly IApplicationLifetime applicationLifetime;
+        private readonly IHostApplicationLifetime hostApplicationLifetime;
 
-        public WebHostService(Container container, IApplicationLifetime applicationLifetime)
+        public WebHostService(Container container, IHostApplicationLifetime hostApplicationLifetime)
         {
             this.container = container;
-            this.applicationLifetime = applicationLifetime;
+            this.hostApplicationLifetime = hostApplicationLifetime;
             configuration = container.GetInstance<IConfiguration>();
         }
 
@@ -37,7 +35,7 @@ namespace HelloCoreClrApp.WebApi
             catch (Exception exception)
             {
                 Log.Fatal(exception, "Web host failed with {exception}", exception.Message);
-                applicationLifetime.StopApplication();
+                hostApplicationLifetime.StopApplication();
             }
         }
 
@@ -56,19 +54,21 @@ namespace HelloCoreClrApp.WebApi
             return Path.GetFullPath(webRootPath);
         }
 
-        private IWebHost BuildWebHost()
+        private IHost BuildWebHost()
         {
             var startup = new Startup(container);
-            var builder = WebHost
+            var builder = Host
                 .CreateDefaultBuilder()
                 .UseSerilog()
-                .UseConfiguration(configuration)
-                .UseKestrel()
-                .ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection))
-                .Configure(applicationBuilder => startup.Configure(applicationBuilder));
-
-            if (IsDevelopment())
-                ConfigureWebRoot(builder);
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseConfiguration(configuration);
+                    webBuilder.UseKestrel();
+                    webBuilder.ConfigureServices(serviceCollection => startup.ConfigureServices(serviceCollection));
+                    webBuilder.Configure(applicationBuilder => startup.Configure(applicationBuilder));
+                    if (IsDevelopment())
+                        ConfigureWebRoot(webBuilder);
+                });
 
             return builder.Build();
         }

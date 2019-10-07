@@ -1,9 +1,10 @@
 version: '0.1.{build}'
 image: Visual Studio 2017
 environment:
-    dotnet_version: "2.2.300"
+    dotnet_version: "3.0.100"
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+    DOTNET_ROOT: "C:\\projects\\hellocoreclr\\.dotnet"
     nodejs_version: "10"
 
 install:

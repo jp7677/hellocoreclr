@@ -14,7 +14,7 @@ namespace HelloCoreClrApp.Test.Data
     {
         private readonly Container container = new Container();
         private readonly IDataService dataService = A.Fake<IDataService>();
-        private readonly IApplicationLifetime applicationLifetime = A.Fake<IApplicationLifetime>();
+        private readonly IHostApplicationLifetime applicationLifetime = A.Fake<IHostApplicationLifetime>();
 
         public SetupDatabaseTaskTest()
         {

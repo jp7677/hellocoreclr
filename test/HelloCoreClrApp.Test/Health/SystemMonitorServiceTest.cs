@@ -15,7 +15,7 @@ namespace HelloCoreClrApp.Test.Health
     {
         private readonly Container container = new Container();
         private readonly IMonitor monitor = A.Fake<IMonitor>();
-        private readonly IApplicationLifetime applicationLifetime = A.Fake<IApplicationLifetime>();
+        private readonly IHostApplicationLifetime applicationLifetime = A.Fake<IHostApplicationLifetime>();
 
         public SystemMonitorServiceTest()
         {

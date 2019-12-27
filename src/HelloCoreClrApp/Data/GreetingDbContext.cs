@@ -1,3 +1,4 @@
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 using System.Threading;
 using System.Threading.Tasks;
 using HelloCoreClrApp.Data.Entities;
@@ -12,7 +13,6 @@ namespace HelloCoreClrApp.Data
         {
         }
 
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public DbSet<Greeting> Greetings { get; set; }
 
         public async Task EnsureCreated(CancellationToken token) => await Database.EnsureCreatedAsync(token);

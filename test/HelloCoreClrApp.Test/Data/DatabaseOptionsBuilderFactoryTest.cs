@@ -9,7 +9,7 @@ namespace HelloCoreClrApp.Test.Data
     public class DatabaseOptionsBuilderFactoryTest
     {
         [Fact]
-        public void SqliteConnectionstringShouldReturnConfguredBuilderTest()
+        public void SqliteConnectionStringShouldReturnConfiguredBuilderTest()
         {
             var builder = DatabaseOptionsBuilderFactory
                 .CreateDatabaseOptionsBuilder("Filename=somefile.db");
@@ -19,7 +19,7 @@ namespace HelloCoreClrApp.Test.Data
         }
 
         [Fact]
-        public void MariaDbConnectionstringShouldReturnConfguredBuilderTest()
+        public void MariaDbConnectionStringShouldReturnConfiguredBuilderTest()
         {
             var builder = DatabaseOptionsBuilderFactory
                 .CreateDatabaseOptionsBuilder("Server=someserver;database=helloworld");
@@ -29,11 +29,11 @@ namespace HelloCoreClrApp.Test.Data
         }
 
         [Fact]
-        public void InvalidConnectionstringShouldThrowTest()
+        public void InvalidConnectionStringShouldThrowTest()
         {
             Assert.Throws<NotSupportedException>(() =>
                 DatabaseOptionsBuilderFactory
-                    .CreateDatabaseOptionsBuilder("invalid connectionstring"));
+                    .CreateDatabaseOptionsBuilder("invalid connection string"));
         }
     }
 }

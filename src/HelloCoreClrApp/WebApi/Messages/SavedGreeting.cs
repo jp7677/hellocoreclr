@@ -1,3 +1,4 @@
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 using System;
 
 namespace HelloCoreClrApp.WebApi.Messages

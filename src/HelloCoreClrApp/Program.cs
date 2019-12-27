@@ -79,17 +79,19 @@ namespace HelloCoreClrApp
 
             Log.Information(
                 "{0} {1} on .NET Core Runtime {2}",
-                Assembly.GetEntryAssembly().GetName().Name,
-                Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion,
+                GetEntryAssembly().GetName().Name,
+                GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion,
                 NetCoreHelper.GetNetCoreVersion());
         }
 
         private static void SetCurrentWorkingDirectory()
         {
-            currentWorkingDirectory = new FileInfo(Assembly.GetEntryAssembly().Location).DirectoryName;
+            currentWorkingDirectory = new FileInfo(GetEntryAssembly().Location).DirectoryName;
             Log.Warning("Set current working directory to {0}", currentWorkingDirectory);
             Directory.SetCurrentDirectory(currentWorkingDirectory);
         }
+
+        private static Assembly GetEntryAssembly() => Assembly.GetEntryAssembly();
 
         private static void SetupResources(IConfiguration configuration)
         {

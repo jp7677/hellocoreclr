@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using FakeItEasy;
@@ -36,7 +37,7 @@ namespace HelloCoreClrApp.Test.WebApi
         public async Task NoGreetingsShouldReturnNoContentTest()
         {
             var action = A.Fake<IGetLastTenGreetingsAction>();
-            A.CallTo(() => action.Execute()).Returns(new SavedGreeting[0]);
+            A.CallTo(() => action.Execute()).Returns(Array.Empty<SavedGreeting>());
             var actionFactory = A.Fake<IActionFactory>();
             A.CallTo(() => actionFactory.CreateGetLastTenGreetingsAction()).Returns(action);
             var sut = new HelloWorldController(actionFactory);

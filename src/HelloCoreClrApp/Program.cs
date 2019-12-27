@@ -20,7 +20,7 @@ namespace HelloCoreClrApp
         private static string currentWorkingDirectory;
 
         // Entry point for the application.
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
             var configuration = BuildConfiguration();
             ConfigureLogging(configuration);

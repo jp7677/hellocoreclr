@@ -10,7 +10,7 @@ using Xunit;
 
 namespace HelloCoreClrApp.Test.Data
 {
-    public class SetupDatabaseTaskTest
+    public sealed class SetupDatabaseTaskTest : IDisposable
     {
         private readonly Container container = new Container();
         private readonly IDataService dataService = A.Fake<IDataService>();
@@ -21,31 +21,37 @@ namespace HelloCoreClrApp.Test.Data
             container.RegisterInstance(dataService);
         }
 
+        public void Dispose() => container.Dispose();
+
         [Fact]
         public async Task ShouldRunTest()
         {
-            var sut = new SetupDatabaseTask(container, applicationLifetime);
+            using (var sut = new SetupDatabaseTask(container, applicationLifetime))
+            {
+                await sut.StartAsync(CancellationToken.None);
+                await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
+                using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2)))
+                {
+                    await sut.StopAsync(cts.Token);
 
-            await sut.StartAsync(CancellationToken.None);
-            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
-            await sut.StopAsync(cts.Token);
-
-            // Assert that sut stopped gracefully
-            cts.IsCancellationRequested.Should().BeFalse();
-            A.CallTo(() => applicationLifetime.StopApplication()).MustNotHaveHappened();
+                    // Assert that sut stopped gracefully
+                    cts.IsCancellationRequested.Should().BeFalse();
+                    A.CallTo(() => applicationLifetime.StopApplication()).MustNotHaveHappened();
+                }
+            }
         }
 
         [Fact]
         public async Task ShouldStopApplicationWhenFailsTest()
         {
             A.CallTo(() => dataService.EnsureCreated(A<CancellationToken>._)).Throws<InvalidOperationException>();
-            var sut = new SetupDatabaseTask(container, applicationLifetime);
+            using (var sut = new SetupDatabaseTask(container, applicationLifetime))
+            {
+                await sut.StartAsync(CancellationToken.None);
+                await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
 
-            await sut.StartAsync(CancellationToken.None);
-            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
-
-            A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
+                A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
+            }
         }
     }
 }

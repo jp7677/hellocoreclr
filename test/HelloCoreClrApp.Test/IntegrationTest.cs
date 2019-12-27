@@ -20,13 +20,13 @@ using Xunit;
 
 namespace HelloCoreClrApp.Test
 {
-    public class IntegrationTest : IAsyncLifetime
+    public sealed class IntegrationTest : IAsyncLifetime, IDisposable
     {
-        private static TestServer server;
+        private readonly Container container = new Container();
+        private TestServer server;
 
         public async Task InitializeAsync()
         {
-            var container = new Container();
             var componentRegistrar = new ComponentRegistrar(container)
             {
                 DatabaseOptionsBuilder = await CreateDatabaseOptions()
@@ -41,14 +41,31 @@ namespace HelloCoreClrApp.Test
                     .Configure(applicationBuilder => startup.Configure(applicationBuilder)));
         }
 
-        public Task DisposeAsync() => Task.CompletedTask;
+        public Task DisposeAsync()
+        {
+            Dispose();
+            return Task.CompletedTask;
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                container?.Dispose();
+                server?.Dispose();
+            }
+            catch (ObjectDisposedException)
+            {
+                // Ignore
+            }
+        }
 
         [Fact]
         public async Task InvalidRequestReturnsNotFoundTest()
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/api/");
+                var response = await client.GetAsync(new Uri("/api/", UriKind.Relative));
 
                 response.StatusCode.Should().Be(HttpStatusCode.NotFound);
             }
@@ -77,7 +94,7 @@ namespace HelloCoreClrApp.Test
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/api/greetings");
+                var response = await client.GetAsync(new Uri("/api/greetings", UriKind.Relative));
 
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var content = await response.Content.ReadAsStringAsync();
@@ -93,7 +110,7 @@ namespace HelloCoreClrApp.Test
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/api/greetings/count");
+                var response = await client.GetAsync(new Uri("/api/greetings/count", UriKind.Relative));
 
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
                 var content = await response.Content.ReadAsStringAsync();
@@ -108,7 +125,7 @@ namespace HelloCoreClrApp.Test
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/swagger/v1/swagger.json");
+                var response = await client.GetAsync(new Uri("/swagger/v1/swagger.json", UriKind.Relative));
 
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
             }
@@ -119,7 +136,7 @@ namespace HelloCoreClrApp.Test
         {
             using (var client = server.CreateClient())
             {
-                var response = await client.GetAsync("/swagger/index.html");
+                var response = await client.GetAsync(new Uri("/swagger/index.html", UriKind.Relative));
 
                 response.StatusCode.Should().Be(HttpStatusCode.OK);
             }

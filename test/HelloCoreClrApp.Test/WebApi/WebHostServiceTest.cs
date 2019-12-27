@@ -11,7 +11,7 @@ using Xunit;
 
 namespace HelloCoreClrApp.Test.WebApi
 {
-    public class WebHostServiceTest
+    public sealed class WebHostServiceTest : IDisposable
     {
         private readonly Container container = new Container();
         private readonly IConfiguration configuration = A.Fake<IConfiguration>();
@@ -22,31 +22,37 @@ namespace HelloCoreClrApp.Test.WebApi
             container.RegisterInstance(configuration);
         }
 
+        public void Dispose() => container.Dispose();
+
         [Fact]
         public async Task ShouldStartAndStopTest()
         {
-            var sut = new WebHostService(container, applicationLifetime);
+            using (var sut = new WebHostService(container, applicationLifetime))
+            {
+                await sut.StartAsync(CancellationToken.None);
+                await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
+                using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1)))
+                {
+                    await sut.StopAsync(cts.Token);
 
-            await sut.StartAsync(CancellationToken.None);
-            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1));
-            await sut.StopAsync(cts.Token);
-
-            // Assert that sut stopped gracefully
-            cts.IsCancellationRequested.Should().BeFalse();
-            A.CallTo(() => applicationLifetime.StopApplication()).MustNotHaveHappened();
+                    // Assert that sut stopped gracefully
+                    cts.IsCancellationRequested.Should().BeFalse();
+                    A.CallTo(() => applicationLifetime.StopApplication()).MustNotHaveHappened();
+                }
+            }
         }
 
         [Fact]
         public async Task ShouldStopApplicationWhenFailsTest()
         {
             A.CallTo(() => configuration.GetChildren()).Throws<InvalidOperationException>();
-            var sut = new WebHostService(container, applicationLifetime);
+            using (var sut = new WebHostService(container, applicationLifetime))
+            {
+                await sut.StartAsync(CancellationToken.None);
+                await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
 
-            await sut.StartAsync(CancellationToken.None);
-            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
-
-            A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
+                A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
+            }
         }
     }
 }

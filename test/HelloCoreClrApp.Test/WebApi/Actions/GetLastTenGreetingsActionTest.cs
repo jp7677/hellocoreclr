@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using FakeItEasy;
 using FluentAssertions;
@@ -31,7 +32,7 @@ namespace HelloCoreClrApp.Test.WebApi.Actions
             var greetingList = new List<Greeting>(10);
             for (var i = 1; i <= 10; i++)
                 greetingList.Add(
-                    new Greeting { Name = string.Format("mygreeting {0}", i), TimestampUtc = DateTime.Now.ToUniversalTime() });
+                    new Greeting { Name = string.Format(CultureInfo.InvariantCulture, "mygreeting {0}", i), TimestampUtc = DateTime.Now.ToUniversalTime() });
 
             var dataService = A.Fake<IDataService>();
             A.CallTo(() => dataService.GetLastTenGreetings(10)).Returns(greetingList);

@@ -12,14 +12,17 @@ using Serilog.Extensions.Logging;
 
 namespace HelloCoreClrApp.Data
 {
-    public class DataService : IDataService
+    public sealed class DataService : IDataService, IDisposable
     {
+        private readonly SerilogLoggerProvider loggerProvider = new SerilogLoggerProvider();
         private readonly IGreetingDbContextFactory dbContextFactory;
 
         public DataService(IGreetingDbContextFactory dbContextFactory)
         {
             this.dbContextFactory = dbContextFactory;
         }
+
+        public void Dispose() => loggerProvider?.Dispose();
 
         public async Task EnsureCreated(CancellationToken token)
         {
@@ -64,11 +67,11 @@ namespace HelloCoreClrApp.Data
             }
         }
 
-        private static void RegisterSeriLog(GreetingDbContext db)
+        private void RegisterSeriLog(GreetingDbContext db)
         {
             var serviceProvider = db.GetInfrastructure();
             var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-            loggerFactory.AddProvider(new SerilogLoggerProvider());
+            loggerFactory.AddProvider(loggerProvider);
         }
     }
 }

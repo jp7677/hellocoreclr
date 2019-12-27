@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -35,7 +36,7 @@ namespace HelloCoreClrApp.Test.Data
 
             await sut.EnsureCreated(CancellationToken.None);
             for (var i = 1; i <= 20; i++)
-                await sut.SaveGreeting(string.Format("mygreeting {0}", 1));
+                await sut.SaveGreeting(string.Format(CultureInfo.InvariantCulture, "mygreeting {0}", 1));
 
             var result = await sut.GetLastTenGreetings(10);
 

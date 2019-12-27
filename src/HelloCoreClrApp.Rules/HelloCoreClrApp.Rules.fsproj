@@ -10,4 +10,7 @@
   <ItemGroup>
     <Compile Include="SayHelloworldRule.fs" />
   </ItemGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>../../analyzers.rules</CodeAnalysisRuleSet>
+  </PropertyGroup>
 </Project>

@@ -27,59 +27,65 @@ namespace HelloCoreClrApp.Test.Hosting
         [Fact]
         public async Task DelegatesShouldBeCalledTest()
         {
-            var stoppingCancellationTokenSource = new CancellationTokenSource();
-            var stoppedCancellationTokenSource = new CancellationTokenSource();
-
-            var hostApplicationLifetime = A.Fake<IHostApplicationLifetime>();
-            A.CallTo(() => hostApplicationLifetime.ApplicationStopping).Returns(stoppingCancellationTokenSource.Token);
-            A.CallTo(() => hostApplicationLifetime.ApplicationStopped).Returns(stoppedCancellationTokenSource.Token);
-
-            var onStoppingCalled = false;
-            var onStoppedCalled = false;
-            var gracefulShutdownServiceOptions = new GracefulShutdownServiceOptions
+            using (var stoppingCancellationTokenSource = new CancellationTokenSource())
+            using (var stoppedCancellationTokenSource = new CancellationTokenSource())
             {
-                OnStopping = () => { onStoppingCalled = true; },
-                OnStopped = () => { onStoppedCalled = true; }
-            };
+                var hostApplicationLifetime = A.Fake<IHostApplicationLifetime>();
+                A.CallTo(() => hostApplicationLifetime.ApplicationStopping)
+                    .Returns(stoppingCancellationTokenSource.Token);
+                A.CallTo(() => hostApplicationLifetime.ApplicationStopped)
+                    .Returns(stoppedCancellationTokenSource.Token);
 
-            var options = A.Fake<IOptions<GracefulShutdownServiceOptions>>();
-            A.CallTo(() => options.Value).Returns(gracefulShutdownServiceOptions);
+                var onStoppingCalled = false;
+                var onStoppedCalled = false;
+                var gracefulShutdownServiceOptions = new GracefulShutdownServiceOptions
+                {
+                    OnStopping = () => { onStoppingCalled = true; },
+                    OnStopped = () => { onStoppedCalled = true; }
+                };
 
-            var sut = new GracefulShutdownService(hostApplicationLifetime, options);
+                var options = A.Fake<IOptions<GracefulShutdownServiceOptions>>();
+                A.CallTo(() => options.Value).Returns(gracefulShutdownServiceOptions);
 
-            await sut.StartAsync(CancellationToken.None);
+                var sut = new GracefulShutdownService(hostApplicationLifetime, options);
 
-            stoppingCancellationTokenSource.Cancel();
-            stoppedCancellationTokenSource.Cancel();
-            onStoppingCalled.Should().BeTrue();
-            onStoppedCalled.Should().BeTrue();
+                await sut.StartAsync(CancellationToken.None);
+
+                stoppingCancellationTokenSource.Cancel();
+                stoppedCancellationTokenSource.Cancel();
+                onStoppingCalled.Should().BeTrue();
+                onStoppedCalled.Should().BeTrue();
+            }
         }
 
         [Fact]
         public async Task DelegatesShouldNotThrowTest()
         {
-            var stoppingCancellationTokenSource = new CancellationTokenSource();
-            var stoppedCancellationTokenSource = new CancellationTokenSource();
-
-            var hostApplicationLifetime = A.Fake<IHostApplicationLifetime>();
-            A.CallTo(() => hostApplicationLifetime.ApplicationStopping).Returns(stoppingCancellationTokenSource.Token);
-            A.CallTo(() => hostApplicationLifetime.ApplicationStopped).Returns(stoppedCancellationTokenSource.Token);
-
-            var gracefulShutdownServiceOptions = new GracefulShutdownServiceOptions
+            using (var stoppingCancellationTokenSource = new CancellationTokenSource())
+            using (var stoppedCancellationTokenSource = new CancellationTokenSource())
             {
-                OnStopping = () => throw new InvalidOperationException(),
-                OnStopped = () => throw new InvalidOperationException()
-            };
+                var hostApplicationLifetime = A.Fake<IHostApplicationLifetime>();
+                A.CallTo(() => hostApplicationLifetime.ApplicationStopping)
+                    .Returns(stoppingCancellationTokenSource.Token);
+                A.CallTo(() => hostApplicationLifetime.ApplicationStopped)
+                    .Returns(stoppedCancellationTokenSource.Token);
 
-            var options = A.Fake<IOptions<GracefulShutdownServiceOptions>>();
-            A.CallTo(() => options.Value).Returns(gracefulShutdownServiceOptions);
+                var gracefulShutdownServiceOptions = new GracefulShutdownServiceOptions
+                {
+                    OnStopping = () => throw new InvalidOperationException(),
+                    OnStopped = () => throw new InvalidOperationException()
+                };
 
-            var sut = new GracefulShutdownService(hostApplicationLifetime, options);
+                var options = A.Fake<IOptions<GracefulShutdownServiceOptions>>();
+                A.CallTo(() => options.Value).Returns(gracefulShutdownServiceOptions);
 
-            await sut.StartAsync(CancellationToken.None);
+                var sut = new GracefulShutdownService(hostApplicationLifetime, options);
 
-            stoppingCancellationTokenSource.Cancel();
-            stoppedCancellationTokenSource.Cancel();
+                await sut.StartAsync(CancellationToken.None);
+
+                stoppingCancellationTokenSource.Cancel();
+                stoppedCancellationTokenSource.Cancel();
+            }
         }
     }
 }

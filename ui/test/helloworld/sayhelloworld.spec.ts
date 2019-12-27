@@ -30,7 +30,7 @@ describe("SayHelloWorld test suite", () => {
     it("should handle a valid response", async () => {
         moxios.stubRequest("sayhelloworld/", { status: 200, response: { greeting: "Hello World!" } });
 
-        const sut = shallowMount(SayHelloWorld, { localVue: Vue, sync: false }).vm;
+        const sut = shallowMount(SayHelloWorld, { localVue: Vue }).vm;
         sut.inputText = "Hello";
 
         await sut.submit();
@@ -42,7 +42,7 @@ describe("SayHelloWorld test suite", () => {
     it("should handle an error response", async () => {
         moxios.stubRequest("sayhelloworld/", { status: 500 });
 
-        const sut = shallowMount(SayHelloWorld, { localVue: Vue, sync: false }).vm;
+        const sut = shallowMount(SayHelloWorld, { localVue: Vue }).vm;
         sut.inputText = "Error";
         sut.greetingText = "Hello";
 

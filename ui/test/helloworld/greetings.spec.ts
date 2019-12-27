@@ -33,7 +33,7 @@ describe("Greetings test suite", () => {
             status: 200
         });
 
-        const sut = shallowMount(Greetings, { localVue: Vue, sync: false }).vm;
+        const sut = shallowMount(Greetings, { localVue: Vue }).vm;
 
         await flushPromises();
         expect(sut.numberOfSavedGreetings).not.to.be.undefined;
@@ -46,7 +46,7 @@ describe("Greetings test suite", () => {
         moxios.stubRequest("greetings/count", { status: 200, response: 0 });
         moxios.stubRequest("greetings", { status: 203 });
 
-        const sut = shallowMount(Greetings, { localVue: Vue, sync: false }).vm;
+        const sut = shallowMount(Greetings, { localVue: Vue }).vm;
 
         await flushPromises();
         expect(sut.numberOfSavedGreetings).not.to.be.undefined;
@@ -59,7 +59,7 @@ describe("Greetings test suite", () => {
         moxios.stubRequest("greetings/count", { status: 500 });
         moxios.stubRequest("greetings", { status: 500 });
 
-        const sut = shallowMount(Greetings, { localVue: Vue, sync: false }).vm;
+        const sut = shallowMount(Greetings, { localVue: Vue }).vm;
 
         await flushPromises();
         expect(sut.numberOfSavedGreetings).not.to.be.undefined;

@@ -24,7 +24,7 @@ module.exports = (env, argv) => {
         { test: /\.html$/i, loader: 'vue-template-loader', options: { transformAssetUrls: { img: 'src' } } },
         { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader' ] },
         { test: /\.(svg)$/i, loader: 'file-loader' },
-        { test: /\.(gif|png|jpe?g)$/i, use: [ { loader: 'file-loader' }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } } ] },
+        { test: /\.(gif|png|jpe?g)$/i, use: [ { loader: 'file-loader', options: { esModule: false } }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } } ] },
         { test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader' }
       ]
     },

@@ -63,83 +63,71 @@ namespace HelloCoreClrApp.Test
         [Fact]
         public async Task InvalidRequestReturnsNotFoundTest()
         {
-            using (var client = server.CreateClient())
-            {
-                var response = await client.GetAsync(new Uri("/api/", UriKind.Relative));
+            using var client = server.CreateClient();
+            var response = await client.GetAsync(new Uri("/api/", UriKind.Relative));
 
-                response.StatusCode.Should().Be(HttpStatusCode.NotFound);
-            }
+            response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
 
         [Fact]
         public async Task ValidSayHelloWorldRequestReturnsOkTest()
         {
-            using (var client = server.CreateClient())
-            {
-                var response = await client.PostAsJsonAsync(
-                    "/api/sayhelloworld/",
-                    "World");
+            using var client = server.CreateClient();
+            var response = await client.PostAsJsonAsync(
+                "/api/sayhelloworld/",
+                "World");
 
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
-                var content = await response.Content.ReadAsStringAsync();
-                var data = JsonConvert.DeserializeObject<SayHelloWorldResponse>(content);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var content = await response.Content.ReadAsStringAsync();
+            var data = JsonConvert.DeserializeObject<SayHelloWorldResponse>(content);
 
-                data.Should().NotBeNull();
-                data.Greeting.Should().Be("Hello World!");
-            }
+            data.Should().NotBeNull();
+            data.Greeting.Should().Be("Hello World!");
         }
 
         [Fact]
         public async Task ValidGetTenGreetingsRequestReturnsOkTest()
         {
-            using (var client = server.CreateClient())
-            {
-                var response = await client.GetAsync(new Uri("/api/greetings", UriKind.Relative));
+            using var client = server.CreateClient();
+            var response = await client.GetAsync(new Uri("/api/greetings", UriKind.Relative));
 
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
-                var content = await response.Content.ReadAsStringAsync();
-                var data = JsonConvert.DeserializeObject<SavedGreeting[]>(content);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var content = await response.Content.ReadAsStringAsync();
+            var data = JsonConvert.DeserializeObject<SavedGreeting[]>(content);
 
-                data.Should().NotBeNull()
-                    .And.HaveCountGreaterThan(0);
-            }
+            data.Should().NotBeNull()
+                .And.HaveCountGreaterThan(0);
         }
 
         [Fact]
         public async Task ValidGetNumberOfGreetingsRequestReturnsOkTest()
         {
-            using (var client = server.CreateClient())
-            {
-                var response = await client.GetAsync(new Uri("/api/greetings/count", UriKind.Relative));
+            using var client = server.CreateClient();
+            var response = await client.GetAsync(new Uri("/api/greetings/count", UriKind.Relative));
 
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
-                var content = await response.Content.ReadAsStringAsync();
-                var data = JsonConvert.DeserializeObject<int>(content);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var content = await response.Content.ReadAsStringAsync();
+            var data = JsonConvert.DeserializeObject<int>(content);
 
-                data.Should().BeGreaterThan(0);
-            }
+            data.Should().BeGreaterThan(0);
         }
 
         [Fact]
         public async Task SwaggerReturnsOkTest()
         {
-            using (var client = server.CreateClient())
-            {
-                var response = await client.GetAsync(new Uri("/swagger/v1/swagger.json", UriKind.Relative));
+            using var client = server.CreateClient();
+            var response = await client.GetAsync(new Uri("/swagger/v1/swagger.json", UriKind.Relative));
 
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
-            }
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
         [Fact]
         public async Task SwaggerUiReturnsOkTest()
         {
-            using (var client = server.CreateClient())
-            {
-                var response = await client.GetAsync(new Uri("/swagger/index.html", UriKind.Relative));
+            using var client = server.CreateClient();
+            var response = await client.GetAsync(new Uri("/swagger/index.html", UriKind.Relative));
 
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
-            }
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
         private static async Task<DbContextOptionsBuilder<GreetingDbContext>> CreateDatabaseOptions()
@@ -154,12 +142,10 @@ namespace HelloCoreClrApp.Test
 
         private static async Task SeedDatabase(DbContextOptions options)
         {
-            using (var db = new GreetingDbContext(options))
-            {
-                await db.Greetings.AddAsync(new Greeting { Name = "First Greeting", TimestampUtc = DateTime.Now.ToUniversalTime() });
-                await db.Greetings.AddAsync(new Greeting { Name = "Second Greeting", TimestampUtc = DateTime.Now.ToUniversalTime() });
-                await db.SaveChangesAsync();
-            }
+            using var db = new GreetingDbContext(options);
+            await db.Greetings.AddAsync(new Greeting { Name = "First Greeting", TimestampUtc = DateTime.Now.ToUniversalTime() });
+            await db.Greetings.AddAsync(new Greeting { Name = "Second Greeting", TimestampUtc = DateTime.Now.ToUniversalTime() });
+            await db.SaveChangesAsync();
         }
     }
 }

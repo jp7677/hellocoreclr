@@ -26,32 +26,29 @@ namespace HelloCoreClrApp.Test.Data
         [Fact]
         public async Task ShouldRunTest()
         {
-            using (var sut = new SetupDatabaseTask(container, applicationLifetime))
-            {
-                await sut.StartAsync(CancellationToken.None);
-                await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
-                using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2)))
-                {
-                    await sut.StopAsync(cts.Token);
+            using var sut = new SetupDatabaseTask(container, applicationLifetime);
 
-                    // Assert that sut stopped gracefully
-                    cts.IsCancellationRequested.Should().BeFalse();
-                    A.CallTo(() => applicationLifetime.StopApplication()).MustNotHaveHappened();
-                }
-            }
+            await sut.StartAsync(CancellationToken.None);
+            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
+
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
+            await sut.StopAsync(cts.Token);
+
+            // Assert that sut stopped gracefully
+            cts.IsCancellationRequested.Should().BeFalse();
+            A.CallTo(() => applicationLifetime.StopApplication()).MustNotHaveHappened();
         }
 
         [Fact]
         public async Task ShouldStopApplicationWhenFailsTest()
         {
             A.CallTo(() => dataService.EnsureCreated(A<CancellationToken>._)).Throws<InvalidOperationException>();
-            using (var sut = new SetupDatabaseTask(container, applicationLifetime))
-            {
-                await sut.StartAsync(CancellationToken.None);
-                await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
+            using var sut = new SetupDatabaseTask(container, applicationLifetime);
 
-                A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
-            }
+            await sut.StartAsync(CancellationToken.None);
+            await Task.Delay(TimeSpan.FromMilliseconds(500), CancellationToken.None);
+
+            A.CallTo(() => applicationLifetime.StopApplication()).MustHaveHappenedOnceExactly();
         }
     }
 }

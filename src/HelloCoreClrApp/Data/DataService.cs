@@ -26,45 +26,37 @@ namespace HelloCoreClrApp.Data
 
         public async Task EnsureCreated(CancellationToken token)
         {
-            using (var db = dbContextFactory.CreateHelloWorldDbContext())
-            {
-                RegisterSeriLog(db);
-                await db.EnsureCreated(token);
-            }
+            await using var db = dbContextFactory.CreateHelloWorldDbContext();
+            RegisterSeriLog(db);
+            await db.EnsureCreated(token);
         }
 
         public async Task<int> GetNumberOfGreetings()
         {
-            using (var db = dbContextFactory.CreateHelloWorldDbContext())
-            {
-                return await db.Greetings.CountAsync();
-            }
+            await using var db = dbContextFactory.CreateHelloWorldDbContext();
+            return await db.Greetings.CountAsync();
         }
 
         public async Task SaveGreeting(string greeting)
         {
-            using (var db = dbContextFactory.CreateHelloWorldDbContext())
+            await using var db = dbContextFactory.CreateHelloWorldDbContext();
+            await db.Greetings.AddAsync(new Greeting
             {
-                await db.Greetings.AddAsync(new Greeting
-                    {
-                        Name = greeting,
-                        TimestampUtc = DateTime.Now.ToUniversalTime()
-                    });
-                await db.SaveChangesAsync();
-            }
+                Name = greeting,
+                TimestampUtc = DateTime.Now.ToUniversalTime()
+            });
+            await db.SaveChangesAsync();
         }
 
         public async Task<IList<Greeting>> GetLastTenGreetings(int numberOfResults)
         {
-            using (var db = dbContextFactory.CreateHelloWorldDbContext())
-            {
-                var items = db.Greetings
-                    .OrderByDescending(g => g.TimestampUtc)
-                    .Take(numberOfResults)
-                    .AsNoTracking();
+            await using var db = dbContextFactory.CreateHelloWorldDbContext();
+            var items = db.Greetings
+                .OrderByDescending(g => g.TimestampUtc)
+                .Take(numberOfResults)
+                .AsNoTracking();
 
-                return await items.ToListAsync();
-            }
+            return await items.ToListAsync();
         }
 
         private void RegisterSeriLog(GreetingDbContext db)

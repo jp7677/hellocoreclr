@@ -15,28 +15,24 @@ namespace HelloCoreClrApp.Test
         [Fact]
         public void RegisterApplicationComponentsShouldSucceedTest()
         {
-            using (var container = new Container())
+            using var container = new Container();
+            var sut = new ComponentRegistrar(container)
             {
-                var sut = new ComponentRegistrar(container)
-                {
-                    DatabaseOptionsBuilder = new DbContextOptionsBuilder<GreetingDbContext>()
-                        .UseInMemoryDatabase("ComponentRegistrarTest")
-                };
+                DatabaseOptionsBuilder = new DbContextOptionsBuilder<GreetingDbContext>()
+                    .UseInMemoryDatabase("ComponentRegistrarTest")
+            };
 
-                sut.RegisterApplicationComponents(configuration);
-            }
+            sut.RegisterApplicationComponents(configuration);
         }
 
         [Fact]
         public void NoDatabaseOptionsBuilderShouldThrowInvalidOperationExceptionTest()
         {
-            using (var container = new Container())
-            {
-                var sut = new ComponentRegistrar(container);
+            using var container = new Container();
+            var sut = new ComponentRegistrar(container);
 
-                Assert.Throws<InvalidOperationException>(() =>
-                    sut.RegisterApplicationComponents(configuration));
-            }
+            Assert.Throws<InvalidOperationException>(() =>
+                sut.RegisterApplicationComponents(configuration));
         }
     }
 }

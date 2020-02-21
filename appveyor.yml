@@ -10,7 +10,7 @@ environment:
 install:
 - choco install googlechrome --ignore-checksums
 - choco install firefox
-- ps: $env:Path += "C:\Program Files\Mozilla Firefox\"
+- ps: $env:Path += ";C:\Program Files\Mozilla Firefox\"
 - ps: Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile ".\install.ps1"
 - ps: '& .\install.ps1 -version "$env:dotnet_version" -InstallDir ".\.dotnet"'
 - ps: Install-Product node $env:nodejs_version

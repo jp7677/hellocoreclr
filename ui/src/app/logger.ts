@@ -1,19 +1,19 @@
 export class Logger {
     public fatal(message: string, args: any) {
         this.log("fatal", message, "magenta", args);
-    };
+    }
 
     public error(message: string, args: any) {
         this.log("error", message, "red", args);
-    };
+    }
 
     public warn(message: string, args: any) {
         this.log("warn", message, "olive", args);
-    };
+    }
 
     public info(message: string, args: any) {
         this.log("info", message, undefined, args);
-    };
+    }
 
     public debug(message: string, args: any) {
         this.log("debug", message, "gray", args);
@@ -43,4 +43,3 @@ export class Logger {
         }
     }
 }
-

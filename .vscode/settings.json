@@ -24,14 +24,11 @@
     "artifacts/**": true,
     "**/npm-debug.log": true
   },
-  "tslint.exclude": "**/*.js",
   "stylelint.config": {
     "extends": "./ui/stylelint.config.js",
     "ignoreFiles": ["**/*.?(cs|fs)proj", "**/*.md"]
   },
-  "eslint.options": {
-    "configFile": "ui/eslint.json"
-  },
+  "eslint.workingDirectories": [ "./ui" ],
   "cucumberautocomplete.steps": [
       "ui/test-e2e/*.ts"
   ],

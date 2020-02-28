@@ -1,4 +1,4 @@
-declare var APPLICATIONMODE: string;
+declare const APPLICATIONMODE: string;
 
 // Import promise polyfill for IE
 import { Promise as Bluebird } from "bluebird";
@@ -20,15 +20,43 @@ import { Logger } from "./logger";
 import App from "./app";
 import { RouterConfiguration } from "./router-configuration";
 
-configureAndMountVue();
-
 // tslint:disable:no-submodule-imports
 import "font-awesome/scss/font-awesome.scss";
 import "../styles/bootstrap.scss";
 import "../styles/toastr.scss";
 import "../styles/main.scss";
+import { VNode } from "vue/types/umd";
 
-function configureAndMountVue() {
+function configureValidation(): void {
+    Vue.component("ValidationProvider", ValidationProvider);
+    Vue.component("ValidationObserver", ValidationObserver);
+    extend("required", required);
+    extend("min", min);
+    extend("max", max);
+    extend("regex", regex);
+    setInteractionMode("fast", () => {
+        return { on: ["input", "blur", "focus"] };
+    });
+}
+
+function configureBluebird(): void {
+    Bluebird.config({
+        longStackTraces: false,
+        warnings: false
+    });
+}
+
+function configureHttp(env: Environment): void {
+    Vue.axios.defaults.baseURL = env.baseUrl;
+    Vue.axios.defaults.headers = { "Content-Type": "application/json" };
+}
+
+function logAplicationStart(vue: Vue, env: Environment): void {
+    vue.$log.info(`Starting application in ${env.applicationMode} mode.`);
+    vue.$log.info(`Use base URL '${env.baseUrl}'.`);
+}
+
+function configureAndMountVue(): void {
     const environment: Environment = new Environment(appsettings, APPLICATIONMODE);
     if (environment.IsKarma()) {
         return;
@@ -46,7 +74,7 @@ function configureAndMountVue() {
 
     const router = RouterConfiguration.build();
     const vue = new Vue({
-        render: h => h(App),
+        render: (h): VNode => h(App),
         router
     });
 
@@ -56,31 +84,4 @@ function configureAndMountVue() {
     Loadingbar.Done();
 }
 
-function configureValidation() {
-    Vue.component("ValidationProvider", ValidationProvider);
-    Vue.component("ValidationObserver", ValidationObserver);
-    extend("required", required);
-    extend("min", min);
-    extend("max", max);
-    extend("regex", regex);
-    setInteractionMode("fast", () => {
-        return { on: ["input", "blur", "focus"] };
-    });
-}
-
-function configureBluebird() {
-    Bluebird.config({
-        longStackTraces: false,
-        warnings: false
-    });
-}
-
-function configureHttp(env: Environment) {
-    Vue.axios.defaults.baseURL = env.baseUrl;
-    Vue.axios.defaults.headers = { "Content-Type": "application/json" };
-}
-
-function logAplicationStart(vue: Vue, env: Environment) {
-    vue.$log.info(`Starting application in ${env.applicationMode} mode.`);
-    vue.$log.info(`Use base URL '${env.baseUrl}'.`);
-}
+configureAndMountVue();

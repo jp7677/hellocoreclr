@@ -5,6 +5,11 @@ import { expect } from "chai";
 
 browser.ignoreSynchronization = true;
 
+async function waitForBrowserTitleChange(): Promise<boolean> {
+    const currentTitle = await browser.getTitle();
+    return browser.wait(async () => (await browser.getTitle()) !== currentTitle);
+}
+
 Given(/^I've navigated to the home page$/, async () => {
     await browser.get("/");
     await browser.wait(async () => {
@@ -26,8 +31,3 @@ When(/^I click on last greetings$/, async () => {
 Then(/^I should see the last greetings page$/, async () => {
     expect(await browser.getTitle()).to.equal("Greetings | Hello World");
 });
-
-async function waitForBrowserTitleChange() {
-    const currentTitle = await browser.getTitle();
-    return browser.wait(async () => (await browser.getTitle()) !== currentTitle);
-}

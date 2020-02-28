@@ -1,7 +1,7 @@
 import * as moment from "moment";
 
 import { AxiosResponse } from "axios";
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import { FormattedSavedGreeting } from "./formattedsavedgreeting";
 import { Notifier } from "./notifier";
 
@@ -12,7 +12,7 @@ import { SavedGreeting } from "./messages/savedgreeting";
 @WithRender
 @Component
 export default class Greetings extends Vue {
-    public numberOfSavedGreetings: number = 0;
+    public numberOfSavedGreetings = 0;
     public savedGreetings: FormattedSavedGreeting[] = [];
 
     private notifier: Notifier;
@@ -22,16 +22,16 @@ export default class Greetings extends Vue {
         this.notifier = new Notifier();
     }
 
-    public created() {
+    public created(): Promise<[void, void]> {
         this.prepareRequests();
         return Promise.all([this.fetchNumberOfSavedGreetings(), this.fetchLastGreetings()]);
     }
 
-    private prepareRequests() {
+    private prepareRequests(): void {
         this.notifier.Info("Working...");
     }
 
-    private async fetchNumberOfSavedGreetings() {
+    private async fetchNumberOfSavedGreetings(): Promise<void> {
         let response: AxiosResponse;
         try {
             response = await this.$http.get("greetings/count");
@@ -42,7 +42,7 @@ export default class Greetings extends Vue {
         this.handleFetchNumberOfSavedGreetingsValidResponse(response);
     }
 
-    private handleFetchNumberOfSavedGreetingsValidResponse(response: AxiosResponse) {
+    private handleFetchNumberOfSavedGreetingsValidResponse(response: AxiosResponse): void {
         this.$log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 
@@ -51,7 +51,7 @@ export default class Greetings extends Vue {
         this.numberOfSavedGreetings = +data;
     }
 
-    private async fetchLastGreetings() {
+    private async fetchLastGreetings(): Promise<void> {
         let response: AxiosResponse;
         try {
             response = await this.$http.get("greetings");
@@ -62,7 +62,7 @@ export default class Greetings extends Vue {
         this.handleFetchLastGreetingsValidResponse(response);
     }
 
-    private handleErrorResponse(response: AxiosResponse | Error) {
+    private handleErrorResponse(response: AxiosResponse | Error): void {
         if (response instanceof Error) {
             this.$log.warn(`Oops... something went wrong. ${response.message}`, response);
             this.notifier.Warn(`Oops... ${response.message}`);
@@ -72,7 +72,7 @@ export default class Greetings extends Vue {
         }
     }
 
-    private handleFetchLastGreetingsValidResponse(response: AxiosResponse) {
+    private handleFetchLastGreetingsValidResponse(response: AxiosResponse): void {
         this.$log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 

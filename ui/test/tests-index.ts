@@ -1,8 +1,9 @@
-// tslint:disable:interface-name
-// tslint:disable:no-empty-interface
+interface WebPackRequire {
+    context(directory: string, useSubdirectories: boolean, regExp: RegExp);
+}
 
-const srcContext = (require as any).context("../src/app/", true, /\.ts$/);
+const srcContext = ((require as unknown) as WebPackRequire).context("../src/app/", true, /\.ts$/);
 srcContext.keys().map(srcContext);
 
-const testContext = (require as any).context("./", true, /spec\.ts$/);
+const testContext = ((require as unknown) as WebPackRequire).context("./", true, /spec\.ts$/);
 testContext.keys().map(testContext);

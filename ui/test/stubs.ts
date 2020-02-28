@@ -1,21 +1,21 @@
-// tslint:disable:max-classes-per-file
+import { LoggerInterface } from "../src/app/logger";
 
 export class LoggerStub {
-    public static create() {
+    public static create(): LoggerInterface {
         return {
-            debug: () => {
+            debug: (): void => {
                 // ignore
             },
-            error: () => {
+            error: (): void => {
                 // ignore
             },
-            fatal: () => {
+            fatal: (): void => {
                 // ignore
             },
-            info: () => {
+            info: (): void => {
                 // ignore
             },
-            warn: () => {
+            warn: (): void => {
                 // ignore
             }
         };

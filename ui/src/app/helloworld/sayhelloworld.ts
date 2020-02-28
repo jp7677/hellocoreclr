@@ -1,5 +1,5 @@
 ﻿import { AxiosResponse } from "axios";
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import { Notifier } from "./notifier";
 
 import WithRender from "./sayhelloworld.html";
@@ -9,8 +9,8 @@ import { SayHelloWorld as SayHelloWorldMessage } from "./messages/sayhelloworld"
 @WithRender
 @Component
 export default class SayHelloWorld extends Vue {
-    public inputText: string = "";
-    public greetingText: string = "";
+    public inputText = "";
+    public greetingText = "";
     private notifier: Notifier;
 
     constructor() {
@@ -18,7 +18,7 @@ export default class SayHelloWorld extends Vue {
         this.notifier = new Notifier();
     }
 
-    public async submit() {
+    public async submit(): Promise<void> {
         const name: string = this.inputText;
         this.prepareRequest(name);
 
@@ -33,12 +33,12 @@ export default class SayHelloWorld extends Vue {
         this.handleValidResponse(response);
     }
 
-    private prepareRequest(name: string) {
+    private prepareRequest(name: string): void {
         this.$log.info(`We got the following name: ${name}`);
         this.notifier.Info("Working...");
     }
 
-    private handleErrorResponse(response: AxiosResponse | Error) {
+    private handleErrorResponse(response: AxiosResponse | Error): void {
         if (response instanceof Error) {
             this.$log.warn(`Oops... something went wrong. ${response.message}`, response);
             this.notifier.Warn(`Oops... ${response.message}`);
@@ -49,11 +49,11 @@ export default class SayHelloWorld extends Vue {
         this.resetGreetingText();
     }
 
-    private resetGreetingText() {
+    private resetGreetingText(): void {
         this.greetingText = "";
     }
 
-    private handleValidResponse(response: AxiosResponse) {
+    private handleValidResponse(response: AxiosResponse): void {
         this.$log.info(`Received http code was: ${response.status}`);
         this.notifier.Info("HTTP/" + response.status);
 

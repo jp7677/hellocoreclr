@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Router from "vue-router";
+import Router, { RouteConfig } from "vue-router";
 
 import Greetings from "./helloworld/greetings";
 import SayHelloWorld from "./helloworld/sayhelloworld";
@@ -7,7 +7,7 @@ import SayHelloWorld from "./helloworld/sayhelloworld";
 export class RouterConfiguration {
     public static build(): Router {
         const router = new Router({ routes: this.buildRoutes() });
-        router.afterEach((to, from) => {
+        router.afterEach(to => {
             Vue.nextTick(() => {
                 document.title = to.meta.title(to);
             });
@@ -16,22 +16,22 @@ export class RouterConfiguration {
         return router;
     }
 
-    private static buildRoutes() {
+    private static buildRoutes(): RouteConfig[] {
         const applicationTitle = "Hello World";
         return [
             {
                 component: SayHelloWorld,
-                meta: { title: route => `Say Hello World! | ${applicationTitle}` },
+                meta: { title: (): string => `Say Hello World! | ${applicationTitle}` },
                 path: "/"
             },
             {
                 component: SayHelloWorld,
-                meta: { title: route => `Say Hello World! | ${applicationTitle}` },
+                meta: { title: (): string => `Say Hello World! | ${applicationTitle}` },
                 path: "/sayhelloworld"
             },
             {
                 component: Greetings,
-                meta: { title: route => `Greetings | ${applicationTitle}` },
+                meta: { title: (): string => `Greetings | ${applicationTitle}` },
                 path: "/greetings"
             }
         ];

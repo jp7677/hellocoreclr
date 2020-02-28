@@ -15,7 +15,7 @@ import { max, min, regex, required } from "vee-validate/dist/rules";
 import Vue from "vue";
 import VueAxios from "vue-axios";
 import Router from "vue-router";
-import VueLogger from "vuejs-logger";
+import { Logger } from "./logger";
 
 import App from "./app";
 import { RouterConfiguration } from "./router-configuration";
@@ -26,7 +26,6 @@ configureAndMountVue();
 import "font-awesome/scss/font-awesome.scss";
 import "../styles/bootstrap.scss";
 import "../styles/toastr.scss";
-
 import "../styles/main.scss";
 
 function configureAndMountVue() {
@@ -36,21 +35,14 @@ function configureAndMountVue() {
     }
 
     Loadingbar.Inc();
+    Vue.use(Logger);
     Vue.use(BootstrapVue);
     Vue.use(VueAxios, axios);
     Vue.use(Router);
-    Vue.use(VueLogger, {
-        logLevel: getLoggingLevel(environment),
-        separator: "|",
-        showConsoleColors: true,
-        showLogLevel: true,
-        showMethodName: false
-    });
 
     configureValidation();
     configureBluebird();
     configureHttp(environment);
-    logAplicationStart(environment);
 
     const router = RouterConfiguration.build();
     const vue = new Vue({
@@ -59,16 +51,9 @@ function configureAndMountVue() {
     });
 
     vue.$mount("#app");
-    Loadingbar.Done();
-}
+    logAplicationStart(vue, environment);
 
-function getLoggingLevel(env: Environment) {
-    if (env.IsDevelopment()) {
-        return "debug";
-    } else if (env.IsProduction()) {
-        return "error";
-    }
-    return "info";
+    Loadingbar.Done();
 }
 
 function configureValidation() {
@@ -95,8 +80,7 @@ function configureHttp(env: Environment) {
     Vue.axios.defaults.headers = { "Content-Type": "application/json" };
 }
 
-function logAplicationStart(env: Environment) {
-    // tslint:disable-next-line:no-console
-    console.info(`Starting application in ${env.applicationMode} mode.`);
-    Vue.$log.info(`Use base URL '${env.baseUrl}'.`);
+function logAplicationStart(vue: Vue, env: Environment) {
+    vue.$log.info(`Starting application in ${env.applicationMode} mode.`);
+    vue.$log.info(`Use base URL '${env.baseUrl}'.`);
 }

@@ -25,7 +25,7 @@ module.exports = (config) => {
         rules: [
           { test: /\.ts$/, loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/] } },
           { test: /\.html$/i, loader: 'vue-template-loader' },
-          { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', 'sass-loader' ] },
+          { test: /\.scss$/i, use: ['style-loader', 'css-loader', 'sass-loader'] },
           { test: /\.(svg)$/i, loader: 'file-loader' },
           { test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader' },
           !noSingleRun
@@ -49,11 +49,11 @@ module.exports = (config) => {
     },
     autoWatchBatchDelay: 10000,
     singleRun: !noSingleRun,
-    browsers: !noSingleRun ? [ 'ChromeHeadless' ] : [ 'ChromeWithRemoteDebugging' ],
+    browsers: !noSingleRun ? ['ChromeHeadless'] : ['ChromeWithRemoteDebugging'],
     customLaunchers: {
       ChromeWithRemoteDebugging: {
         base: 'Chrome',
-        flags: [ '--remote-debugging-port=9333', 'http://localhost:9876/debug.html' ]
+        flags: ['--remote-debugging-port=9333', 'http://localhost:9876/debug.html']
       }
     },
     mime: {
@@ -63,13 +63,13 @@ module.exports = (config) => {
     browserDisconnectTimeout: 5000,
     browserDisconnectTolerance: 5,
     browserNoActivityTimeout: 10000,
-    reporters: !noSingleRun ? [ 'dots', 'coverage-istanbul' ] : [ 'dots' ],
+    reporters: !noSingleRun ? ['dots', 'coverage-istanbul'] : ['dots'],
     coverageIstanbulReporter: {
       skipFilesWithNoCoverage: false,
-      reports: [ 'text-summary', 'json' ],
+      reports: ['text-summary', 'json'],
       fixWebpackSourcePaths: true,
       dir: __dirname.replace('\\', '/') + '/../reports/',
-      'report-config': { 'json': { file: 'coverage-ts.json' } }
+      'report-config': { json: { file: 'coverage-ts.json' } }
     }
   })
 }

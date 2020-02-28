@@ -16,7 +16,7 @@ const runProtractor = () => {
   const winExt = /^win/.test(process.platform) ? '.cmd' : ''
   const protractorBin = 'protractor' + winExt
 
-  const protractorArgs = [ 'protractor.conf.js' ]
+  const protractorArgs = ['protractor.conf.js']
   if (process.argv.slice(2).length > 0) {
     protractorArgs.push(process.argv.slice(2))
   }

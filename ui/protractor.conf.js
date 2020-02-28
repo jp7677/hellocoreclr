@@ -5,7 +5,7 @@ const test = path.resolve(__dirname, 'test-e2e')
 
 exports.config = {
   baseUrl: 'http://localhost:3000',
-  specs: [ path.join(test, '**/*.feature') ],
+  specs: [path.join(test, '**/*.feature')],
   directConnect: true,
   capabilities: {
     browserName: 'chrome',

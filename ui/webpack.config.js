@@ -14,17 +14,17 @@ module.exports = (env, argv) => {
 
   return {
     entry: {
-      app: [ 'app/main' ],
-      splash: [ 'app/splash' ]
+      app: ['app/main'],
+      splash: ['app/splash']
     },
     module: {
       rules: [
         { test: /\.ts$/i, loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/] }, exclude: nodeModules },
         { test: /\.vue$/i, loader: 'vue-loader', exclude: nodeModules },
         { test: /\.html$/i, loader: 'vue-template-loader', options: { transformAssetUrls: { img: 'src' } } },
-        { test: /\.scss$/i, use: [ 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader' ] },
+        { test: /\.scss$/i, use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'] },
         { test: /\.(svg)$/i, loader: 'file-loader' },
-        { test: /\.(gif|png|jpe?g)$/i, use: [ { loader: 'file-loader', options: { esModule: false } }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } } ] },
+        { test: /\.(gif|png|jpe?g)$/i, use: [{ loader: 'file-loader', options: { esModule: false } }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } }] },
         { test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader' }
       ]
     },
@@ -49,7 +49,7 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: path.resolve(src, 'index.ejs'),
         favicon: path.resolve(src, 'favicon.ico'),
-        chunks: [ 'splash', 'app' ],
+        chunks: ['splash', 'app'],
         chunksSortMode: 'manual',
         minify: isProduction ? { collapseWhitespace: true, collapseInlineTagWhitespace: true } : false
       }),

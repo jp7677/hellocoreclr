@@ -23,7 +23,7 @@ module.exports = function (wallaby) {
       module: {
         rules: [
           { test: /\.html$/i, loader: 'vue-template-loader' },
-          { test: /\.scss$/i, use: [ 'css-loader', 'sass-loader' ] }
+          { test: /\.scss$/i, use: ['css-loader', 'sass-loader'] }
         ]
       },
       resolve: {

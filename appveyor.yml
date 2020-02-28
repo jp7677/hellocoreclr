@@ -1,7 +1,7 @@
 version: '0.1.{build}'
 image: Visual Studio 2017
 environment:
-    dotnet_version: "3.1.102"
+    dotnet_version: "3.1"
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
     DOTNET_ROOT: "C:\\projects\\hellocoreclr\\.dotnet"
@@ -12,7 +12,7 @@ install:
 - choco install firefox
 - ps: $env:Path += ";C:\Program Files\Mozilla Firefox\"
 - ps: Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile ".\install.ps1"
-- ps: '& .\install.ps1 -version "$env:dotnet_version" -InstallDir ".\.dotnet"'
+- ps: '& .\install.ps1 --channel "$env:dotnet_version" -InstallDir ".\.dotnet"'
 - ps: Install-Product node $env:nodejs_version
 
 build_script:

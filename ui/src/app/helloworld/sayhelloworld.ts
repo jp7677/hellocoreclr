@@ -38,9 +38,14 @@ export default class SayHelloWorld extends Vue {
         this.notifier.Info("Working...");
     }
 
-    private handleErrorResponse(response: AxiosResponse) {
-        this.$log.warn(`Oops... something went wrong. Received http code was: ${response.status}`);
-        this.notifier.Warn(`Oops... HTTP/${response.status}`);
+    private handleErrorResponse(response: AxiosResponse | Error) {
+        if (response instanceof Error) {
+            this.$log.warn(`Oops... something went wrong. ${response.message}`, response);
+            this.notifier.Warn(`Oops... ${response.message}`);
+        } else {
+            this.$log.warn(`Oops... something went wrong. Received http code was: ${response.status}`);
+            this.notifier.Warn(`Oops... HTTP/${response.status}`);
+        }
         this.resetGreetingText();
     }
 

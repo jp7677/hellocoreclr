@@ -11,7 +11,7 @@ const port = 3000
 const wwwroot = path.join(__dirname, 'wwwroot')
 const ifaces = os.networkInterfaces()
 const app = express()
-const backendProxy = proxy({
+const backendProxy = proxy.createProxyMiddleware({
   target: 'http://localhost:5000/',
   logLevel: 'debug',
   logProvider: () => {

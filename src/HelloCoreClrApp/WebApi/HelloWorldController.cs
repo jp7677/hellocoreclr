@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using HelloCoreClrApp.WebApi.Actions;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -9,11 +10,11 @@ namespace HelloCoreClrApp.WebApi
     public class HelloWorldController
     {
         private static readonly ILogger Log = Serilog.Log.ForContext<HelloWorldController>();
-        private readonly IActionFactory actionFactory;
+        private readonly IResourceProvider resourceProvider;
 
-        public HelloWorldController(IActionFactory actionFactory)
+        public HelloWorldController(IResourceProvider resourceProvider)
         {
-            this.actionFactory = actionFactory;
+            this.resourceProvider = resourceProvider;
         }
 
         [Route("sayhelloworld")]
@@ -22,7 +23,7 @@ namespace HelloCoreClrApp.WebApi
         {
             Log.Information("'sayhelloworld' Request received with '{0}'.", name);
 
-            var action = actionFactory.CreateSayHelloWorldAction();
+            var action = resourceProvider.CreateResource<ISayHelloWorldAction>();
             var response = await action.Execute(name);
 
             return new OkObjectResult(response);
@@ -34,7 +35,7 @@ namespace HelloCoreClrApp.WebApi
         {
             Log.Information("'greetings' Request received.");
 
-            var action = actionFactory.CreateGetLastTenGreetingsAction();
+            var action = resourceProvider.CreateResource<IGetLastTenGreetingsAction>();
             var response = await action.Execute();
 
             if (response.GetLength(0) == 0)
@@ -49,7 +50,7 @@ namespace HelloCoreClrApp.WebApi
         {
             Log.Information("'greetings/count' Request received.");
 
-            var action = actionFactory.CreateGetTotalNumberOfGreetingsAction();
+            var action = resourceProvider.CreateResource<IGetTotalNumberOfGreetingsAction>();
             var response = await action.Execute();
 
             return new OkObjectResult(response);

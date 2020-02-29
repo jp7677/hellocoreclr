@@ -38,7 +38,6 @@ namespace HelloCoreClrApp
             container.RegisterSingleton<IDataService, DataService>();
 
             container.Register<HelloWorldController>();
-            container.RegisterSingleton<IActionFactory, ActionFactory>();
             container.Register<ISayHelloWorldAction, SayHelloWorldAction>();
             container.Register<IGetLastTenGreetingsAction, GetLastTenHelloWorldsAction>();
             container.Register<IGetTotalNumberOfGreetingsAction, GetTotalNumberOfGreetingsAction>();

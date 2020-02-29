@@ -18,9 +18,9 @@ namespace HelloCoreClrApp.Test.WebApi
         {
             var action = A.Fake<ISayHelloWorldAction>();
             A.CallTo(() => action.Execute("You")).Returns(new SayHelloWorldResponse { Greeting = "Hello You!" });
-            var actionFactory = A.Fake<IActionFactory>();
-            A.CallTo(() => actionFactory.CreateSayHelloWorldAction()).Returns(action);
-            var sut = new HelloWorldController(actionFactory);
+            var resourceProvider = A.Fake<IResourceProvider>();
+            A.CallTo(() => resourceProvider.CreateResource<ISayHelloWorldAction>()).Returns(action);
+            var sut = new HelloWorldController(resourceProvider);
 
             var response = await sut.SayHelloWorld("You");
 
@@ -38,9 +38,9 @@ namespace HelloCoreClrApp.Test.WebApi
         {
             var action = A.Fake<IGetLastTenGreetingsAction>();
             A.CallTo(() => action.Execute()).Returns(Array.Empty<SavedGreeting>());
-            var actionFactory = A.Fake<IActionFactory>();
-            A.CallTo(() => actionFactory.CreateGetLastTenGreetingsAction()).Returns(action);
-            var sut = new HelloWorldController(actionFactory);
+            var resourceProvider = A.Fake<IResourceProvider>();
+            A.CallTo(() => resourceProvider.CreateResource<IGetLastTenGreetingsAction>()).Returns(action);
+            var sut = new HelloWorldController(resourceProvider);
 
             var response = await sut.GetLastTenGreetings();
 
@@ -54,9 +54,9 @@ namespace HelloCoreClrApp.Test.WebApi
         {
             var action = A.Fake<IGetLastTenGreetingsAction>();
             A.CallTo(() => action.Execute()).Returns(new[] { new SavedGreeting { Greeting = "mygreeting" } });
-            var actionFactory = A.Fake<IActionFactory>();
-            A.CallTo(() => actionFactory.CreateGetLastTenGreetingsAction()).Returns(action);
-            var sut = new HelloWorldController(actionFactory);
+            var resourceProvider = A.Fake<IResourceProvider>();
+            A.CallTo(() => resourceProvider.CreateResource<IGetLastTenGreetingsAction>()).Returns(action);
+            var sut = new HelloWorldController(resourceProvider);
 
             var response = await sut.GetLastTenGreetings();
 
@@ -73,9 +73,9 @@ namespace HelloCoreClrApp.Test.WebApi
         {
             var action = A.Fake<IGetTotalNumberOfGreetingsAction>();
             A.CallTo(() => action.Execute()).Returns(6);
-            var actionFactory = A.Fake<IActionFactory>();
-            A.CallTo(() => actionFactory.CreateGetTotalNumberOfGreetingsAction()).Returns(action);
-            var sut = new HelloWorldController(actionFactory);
+            var resourceProvider = A.Fake<IResourceProvider>();
+            A.CallTo(() => resourceProvider.CreateResource<IGetTotalNumberOfGreetingsAction>()).Returns(action);
+            var sut = new HelloWorldController(resourceProvider);
 
             var response = await sut.GetTotalNumberOfGreetings();
 

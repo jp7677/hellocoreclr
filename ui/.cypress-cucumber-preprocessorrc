@@ -1,3 +1,4 @@
 {
+    "nonGlobalStepDefinitions": true,
     "stepDefinitions": "test-e2e/features"
 }

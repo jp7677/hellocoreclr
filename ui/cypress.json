@@ -1,0 +1,11 @@
+{
+    "nodeVersion": "system",
+    "integrationFolder": "test-e2e/features",
+    "testFiles": "**/*.feature",
+    "pluginsFile": "test-e2e/plugins.js",
+    "fixturesFolder": false,
+    "supportFile": false,
+    "screenshotsFolder": "../reports/e2e",
+    "videosFolder": "../reports/e2e",
+    "baseUrl": "http://localhost:3000"
+}

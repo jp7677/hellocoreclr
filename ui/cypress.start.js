@@ -9,19 +9,19 @@ const app = express()
 app.use('/', express.static(wwwroot))
 
 app.listen(port, () => {
-  runProtractor()
+  runCypress()
 })
 
-const runProtractor = () => {
+const runCypress = () => {
   const winExt = /^win/.test(process.platform) ? '.cmd' : ''
-  const protractorBin = 'protractor' + winExt
+  const cypressBin = 'cypress' + winExt
 
-  const protractorArgs = ['protractor.conf.js']
+  const cypressArgs = ['run']
   if (process.argv.slice(2).length > 0) {
-    protractorArgs.push(process.argv.slice(2))
+    process.argv.slice(2).forEach(arg => cypressArgs.push(arg))
   }
 
-  childprocess.spawn(protractorBin, protractorArgs, { stdio: 'inherit' })
+  childprocess.spawn(cypressBin, cypressArgs, { stdio: 'inherit' })
     .on('close', (code) => {
       if (code !== 0) {
         process.exit(code)

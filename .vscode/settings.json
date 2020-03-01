@@ -20,17 +20,15 @@
     ".vs/**": true,
     "**/*.sln*": true,
     "node_modules/**": true,
-    "reports/**": true,
-    "artifacts/**": true,
     "**/npm-debug.log": true
   },
   "stylelint.config": {
     "extends": "./ui/stylelint.config.js",
     "ignoreFiles": ["**/*.?(cs|fs)proj", "**/*.md"]
   },
-  "eslint.workingDirectories": [ "./ui" ],
+  "eslint.workingDirectories": [ "./ui", "./ui/test-e2e" ],
   "cucumberautocomplete.steps": [
-      "ui/test-e2e/*.ts"
+      "ui/test-e2e/**/*.ts"
   ],
   "cucumberautocomplete.syncfeatures": "ui/test-e2e/*.feature",
   "cucumberautocomplete.strictGherkinCompletion": true

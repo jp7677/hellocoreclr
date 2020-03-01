@@ -12,7 +12,6 @@
         "src/**/*.ts",
         "src/**/*.vue",
         "src/**/*.html",
-        "test",
-        "test-e2e"
+        "test"
     ]
 }

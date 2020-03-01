@@ -8,6 +8,7 @@
   },
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^4.1.3",
     "@types/bluebird": "^3.5.29",
     "@types/chai": "^4.2.9",
     "@types/cucumber": "^6.0.1",
@@ -27,6 +28,8 @@
     "compression-webpack-plugin": "^3.1.0",
     "css-loader": "^3.4.2",
     "cucumber": "^6.0.5",
+    "cypress": "^4.1.0",
+    "cypress-cucumber-preprocessor": "^2.0.1",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
@@ -54,14 +57,11 @@
     "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
-    "protractor": "^5.4.3",
-    "protractor-cucumber-framework": "^6.2.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3",
     "stylelint": "^13.2.0",
     "stylelint-config-standard": "^20.0.0",
     "ts-loader": "^6.2.1",
-    "ts-node": "^8.6.2",
     "typescript": "^3.8.2",
     "vue-loader": "^15.9.0",
     "vue-template-compiler": "^2.6.11",
@@ -88,7 +88,6 @@
     "vue-router": "~3.1.6"
   },
   "scripts": {
-    "postinstall": "cd ./node_modules/protractor && npm install webdriver-manager@latest",
     "build": "webpack --mode development",
     "build:production": "webpack --mode production",
     "test": "npm run lint && npm run format:verify && npm run unit-tests && npm run e2e-tests:prepare && npm run e2e-tests",
@@ -101,10 +100,9 @@
     "format:verify": "prettier --list-different \"{src,test,test-e2e}/**/*.{ts,css,html}\"",
     "unit-tests": "karma start",
     "unit-tests:watch": "karma start --nosinglerun",
-    "e2e-tests:prepare": "webdriver-manager update --standalone false",
     "e2e-tests": "npm run e2e-tests:chrome && npm run e2e-tests:firefox",
-    "e2e-tests:chrome": "node protractor.start",
-    "e2e-tests:firefox": "node protractor.start --browser=firefox",
+    "e2e-tests:chrome": "node cypress.start --browser chrome --headless --config video=false",
+    "e2e-tests:firefox": "node cypress.start --browser firefox  --headless --config video=false",
     "serve": "node server",
     "watch": "webpack-dev-server --mode development --hot --inline"
   }

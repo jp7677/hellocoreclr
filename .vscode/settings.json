@@ -26,7 +26,7 @@
     "extends": "./ui/stylelint.config.js",
     "ignoreFiles": ["**/*.?(cs|fs)proj", "**/*.md"]
   },
-  "eslint.workingDirectories": [ "./ui", "./ui/test-e2e" ],
+  "eslint.workingDirectories": [ "./ui" ],
   "cucumberautocomplete.steps": [
       "ui/test-e2e/**/*.ts"
   ],

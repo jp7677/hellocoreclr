@@ -27,6 +27,7 @@ script:
 
 cache:
   directories:
+    - $HOME/.cache/
     - $HOME/.nuget/packages
     - node_modules
     - ui/node_modules

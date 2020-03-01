@@ -8,9 +8,6 @@ environment:
     nodejs_version: "12"
 
 install:
-- choco install googlechrome --ignore-checksums
-- choco install firefox
-- ps: $env:Path += ";C:\Program Files\Mozilla Firefox\"
 - ps: Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile ".\install.ps1"
 - ps: '& .\install.ps1 -Channel "$env:dotnet_version" -InstallDir ".\.dotnet"'
 - ps: Install-Product node $env:nodejs_version

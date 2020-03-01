@@ -37,6 +37,7 @@ after_test:
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 
 cache:
+- '%USERPROFILE%\AppData\Local -> appveyor.yml'
 - '%USERPROFILE%\.nuget\packages -> appveyor.yml'
 - 'ui\node_modules -> appveyor.yml'
 - 'node_modules -> appveyor.yml'

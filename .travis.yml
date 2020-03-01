@@ -27,6 +27,6 @@ script:
 
 cache:
   directories:
-    - $HOME/.cache/
+    - $HOME/.cache/Cypress
     - $HOME/.nuget/packages
     - ui/node_modules

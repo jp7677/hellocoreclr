@@ -2,7 +2,7 @@
     "ignorePatterns": [ "wwwroot/**" ],
     "overrides": [
         {
-            "files": [ "*.ts" ],
+            "files": [ "{src,test}/**/*.ts" ],
             "parser": "@typescript-eslint/parser",
             "parserOptions": {
                 "project": "tsconfig.json",
@@ -19,7 +19,24 @@
             ]
         },
         {
-            "files": [ "*.js" ],
+            "files": [ "test-e2e/**/*.ts" ],
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "project": "test-e2e/tsconfig.json",
+                "sourceType": "module"
+            },
+            "plugins": [
+                "@typescript-eslint"
+            ],
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/eslint-recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking"
+            ]
+        },
+        {
+            "files": [ "**/*.js" ],
             "extends": "standard"
         }
     ]

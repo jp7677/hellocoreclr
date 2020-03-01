@@ -90,7 +90,7 @@
   "scripts": {
     "build": "webpack --mode development",
     "build:production": "webpack --mode production",
-    "test": "npm run lint && npm run format:verify && npm run unit-tests && npm run e2e-tests:prepare && npm run e2e-tests",
+    "test": "npm run lint && npm run format:verify && npm run unit-tests && npm run e2e-tests",
     "lint": "npm run lint:ts && npm run lint:js && npm run lint:html && npm run lint:style",
     "lint:ts": "eslint \"**/*.ts\"",
     "lint:js": "eslint \"**/*.js\"",

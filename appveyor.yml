@@ -21,8 +21,6 @@ build_script:
 
 before_test:
 - pushd ui && npm install karma-appveyor-reporter && popd
-- if not exist ui\node_modules\protractor\node_modules\webdriver-manager\selenium mkdir ui\node_modules\protractor\node_modules\webdriver-manager\selenium
-- curl -o ui\node_modules\protractor\node_modules\webdriver-manager\selenium\chrome-response.xml https://chromedriver.storage.googleapis.com/
 
 test_script:
 - dotnet test test\HelloCoreClrApp.Test\HelloCoreClrApp.Test.csproj /p:Include=[HelloCoreClrApp*]* /p:Exclude=[HelloCoreClrApp.Test*]* /p:CopyLocalLockFileAssemblies=true /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=..\..\reports\coverage-cs.xml

@@ -2,7 +2,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			// Run 'npm run unit-tests:watch' within 'ui' prior to launch
+			// Run 'npm run serve' within 'ui' prior to launch
 			"type": "chrome",
 			"request": "launch",
 			"name": "Launch Chrome - UI",
@@ -12,7 +12,7 @@
 			"webRoot": "${workspaceRoot}/ui/"
 		},
 		{
-			// Run 'npm run serve' within 'ui' prior to launch
+			// Run 'npm run unit-tests:watch' within 'ui' prior to launch
 			// and attach to the 'Karma DEBUG RUNNER' window.
 			// Refresh the browser windows when attached.
 			"type": "chrome",

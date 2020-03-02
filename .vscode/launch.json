@@ -27,21 +27,11 @@
 			}
 		},
 		{
-			// Run 'npm run serve' within 'ui' prior to launch
-			"type": "node",
-			"request": "launch",
-			"name": "Launch Node - Protractor E2E-Tests",
-			"program": "${workspaceFolder}/ui/./node_modules/.bin/protractor",
-			"args": [ "${workspaceFolder}/ui/protractor.conf" ],
-			"cwd": "${workspaceRoot}/ui/",
-			"outputCapture": "std"
-		},
-		{
 			"type": "coreclr",
 			"request": "launch",
 			"name": "Launch .NET Core - App",
 			"preLaunchTask": "Build All",
-			"program": "${workspaceRoot}/src/HelloCoreClrApp/bin/Debug/netcoreapp2.0/HelloCoreClrApp.dll",
+			"program": "${workspaceRoot}/src/HelloCoreClrApp/bin/Debug/netcoreapp3.1/HelloCoreClrApp.dll",
 			"args": [],
 			"cwd": "${workspaceRoot}",
 			"stopAtEntry": false,

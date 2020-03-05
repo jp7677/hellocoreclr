@@ -9,14 +9,18 @@
                 "sourceType": "module"
             },
             "plugins": [
-                "@typescript-eslint"
+                "@typescript-eslint",
+                "prettier"
             ],
             "extends": [
                 "eslint:recommended",
                 "plugin:@typescript-eslint/eslint-recommended",
                 "plugin:@typescript-eslint/recommended",
                 "plugin:@typescript-eslint/recommended-requiring-type-checking"
-            ]
+            ],
+            "rules": {
+                "prettier/prettier": "error"
+            }
         },
         {
             "files": [ "test-e2e/**/*.ts" ],
@@ -26,14 +30,18 @@
                 "sourceType": "module"
             },
             "plugins": [
-                "@typescript-eslint"
+                "@typescript-eslint",
+                "prettier"
             ],
             "extends": [
                 "eslint:recommended",
                 "plugin:@typescript-eslint/eslint-recommended",
                 "plugin:@typescript-eslint/recommended",
                 "plugin:@typescript-eslint/recommended-requiring-type-checking"
-            ]
+            ],
+            "rules": {
+                "prettier/prettier": "error"
+            }
         },
         {
             "files": [ "**/*.js" ],

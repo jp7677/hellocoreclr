@@ -13,8 +13,7 @@ module.exports = (on) => {
           { test: /\.feature$/, use: [{ loader: 'cypress-cucumber-preprocessor/loader' }] },
           { test: /\.features$/, use: [{ loader: 'cypress-cucumber-preprocessor/lib/featuresLoader' }] }
         ]
-      },
-      devtool: 'source-map'
+      }
     }
   }))
 }

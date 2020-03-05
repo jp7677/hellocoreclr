@@ -23,7 +23,7 @@
     "**/npm-debug.log": true
   },
   "stylelint.config": {
-    "extends": "./ui/stylelint.config.js",
+    "extends": "./ui/.stylelintrc",
     "ignoreFiles": ["**/*.?(cs|fs)proj", "**/*.md"]
   },
   "eslint.workingDirectories": [ "./ui" ],

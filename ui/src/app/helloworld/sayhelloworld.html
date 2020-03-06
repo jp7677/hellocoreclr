@@ -37,12 +37,13 @@
                         v-bind:class="(valid || !validated ? 'is-valid' : 'is-invalid') + ' form-control input'"
                         placeholder="Give me some text"
                         maxlength="20"
+                        data-testid="greeting"
                     />
                     <div class="invalid-tooltip">Between 3 and 20, no strange characters please</div>
                 </validation-provider>
             </div>
             <div class="col">
-                <button v-on:click="submit()" v-bind:disabled="!valid" class="col btn btn-primary btn">
+                <button v-on:click="submit()" v-bind:disabled="!valid" class="col btn btn-primary btn" data-testid="submit">s
                     <i class="fa fa-play-circle-o"></i> Say Hello!
                 </button>
             </div>
@@ -54,10 +55,11 @@
                     class="form-control input"
                     placeholder="Something will happen over here"
                     disabled
+                    data-testid="result"
                 />
             </div>
         </div>
     </validation-observer>
     <hr />
-    <router-link to="greetings">See older greetings</router-link>
+    <router-link to="greetings" data-testid="open-greetings">See older greetings</router-link>
 </form>

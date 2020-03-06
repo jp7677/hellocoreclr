@@ -34,19 +34,19 @@ Then("I should see the say hello page", function() {
 });
 
 When("I enter a {text} text", function(text: string) {
-    cy.get('input[name="greeter"]').type(text);
+    cy.get('[data-testid="greeting"]').type(text);
 });
 
 Then("I {yesno} say hello", function(enabled: boolean) {
     if (enabled) {
-        cy.get("button").should("be.enabled");
+        cy.get('[data-testid="submit"]').should("be.enabled");
     } else {
-        cy.get("button").should("be.disabled");
+        cy.get('[data-testid="submit"]').should("be.disabled");
     }
 });
 
 When("I click on last greetings", function() {
-    cy.get('a[href="#/greetings"]').click();
+    cy.get('[data-testid="open-greetings"]').click();
 });
 
 Then("I should see the last greetings page", function() {

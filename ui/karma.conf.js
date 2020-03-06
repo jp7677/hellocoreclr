@@ -63,7 +63,7 @@ module.exports = (config) => {
     browserDisconnectTimeout: 5000,
     browserDisconnectTolerance: 5,
     browserNoActivityTimeout: 10000,
-    reporters: !noSingleRun ? ['dots', 'coverage-istanbul'] : ['dots'],
+    reporters: !noSingleRun ? ['spec', 'coverage-istanbul'] : ['spec'],
     coverageIstanbulReporter: {
       skipFilesWithNoCoverage: false,
       reports: ['text-summary', 'json'],

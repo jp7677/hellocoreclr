@@ -5,43 +5,35 @@
             "files": [ "{src,test}/**/*.ts" ],
             "parser": "@typescript-eslint/parser",
             "parserOptions": {
-                "project": "tsconfig.json",
-                "sourceType": "module"
+                "project": "tsconfig.json"
             },
             "plugins": [
-                "@typescript-eslint",
-                "prettier"
+                "@typescript-eslint"
             ],
             "extends": [
                 "eslint:recommended",
                 "plugin:@typescript-eslint/eslint-recommended",
                 "plugin:@typescript-eslint/recommended",
-                "plugin:@typescript-eslint/recommended-requiring-type-checking"
-            ],
-            "rules": {
-                "prettier/prettier": "error"
-            }
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "plugin:prettier/recommended"
+            ]
         },
         {
             "files": [ "test-e2e/**/*.ts" ],
             "parser": "@typescript-eslint/parser",
             "parserOptions": {
-                "project": "test-e2e/tsconfig.json",
-                "sourceType": "module"
+                "project": "test-e2e/tsconfig.json"
             },
             "plugins": [
-                "@typescript-eslint",
-                "prettier"
+                "@typescript-eslint"
             ],
             "extends": [
                 "eslint:recommended",
                 "plugin:@typescript-eslint/eslint-recommended",
                 "plugin:@typescript-eslint/recommended",
-                "plugin:@typescript-eslint/recommended-requiring-type-checking"
-            ],
-            "rules": {
-                "prettier/prettier": "error"
-            }
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "plugin:prettier/recommended"
+            ]
         },
         {
             "files": [ "**/*.js" ],

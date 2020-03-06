@@ -34,7 +34,7 @@ Then("I should see the Say Hello page", function() {
 });
 
 When("I click on last greetings", function() {
-    cy.get('[data-testid="open-greetings"]').click();
+    cy.getTestid("open-greetings").click();
 });
 
 Then("I should see the last greetings page", function() {
@@ -42,17 +42,17 @@ Then("I should see the last greetings page", function() {
 });
 
 When("I click on Say Hello", function() {
-    cy.get('[data-testid="open-home"]').click();
+    cy.getTestid("open-home").click();
 });
 
 When("I enter a {text} text", function(text: string) {
-    cy.get('[data-testid="greeting"]').type(text);
+    cy.getTestid("greeting").type(text);
 });
 
 Then("I {yesno} say hello", function(enabled: boolean) {
     if (enabled) {
-        cy.get('[data-testid="submit"]').should("be.enabled");
+        cy.getTestid("submit").should("be.enabled");
     } else {
-        cy.get('[data-testid="submit"]').should("be.disabled");
+        cy.getTestid("submit").should("be.disabled");
     }
 });

@@ -29,8 +29,20 @@ Given("I've navigated to the home page", function() {
     cy.visit("/");
 });
 
-Then("I should see the say hello page", function() {
+Then("I should see the Say Hello page", function() {
     cy.title().should("equal", "Say Hello World! | Hello World");
+});
+
+When("I click on last greetings", function() {
+    cy.get('[data-testid="open-greetings"]').click();
+});
+
+Then("I should see the last greetings page", function() {
+    cy.title().should("equal", "Greetings | Hello World");
+});
+
+When("I click on Say Hello", function() {
+    cy.get('[data-testid="open-home"]').click();
 });
 
 When("I enter a {text} text", function(text: string) {
@@ -43,12 +55,4 @@ Then("I {yesno} say hello", function(enabled: boolean) {
     } else {
         cy.get('[data-testid="submit"]').should("be.disabled");
     }
-});
-
-When("I click on last greetings", function() {
-    cy.get('[data-testid="open-greetings"]').click();
-});
-
-Then("I should see the last greetings page", function() {
-    cy.title().should("equal", "Greetings | Hello World");
 });

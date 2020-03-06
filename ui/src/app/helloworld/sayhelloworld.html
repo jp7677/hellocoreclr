@@ -43,8 +43,13 @@
                 </validation-provider>
             </div>
             <div class="col">
-                <button v-on:click="submit()" v-bind:disabled="!valid" class="col btn btn-primary btn" data-testid="submit">s
-                    <i class="fa fa-play-circle-o"></i> Say Hello!
+                <button
+                    v-on:click="submit()"
+                    v-bind:disabled="!valid"
+                    class="col btn btn-primary btn"
+                    data-testid="submit"
+                >
+                    s <i class="fa fa-play-circle-o"></i> Say Hello!
                 </button>
             </div>
             <div class="col">

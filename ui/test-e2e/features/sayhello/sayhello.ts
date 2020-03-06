@@ -1,17 +1,54 @@
-import { Given, Then, When } from "cypress-cucumber-preprocessor/steps";
+import { Given, Then, When, defineParameterType } from "cypress-cucumber-preprocessor/steps";
 
-Given(/^I've navigated to the home page$/, () => {
+defineParameterType({
+    name: "text",
+    regexp: /(short|weird|long)/,
+    transformer(text: string): string {
+        if (text === "short") {
+            return "sh";
+        } else if (text === "weird") {
+            return "Some {}";
+        } else if (text === "long") {
+            return "verylong";
+        }
+    }
+});
+
+defineParameterType({
+    name: "yesno",
+    regexp: /(can|cannot)/,
+    transformer(text: string): boolean {
+        if (text === "can") {
+            return true;
+        }
+        return false;
+    }
+});
+
+Given("I've navigated to the home page", function() {
     cy.visit("/");
 });
 
-Then(/^I should see the say hello page$/, () => {
-    cy.title().should("be", "Say Hello World! | Hello World");
+Then("I should see the say hello page", function() {
+    cy.title().should("equal", "Say Hello World! | Hello World");
 });
 
-When(/^I click on last greetings$/, () => {
+When("I enter a {text} text", function(text: string) {
+    cy.get('input[name="greeter"]').type(text);
+});
+
+Then("I {yesno} say hello", function(enabled: boolean) {
+    if (enabled) {
+        cy.get("button").should("be.enabled");
+    } else {
+        cy.get("button").should("be.disabled");
+    }
+});
+
+When("I click on last greetings", function() {
     cy.get('a[href="#/greetings"]').click();
 });
 
-Then(/^I should see the last greetings page$/, () => {
-    cy.title().should("be", "Greetings | Hello World");
+Then("I should see the last greetings page", function() {
+    cy.title().should("equal", "Greetings | Hello World");
 });

@@ -21,12 +21,12 @@ test_script:
 - npm run test --prefix ui
 
 after_test:
-- npm install codecov
-- node_modules\.bin\codecov --disable=gcov -f reports\coverage-cs.xml
-- node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 - ps: $wc = New-Object 'System.Net.WebClient'
 - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\reports\cypress-chrome.xml))
 - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\reports\cypress-firefox.xml))
+- npm install codecov --no-save
+- node_modules\.bin\codecov --disable=gcov -f reports\coverage-cs.xml
+- node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 
 cache:
 - '%USERPROFILE%\AppData\Local\Cypress -> appveyor.yml'

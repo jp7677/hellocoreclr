@@ -1,4 +1,4 @@
-Feature: The page should load correctly.
+Feature: Using the app
 
 Scenario: Navigating the app
   Given I've navigated to the home page

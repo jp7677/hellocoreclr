@@ -16,7 +16,10 @@
                 "plugin:@typescript-eslint/recommended",
                 "plugin:@typescript-eslint/recommended-requiring-type-checking",
                 "plugin:prettier/recommended"
-            ]
+            ],
+            "rules": {
+                "@typescript-eslint/no-floating-promises": "error"
+            }
         },
         {
             "files": [ "test-e2e/**/*.ts" ],
@@ -33,7 +36,10 @@
                 "plugin:@typescript-eslint/recommended",
                 "plugin:@typescript-eslint/recommended-requiring-type-checking",
                 "plugin:prettier/recommended"
-            ]
+            ],
+            "rules": {
+                "@typescript-eslint/no-floating-promises": "error"
+            }
         },
         {
             "files": [ "**/*.js" ],

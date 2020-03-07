@@ -17,13 +17,10 @@ build_script:
 - dotnet msbuild /t:publish /p:output=..\artifacts\wwwroot ui
 
 test_script:
-- dotnet test /p:Include=[HelloCoreClrApp*]* /p:Exclude=[HelloCoreClrApp.Test*]* /p:CopyLocalLockFileAssemblies=true /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=..\..\reports\coverage-cs.xml
+- dotnet test /p:Include=[HelloCoreClrApp*]* /p:Exclude=[HelloCoreClrApp.Test*]* /p:CopyLocalLockFileAssemblies=true /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=..\..\reports\coverage-cs.xml -- NoAutoReporters=true
 - npm run test --prefix ui
 
 after_test:
-- ps: $wc = New-Object 'System.Net.WebClient'
-- ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\reports\cypress-chrome.xml))
-- ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\reports\cypress-firefox.xml))
 - npm install codecov --no-save
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-cs.xml
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json

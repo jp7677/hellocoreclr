@@ -105,8 +105,8 @@
     "unit-tests": "karma start",
     "unit-tests:watch": "karma start --nosinglerun",
     "e2e-tests": "npm run e2e-tests:chrome && npm run e2e-tests:firefox",
-    "e2e-tests:chrome": "node cypress.start --browser chrome --headless --config video=false --reporter junit --reporter-options mochaFile=../reports/cypress-chrome.xml,rootSuiteTitle=Chrome-E2E-Suite,useFullSuiteTitle=true,testCaseSwitchClassnameAndName=true",
-    "e2e-tests:firefox": "node cypress.start --browser firefox --headless --config video=false --reporter junit --reporter-options mochaFile=../reports/cypress-firefox.xml,rootSuiteTitle=Firefox-E2E-Suite,useFullSuiteTitle=true,testCaseSwitchClassnameAndName=true",
+    "e2e-tests:chrome": "node cypress.start --browser chrome --headless --config video=false",
+    "e2e-tests:firefox": "node cypress.start --browser firefox --headless --config video=false",
     "serve": "node server",
     "watch": "webpack-dev-server --mode development --hot --inline"
   }

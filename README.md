@@ -76,9 +76,9 @@ in a separate console to run the dedicated front end server. Open <http://localh
 
 For a nice web programming experience I'm using [Visual Studio Code](https://code.visualstudio.com/) with the following extensions:
 
-> ESLint, stylelint, HTMLHint, markdownlint, Cucumber (Gherkin) Full Support, Debugger for Chrome, Wallabyjs for Visual Studio Code
+> ESLint, stylelint, HTMLHint, markdownlint, Cucumber (Gherkin) Full Support, Debugger for Chrome, Wallaby.js for Visual Studio Code
 
-Note that Wallabyjs is a commercial extension, for that you'll also need to run `npm install wallaby-webpack --no-save` within the ui folder.
+Note that Wallaby.js is a commercial extension.
 
 My choice for C# development is [JetBrains Rider](https://www.jetbrains.com/rider/).
 

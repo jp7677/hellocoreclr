@@ -9,8 +9,6 @@ import { LoggerStub } from "../stubs";
 
 import SayHelloWorld from "../../src/app/helloworld/sayhelloworld";
 
-// tslint:disable:no-unused-expression
-
 describe("SayHelloWorld test suite", () => {
     const Vue = createLocalVue();
     Vue.component("ValidationProvider", ValidationProvider);

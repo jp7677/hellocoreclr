@@ -34,18 +34,14 @@ export class Logger implements LoggerInterface {
     private log(level: string, message: string, color: string, args: object): void {
         if (color) {
             if (args) {
-                // tslint:disable-next-line:no-console
                 console.log(`%c${level} | ${message} %o`, `color: ${color}`, args);
             } else {
-                // tslint:disable-next-line:no-console
                 console.log(`%c${level} | ${message}`, `color: ${color}`);
             }
         } else {
             if (args) {
-                // tslint:disable-next-line:no-console
                 console.log(`${level} | ${message} %o`, args);
             } else {
-                // tslint:disable-next-line:no-console
                 console.log(`${level} | ${message}`);
             }
         }

@@ -8,7 +8,6 @@ import { LoggerStub } from "../stubs";
 
 import Greetings from "../../src/app/helloworld/greetings";
 
-// tslint:disable:no-unused-expression
 describe("Greetings test suite", () => {
     const Vue = createLocalVue();
 

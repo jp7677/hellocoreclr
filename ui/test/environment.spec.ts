@@ -1,8 +1,6 @@
 import { expect } from "chai";
 import { Environment } from "../src/app/environment";
 
-// tslint:disable:no-unused-expression
-
 describe("Environment test suite", () => {
     it("should initialize correctly", () => {
         const sut = new Environment({ baseUrl: "api" }, "appMode");

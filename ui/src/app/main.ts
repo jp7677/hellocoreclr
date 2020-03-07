@@ -10,7 +10,6 @@ import { Loadingbar } from "./loadingbar";
 import axios from "axios";
 import BootstrapVue from "bootstrap-vue";
 import { extend, setInteractionMode, ValidationObserver, ValidationProvider } from "vee-validate";
-// tslint:disable:no-submodule-imports
 import { max, min, regex, required } from "vee-validate/dist/rules";
 import Vue from "vue";
 import VueAxios from "vue-axios";
@@ -20,7 +19,6 @@ import { Logger } from "./logger";
 import App from "./app";
 import { RouterConfiguration } from "./router-configuration";
 
-// tslint:disable:no-submodule-imports
 import "font-awesome/scss/font-awesome.scss";
 import "../styles/bootstrap.scss";
 import "../styles/toastr.scss";

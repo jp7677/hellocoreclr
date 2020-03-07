@@ -21,7 +21,7 @@ test_script:
 - npm run test --prefix ui
 
 after_test:
-- npm install codecov --no-save
+- npm install codecov
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-cs.xml
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
 

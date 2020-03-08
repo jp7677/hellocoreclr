@@ -56,9 +56,6 @@ function logAplicationStart(vue: Vue, env: Environment): void {
 
 function configureAndMountVue(): void {
     const environment: Environment = new Environment(appsettings, APPLICATIONMODE);
-    if (environment.IsKarma()) {
-        return;
-    }
 
     Loadingbar.Inc();
     Vue.use(Logger);

@@ -10,7 +10,6 @@ describe("Environment test suite", () => {
         expect(sut.IsDevelopment()).to.equal(false);
         expect(sut.IsStaging()).to.equal(false);
         expect(sut.IsProduction()).to.equal(false);
-        expect(sut.IsKarma()).to.equal(false);
     });
 
     it("should detect development", () => {
@@ -19,7 +18,6 @@ describe("Environment test suite", () => {
         expect(sut.IsDevelopment()).to.equal(true);
         expect(sut.IsStaging()).to.equal(false);
         expect(sut.IsProduction()).to.equal(false);
-        expect(sut.IsKarma()).to.equal(false);
     });
 
     it("should detect staging", () => {
@@ -28,7 +26,6 @@ describe("Environment test suite", () => {
         expect(sut.IsDevelopment()).to.equal(false);
         expect(sut.IsStaging()).to.equal(true);
         expect(sut.IsProduction()).to.equal(false);
-        expect(sut.IsKarma()).to.equal(false);
     });
 
     it("should detect production", () => {
@@ -37,15 +34,5 @@ describe("Environment test suite", () => {
         expect(sut.IsDevelopment()).to.equal(false);
         expect(sut.IsStaging()).to.equal(false);
         expect(sut.IsProduction()).to.equal(true);
-        expect(sut.IsKarma()).to.equal(false);
-    });
-
-    it("should detect karma", () => {
-        const sut = new Environment({ baseUrl: "" }, "Karma");
-
-        expect(sut.IsDevelopment()).to.equal(false);
-        expect(sut.IsStaging()).to.equal(false);
-        expect(sut.IsProduction()).to.equal(false);
-        expect(sut.IsKarma()).to.equal(true);
     });
 });

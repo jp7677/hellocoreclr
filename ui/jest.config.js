@@ -10,5 +10,5 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.ts', '!**/*.d.ts'],
   coverageReporters: ['json', 'text-summary'],
   coverageDirectory: '../reports/',
-  watchPathIgnorePatterns: ['node_modules']
+  watchPathIgnorePatterns: ['node_modules', 'wwwroot']
 }

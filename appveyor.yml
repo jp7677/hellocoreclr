@@ -29,4 +29,3 @@ cache:
 - '%USERPROFILE%\AppData\Local\Cypress -> appveyor.yml'
 - '%USERPROFILE%\.nuget\packages -> appveyor.yml'
 - 'ui\node_modules -> appveyor.yml'
-- 'node_modules -> appveyor.yml'

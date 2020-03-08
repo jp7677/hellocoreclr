@@ -1,7 +1,5 @@
 dist: bionic
 addons:
-  chrome: stable
-  firefox: latest
   apt:
     sources:
     - sourceline: 'deb https://packages.microsoft.com/ubuntu/18.04/prod bionic main'

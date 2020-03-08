@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import flushPromises from "flush-promises";
 
 import { config, createLocalVue, RouterLinkStub, shallowMount } from "@vue/test-utils";
@@ -35,10 +34,10 @@ describe("Greetings test suite", () => {
         const sut = shallowMount(Greetings, { localVue: Vue }).vm;
 
         await flushPromises();
-        expect(sut.numberOfSavedGreetings).not.to.be.undefined;
-        expect(sut.numberOfSavedGreetings).to.equal(5);
-        expect(sut.savedGreetings).not.to.be.undefined;
-        expect(sut.savedGreetings.length).to.equal(2);
+        expect(sut.numberOfSavedGreetings).not.toBeUndefined();
+        expect(sut.numberOfSavedGreetings).toEqual(5);
+        expect(sut.savedGreetings).not.toBeUndefined();
+        expect(sut.savedGreetings.length).toEqual(2);
     });
 
     it("should handle a valid response without content", async () => {
@@ -48,10 +47,10 @@ describe("Greetings test suite", () => {
         const sut = shallowMount(Greetings, { localVue: Vue }).vm;
 
         await flushPromises();
-        expect(sut.numberOfSavedGreetings).not.to.be.undefined;
-        expect(sut.numberOfSavedGreetings).to.equal(0);
-        expect(sut.savedGreetings).not.to.be.undefined;
-        expect(sut.savedGreetings.length).to.equal(0);
+        expect(sut.numberOfSavedGreetings).not.toBeUndefined();
+        expect(sut.numberOfSavedGreetings).toEqual(0);
+        expect(sut.savedGreetings).not.toBeUndefined();
+        expect(sut.savedGreetings.length).toEqual(0);
     });
 
     it("should handle an error response", async () => {
@@ -61,9 +60,9 @@ describe("Greetings test suite", () => {
         const sut = shallowMount(Greetings, { localVue: Vue }).vm;
 
         await flushPromises();
-        expect(sut.numberOfSavedGreetings).not.to.be.undefined;
-        expect(sut.numberOfSavedGreetings).to.equal(0);
-        expect(sut.savedGreetings).not.to.be.undefined;
-        expect(sut.savedGreetings.length).equal(0);
+        expect(sut.numberOfSavedGreetings).not.toBeUndefined();
+        expect(sut.numberOfSavedGreetings).toEqual(0);
+        expect(sut.savedGreetings).not.toBeUndefined();
+        expect(sut.savedGreetings.length).toEqual(0);
     });
 });

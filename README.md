@@ -51,7 +51,7 @@ dotnet build ui
 to restore packages, bindings, building and for assembling the web application. Use
 
 ```bash
-dotnet test test/HelloCoreClrApp.Test/HelloCoreClrApp.Test.csproj
+dotnet test
 npm run test --prefix ui
 ```
 

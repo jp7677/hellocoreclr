@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import flushPromises from "flush-promises";
 
 import { config, createLocalVue, RouterLinkStub, shallowMount } from "@vue/test-utils";
@@ -34,7 +33,7 @@ describe("SayHelloWorld test suite", () => {
         await sut.submit();
 
         await flushPromises();
-        expect(sut.greetingText).to.equal("Hello World!");
+        expect(sut.greetingText).toEqual("Hello World!");
     });
 
     it("should handle an error response", async () => {
@@ -47,6 +46,6 @@ describe("SayHelloWorld test suite", () => {
         await sut.submit();
 
         await flushPromises();
-        expect(sut.greetingText).to.equal("");
+        expect(sut.greetingText).toEqual("");
     });
 });

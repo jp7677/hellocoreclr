@@ -23,7 +23,7 @@ test_script:
 after_test:
 - npm install codecov
 - node_modules\.bin\codecov --disable=gcov -f reports\coverage-cs.xml
-- node_modules\.bin\codecov --disable=gcov -f reports\coverage-ts.json
+- node_modules\.bin\codecov --disable=gcov -f reports\coverage-final.json
 
 cache:
 - '%USERPROFILE%\AppData\Local\Cypress -> appveyor.yml'

@@ -12,18 +12,27 @@
 			"webRoot": "${workspaceRoot}/ui/"
 		},
 		{
-			// Run 'npm run unit-tests:watch' within 'ui' prior to launch
-			// and attach to the 'Karma DEBUG RUNNER' window.
-			// Refresh the browser windows when attached.
-			"type": "chrome",
-			"request": "attach",
-			"name": "Attach Chrome - Karma Unit-Tests",
-			"address": "localhost",
-			"port": 9333,
-			"sourceMaps": true,
-			"webRoot": "${workspaceRoot}/ui/",
-			"pathMapping": {
-			  "/base/test/": "${workspaceRoot}/ui/"
+			"type": "node",
+			"request": "launch",
+			"name": "Debug Jest - UI Tests",
+			"runtimeArgs": [
+				"--inspect-brk",
+				"${workspaceRoot}/ui/node_modules/.bin/jest",
+				"--config=${workspaceRoot}/ui/jest.config.js",
+				"--coverage=false",
+				"--runInBand"
+			],
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"port": 9229,
+			"windows": {
+				"runtimeArgs": [
+					"--inspect-brk",
+					"${workspaceRoot}/ui/node_modules/bin/jest.js",
+					"--config=${workspaceRoot}/ui/jest.config.js",
+					"--coverage=false",
+					"--runInBand"
+				],
 			}
 		},
 		{

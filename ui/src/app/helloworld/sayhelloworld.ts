@@ -19,12 +19,12 @@ export default class SayHelloWorld extends Vue {
     }
 
     public async submit(): Promise<void> {
-        const name: string = this.inputText;
-        this.prepareRequest(name);
+        const value: string = this.inputText;
+        this.prepareRequest(value);
 
         let response: AxiosResponse;
         try {
-            response = await this.$http.post("sayhelloworld/", JSON.stringify(name));
+            response = await this.$http.post("sayhelloworld/", JSON.stringify({ name: value }));
         } catch (err) {
             this.handleErrorResponse(err);
             return;
@@ -33,8 +33,8 @@ export default class SayHelloWorld extends Vue {
         this.handleValidResponse(response);
     }
 
-    private prepareRequest(name: string): void {
-        this.$log.info(`We got the following name: ${name}`);
+    private prepareRequest(value: string): void {
+        this.$log.info(`We got the following name: ${value}`);
         this.notifier.Info("Working...");
     }
 

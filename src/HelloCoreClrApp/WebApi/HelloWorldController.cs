@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using HelloCoreClrApp.WebApi.Actions;
+using HelloCoreClrApp.WebApi.Messages;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -19,12 +20,12 @@ namespace HelloCoreClrApp.WebApi
 
         [Route("sayhelloworld")]
         [HttpPost]
-        public async Task<IActionResult> SayHelloWorld([FromBody] string name)
+        public async Task<IActionResult> SayHelloWorld([FromBody] SayHelloWorldRequest request)
         {
-            Log.Information("'sayhelloworld' Request received with '{0}'.", name);
+            Log.Information("'sayhelloworld' Request received with '{0}'.", request.Name);
 
             var action = resourceProvider.CreateResource<ISayHelloWorldAction>();
-            var response = await action.Execute(name);
+            var response = await action.Execute(request.Name);
 
             return new OkObjectResult(response);
         }

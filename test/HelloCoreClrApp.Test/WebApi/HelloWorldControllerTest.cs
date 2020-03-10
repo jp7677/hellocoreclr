@@ -22,7 +22,7 @@ namespace HelloCoreClrApp.Test.WebApi
             A.CallTo(() => resourceProvider.CreateResource<ISayHelloWorldAction>()).Returns(action);
             var sut = new HelloWorldController(resourceProvider);
 
-            var response = await sut.SayHelloWorld("You");
+            var response = await sut.SayHelloWorld(new SayHelloWorldRequest { Name = "You" });
 
             response.Should().NotBeNull();
             var okResponse = response.As<OkObjectResult>();

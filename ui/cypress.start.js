@@ -1,16 +1,6 @@
 const path = require('path')
-const express = require('express')
+const server = require('local-web-server')
 const childprocess = require('child_process')
-
-const wwwroot = path.join(__dirname, 'wwwroot')
-const port = 3000
-
-const app = express()
-app.use('/', express.static(wwwroot))
-
-app.listen(port, () => {
-  runCypress()
-})
 
 const runCypress = () => {
   const winExt = /^win/.test(process.platform) ? '.cmd' : ''
@@ -23,6 +13,7 @@ const runCypress = () => {
 
   childprocess.spawn(cypressBin, cypressArgs, { stdio: 'inherit' })
     .on('close', (code) => {
+      ws.server.close()
       if (code !== 0) {
         process.exit(code)
       } else {
@@ -30,3 +21,10 @@ const runCypress = () => {
       }
     })
 }
+
+const ws = server.create({
+  port: 3000,
+  directory: path.join(__dirname, 'wwwroot')
+})
+
+runCypress()

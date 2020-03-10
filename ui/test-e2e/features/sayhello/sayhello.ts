@@ -1,4 +1,13 @@
-import { Given, Then, When, defineParameterType } from "cypress-cucumber-preprocessor/steps";
+import { Given, Then, When } from "cypress-cucumber-preprocessor/steps";
+
+// Use our own declararion for defineParameterType, the one from
+// https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/cypress-cucumber-preprocessor/steps/index.d.ts
+// is unfortunately wrong.
+declare function defineParameterType(parameterType: {
+    name: string;
+    regexp: RegExp;
+    transformer: (text: string) => {};
+}): void;
 
 defineParameterType({
     name: "text",

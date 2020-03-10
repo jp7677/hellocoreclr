@@ -14,11 +14,7 @@ const runCypress = () => {
   childprocess.spawn(cypressBin, cypressArgs, { stdio: 'inherit' })
     .on('close', (code) => {
       ws.server.close()
-      if (code !== 0) {
-        process.exit(code)
-      } else {
-        process.exit(0)
-      }
+      process.exit(code)
     })
 }
 

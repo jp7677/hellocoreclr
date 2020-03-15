@@ -22,14 +22,14 @@
     "node_modules/**": true,
     "**/npm-debug.log": true
   },
+  "eslint.workingDirectories": [ "./ui" ],
   "stylelint.config": {
     "extends": "./ui/.stylelintrc",
     "ignoreFiles": ["**/*.?(cs|fs)proj", "**/*.md"]
   },
-  "eslint.workingDirectories": [ "./ui" ],
-  "cucumberautocomplete.steps": [
-      "ui/test-e2e/**/*.ts"
-  ],
   "cucumberautocomplete.syncfeatures": "ui/test-e2e/*.feature",
-  "cucumberautocomplete.strictGherkinCompletion": true
+  "cucumberautocomplete.strictGherkinCompletion": true,
+  "cucumberautocomplete.steps": [
+    "ui/test-e2e/**/*.ts"
+  ]
 }

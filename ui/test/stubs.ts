@@ -17,7 +17,7 @@ export class LoggerStub {
             },
             warn: (): void => {
                 // ignore
-            }
+            },
         };
     }
 }

@@ -26,9 +26,9 @@ describe("Greetings test suite", () => {
         moxios.stubRequest("greetings", {
             response: [
                 { greeting: "Hello", timestampUtc: new Date(Date.now()) },
-                { greeting: "World", timestampUtc: new Date(Date.now()) }
+                { greeting: "World", timestampUtc: new Date(Date.now()) },
             ],
-            status: 200
+            status: 200,
         });
 
         const sut = shallowMount(Greetings, { localVue: Vue }).vm;

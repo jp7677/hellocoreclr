@@ -11,7 +11,7 @@ defineParameterType({
         } else if (text === "long") {
             return "verylong";
         }
-    }
+    },
 });
 
 defineParameterType({
@@ -22,34 +22,34 @@ defineParameterType({
             return true;
         }
         return false;
-    }
+    },
 });
 
-Given("I've navigated to the home page", function() {
+Given("I've navigated to the home page", () => {
     cy.visit("/");
 });
 
-Then("I should see the Say Hello page", function() {
+Then("I should see the Say Hello page", () => {
     cy.title().should("equal", "Say Hello World! | Hello World");
 });
 
-When("I click on last greetings", function() {
+When("I click on last greetings", () => {
     cy.getTestid("open-greetings").click();
 });
 
-Then("I should see the last greetings page", function() {
+Then("I should see the last greetings page", () => {
     cy.title().should("equal", "Greetings | Hello World");
 });
 
-When("I click on Say Hello", function() {
+When("I click on Say Hello", () => {
     cy.getTestid("open-home").click();
 });
 
-When("I enter a {text} text", function(text: string) {
+When("I enter a {text} text", (text: string) => {
     cy.getTestid("greeting").type(text);
 });
 
-Then("I {yesno} say hello", function(enabled: boolean) {
+Then("I {yesno} say hello", (enabled: boolean) => {
     if (enabled) {
         cy.getTestid("submit").should("be.enabled");
     } else {

@@ -83,7 +83,7 @@ export default class Greetings extends Vue {
         const data: SavedGreeting[] = response.data;
         this.$log.info(`Received data was: ${data.length} elements`);
 
-        data.forEach(element => {
+        data.forEach((element) => {
             const formatedSavedGreeting = new FormattedSavedGreeting();
             formatedSavedGreeting.greeting = element.greeting;
             formatedSavedGreeting.timestamp = moment.utc(element.timestampUtc).fromNow();

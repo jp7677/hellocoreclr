@@ -40,7 +40,7 @@ function configureValidation(): void {
 function configureBluebird(): void {
     Bluebird.config({
         longStackTraces: false,
-        warnings: false
+        warnings: false,
     });
 }
 
@@ -70,7 +70,7 @@ function configureAndMountVue(): void {
     const router = RouterConfiguration.build();
     const vue = new Vue({
         render: (h): VNode => h(App),
-        router
+        router,
     });
 
     vue.$mount("#app");

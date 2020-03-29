@@ -28,7 +28,7 @@ export class Loadingbar {
         nprogress.configure({
             minimum: 0.3,
             showSpinner: false,
-            trickleSpeed: 200
+            trickleSpeed: 200,
         });
         nprogress.start();
     }

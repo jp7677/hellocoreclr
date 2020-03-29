@@ -7,7 +7,7 @@ import SayHelloWorld from "./helloworld/sayhelloworld";
 export class RouterConfiguration {
     public static build(): Router {
         const router = new Router({ routes: this.buildRoutes() });
-        router.afterEach(to => {
+        router.afterEach((to) => {
             Vue.nextTick(() => {
                 document.title = to.meta.title(to);
             });
@@ -22,18 +22,18 @@ export class RouterConfiguration {
             {
                 component: SayHelloWorld,
                 meta: { title: (): string => `Say Hello World! | ${applicationTitle}` },
-                path: "/"
+                path: "/",
             },
             {
                 component: SayHelloWorld,
                 meta: { title: (): string => `Say Hello World! | ${applicationTitle}` },
-                path: "/sayhelloworld"
+                path: "/sayhelloworld",
             },
             {
                 component: Greetings,
                 meta: { title: (): string => `Greetings | ${applicationTitle}` },
-                path: "/greetings"
-            }
+                path: "/greetings",
+            },
         ];
     }
 }

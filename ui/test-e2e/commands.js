@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
-Cypress.Commands.add('getTestid', (testId) => {
-  cy.get(`[data-testid=${testId}]`)
-})
+import setup from 'cypress-cy-select'
+
+setup({ name: 'testid' })

@@ -34,8 +34,7 @@ module.exports = (env, argv) => {
     },
     output: {
       filename: isProduction ? '[name]-[hash].js' : '[name]-bundle.js',
-      path: wwwroot,
-      devtoolModuleFilenameTemplate: './[resource-path]'
+      path: wwwroot
     },
     performance: { hints: false },
     plugins: [

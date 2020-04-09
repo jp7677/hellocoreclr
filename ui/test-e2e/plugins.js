@@ -1,7 +1,8 @@
-const webpack = require('@cypress/webpack-preprocessor')
+const webpack = require('webpack')
+const cypressWebpack = require('@cypress/webpack-preprocessor')
 
 module.exports = (on) => {
-  on('file:preprocessor', webpack({
+  on('file:preprocessor', cypressWebpack({
     webpackOptions: {
       resolve: {
         extensions: ['.ts', '.js']
@@ -13,7 +14,10 @@ module.exports = (on) => {
           { test: /\.feature$/, use: [{ loader: 'cypress-cucumber-preprocessor/loader' }] },
           { test: /\.features$/, use: [{ loader: 'cypress-cucumber-preprocessor/lib/featuresLoader' }] }
         ]
-      }
+      },
+      plugins: [
+        new webpack.SourceMapDevToolPlugin({ test: /\.(ts|features?)$/ })
+      ]
     }
   }))
 }

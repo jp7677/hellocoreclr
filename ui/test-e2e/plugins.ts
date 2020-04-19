@@ -6,9 +6,7 @@ module.exports = (on): any => {
         cypressWebpack({
             webpackOptions: {
                 mode: "none",
-                resolve: {
-                    extensions: [".ts", ".js"],
-                },
+                resolve: { extensions: [".ts", ".js"] },
                 module: {
                     rules: [
                         { test: /\.ts$/, exclude: [/node_modules/], use: [{ loader: "ts-loader" }] },

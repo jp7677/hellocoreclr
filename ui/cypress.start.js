@@ -23,4 +23,8 @@ const ws = server.create({
   directory: path.join(__dirname, 'wwwroot')
 })
 
+ws.server.on('error', (error) => {
+  console.log(error)
+})
+
 runCypress()

@@ -3,8 +3,8 @@
     "integrationFolder": "test-e2e/features",
     "fixturesFolder": false,
     "testFiles": "**/*.feature",
-    "pluginsFile": "test-e2e/plugins.js",
-    "supportFile": "test-e2e/commands.js",
+    "pluginsFile": "test-e2e/plugins.ts",
+    "supportFile": "test-e2e/commands.ts",
     "screenshotsFolder": "../reports/e2e",
     "videosFolder": "../reports/e2e",
     "baseUrl": "http://localhost:3000"

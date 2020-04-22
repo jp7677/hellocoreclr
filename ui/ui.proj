@@ -9,7 +9,7 @@
       <Production Condition="'$(Configuration)'=='Release'">:production</Production>
     </PropertyGroup>
     <Message Text="ui -&gt; ui/wwwroot $(Production)" Importance="high" />
-    <Exec Command="npm clean-install" />
+    <Exec Command="npm install" />
     <Exec Command="npm run build$(Production)" />
   </Target>
   <Target Name="Publish" DependsOnTargets="Build">

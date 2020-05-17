@@ -16,8 +16,7 @@ namespace HelloCoreClrApp.Test.Data
             var options = new DbContextOptionsBuilder<GreetingDbContext>()
                 .UseInMemoryDatabase(nameof(SaveOneGreetingShouldResultInOneSavedGreetingTest));
             var factory = new GreetingDbContextFactory(options.Options);
-            var sut = new DataService(factory);
-
+            using var sut = new DataService(factory);
             await sut.EnsureCreated(CancellationToken.None);
             await sut.SaveGreeting("mygreeting");
 
@@ -32,7 +31,7 @@ namespace HelloCoreClrApp.Test.Data
             var options = new DbContextOptionsBuilder<GreetingDbContext>()
                 .UseInMemoryDatabase(nameof(SaveTenGreetingShouldResultInTenSavedGreetingTest));
             var factory = new GreetingDbContextFactory(options.Options);
-            var sut = new DataService(factory);
+            using var sut = new DataService(factory);
 
             await sut.EnsureCreated(CancellationToken.None);
             for (var i = 1; i <= 20; i++)

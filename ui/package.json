@@ -86,7 +86,7 @@
     "lint": "npm run lint:ts && npm run lint:js && npm run lint:html && npm run lint:style",
     "lint:ts": "eslint \"**/*.ts\"",
     "lint:js": "eslint \"**/*.js\"",
-    "lint:html": "htmlhint -f compact src/**/*.{html,ejs}",
+    "lint:html": "htmlhint --config .htmlhintrc.json -f compact src/**/*.{html,ejs}",
     "lint:style": "stylelint src/**/*.scss",
     "format": "prettier --write \"{src,test,test-e2e}/**/*.{ts,css,html}\"",
     "unit-tests": "jest",

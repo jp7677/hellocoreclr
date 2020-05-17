@@ -24,9 +24,10 @@
   },
   "eslint.workingDirectories": [ "./ui" ],
   "stylelint.config": {
-    "extends": "./ui/.stylelintrc",
+    "extends": "./ui/.stylelintrc.json",
     "ignoreFiles": ["**/*.?(cs|fs)proj", "**/*.md"]
   },
+  "htmlhint.configFile": "ui/.htmlhintrc.json",
   "cucumberautocomplete.syncfeatures": "ui/test-e2e/*.feature",
   "cucumberautocomplete.strictGherkinCompletion": true,
   "cucumberautocomplete.steps": [

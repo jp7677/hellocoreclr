@@ -63,7 +63,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "axios": "~0.19.2",
+    "axios": "~0.21.1",
     "bluebird": "~3.7.2",
     "bootstrap": "~4.5.0",
     "bootstrap-vue": "~2.14.0",

@@ -1,29 +1,29 @@
 export interface LoggerInterface {
-    fatal(message: string, args?: object): void;
-    error(message: string, args?: object): void;
-    warn(message: string, args?: object): void;
-    info(message: string, args?: object): void;
-    debug(message: string, args?: object): void;
+    fatal(message: string, args?: any): void;
+    error(message: string, args?: any): void;
+    warn(message: string, args?: any): void;
+    info(message: string, args?: any): void;
+    debug(message: string, args?: any): void;
 }
 
 export class Logger implements LoggerInterface {
-    public fatal(message: string, args?: object): void {
+    public fatal(message: string, args?: any): void {
         this.log("fatal", message, "magenta", args);
     }
 
-    public error(message: string, args?: object): void {
+    public error(message: string, args?: any): void {
         this.log("error", message, "red", args);
     }
 
-    public warn(message: string, args?: object): void {
+    public warn(message: string, args?: any): void {
         this.log("warn", message, "olive", args);
     }
 
-    public info(message: string, args?: object): void {
+    public info(message: string, args?: any): void {
         this.log("info", message, undefined, args);
     }
 
-    public debug(message: string, args?: object): void {
+    public debug(message: string, args?: any): void {
         this.log("debug", message, "gray", args);
     }
 
@@ -31,7 +31,7 @@ export class Logger implements LoggerInterface {
         Vue.prototype.$log = new Logger();
     }
 
-    private log(level: string, message: string, color: string, args: object): void {
+    private log(level: string, message: string, color: string, args: any): void {
         if (color) {
             if (args) {
                 console.log(`%c${level} | ${message} %o`, `color: ${color}`, args);

@@ -3,11 +3,11 @@ import Vue from "vue";
 declare module "vue/types/vue" {
     export interface Vue {
         $log: {
-            fatal(message: string, args?: object): void;
-            error(message: string, args?: object): void;
-            warn(message: string, args?: object): void;
-            info(message: string, args?: object): void;
-            debug(message: string, args?: object): void;
+            fatal(message: string, args?: any): void;
+            error(message: string, args?: any): void;
+            warn(message: string, args?: any): void;
+            info(message: string, args?: any): void;
+            debug(message: string, args?: any): void;
         };
     }
 }

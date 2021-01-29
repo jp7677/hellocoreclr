@@ -1,8 +1,10 @@
+import { Appsettings } from "./appsettings";
+
 export class Environment {
     public applicationMode: string;
     public baseUrl: string;
 
-    constructor(appsettings, applicationMode: string) {
+    constructor(appsettings: Appsettings, applicationMode: string) {
         this.applicationMode = applicationMode;
         this.baseUrl = appsettings.baseUrl;
     }

@@ -55,9 +55,9 @@ export default class SayHelloWorld extends Vue {
 
     private handleValidResponse(response: AxiosResponse): void {
         this.$log.info(`Received http code was: ${response.status}`);
-        this.notifier.Info("HTTP/" + response.status);
+        this.notifier.Info(`HTTP/${response.status}`);
 
-        const data: SayHelloWorldMessage = response.data;
+        const data: SayHelloWorldMessage = response.data as SayHelloWorldMessage;
         this.$log.info(`Received data was: ${data.greeting}`);
         this.greetingText = data.greeting;
     }

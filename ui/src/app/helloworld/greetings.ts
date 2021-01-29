@@ -44,9 +44,9 @@ export default class Greetings extends Vue {
 
     private handleFetchNumberOfSavedGreetingsValidResponse(response: AxiosResponse): void {
         this.$log.info(`Received http code was: ${response.status}`);
-        this.notifier.Info("HTTP/" + response.status);
+        this.notifier.Info(`HTTP/${response.status}`);
 
-        const data: string = response.data;
+        const data: string = response.data as string;
         this.$log.info(`Received data was: ${data}`);
         this.numberOfSavedGreetings = +data;
     }
@@ -74,13 +74,13 @@ export default class Greetings extends Vue {
 
     private handleFetchLastGreetingsValidResponse(response: AxiosResponse): void {
         this.$log.info(`Received http code was: ${response.status}`);
-        this.notifier.Info("HTTP/" + response.status);
+        this.notifier.Info(`HTTP/${response.status}`);
 
         if (response.status === 203) {
             return;
         }
 
-        const data: SavedGreeting[] = response.data;
+        const data: SavedGreeting[] = response.data as SavedGreeting[];
         this.$log.info(`Received data was: ${data.length} elements`);
 
         data.forEach((element) => {

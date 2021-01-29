@@ -5,7 +5,6 @@ module.exports = (on): any => {
         "file:preprocessor",
         cypressWebpack({
             webpackOptions: {
-                mode: "none",
                 resolve: { extensions: [".ts", ".js"] },
                 module: {
                     rules: [

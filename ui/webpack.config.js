@@ -33,7 +33,7 @@ module.exports = (env, argv) => {
       modules: [src, nodeModules]
     },
     output: {
-      filename: isProduction ? '[name]-[hash].js' : '[name]-bundle.js',
+      filename: isProduction ? '[name]-[fullhash].js' : '[name]-bundle.js',
       path: wwwroot
     },
     performance: { hints: false },

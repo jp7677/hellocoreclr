@@ -52,7 +52,7 @@ module.exports = (env, argv) => {
         chunksSortMode: 'manual',
         minify: isProduction ? { collapseWhitespace: true, collapseInlineTagWhitespace: true } : false
       }),
-      new CompressionPlugin({ test: /\.(js|html)$/, threshold: 1024 })
+      new CompressionPlugin({ test: /\.(js|html|svg|woff|woff2|eot|ttf|otf)$/, threshold: 1024 })
     ],
     devtool: !isProduction ? 'source-map' : undefined,
     devServer: {

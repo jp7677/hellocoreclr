@@ -22,7 +22,7 @@ namespace HelloCoreClrApp.Test.Data
         public void MariaDbConnectionStringShouldReturnConfiguredBuilderTest()
         {
             var builder = DatabaseOptionsBuilderFactory
-                .CreateDatabaseOptionsBuilder("Server=someserver;database=helloworld");
+                .CreateDatabaseOptionsBuilder("Server=someserver;database=helloworld", "1.0");
 
             builder.Should().BeOfType<DbContextOptionsBuilder<GreetingDbContext>>();
             builder.IsConfigured.Should().BeTrue();

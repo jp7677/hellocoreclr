@@ -5,7 +5,7 @@ namespace HelloCoreClrApp.Data
 {
     public static class DatabaseOptionsBuilderFactory
     {
-        public static DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptionsBuilder(string connectionString)
+        public static DbContextOptionsBuilder<GreetingDbContext> CreateDatabaseOptionsBuilder(string connectionString, string serverVersion = null)
         {
             if (connectionString.StartsWith("Filename", StringComparison.OrdinalIgnoreCase))
                 return new DbContextOptionsBuilder<GreetingDbContext>()
@@ -13,7 +13,7 @@ namespace HelloCoreClrApp.Data
 
             if (connectionString.StartsWith("Server", StringComparison.OrdinalIgnoreCase))
                 return new DbContextOptionsBuilder<GreetingDbContext>()
-                    .UseMySql(connectionString);
+                    .UseMySql(connectionString, string.IsNullOrEmpty(serverVersion) ? ServerVersion.AutoDetect(connectionString) : ServerVersion.FromString(serverVersion));
 
             throw new NotSupportedException($"The connection string '{connectionString}' is not supported.{Environment.NewLine}" +
                                              "Use \"Filename=[options]\" for Sqlite or \"Server=[options];\" for MariaDb. " +

@@ -12,7 +12,7 @@ namespace HelloCoreClrApp.Test.Data
         public void SqliteConnectionStringShouldReturnConfiguredBuilderTest()
         {
             var builder = DatabaseOptionsBuilderFactory
-                .CreateDatabaseOptionsBuilder("Filename=somefile.db");
+                .CreateDatabaseOptionsBuilder("Filename=some-file.db");
 
             builder.Should().BeOfType<DbContextOptionsBuilder<GreetingDbContext>>();
             builder.IsConfigured.Should().BeTrue();
@@ -22,7 +22,7 @@ namespace HelloCoreClrApp.Test.Data
         public void MariaDbConnectionStringShouldReturnConfiguredBuilderTest()
         {
             var builder = DatabaseOptionsBuilderFactory
-                .CreateDatabaseOptionsBuilder("Server=someserver;database=helloworld", "1.0");
+                .CreateDatabaseOptionsBuilder("Server=some-server;database=hello-world", "1.0");
 
             builder.Should().BeOfType<DbContextOptionsBuilder<GreetingDbContext>>();
             builder.IsConfigured.Should().BeTrue();

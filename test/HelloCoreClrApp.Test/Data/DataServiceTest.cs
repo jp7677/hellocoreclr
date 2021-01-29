@@ -18,7 +18,7 @@ namespace HelloCoreClrApp.Test.Data
             var factory = new GreetingDbContextFactory(options.Options);
             using var sut = new DataService(factory);
             await sut.EnsureCreated(CancellationToken.None);
-            await sut.SaveGreeting("mygreeting");
+            await sut.SaveGreeting("my-greeting");
 
             var result = await sut.GetNumberOfGreetings();
 
@@ -35,13 +35,13 @@ namespace HelloCoreClrApp.Test.Data
 
             await sut.EnsureCreated(CancellationToken.None);
             for (var i = 1; i <= 20; i++)
-                await sut.SaveGreeting(string.Format(CultureInfo.InvariantCulture, "mygreeting {0}", 1));
+                await sut.SaveGreeting(string.Format(CultureInfo.InvariantCulture, "my-greeting {0}", 1));
 
             var result = await sut.GetLastTenGreetings(10);
 
             result.Should().NotBeNull()
                 .And.HaveCount(10);
-            result[0].Name.Should().Be("mygreeting 1");
+            result[0].Name.Should().Be("my-greeting 1");
         }
     }
 }

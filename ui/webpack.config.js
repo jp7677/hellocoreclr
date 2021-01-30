@@ -19,13 +19,13 @@ module.exports = (env, argv) => {
     },
     module: {
       rules: [
-        { test: /\.ts$/i, loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/] }, exclude: nodeModules },
-        { test: /\.vue$/i, loader: 'vue-loader', exclude: nodeModules },
-        { test: /\.html$/i, loader: 'vue-template-loader', options: { transformAssetUrls: { img: 'src' } } },
-        { test: /\.scss$/i, use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'] },
-        { test: /\.(svg)$/i, loader: 'file-loader' },
-        { test: /\.(gif|png|jpe?g)$/i, use: [{ loader: 'file-loader', options: { esModule: false } }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } }] },
-        { test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader' }
+        { test: /\.ts/, loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/] }, exclude: nodeModules },
+        { test: /\.vue/, loader: 'vue-loader', exclude: nodeModules },
+        { test: /\.html/, loader: 'vue-template-loader', options: { transformAssetUrls: { img: 'src' } } },
+        { test: /\.scss/, use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'] },
+        { test: /\.(svg)/, type: 'asset/resource' },
+        { test: /\.(gif|png|jpe?g)/, use: [{ loader: 'file-loader', options: { esModule: false } }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } }] },
+        { test: /\.(woff|woff2|eot|ttf|otf)/, type: 'asset/resource' }
       ]
     },
     resolve: {
@@ -33,7 +33,7 @@ module.exports = (env, argv) => {
       modules: [src, nodeModules]
     },
     output: {
-      filename: isProduction ? '[name]-[fullhash].js' : '[name]-bundle.js',
+      filename: isProduction ? '[name]-[contenthash].js' : '[name]-bundle.js',
       path: wwwroot
     },
     performance: { hints: false },
@@ -56,7 +56,7 @@ module.exports = (env, argv) => {
     ],
     devtool: !isProduction ? 'source-map' : undefined,
     devServer: {
-      contentBase: wwwroot,
+      static: wwwroot,
       port: 3000,
       historyApiFallback: true,
       proxy: { '/api': 'http://localhost:5000' }

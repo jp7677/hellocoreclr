@@ -12,9 +12,9 @@ module.exports = (on): any => {
                 },
                 module: {
                     rules: [
-                        { test: /\.ts$/, exclude: [/node_modules/], use: [{ loader: "ts-loader" }] },
-                        { test: /\.feature$/, use: [{ loader: "cypress-cucumber-preprocessor/loader" }] },
-                        { test: /\.features$/, use: [{ loader: "cypress-cucumber-preprocessor/lib/featuresLoader" }] },
+                        { test: /\.ts$/i, exclude: [/node_modules/], use: [{ loader: "ts-loader" }] },
+                        { test: /\.feature$/i, use: [{ loader: "cypress-cucumber-preprocessor/loader" }] },
+                        { test: /\.features$/i, use: [{ loader: "cypress-cucumber-preprocessor/lib/featuresLoader" }] },
                     ],
                 },
                 plugins: [

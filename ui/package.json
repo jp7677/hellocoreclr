@@ -8,6 +8,7 @@
   },
   "readme": "See https://github.com/jp7677/hellocoreclr/",
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^5.5.0",
     "@types/bluebird": "^3.5.33",
     "@types/cypress-cucumber-preprocessor": "^4.0.0",
     "@types/jest": "^26.0.20",
@@ -24,7 +25,6 @@
     "cypress": "^6.3.0",
     "cypress-cucumber-preprocessor": "^4.0.0",
     "cypress-cy-select": "^0.2.2",
-    "cypress-webpack-preprocessor-v5": "^5.0.0-alpha.1",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-config-standard": "^16.0.2",

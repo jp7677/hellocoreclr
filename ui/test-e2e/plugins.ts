@@ -1,4 +1,4 @@
-import cypressWebpack from "cypress-webpack-preprocessor-v5";
+import cypressWebpack from "@cypress/webpack-preprocessor";
 import { ProvidePlugin } from "webpack";
 
 module.exports = (on): any => {

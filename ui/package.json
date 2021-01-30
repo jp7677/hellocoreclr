@@ -95,6 +95,6 @@
     "e2e-tests:chrome": "node cypress.start --browser chrome --headless --config video=false",
     "e2e-tests:firefox": "node cypress.start --browser firefox --headless --config video=false",
     "serve": "ws --port 3000 --directory wwwroot --spa index.html --compress --rewrite '/api/(.*) -> http://localhost:5000/api/$1' --log.format dev",
-    "watch": "webpack-dev-server --mode development --hot"
+    "watch": "webpack-dev-server --mode development"
   }
 }

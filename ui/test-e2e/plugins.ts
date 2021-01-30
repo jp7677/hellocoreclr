@@ -1,4 +1,4 @@
-import cypressWebpack from "@cypress/webpack-preprocessor";
+import cypressWebpack from "cypress-webpack-preprocessor-v5";
 
 module.exports = (on): any => {
     on(

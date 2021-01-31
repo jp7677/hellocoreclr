@@ -23,9 +23,9 @@ module.exports = (env, argv) => {
         { test: /\.vue$/i, loader: 'vue-loader', exclude: nodeModules },
         { test: /\.html$/i, loader: 'vue-template-loader', options: { transformAssetUrls: { img: 'src' } } },
         { test: /\.scss$/i, use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'] },
-        { test: /\.(svg)$/i, loader: 'file-loader' },
+        { test: /\.svg$/i, type: 'asset/resource' },
         { test: /\.(gif|png|jpe?g)$/i, use: [{ loader: 'file-loader', options: { esModule: false } }, { loader: 'image-webpack-loader', options: { optipng: { optimizationLevel: 8 } } }] },
-        { test: /\.(woff|woff2|eot|ttf|otf)$/i, loader: 'file-loader' }
+        { test: /\.(woff|woff2|eot|ttf|otf)$/i, type: 'asset/resource' }
       ]
     },
     resolve: {
@@ -33,7 +33,7 @@ module.exports = (env, argv) => {
       modules: [src, nodeModules]
     },
     output: {
-      filename: isProduction ? '[name]-[fullhash].js' : '[name]-bundle.js',
+      filename: isProduction ? '[name]-[contenthash].js' : '[name]-bundle.js',
       path: wwwroot
     },
     performance: { hints: false },
@@ -52,11 +52,11 @@ module.exports = (env, argv) => {
         chunksSortMode: 'manual',
         minify: isProduction ? { collapseWhitespace: true, collapseInlineTagWhitespace: true } : false
       }),
-      new CompressionPlugin({ test: /\.(js|html|svg|woff|woff2|eot|ttf|otf)$/, threshold: 1024 })
+      new CompressionPlugin({ test: /\.(js|html|svg|woff|woff2|eot|ttf|otf)$/i, threshold: 1024 })
     ],
     devtool: !isProduction ? 'source-map' : undefined,
     devServer: {
-      contentBase: wwwroot,
+      static: wwwroot,
       port: 3000,
       historyApiFallback: true,
       proxy: { '/api': 'http://localhost:5000' }
